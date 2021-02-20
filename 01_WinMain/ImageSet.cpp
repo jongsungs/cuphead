@@ -1,9 +1,9 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "ImageSet.h"
-//»ç¿ëÇÒ ÀÌ¹ÌÁö ÀÔ·Â
+//ì‚¬ìš©í•  ì´ë¯¸ì§€ ìž…ë ¥
 void ImageSet::SetImage()
 {
-	//ÇÃ·¹ÀÌ¾î ÀÌ¹ÌÁö
+	//í”Œë ˆì´ì–´ ì´ë¯¸ì§€
 	IMAGEMANAGER->LoadFromFile(L"Player", Resources(L"Player.bmp"), 64, 96, 4, 4, true);
 	IMAGEMANAGER->LoadFromFile(L"SideSword", Resources(L"SideSword.bmp"), 15, 14, 1, 2, true);
 	IMAGEMANAGER->LoadFromFile(L"UpdownSword", Resources(L"UpdownSword.bmp"), 14, 15, 2, 1, true);
@@ -12,13 +12,13 @@ void ImageSet::SetImage()
 	IMAGEMANAGER->LoadFromFile(L"DownSword", Resources(L"DownSword.bmp"), 7, 15, true);
 	IMAGEMANAGER->LoadFromFile(L"RightSword", Resources(L"RightSword.bmp"), 15, 7, true);
 	IMAGEMANAGER->LoadFromFile(L"LeftSword", Resources(L"LeftSword.bmp"), 15, 7, true);
-	//Àû ÀÌ¹ÌÁö
-	//Ä³¸¯ÅÍ »óÅÂ¿¡ µû¶ó ´Ù¸¥ ÀÌ¹ÌÁö¸¦ º¸¿©ÁÖ±â À§ÇÔ
+	//ì  ì´ë¯¸ì§€
+	//ìºë¦­í„° ìƒíƒœì— ë”°ë¼ ë‹¤ë¥¸ ì´ë¯¸ì§€ë¥¼ ë³´ì—¬ì£¼ê¸° ìœ„í•¨
 	IMAGEMANAGER->LoadFromFile(L"EnemyIdle", Resources(L"EnemyIdle.bmp"), 72, 176, 3, 8, true);
 	IMAGEMANAGER->LoadFromFile(L"EnemyAttack", Resources(L"EnemyAttack.bmp"), 336, 92, 12, 4, true);
 	IMAGEMANAGER->LoadFromFile(L"EnemyDeath", Resources(L"EnemyDeath.bmp"), 282, 49, 6, 1, true);
 
-	//·£´ýÇÑ Æø¹ß Å©±â¸¦ ÁÖ±â À§ÇÔ
+	//ëžœë¤í•œ í­ë°œ í¬ê¸°ë¥¼ ì£¼ê¸° ìœ„í•¨
 	IMAGEMANAGER->LoadFromFile(L"BigExplosion", Resources(L"BigExplosion.bmp"), 2240, 84, 28, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"MiddleExplosion", Resources(L"MiddleExplosion.bmp"), 1344, 48, 28, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"SmallExplosion", Resources(L"SmallExplosion.bmp"), 1008, 36, 28, 1, true);

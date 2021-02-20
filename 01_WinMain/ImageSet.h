@@ -1,9 +1,9 @@
-#pragma once
-//»ç¿ëÇÒ ÀÌ¹ÌÁö ¼ÂÆÃ
+ï»¿#pragma once
+//ì‚¬ìš©í•  ì´ë¯¸ì§€ ì…‹íŒ…
 class ImageSet
 {
 	Singleton(ImageSet)
 public :
-	void SetImage(); // ÀÌ¹ÌÁö ¼ÂÆÃ
+	void SetImage(); // ì´ë¯¸ì§€ ì…‹íŒ…
 };
 
