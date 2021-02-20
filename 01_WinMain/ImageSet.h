@@ -6,4 +6,3 @@ class ImageSet
 public :
 	void SetImage(); // 이미지 셋팅
 };
-

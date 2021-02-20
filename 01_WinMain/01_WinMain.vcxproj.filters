@@ -67,8 +67,44 @@
     <Filter Include="FrameWork\GameEvent">
       <UniqueIdentifier>{d1911068-58c6-4da3-9516-415c40175f80}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainGame\ImageSet">
+    <Filter Include="MainGame\Object\Bullet">
+      <UniqueIdentifier>{b61763a1-f391-49d1-ab14-84e11b255230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Effect">
+      <UniqueIdentifier>{cd7fc9b0-6bbe-4010-bd45-e62154dd3090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Enemy">
+      <UniqueIdentifier>{820474eb-d045-4d0c-a8d0-2f0b92790eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\NPC">
+      <UniqueIdentifier>{2fa7d8a8-676c-4eca-a29e-c01dfbd55435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Player">
+      <UniqueIdentifier>{104eaf54-5058-46a7-9a60-69d546ea4f06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Bullet\Peashooter">
+      <UniqueIdentifier>{add03584-a923-4b55-b54a-1595c4e90a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Bullet\Spread">
+      <UniqueIdentifier>{27000c30-b90e-4cea-83b6-32b29d696ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Bullet\Chaser">
+      <UniqueIdentifier>{d6ca486e-c20f-42ac-a84c-5b0aa11738db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Player\PlatformerPlayer">
+      <UniqueIdentifier>{01cd8c4b-2a89-4460-982e-507c379208ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\SageSetting">
+      <UniqueIdentifier>{60463734-b4d9-4ee5-a38e-0f31a9bfae32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\SageSetting\ImageSet">
       <UniqueIdentifier>{f2ae3fb0-177c-42fe-9a5e-5613263d99da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\SageSetting\Mp3Set">
+      <UniqueIdentifier>{970ac68e-f89f-4107-bc76-d9b20640a9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\SageSetting\Function">
+      <UniqueIdentifier>{692991d7-af17-4f0e-a1b9-a7f022067c60}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,29 +180,44 @@
     <ClInclude Include="Animation.h">
       <Filter>FrameWork\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>MainGame\Object</Filter>
-    </ClInclude>
     <ClInclude Include="GameEvent.h">
       <Filter>FrameWork\GameEvent</Filter>
     </ClInclude>
     <ClInclude Include="GameEventManager.h">
       <Filter>FrameWork\GameEvent</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>MainGame\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Scene2.h">
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="ImageSet.h">
-      <Filter>MainGame\ImageSet</Filter>
+      <Filter>MainGame\SageSetting\ImageSet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>MainGame\Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>MainGame\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>MainGame\Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="NPC.h">
-      <Filter>MainGame\Object</Filter>
+      <Filter>MainGame\Object\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>MainGame\Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlatformerPlayer.h">
-      <Filter>MainGame\Object</Filter>
+      <Filter>MainGame\Object\Player\PlatformerPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Mp3Set.h">
+      <Filter>MainGame\SageSetting\Mp3Set</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>MainGame\SageSetting\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneSetting.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,29 +281,44 @@
     <ClCompile Include="Animation.cpp">
       <Filter>FrameWork\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>MainGame\Object</Filter>
-    </ClCompile>
     <ClCompile Include="GameEvent.cpp">
       <Filter>FrameWork\GameEvent</Filter>
     </ClCompile>
     <ClCompile Include="GameEventManager.cpp">
       <Filter>FrameWork\GameEvent</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>MainGame\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Scene2.cpp">
       <Filter>MainGame\Scene</Filter>
     </ClCompile>
     <ClCompile Include="ImageSet.cpp">
-      <Filter>MainGame\ImageSet</Filter>
+      <Filter>MainGame\SageSetting\ImageSet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>MainGame\Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>MainGame\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>MainGame\Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="NPC.cpp">
-      <Filter>MainGame\Object</Filter>
+      <Filter>MainGame\Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>MainGame\Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlatformerPlayer.cpp">
-      <Filter>MainGame\Object</Filter>
+      <Filter>MainGame\Object\Player\PlatformerPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Mp3Set.cpp">
+      <Filter>MainGame\SageSetting\Mp3Set</Filter>
+    </ClCompile>
+    <ClCompile Include="Function.cpp">
+      <Filter>MainGame\SageSetting\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneSetting.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
