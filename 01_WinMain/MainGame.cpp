@@ -23,8 +23,8 @@ void MainGame::Init()
 	SceneManager::GetInstance()->AddScene(L"Scene2", new Scene2);
 	
 	LoadingScene* mLoading = new LoadingScene;
-
-	mLoading->AddLoadFunc([]()->void {ImageSet::GetInstance()->Stage1();});
+	mLoading->AddLoadFunc([]()->void {ImageSet::GetInstance()->SetImage();});
+	mLoading->AddLoadFunc([]()->void {SoundSet::GetInstance()->SetSound(); });
 	SceneManager::GetInstance()->AddScene(L"Scene1LoadingScene", mLoading);
 	SceneManager::GetInstance()->LoadSceneLoading(L"Scene1",L"Scene1LoadingScene");
 }

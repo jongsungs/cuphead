@@ -1,8 +1,9 @@
 #pragma once
+//사용할 이미지 셋팅
 class ImageSet
 {
 	Singleton(ImageSet)
 public :
-	void Stage1();
+	void SetImage(); // 이미지 셋팅
 };
 

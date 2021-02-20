@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "ImageSet.h"
-
-void ImageSet::Stage1()
+//사용할 이미지 입력
+void ImageSet::SetImage()
 {
 	//플레이어 이미지
 	IMAGEMANAGER->LoadFromFile(L"Player", Resources(L"Player.bmp"), 64, 96, 4, 4, true);
