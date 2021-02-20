@@ -42,7 +42,7 @@ void PlatformerPlayer::Update()
 	mJumpPower -= mGravity;
 	if (mY<= WINSIZEY)
 	{
-		mY = WINSIZEY - 100;
+		mY = WINSIZEY - 155;
 	}
 	mRect = RectMakeCenter(mX, mY, 98, 155);
 	//mCurrentAnimation->Update();

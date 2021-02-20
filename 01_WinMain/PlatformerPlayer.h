@@ -1,5 +1,11 @@
 #pragma once
 #include "GameObject.h"
+enum struct PlayerState : int
+{
+	RightIdle,
+	LeftIdle,
+	
+};
 class PlatformerPlayer : public GameObject
 {
 	RECT mGround;

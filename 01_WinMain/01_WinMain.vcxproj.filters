@@ -165,6 +165,9 @@
     <ClInclude Include="NPC.h">
       <Filter>MainGame\Object</Filter>
     </ClInclude>
+    <ClInclude Include="PlatformerPlayer.h">
+      <Filter>MainGame\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="01_WinMain.cpp">
@@ -246,6 +249,9 @@
       <Filter>MainGame\ImageSet</Filter>
     </ClCompile>
     <ClCompile Include="NPC.cpp">
+      <Filter>MainGame\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformerPlayer.cpp">
       <Filter>MainGame\Object</Filter>
     </ClCompile>
   </ItemGroup>
