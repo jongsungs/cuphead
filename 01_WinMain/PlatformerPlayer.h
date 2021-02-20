@@ -5,9 +5,6 @@ class PlatformerPlayer : public GameObject
 	RECT mGround;
 	float mGravity;
 	float mJumpPower;
-	
-	
-
 public:
 	PlatformerPlayer(const string& name, float x, float y);
 
