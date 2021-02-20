@@ -8,8 +8,6 @@ PlatformerPlayer::PlatformerPlayer(const string& name, float x, float y)
 {
 	mX = x;
 	mY = y;
-	
-
 }
 
 
@@ -21,8 +19,6 @@ void PlatformerPlayer::Init()
 	mRect = RectMakeCenter(mX, mY, 98, 155);
 	mGravity = 0.1f;
 	mJumpPower = 0.f;
-	
-
 }
 
 void PlatformerPlayer::Release()
@@ -34,10 +30,6 @@ void PlatformerPlayer::Release()
 
 void PlatformerPlayer::Update()
 {
-	if (mY == WINSIZEY)
-	{
-		mY = WINSIZEY - 100;
-	}
 	if (Input::GetInstance()->GetKey('A'))
 	{
 		mX -= 5;
@@ -48,6 +40,10 @@ void PlatformerPlayer::Update()
 	}
 	mY -= mJumpPower;
 	mJumpPower -= mGravity;
+	if (mY<= WINSIZEY)
+	{
+		mY = WINSIZEY - 100;
+	}
 	mRect = RectMakeCenter(mX, mY, 98, 155);
 	//mCurrentAnimation->Update();
 	
