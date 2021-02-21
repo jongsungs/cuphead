@@ -104,6 +104,64 @@ void Camera::AlphaScaleFrameRender(HDC hdc, Image * image, int x, int y, int fra
 {
 	image->AlphaScaleFrameRender(hdc, x - mRect.left, y - mRect.top, frameX, frameY, width, height, alpha);
 }
+void Camera::CenterRender(HDC hdc, Image* image, int x, int y)
+{
+
+	x += -(image->GetWidth() / 2);
+	y += -(image->GetHeight() / 2);
+	Render(hdc,image, x, y);
+
+}
+
+void Camera::CenterFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY)
+{
+	x += -(image->GetFrameWidth() / 2);
+	y += -(image->GetFrameHeight() / 2);
+	FrameRender(hdc,image, x, y, frameX, frameY);
+}
+
+void Camera::CnterAlphaRender(HDC hdc, Image* image, int x, int y, float alpha)
+{
+	x += -(image->GetWidth() / 2);
+	y += -(image->GetHeight() / 2);
+	AlphaRender(hdc,image, x, y, alpha);
+}
+
+void Camera::CnterAlphaFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, float alpha)
+{
+	x += -(image->GetFrameWidth() / 2);
+	y += -(image->GetFrameHeight() / 2);
+	AlphaFrameRender(hdc, image, x, y, frameX, frameY, alpha);
+}
+
+void Camera::CnterScaleRender(HDC hdc, Image* image, int x, int y, int width, int height)
+{
+	x += -(image->GetWidth() / 2);
+	y += -(image->GetHeight() / 2);
+	ScaleRender(hdc, image, x, y, width, height);
+}
+
+void Camera::CnterScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height)
+{
+	x += -(image->GetFrameWidth() / 2);
+	y += -(image->GetFrameHeight() / 2);
+	ScaleFrameRender(hdc, image, x, y, frameX, frameY, width, height);
+}
+
+void Camera::CnterAlphaScaleRender(HDC hdc, Image* image, int x, int y, int width, int height, float alpha)
+{
+	x += -(image->GetWidth() / 2);
+	y += -(image->GetHeight() / 2);
+	AlphaScaleRender(hdc, image, x, y, width, height, alpha);
+}
+
+void Camera::CnterAlphaScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height, float alpha)
+{
+	x += -(image->GetFrameWidth() / 2);
+	y += -(image->GetFrameHeight() / 2);
+	AlphaScaleFrameRender(hdc, image, x, y, frameX, frameY, width, height, alpha);
+}
+
 
 void Camera::RenderRect(HDC hdc, RECT rc)
 {

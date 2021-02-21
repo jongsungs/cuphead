@@ -31,7 +31,14 @@ public:
 	void ScaleFrameRender(HDC hdc,class Image* image, int x, int y, int frameX, int frameY, int width, int height);
 	void AlphaScaleRender(HDC hdc,class Image* image, int x, int y, int width, int height, float alpha);
 	void AlphaScaleFrameRender(HDC hdc, class Image* image, int x, int y, int frameX, int frameY, int width, int height, float alpha);
-
+	void CenterRender(HDC hdc, Image* image, int x, int y);
+	void CenterFrameRender(HDC hdc, Image* image, int x, int y, int frameIndexX, int frameIndexY);
+	void CnterAlphaRender(HDC hdc, Image* image, int x, int y, float alpha);
+	void CnterAlphaFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, float alpha);
+	void CnterScaleRender(HDC hdc, Image* image, int x, int y, int width, int height);
+	void CnterScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height);
+	void CnterAlphaScaleRender(HDC hdc, Image* image, int x, int y, int width, int height, float alpha);
+	void CnterAlphaScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height, float alpha);
 	void RenderRect(HDC hdc, RECT rc);
 	void RenderEllipse(HDC hdc, float x, float y, float radius);
 

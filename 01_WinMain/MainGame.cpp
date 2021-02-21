@@ -1,24 +1,25 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "MainGame.h"
 
 #include "Image.h"
 #include "Scene2.h"
 #include "Scene1.h"
 #include "LoadingScene.h"
+#include "Animation.h"
 /*
-Scene : ½ºÅ×ÀÌÁö ´ÜÀ§¸¦ ¾ÀÀÌ¶ó°í ÇÔ
+Scene : ìŠ¤í…Œì´ì§€ ë‹¨ìœ„ë¥¼ ì”¬ì´ë¼ê³  í•¨
 */
 
 /*
-Initialize : ÃÊ±âÈ­
-¾ÕÀ¸·Î °ÔÀÓÀ» ½ÃÀÛÇÏ±â Àü¿¡ ÃÊ±âÈ­ ¹× »ı¼ºÀº ¿©±â¼­ ÁøÇà
-°ÔÀÓ ½ÃÀÛÇÏ±â Àü¿¡ µü ÇÑ¹ø¸¸ ½ÇÇàµÇ´Â ÇÔ¼ö
+Initialize : ì´ˆê¸°í™”
+ì•ìœ¼ë¡œ ê²Œì„ì„ ì‹œì‘í•˜ê¸° ì „ì— ì´ˆê¸°í™” ë° ìƒì„±ì€ ì—¬ê¸°ì„œ ì§„í–‰
+ê²Œì„ ì‹œì‘í•˜ê¸° ì „ì— ë”± í•œë²ˆë§Œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜
 *///
 void MainGame::Init()
 {
 	mBackBuffer = new Image();
 	mBackBuffer->CreateEmpty(WINSIZEX, WINSIZEY);
-
+	ImageSet::GetInstance()->SetFxImage();
 	SceneManager::GetInstance()->AddScene(L"Scene1", new Scene1);
 	SceneManager::GetInstance()->AddScene(L"Scene2", new Scene2);
 	
@@ -30,20 +31,20 @@ void MainGame::Init()
 }
 
 /*
-Release : ¸Ş¸ğ¸® ÇØÁ¦ÇÒ ¶§ ºÒ·¯ÁÖ´Â ÇÔ¼ö
-À¯´ÏÆ¼¶ó¸é OnDestroy
-ÇØ´ç Å¬·¡½º ÀÎ½ºÅÏ½º°¡ ¸Ş¸ğ¸® ÇØÁ¦ µÉ ¶§ ´Ü ÇÑ¹ø È£ÃâÇØÁÖ´Â ³à¼®
+Release : ë©”ëª¨ë¦¬ í•´ì œí•  ë•Œ ë¶ˆëŸ¬ì£¼ëŠ” í•¨ìˆ˜
+ìœ ë‹ˆí‹°ë¼ë©´ OnDestroy
+í•´ë‹¹ í´ë˜ìŠ¤ ì¸ìŠ¤í„´ìŠ¤ê°€ ë©”ëª¨ë¦¬ í•´ì œ ë  ë•Œ ë‹¨ í•œë²ˆ í˜¸ì¶œí•´ì£¼ëŠ” ë…€ì„
 */
 void MainGame::Release()
 {
-	Random::ReleaseInstance();	//½Ì±ÛÅæ ÀÎ½ºÅÏ½º »èÁ¦
+	Random::ReleaseInstance();	//ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤ ì‚­ì œ
 
 	SafeDelete(mBackBuffer);
 
 }
 
 /*
-Update : ¸Å ÇÁ·¹ÀÓ ½ÇÇàµÇ´Â ÇÔ¼ö, ¿©±â¼­ ¿¬»ê Ã³¸® ÇÑ´Ù.
+Update : ë§¤ í”„ë ˆì„ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜, ì—¬ê¸°ì„œ ì—°ì‚° ì²˜ë¦¬ í•œë‹¤.
 */
 void MainGame::Update()
 {
@@ -51,24 +52,25 @@ void MainGame::Update()
 }
 
 /*
-Render : ¸Å ÇÁ·¹ÀÓ ½ÇÇàµÇ´Â ÇÔ¼ö, Update°¡ ³¡³ª°í Render°¡ ½ÇÇàµÈ´Ù.
-È­¸é¿¡ ±×·ÁÁÖ´Â °ÍµéÀº ÀüºÎ ¿©±â¼­ Ã³¸®
+Render : ë§¤ í”„ë ˆì„ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜, Updateê°€ ëë‚˜ê³  Renderê°€ ì‹¤í–‰ëœë‹¤.
+í™”ë©´ì— ê·¸ë ¤ì£¼ëŠ” ê²ƒë“¤ì€ ì „ë¶€ ì—¬ê¸°ì„œ ì²˜ë¦¬
 
-¸Å°³º¯¼ö hdc : À©µµ¿ì Ã¢ÀÇ HDC°¡ µé¾î¿È
+ë§¤ê°œë³€ìˆ˜ hdc : ìœˆë„ìš° ì°½ì˜ HDCê°€ ë“¤ì–´ì˜´
 */
 void MainGame::Render(HDC hdc)
 {
-	//¹é¹öÆÛÀÇ HDC °¡Á®¿Â´Ù
+	//ë°±ë²„í¼ì˜ HDC ê°€ì ¸ì˜¨ë‹¤
 	HDC backDC = mBackBuffer->GetHDC();
-	//HDC ¿µ¿ªÀ» Æ¯Á¤ »öÀ¸·Î ¹Ğ¾î¹ö¸®´Â ³à¼®
+	//HDC ì˜ì—­ì„ íŠ¹ì • ìƒ‰ìœ¼ë¡œ ë°€ì–´ë²„ë¦¬ëŠ” ë…€ì„
 	PatBlt(backDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	// ==================================================
 	{
 		SceneManager::GetInstance()->Render(backDC);
 		RenderTime(backDC);
+		RenderFilter(backDC);
 	}
 	//====================================================
-	//ÈÄ¸é¹öÆÛ ³»¿ëÀ» À©µµ¿ì Ã¢¿¡ °í¼Ó º¹»ç
+	//í›„ë©´ë²„í¼ ë‚´ìš©ì„ ìœˆë„ìš° ì°½ì— ê³ ì† ë³µì‚¬
 	mBackBuffer->Render(hdc, 0, 0);
 }
 
@@ -85,4 +87,12 @@ void MainGame::RenderTime(HDC hdc)
 	TextOut(hdc, 10, 25, strDeltaTime.c_str(), strDeltaTime.length());
 	TextOut(hdc, 10, 40, strFPS.c_str(), strFPS.length());
 }
-
+void MainGame::RenderFilter(HDC hdc)
+{
+	mFilter = ImageManager::GetInstance()->FindImage(L"FX_" + to_wstring((int)mFilterNumber));
+	mFilter->AlphaScaleRender(hdc , 0 , 0,WINSIZEX,WINSIZEY, 0.25f);
+	mFilterNumber += Time::GetInstance()->DeltaTime() * 10;
+	if (mFilterNumber > 126) {
+		mFilterNumber = 0;
+	}
+}

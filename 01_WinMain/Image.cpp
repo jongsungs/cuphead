@@ -455,5 +455,61 @@ void Image::AlphaScaleFrameRender(HDC hdc, int x, int y, int frameX, int frameY,
 		);
 	}
 }
+void Image::CenterRender(HDC hdc, int x, int y)
+{
 
+	x += -(mImageBuffer->width / 2);
+	y += -(mImageBuffer->height / 2);
+	Render(hdc, x, y);
+
+}
+
+void Image::CenterFrameRender(HDC hdc, int x, int y, int frameX, int frameY)
+{
+	x += -(mImageBuffer->frameWidth / 2);
+	y += -(mImageBuffer->frameHeight / 2);
+	FrameRender(hdc, x, y, frameX, frameY);
+}
+
+void Image::CnterAlphaRender(HDC hdc, int x, int y, float alpha)
+{
+	x += -(mImageBuffer->width / 2);
+	y += -(mImageBuffer->height / 2);
+	AlphaRender(hdc, x, y, alpha);
+}
+
+void Image::CnterAlphaFrameRender(HDC hdc, int x, int y, int frameX, int frameY, float alpha)
+{
+	x += -(mImageBuffer->frameWidth / 2);
+	y += -(mImageBuffer->frameHeight / 2);
+	AlphaFrameRender(hdc, x, y, frameX, frameY, alpha);
+}
+
+void Image::CnterScaleRender(HDC hdc, int x, int y, int width, int height)
+{
+	x += -(mImageBuffer->width / 2);
+	y += -(mImageBuffer->height / 2);
+	ScaleRender(hdc, x, y, width, height);
+}
+
+void Image::CnterScaleFrameRender(HDC hdc, int x, int y, int frameX, int frameY, int width, int height)
+{
+	x += -(mImageBuffer->frameWidth / 2);
+	y += -(mImageBuffer->frameHeight / 2);
+	ScaleFrameRender(hdc, x, y, frameX, frameY, width, height);
+}
+
+void Image::CnterAlphaScaleRender(HDC hdc, int x, int y, int width, int height, float alpha)
+{
+	x += -(mImageBuffer->width / 2);
+	y += -(mImageBuffer->height / 2);
+	AlphaScaleRender(hdc, x, y, width, height, alpha);
+}
+
+void Image::CnterAlphaScaleFrameRender(HDC hdc, int x, int y, int frameX, int frameY, int width, int height, float alpha)
+{
+	x += -(mImageBuffer->frameWidth / 2);
+	y += -(mImageBuffer->frameHeight / 2);
+	AlphaScaleFrameRender(hdc, x, y, frameX, frameY, width, height, alpha);
+}
 

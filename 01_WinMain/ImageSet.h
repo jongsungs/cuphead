@@ -5,4 +5,5 @@ class ImageSet
 	Singleton(ImageSet)
 public :
 	void SetImage(); // 이미지 셋팅
+	void SetFxImage(); //필터 셋팅
 };

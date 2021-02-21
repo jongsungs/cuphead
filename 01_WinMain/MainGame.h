@@ -1,15 +1,17 @@
-#pragma once
+ï»¿#pragma once
 
 /*
-1. ¾Ö´Ï¸ŞÀÌ¼Ç 
-2. ÀÌº¥Æ® ¸¸µå´Â ¹ı
+1. ì• ë‹ˆë©”ì´ì…˜ 
+2. ì´ë²¤íŠ¸ ë§Œë“œëŠ” ë²•
 */
 
 class Image;
 
 class MainGame
 {
-	Image* mBackBuffer;	//ÈÄ¸é¹öÆÛ(°ÇµéÁö¸¶¶ó)
+	Image* mBackBuffer;	//í›„ë©´ë²„í¼(ê±´ë“¤ì§€ë§ˆë¼)
+	Image* mFilter;
+	float mFilterNumber = 0;
 public:
 	void Init();
 	void Release();
@@ -17,7 +19,7 @@ public:
 	void Render(HDC hdc);
 	
 	void RenderTime(HDC hdc);
-
+	void RenderFilter(HDC hdc);
 	LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 };
 

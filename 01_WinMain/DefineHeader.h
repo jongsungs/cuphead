@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 #define WINSTARTX 50
 #define WINSTARTY 50
 #define WINSIZEX 1280
 #define WINSIZEY 720
 
-//ÀÎÀÚ·Î µé¾î¿Â p¸¦ »èÁ¦ÇÏ°í NULL·Î ÃÊ±âÈ­ ÇÏ´Â ¸ÅÅ©·Î ÇÔ¼ö, ¾ÈÀüÇÏ°Ô »èÁ¦
+//ì¸ìë¡œ ë“¤ì–´ì˜¨ pë¥¼ ì‚­ì œí•˜ê³  NULLë¡œ ì´ˆê¸°í™” í•˜ëŠ” ë§¤í¬ë¡œ í•¨ìˆ˜, ì•ˆì „í•˜ê²Œ ì‚­ì œ
 #define SafeDelete(p)\
 {\
 	if(p)\
@@ -14,7 +14,7 @@
 	}\
 }
 
-//½Ì±ÛÅæ ¸ÅÅ©·Î
+//ì‹±ê¸€í†¤ ë§¤í¬ë¡œ
 #define Singleton(ClassName)\
 public:\
 static ClassName* GetInstance()\
@@ -24,8 +24,10 @@ static ClassName* GetInstance()\
 }
 
 #define Resources(Path) (wstring(L"../02_Resources/").append(Path))
+#define ResourcesImage(Path) (wstring(L"../02_Resources/Image/").append(Path))
+#define ResourcesSound(Path) (wstring(L"../02_Resources/Sound/").append(Path))
 
-//±İ¼ú
+//ê¸ˆìˆ 
 #define Synthesize(VarType,VarName,FuncName)\
 protected: VarType VarName;\
 public: inline VarType Get##FuncName(void)const{return VarName;}\
