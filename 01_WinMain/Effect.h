@@ -6,7 +6,7 @@ class Effect : public GameObject
 	class Image* mImage;
 	class Animation* mEffectAnimation;
 public :
-	Effect(const string& name, float x, float y, class Image* image);
+	Effect(float x, float y, class Image* image, float frameTime = 0.1f);
 	void virtual Init()override;
 	void virtual Update()override;
 	void virtual Release()override;

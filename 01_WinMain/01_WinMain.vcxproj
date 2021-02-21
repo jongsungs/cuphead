@@ -157,7 +157,6 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="Function.h" />
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="GameEventManager.h" />
     <ClInclude Include="GameObject.h" />
@@ -168,7 +167,6 @@
     <ClInclude Include="LoadingScene.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Math.h" />
-    <ClInclude Include="Mp3Set.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="pch.h" />
@@ -180,8 +178,8 @@
     <ClInclude Include="Scene1.h" />
     <ClInclude Include="Scene2.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SceneSetting.h" />
     <ClInclude Include="SoundPlayer.h" />
+    <ClInclude Include="SoundSet.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Time.h" />
   </ItemGroup>
@@ -193,7 +191,6 @@
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Function.cpp" />
     <ClCompile Include="GameEvent.cpp" />
     <ClCompile Include="GameEventManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -205,7 +202,6 @@
     <ClCompile Include="MainGame + MainProc.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Math.cpp" />
-    <ClCompile Include="Mp3Set.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="pch.cpp">
@@ -221,8 +217,8 @@
     <ClCompile Include="Scene1.cpp" />
     <ClCompile Include="Scene2.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SceneSetting.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
+    <ClCompile Include="SoundSet.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>

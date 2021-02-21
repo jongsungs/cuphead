@@ -6,23 +6,28 @@
 /*
 처음 호출 시 x 좌표, y좌표 셋팅 및 이미지 셋팅
 */
-Effect::Effect(const string& name, float x, float y, Image* image)
-	: GameObject(name)
+Effect::Effect(float x, float y, Image* image , float frameTime)
 {
 	mX = x;
 	mY = y;
 	mImage = image;
+	
+	mEffectAnimation = new Animation();
+	mEffectAnimation->InitFrameByStartEnd(0, 0, mImage->GetFrameX() - 1, 0, false);
+	mEffectAnimation->SetIsLoop(false);
+	mEffectAnimation->SetFrameUpdateTime(frameTime);
+	mEffectAnimation->Play();
+	vector<GameObject*>* effectvector = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Effect);
+	mName = to_string(effectvector->size());
+	mIsActive = true;
+	mIsDestroy = false;
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Effect, this);
+
+	mRect = RectMakeCenter(mX, mY, mImage->GetFrameWidth(), mImage->GetFrameHeight());
 }
 
 void Effect::Init()
 {
-	mEffectAnimation = new Animation();
-	mEffectAnimation->InitFrameByStartEnd(0, 0, mImage->GetFrameX()-1, 0, false);
-	mEffectAnimation->SetIsLoop(false);
-	mEffectAnimation->SetFrameUpdateTime(0.2f);
-	mEffectAnimation->Play();
-	
-	mRect = RectMakeCenter(mX, mY, mImage->GetFrameWidth(), mImage->GetFrameHeight());
 }
 
 void Effect::Update()
