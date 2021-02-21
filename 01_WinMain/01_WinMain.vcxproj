@@ -152,6 +152,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Cuphead_OverWorld.h" />
     <ClInclude Include="DefineHeader.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Enemy.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Scene1.h" />
     <ClInclude Include="Scene2.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Scene_OverWorld.h" />
     <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="SoundSet.h" />
     <ClInclude Include="targetver.h" />
@@ -189,6 +191,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Cuphead_OverWorld.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameEvent.cpp" />
@@ -217,6 +220,7 @@
     <ClCompile Include="Scene1.cpp" />
     <ClCompile Include="Scene2.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Scene_OverWorld.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="SoundSet.cpp" />
     <ClCompile Include="Time.cpp" />

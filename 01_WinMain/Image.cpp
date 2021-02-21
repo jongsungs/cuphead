@@ -63,7 +63,7 @@ bool Image::CreateEmpty(int width, int height)
 	mBlendImageBuffer->oldBitmap = (HBITMAP)SelectObject(mBlendImageBuffer->hdc, mBlendImageBuffer->bitmap);
 	mBlendImageBuffer->width = WINSIZEX;
 	mBlendImageBuffer->height = WINSIZEY;
-
+	
 	if (mImageBuffer->bitmap == nullptr)
 	{
 		ReleaseBuffer();

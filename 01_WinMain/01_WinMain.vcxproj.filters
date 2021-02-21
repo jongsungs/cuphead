@@ -103,6 +103,9 @@
     <Filter Include="FrameWork\Setting\SoundSet">
       <UniqueIdentifier>{970ac68e-f89f-4107-bc76-d9b20640a9e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Object\Player\OverWorld">
+      <UniqueIdentifier>{6890e317-594c-40d9-b998-1d3909c24da7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -210,6 +213,12 @@
     <ClInclude Include="SoundSet.h">
       <Filter>FrameWork\Setting\SoundSet</Filter>
     </ClInclude>
+    <ClInclude Include="Scene_OverWorld.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Cuphead_OverWorld.h">
+      <Filter>MainGame\Object\Player\OverWorld</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="01_WinMain.cpp">
@@ -304,6 +313,12 @@
     </ClCompile>
     <ClCompile Include="SoundSet.cpp">
       <Filter>FrameWork\Setting\SoundSet</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_OverWorld.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Cuphead_OverWorld.cpp">
+      <Filter>MainGame\Object\Player\OverWorld</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
