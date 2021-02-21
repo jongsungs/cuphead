@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+class Bullet;
 enum struct PlayerState : int
 {
 	RightIdle,
@@ -12,11 +13,11 @@ enum struct PlayerState : int
 	RightJump,
 	RightDown,
 	LeftDown,
-	RightDownShot,
-	LeftDownShot,
-	RightShot,
-	LeftShot,
-	LeftRunShot,
+	RightDownShoot,
+	LeftDownShoot,
+	RightShoot,
+	LeftShoot,
+	LeftRunShoot,
 	RightSpecialAttack,
 	LeftSpecialAttack,
 	UpSpecialAttack,
@@ -33,9 +34,12 @@ enum struct PlayerState : int
 };
 class PlatformerPlayer : public GameObject
 {
+	Image* mImage;
 	RECT mGround;
 	float mGravity;
 	float mJumpPower;
+	PlayerState mPlayerState;
+	vector<Bullet*> mBullet;
 public:
 	PlatformerPlayer(const string& name, float x, float y);
 
