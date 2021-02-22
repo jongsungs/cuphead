@@ -240,6 +240,9 @@
     <ClInclude Include="BossScene.h">
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Building.h">
+      <Filter>MainGame\Object\Player\OverWorld</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="01_WinMain.cpp">
@@ -352,6 +355,9 @@
     </ClCompile>
     <ClCompile Include="BossScene.cpp">
       <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Building.cpp">
+      <Filter>MainGame\Object\Player\OverWorld</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
