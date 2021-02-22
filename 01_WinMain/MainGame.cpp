@@ -4,6 +4,7 @@
 #include "Image.h"
 #include "Scene2.h"
 #include "Scene1.h"
+#include "BossScene.h"
 #include "LoadingScene.h"
 #include "Animation.h"
 /*
@@ -20,6 +21,7 @@ void MainGame::Init()
 	mBackBuffer = new Image();
 	mBackBuffer->CreateEmpty(WINSIZEX, WINSIZEY);
 	ImageSet::GetInstance()->SetFxImage();
+	SceneManager::GetInstance()->AddScene(L"BotanicPanic", new BossScene);
 	SceneManager::GetInstance()->AddScene(L"Scene1", new Scene1);
 	SceneManager::GetInstance()->AddScene(L"Scene2", new Scene2);
 	
@@ -27,7 +29,7 @@ void MainGame::Init()
 	mLoading->AddLoadFunc([]()->void {ImageSet::GetInstance()->SetImage();});
 	mLoading->AddLoadFunc([]()->void {SoundSet::GetInstance()->SetSound(); });
 	SceneManager::GetInstance()->AddScene(L"Scene1LoadingScene", mLoading);
-	SceneManager::GetInstance()->LoadSceneLoading(L"Scene1",L"Scene1LoadingScene");
+	SceneManager::GetInstance()->LoadSceneLoading(L"BotanicPanic",L"Scene1LoadingScene");
 }
 
 /*

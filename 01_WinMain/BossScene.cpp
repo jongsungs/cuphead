@@ -10,13 +10,13 @@
 #include "Potato.h"
 #include "Onion.h"
 #include "Carrot.h"
-void Scene1::Init()
+void BossScene::Init()
 {
 	//Enemy* enemy = new Potato("Potato", WINSIZEX / 2, WINSIZEY / 2);
 	//Enemy* enemy = new Potato("Onion", WINSIZEX / 2, WINSIZEY / 2);
 	Enemy* enemy = new Onion("Carrot", WINSIZEX / 2, WINSIZEY / 2);
 
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemey, enemy);
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, enemy);
 	//((Potato*)enemy)->PotatoMasisu();
 	//Potato* dump = (Potato*)enemy;
 	//dump->PotatoMasisu();
@@ -32,17 +32,17 @@ void Scene1::Init()
 	ObjectManager::GetInstance()->Init();
 }
 
-void Scene1::Release()
+void BossScene::Release()
 {
 	ObjectManager::GetInstance()->Release();
 }
 
-void Scene1::Update()
+void BossScene::Update()
 {
 	ObjectManager::GetInstance()->Update();
 }
 
-void Scene1::Render(HDC hdc)
+void BossScene::Render(HDC hdc)
 {
 	ObjectManager::GetInstance()->Render(hdc);
 }

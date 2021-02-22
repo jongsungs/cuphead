@@ -45,7 +45,7 @@ void Onion::Init() {
 	mIdleAnimation = new Animation();
 	mIdleAnimation->InitFrameByStartEnd(0, 0, 14, 0, true);
 	mIdleAnimation->SetIsLoop(true);
-	mIdleAnimation->SetFrameUpdateTime(0.05f);
+	mIdleAnimation->SetFrameUpdateTime(0.1f);
 	//공격 애니메이션
 	mAttackAnimation = new Animation();
 	mAttackAnimation->InitFrameByStartEnd(0, 0, 11, 0, false);
