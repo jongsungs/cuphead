@@ -14,9 +14,9 @@ Cuphead_OverWorld::Cuphead_OverWorld(const string& name, float x, float y)
 
 void Cuphead_OverWorld::Init()
 {
-	IMAGEMANAGER->LoadFromFile(L"CupHead_OverWolrd", Resources(L"/overworld/CupHead_OverWorld.bmp"), 1649, 1130, 16, 10, true, RGB(99,92,99));
+	IMAGEMANAGER->LoadFromFile(L"CupHead_OverWolrd", Resources(L"/overworld/Cuphead/CupHead_OverWorld.bmp"), 1649, 1130, 16, 10, true, RGB(99,92,99));
 	mImage = IMAGEMANAGER->FindImage(L"CupHead_OverWolrd");
-	IMAGEMANAGER->LoadFromFile(L"Dust_OverWolrd", Resources(L"/overworld/Dust_Overworld.bmp"), 1622, 498, 20, 6, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"Dust_OverWolrd", Resources(L"/overworld/Cuphead/Dust_Overworld.bmp"), 1622, 498, 20, 6, true, RGB(99, 92, 99));
 	mDustImage = IMAGEMANAGER->FindImage(L"Dust_OverWolrd");
 	mDustCount = 0;
 
@@ -370,6 +370,7 @@ void Cuphead_OverWorld::Update()
 		}
 	}
 	mDustCount++;
+	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 }
 
 void Cuphead_OverWorld::Render(HDC hdc)

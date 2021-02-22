@@ -17,6 +17,7 @@ enum class ObjectLayer : int
 	Enemy_Bullet,
 	Player_Bullet,
 	UI,
+	Building,
 	End
 };
 
