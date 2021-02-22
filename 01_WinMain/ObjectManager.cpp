@@ -164,15 +164,37 @@ vector<class GameObject*>* ObjectManager::GetObjectListPt(ObjectLayer layer)
 {
 	return &mObjectList[layer];
 }
-
+// 모든 Object Active => False; 단 Effect 제거
 void ObjectManager::AllActiveFalse()
+{
+	ObjectIter iter = mObjectList.begin();
+	for (; iter != mObjectList.end(); ++iter)
+	{
+		if (iter->first == ObjectLayer::Background || iter->first == ObjectLayer::Player || iter->first == ObjectLayer::UI || iter->first == ObjectLayer::NPC) {
+			for (int i = 0; i < iter->second.size(); ++i)
+			{
+				iter->second[i]->SetIsActive(false);
+			}
+		}
+		else {
+			for (int i = 0; i < iter->second.size(); ++i)
+			{
+				iter->second[i]->Release();
+				SafeDelete(iter->second[i]);
+			}
+			iter->second.clear();
+		}
+	}
+}
+// 모든 Object Active => True;
+void ObjectManager::AllActiveTrue()
 {
 	ObjectIter iter = mObjectList.begin();
 	for (; iter != mObjectList.end(); ++iter)
 	{
 		for (int i = 0; i < iter->second.size(); ++i)
 		{
-			iter->second[i]->SetIsActive = false;
+			iter->second[i]->SetIsActive(true);
 		}
 	}
 }
