@@ -75,7 +75,7 @@ void Animation::InitFrameByStartEnd(int startX, int startY, int endX, int endY, 
 		{
 			mFrameList.push_back(make_pair(x, y));
 		}
-	}
+	} 
 
 	if (isReverse)
 	{

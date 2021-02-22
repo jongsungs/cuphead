@@ -17,10 +17,13 @@ Effect::Effect(float x, float y, Image* image , float frameTime)
 	mEffectAnimation->SetIsLoop(false);
 	mEffectAnimation->SetFrameUpdateTime(frameTime);
 	mEffectAnimation->Play();
+
 	vector<GameObject*>* effectvector = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Effect);
+
 	mName = to_string(effectvector->size());
 	mIsActive = true;
 	mIsDestroy = false;
+
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Effect, this);
 
 	mRect = RectMakeCenter(mX, mY, mImage->GetFrameWidth(), mImage->GetFrameHeight());

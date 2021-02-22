@@ -90,7 +90,7 @@ void MainGame::RenderTime(HDC hdc)
 void MainGame::RenderFilter(HDC hdc)
 {
 	mFilter = ImageManager::GetInstance()->FindImage(L"FX_" + to_wstring((int)mFilterNumber));
-	mFilter->AlphaScaleRender(hdc , 0 , 0,WINSIZEX,WINSIZEY, 0.25f);
+	mFilter->AlphaScaleRender(hdc , 0 , 0,WINSIZEX,WINSIZEY, 0.20f);
 	mFilterNumber += Time::GetInstance()->DeltaTime() * 10;
 	if (mFilterNumber > 126) {
 		mFilterNumber = 0;

@@ -73,9 +73,6 @@
     <Filter Include="MainGame\Object\Effect">
       <UniqueIdentifier>{cd7fc9b0-6bbe-4010-bd45-e62154dd3090}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainGame\Object\Enemy">
-      <UniqueIdentifier>{820474eb-d045-4d0c-a8d0-2f0b92790eb2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MainGame\Object\NPC">
       <UniqueIdentifier>{2fa7d8a8-676c-4eca-a29e-c01dfbd55435}</UniqueIdentifier>
     </Filter>
@@ -105,6 +102,18 @@
     </Filter>
     <Filter Include="MainGame\Object\Player\OverWorld">
       <UniqueIdentifier>{6890e317-594c-40d9-b998-1d3909c24da7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Boss">
+      <UniqueIdentifier>{820474eb-d045-4d0c-a8d0-2f0b92790eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Boss\Potato">
+      <UniqueIdentifier>{e4d96c94-1a51-4996-a99b-879e77a48759}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Boss\Carrot">
+      <UniqueIdentifier>{246d7d62-d5d7-4f5a-baeb-6fce21108c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Boss\Onion">
+      <UniqueIdentifier>{b3ad93a8-43b2-4ee7-aebe-db507c273210}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -199,7 +208,7 @@
       <Filter>MainGame\Object\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>MainGame\Object\Enemy</Filter>
+      <Filter>MainGame\Object\Boss</Filter>
     </ClInclude>
     <ClInclude Include="NPC.h">
       <Filter>MainGame\Object\NPC</Filter>
@@ -218,6 +227,18 @@
     </ClInclude>
     <ClInclude Include="Cuphead_OverWorld.h">
       <Filter>MainGame\Object\Player\OverWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="Onion.h">
+      <Filter>MainGame\Object\Boss\Onion</Filter>
+    </ClInclude>
+    <ClInclude Include="Carrot.h">
+      <Filter>MainGame\Object\Boss\Carrot</Filter>
+    </ClInclude>
+    <ClInclude Include="Potato.h">
+      <Filter>MainGame\Object\Boss\Potato</Filter>
+    </ClInclude>
+    <ClInclude Include="BossScene.h">
+      <Filter>MainGame\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -300,7 +321,7 @@
       <Filter>MainGame\Object\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>MainGame\Object\Enemy</Filter>
+      <Filter>MainGame\Object\Boss</Filter>
     </ClCompile>
     <ClCompile Include="NPC.cpp">
       <Filter>MainGame\Object\NPC</Filter>
@@ -319,6 +340,18 @@
     </ClCompile>
     <ClCompile Include="Cuphead_OverWorld.cpp">
       <Filter>MainGame\Object\Player\OverWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="Onion.cpp">
+      <Filter>MainGame\Object\Boss\Onion</Filter>
+    </ClCompile>
+    <ClCompile Include="Carrot.cpp">
+      <Filter>MainGame\Object\Boss\Carrot</Filter>
+    </ClCompile>
+    <ClCompile Include="Potato.cpp">
+      <Filter>MainGame\Object\Boss\Potato</Filter>
+    </ClCompile>
+    <ClCompile Include="BossScene.cpp">
+      <Filter>MainGame\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
