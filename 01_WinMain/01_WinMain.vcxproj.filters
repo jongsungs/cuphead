@@ -106,6 +106,9 @@
     <Filter Include="MainGame\Object\Player\OverWorld">
       <UniqueIdentifier>{6890e317-594c-40d9-b998-1d3909c24da7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Object\Building">
+      <UniqueIdentifier>{a45f7fe3-68c3-4dd8-b70b-3f82b37c0382}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -219,6 +222,9 @@
     <ClInclude Include="Cuphead_OverWorld.h">
       <Filter>MainGame\Object\Player\OverWorld</Filter>
     </ClInclude>
+    <ClInclude Include="Building.h">
+      <Filter>MainGame\Object\Building</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="01_WinMain.cpp">
@@ -319,6 +325,9 @@
     </ClCompile>
     <ClCompile Include="Cuphead_OverWorld.cpp">
       <Filter>MainGame\Object\Player\OverWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="Building.cpp">
+      <Filter>MainGame\Object\Building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
