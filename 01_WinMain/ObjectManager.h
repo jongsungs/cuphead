@@ -9,12 +9,15 @@ GameObject 관리하는 클래스
 enum class ObjectLayer : int
 {
 	Background = 0,
-	Effect = 1,
-	Enemey = 2,
-	NPC = 3,
-	Player = 4,
-	UI = 5,
-	Filter = 6,
+	Effect,
+	NPC,
+	Enemy,
+	Boss,
+	Player,
+	Enemy_Bullet,
+	Player_Bullet,
+	UI,
+	Filter,
 	End
 };
 
