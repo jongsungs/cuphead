@@ -11,13 +11,13 @@ enum class ObjectLayer : int
 	Background = 0,
 	Effect,
 	NPC,
+	Building,
 	Enemy,
 	Boss,
 	Player,
 	Enemy_Bullet,
 	Player_Bullet,
 	UI,
-	Building,
 	End
 };
 

@@ -8,17 +8,19 @@
 #include "Building.h"
 void Scene_OverWorld::Init()
 {
+	IMAGEMANAGER->LoadFromFile(L"CupHead_OverWolrd", Resources(L"/overworld/Cuphead/CupHead_OverWorld.bmp"), 1649, 1130, 16, 10, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"OverWorld", Resources(L"/overworld/OverWorld.bmp"), 4000, 2200, true);
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_CanMove", Resources(L"/overworld/OverWorld_CanMove.bmp"), 4000, 2200, true);
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Front", Resources(L"/overworld/OverWorld_Front.bmp"), 4000, 2200, true,RGB(99,92,99));
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_ElderHouse", Resources(L"/overworld/Buildings/ElderHouse.bmp"), 300, 350, true,RGB(99,92,99));
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_Flatformer", Resources(L"/overworld/Buildings/flatformer.bmp"), 63, 46, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_BotanicPanic", Resources(L"/overworld/Buildings/BotanicPanic.bmp"), 330, 270, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"Dust_OverWolrd", Resources(L"/overworld/Cuphead/Dust_Overworld.bmp"), 1622, 498, 20, 6, true, RGB(99, 92, 99));
 
 
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, new Building("Flatformer", IMAGEMANAGER->FindImage(L"OverWorld_Building_Flatformer"), 2000, 800));
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, new Building("ElderHouse", IMAGEMANAGER->FindImage(L"OverWorld_Building_ElderHouse"), 650, 650));
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, new Building("BotanicPanic", IMAGEMANAGER->FindImage(L"OverWorld_Building_BotanicPanic"), 1680, 1490));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Building, new Building("Flatformer", IMAGEMANAGER->FindImage(L"OverWorld_Building_Flatformer"), 2000, 800));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Building, new Building("ElderHouse", IMAGEMANAGER->FindImage(L"OverWorld_Building_ElderHouse"), 650, 650));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Building, new Building("BotanicPanic", IMAGEMANAGER->FindImage(L"OverWorld_Building_BotanicPanic"), 1680, 1490));
 	//오브젝트레이어에 컵헤드 추가.
 	mCupHead = new Cuphead_OverWorld("CupHead_OverWorld", 2000, 800);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, mCupHead);
