@@ -1,5 +1,6 @@
-#pragma once
-//Á¶»ó´Ô!!!
+ï»¿#pragma once
+
+//ì¡°ìƒë‹˜!!!
 class GameObject
 {
 protected:
@@ -12,14 +13,14 @@ protected:
 	RECT mAttakArea;
 	int mHP;
 
-	bool mIsAttak;		//°ø°İÇÏ´Â ¿ÀºêÁ¦Æ®ÀÎ°¡
-	bool mIsActive;		//È°¼ºÈ­ »óÅÂ
-	bool mIsDestroy;	//»èÁ¦ÇÒÁö ¸»Áö
+	bool mIsAttak;		//ê³µê²©í•˜ëŠ” ì˜¤ë¸Œì œíŠ¸ì¸ê°€
+	bool mIsActive;		//í™œì„±í™” ìƒíƒœ
+	bool mIsDestroy;	//ì‚­ì œí• ì§€ ë§ì§€
 public:
 	GameObject();
 	GameObject(const string& name);
 
-	//¼ø¼ö°¡»óÇÔ¼ö : ¹İµå½Ã ÀÚ½Ä¿¡¼­ ÇØ´ç ÇÔ¼ö¸¦ ¿À¹ö¶óÀÌµù ÇØ¾ßÇÔ
+	//ìˆœìˆ˜ê°€ìƒí•¨ìˆ˜ : ë°˜ë“œì‹œ ìì‹ì—ì„œ í•´ë‹¹ í•¨ìˆ˜ë¥¼ ì˜¤ë²„ë¼ì´ë”© í•´ì•¼í•¨
 	virtual void Init() = 0;
 	virtual void Release() = 0;
 	virtual void Update() = 0;
@@ -48,5 +49,9 @@ public:
 	inline void SetIsActive(bool b) { mIsActive = b; }
 	inline bool GetIsDestroy()const { return mIsDestroy; }
 	inline void SetIsDestroy(bool b) { mIsDestroy = b; }
+
+	//ìƒì‹œ ì¶©ëŒê°’ í•¨ìˆ˜
+	void virtual InInterscet(){}
+	void virtual InIntersectDamage() {}
 };
 
