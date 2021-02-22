@@ -1,20 +1,23 @@
-#pragma once
+ï»¿#pragma once
 
 /*
 ## ObjectManager ##
-GameObject °ü¸®ÇÏ´Â Å¬·¡½º
+GameObject ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
 */
 
-//enum (¿­°ÅÀÚ) : Á¤¼ö¸¦ ´Ù¸¥ ÀÌ¸§À¸·Î Ç¥ÇöÇÏ´Â °Í
+//enum (ì—´ê±°ì) : ì •ìˆ˜ë¥¼ ë‹¤ë¥¸ ì´ë¦„ìœ¼ë¡œ í‘œí˜„í•˜ëŠ” ê²ƒ
 enum class ObjectLayer : int
 {
 	Background = 0,
-	Effect = 1,
-	Enemey = 2,
-	NPC = 3,
-	Player = 4,
-	UI = 5,
-	Filter = 6,
+	Effect,
+	NPC,
+	Building,
+	Enemy,
+	Boss,
+	Player,
+	Enemy_Bullet,
+	Player_Bullet,
+	UI,
 	End
 };
 
@@ -32,9 +35,13 @@ public:
 	void Update();
 	void Render(HDC hdc);
 
+	void AllActiveFalse(); //ëª¨ë“  ì˜¤ë¸Œì íŠ¸ ì•¡í‹°ë¸Œ = false ë³€ê²½
+	void AllActiveTrue();
 	void AddObject(ObjectLayer layer, class GameObject* object);
+	void AddObject(ObjectLayer layer, class GameObject* object, const string& name); //ê°™ì€ ì´ë¦„ì˜ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ëŠ”ë‹¤. ìˆìœ¼ë©´ í™œì„±í™”ë¥¼ ì‹œì¼œì¤€ë‹¤. ì—†ìœ¼ë©´ ìƒì„±
 	class GameObject* FindObject(const string& name);
 	class GameObject* FindObject(ObjectLayer layer, const string& name);
+	
 	vector<class GameObject*> FindObjects(const string& name);
 	vector<class GameObject*> FindObjects(ObjectLayer layer, const string& name);
 	vector<class GameObject*> GetObjectList(ObjectLayer layer);

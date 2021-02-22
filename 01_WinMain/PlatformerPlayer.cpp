@@ -14,7 +14,7 @@ PlatformerPlayer::PlatformerPlayer(const string& name, float x, float y)
 
 void PlatformerPlayer::Init()
 {
-	
+	mImage = IMAGEMANAGER->FindImage(L"UpShoot");
 	mGround = RectMake(0, 620, 3000, 200);
 	mX = WINSIZEX / 4;
 	mY = 300;
@@ -22,6 +22,14 @@ void PlatformerPlayer::Init()
 	mGravity = 0.1f;
 	mJumpPower = 0.f;
 	mPlayerState = PlayerState::RightIdle;
+
+
+	mAnimation = new Animation();
+	mAnimation->InitFrameByStartEnd(0, 0, 5, 1, false);
+	mAnimation->SetIsLoop(true);
+	mAnimation->SetFrameUpdateTime(0.1f);
+	mAnimation->Play();
+
 
 	
 }
@@ -47,12 +55,12 @@ void PlatformerPlayer::Update()
 	{
 		mJumpPower = 5.f;
 	}
-	if (Input::GetInstance()->GetKey(VK_SPACE))
-	{
-		Bullet* bullet = new Bullet();
-		bullet->Init( mX, mY, 10, 0 );
-		mBullet.push_back(bullet);
-	}
+	//if (Input::GetInstance()->GetKey(VK_SPACE))
+	//{
+	//	Bullet* bullet = new Bullet();
+	//	bullet->Init();
+	//	mBullet.push_back(bullet);
+	//}
 	mRect = RectMakeCenter(mX, mY, 98, 155);
 	mJumpPower -= mGravity;
 	mY -= mJumpPower;
@@ -61,30 +69,33 @@ void PlatformerPlayer::Update()
 		mY = WINSIZEY - 180;
 	}
 	
+
+
 	//mCurrentAnimation->Update();
 	for (int i = 0; i < mBullet.size(); i++)
 	{
 		mBullet[i]->Update();
 	}
+	mAnimation->Update();
 }
 
 void PlatformerPlayer::Render(HDC hdc)
 {
 	
 	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
-	//CameraManager::GetInstance()->GetMainCamera()->ScaleFrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(),
-	//	mCurrentAnimation->GetNowFrameY(), 80, 120);
 	////Á×À½
 	//if (mCurrentAnimation == mDieAnimation)
 	//{
 	//	CameraManager::GetInstance()->GetMainCamera()->ScaleFrameRender(hdc, mImage4, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 80, 120);
 	//}
 	RenderRect(hdc, mRect);
+	mImage->FrameRender(hdc,mRect.left, mRect.top, mAnimation->GetNowFrameX(),mAnimation->GetNowFrameY());
 
-	RenderRect(hdc, mGround);
+	//RenderRect(hdc, mGround);
 	for (int i = 0; i < mBullet.size(); ++i)
 	{
 		mBullet[i]->Render(hdc);
 	}
+	
 
 }

@@ -1,10 +1,10 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "ObjectManager.h"
 
 #include "GameObject.h"
 ObjectManager::ObjectManager()
 {
-	//ObjectLayer º°·Î º¤ÅÍ ÇÏ³ª¾¿ ¸Ê¿¡ Áı¾î ³Ö´Â´Ù.
+	//ObjectLayer ë³„ë¡œ ë²¡í„° í•˜ë‚˜ì”© ë§µì— ì§‘ì–´ ë„£ëŠ”ë‹¤.
 	for (int i = 0; i < (int)ObjectLayer::End; ++i)
 	{
 		vector<GameObject*> emptyVector;
@@ -77,14 +77,23 @@ void ObjectManager::Render(HDC hdc)
 
 void ObjectManager::AddObject(ObjectLayer layer, GameObject * object)
 {
-	//mapµµ ¹è¿­¿¬»êÀÚ°¡ Á¤ÀÇµÇ¾î ÀÖ´Ù. 
-	//´Ü, ½ÇÁ¦ ¹è¿­Ã³·³ µ¿ÀÛÇÏ´Â°Ô ¾Æ´Ï¶ó.[]¿¬»êÀÚ ³»ºÎ¿¡ findÇÔ¼ö¸¦ ½á¼­ µ¿ÀÛÇÔ
-	//±×·¡¼­ °á±¹ find¾²´Â°Å¶û ºñ½ÁÇÑµ¥, ´Ù¸¥Á¡ÀÌ¶ó°í ÇÑ´Ù¸é ÇØ´ç Å°°ªÀÇ µ¥ÀÌÅÍ°¡ 
-	//¾øÀ¸¸é »õ·Î »ı¼ºÇØ¹ö¸². ÁÖÀÇÇØ¾ßÇÔ
+	//mapë„ ë°°ì—´ì—°ì‚°ìê°€ ì •ì˜ë˜ì–´ ìˆë‹¤. 
+	//ë‹¨, ì‹¤ì œ ë°°ì—´ì²˜ëŸ¼ ë™ì‘í•˜ëŠ”ê²Œ ì•„ë‹ˆë¼.[]ì—°ì‚°ì ë‚´ë¶€ì— findí•¨ìˆ˜ë¥¼ ì¨ì„œ ë™ì‘í•¨
+	//ê·¸ë˜ì„œ ê²°êµ­ findì“°ëŠ”ê±°ë‘ ë¹„ìŠ·í•œë°, ë‹¤ë¥¸ì ì´ë¼ê³  í•œë‹¤ë©´ í•´ë‹¹ í‚¤ê°’ì˜ ë°ì´í„°ê°€ 
+	//ì—†ìœ¼ë©´ ìƒˆë¡œ ìƒì„±í•´ë²„ë¦¼. ì£¼ì˜í•´ì•¼í•¨
 	mObjectList[layer].push_back(object);
 }
+void  ObjectManager::AddObject(ObjectLayer layer, GameObject * object, const string& name) {
+	GameObject* findObject = FindObject(layer, name);
+	if (findObject ==nullptr) {
+		mObjectList[layer].push_back(object);
+	}
+	else {
+		findObject->SetIsActive(true);
+	}
+}
 
-//ÇØ´ç ÀÌ¸§ÀÇ ¿ÀºêÁ§Æ® Ã£¾Æ¿À±â
+//í•´ë‹¹ ì´ë¦„ì˜ ì˜¤ë¸Œì íŠ¸ ì°¾ì•„ì˜¤ê¸°
 GameObject * ObjectManager::FindObject(const string & name)
 {
 	ObjectIter iter = mObjectList.begin();
@@ -101,7 +110,7 @@ GameObject * ObjectManager::FindObject(const string & name)
 	return nullptr;
 }
 
-//ÇØ´ç ÀÌ¸§ÀÇ ¿ÀºêÁ§Æ® Ã£±â
+//í•´ë‹¹ ì´ë¦„ì˜ ì˜¤ë¸Œì íŠ¸ ì°¾ê¸°
 GameObject * ObjectManager::FindObject(ObjectLayer layer, const string & name)
 {
 	ObjectIter iter = mObjectList.find(layer);
@@ -154,4 +163,38 @@ vector<class GameObject*> ObjectManager::GetObjectList(ObjectLayer layer)
 vector<class GameObject*>* ObjectManager::GetObjectListPt(ObjectLayer layer)
 {
 	return &mObjectList[layer];
+}
+// ëª¨ë“  Object Active => False; ë‹¨ Effect ì œê±°
+void ObjectManager::AllActiveFalse()
+{
+	ObjectIter iter = mObjectList.begin();
+	for (; iter != mObjectList.end(); ++iter)
+	{
+		if (iter->first == ObjectLayer::Background || iter->first == ObjectLayer::Player || iter->first == ObjectLayer::UI || iter->first == ObjectLayer::NPC) {
+			for (int i = 0; i < iter->second.size(); ++i)
+			{
+				iter->second[i]->SetIsActive(false);
+			}
+		}
+		else {
+			for (int i = 0; i < iter->second.size(); ++i)
+			{
+				iter->second[i]->Release();
+				SafeDelete(iter->second[i]);
+			}
+			iter->second.clear();
+		}
+	}
+}
+// ëª¨ë“  Object Active => True;
+void ObjectManager::AllActiveTrue()
+{
+	ObjectIter iter = mObjectList.begin();
+	for (; iter != mObjectList.end(); ++iter)
+	{
+		for (int i = 0; i < iter->second.size(); ++i)
+		{
+			iter->second[i]->SetIsActive(true);
+		}
+	}
 }

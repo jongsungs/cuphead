@@ -9,8 +9,8 @@ class Bullet : public GameObject
 	class Animation* UpBullet;
 
 public:
+	Bullet(string name, float x, float y, float speed, float angle);
 	void Init()override;
-	void Init(float x, float y, float speed, float angle);
 	void Release()override;
 	void Update()override;
 	void Render(HDC hdc)override;

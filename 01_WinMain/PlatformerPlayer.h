@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 class Bullet;
-enum struct PlayerState : int
+enum class PlayerState : int
 {
 	RightIdle,
 	LeftIdle,
@@ -18,20 +18,22 @@ enum struct PlayerState : int
 	RightShoot,
 	LeftShoot,
 	LeftRunShoot,
+	RightRunShot,
 	RightSpecialAttack,
 	LeftSpecialAttack,
 	UpSpecialAttack,
-	DownSpecialAttack,
-	RightRunShot,
 	RightGroundHit,//오른쪽땅에서 피격
 	RightAirHit, // 오른쪽 공중 피격
 	LeftGroundHit,
 	LeftAirHit,
 	LeftDash,
 	RightDash,
+	LeftAirDash,
+	RightAirDash,
 	Die,
 
 };
+
 class PlatformerPlayer : public GameObject
 {
 	Image* mImage;
@@ -40,6 +42,7 @@ class PlatformerPlayer : public GameObject
 	float mJumpPower;
 	PlayerState mPlayerState;
 	vector<Bullet*> mBullet;
+	Animation* mAnimation;
 public:
 	PlatformerPlayer(const string& name, float x, float y);
 

@@ -14,10 +14,8 @@ Cuphead_OverWorld::Cuphead_OverWorld(const string& name, float x, float y)
 
 void Cuphead_OverWorld::Init()
 {
-	IMAGEMANAGER->LoadFromFile(L"CupHead_OverWolrd", Resources(L"/overworld/CupHead_OverWorld.bmp"), 1649, 1130, 16, 10, true, RGB(99,92,99));
 	mImage = IMAGEMANAGER->FindImage(L"CupHead_OverWolrd");
-	IMAGEMANAGER->LoadFromFile(L"Dust_OverWolrd", Resources(L"/overworld/Dust_Overworld.bmp"), 1622, 498, 20, 6, true, RGB(99, 92, 99));
-	mDustImage = IMAGEMANAGER->FindImage(L"Dust_OverWolrd");
+	
 	mDustCount = 0;
 
 	mSizeX = mImage->GetWidth()/16;
@@ -29,35 +27,35 @@ void Cuphead_OverWorld::Init()
 	mUpIdleAnimation = new Animation();
 	mUpIdleAnimation->InitFrameByStartEnd(0, 0, 1, 0, false);
 	mUpIdleAnimation->SetIsLoop(true);
-	mUpIdleAnimation->SetFrameUpdateTime(0.1f);
+	mUpIdleAnimation->SetFrameUpdateTime(0.3f);
 	mDownIdleAnimation = new Animation();
 	mDownIdleAnimation->InitFrameByStartEnd(0, 4, 1, 4, false);
 	mDownIdleAnimation->SetIsLoop(true);
-	mDownIdleAnimation->SetFrameUpdateTime(0.1f);
+	mDownIdleAnimation->SetFrameUpdateTime(0.3f);
 	mLeftIdleAnimation = new Animation();
 	mLeftIdleAnimation->InitFrameByStartEnd(14, 6, 15, 6, true);
 	mLeftIdleAnimation->SetIsLoop(true);
-	mLeftIdleAnimation->SetFrameUpdateTime(0.1f);
+	mLeftIdleAnimation->SetFrameUpdateTime(0.3f);
 	mLeftDownIdleAnimation = new Animation();
 	mLeftDownIdleAnimation->InitFrameByStartEnd(15, 7, 16, 7, true);
 	mLeftDownIdleAnimation->SetIsLoop(true);
-	mLeftDownIdleAnimation->SetFrameUpdateTime(0.1f);
+	mLeftDownIdleAnimation->SetFrameUpdateTime(0.3f);
 	mLeftUpIdleAnimation = new Animation();
 	mLeftUpIdleAnimation->InitFrameByStartEnd(15, 5, 16, 5, true);
 	mLeftUpIdleAnimation->SetIsLoop(true);
-	mLeftUpIdleAnimation->SetFrameUpdateTime(0.1f);
+	mLeftUpIdleAnimation->SetFrameUpdateTime(0.3f);
 	mRightIdleAnimation = new Animation();
 	mRightIdleAnimation->InitFrameByStartEnd(0, 2, 1, 2, false);
 	mRightIdleAnimation->SetIsLoop(true);
-	mRightIdleAnimation->SetFrameUpdateTime(0.1f);
+	mRightIdleAnimation->SetFrameUpdateTime(0.3f);
 	mRightUpIdleAnimation = new Animation();
 	mRightUpIdleAnimation->InitFrameByStartEnd(0, 1, 1, 1, false);
 	mRightUpIdleAnimation->SetIsLoop(true);
-	mRightUpIdleAnimation->SetFrameUpdateTime(0.1f);
+	mRightUpIdleAnimation->SetFrameUpdateTime(0.3f);
 	mRightDownIdleAnimation = new Animation();
 	mRightDownIdleAnimation->InitFrameByStartEnd(0, 3, 1, 3, false);
 	mRightDownIdleAnimation->SetIsLoop(true);
-	mRightDownIdleAnimation->SetFrameUpdateTime(0.1f);
+	mRightDownIdleAnimation->SetFrameUpdateTime(0.3f);
 
 	mUpMoveAnimation = new Animation();
 	mUpMoveAnimation->InitFrameByStartEnd(5, 0, 15, 0, false);
@@ -365,11 +363,12 @@ void Cuphead_OverWorld::Update()
 
 		if (mDustCount > 50)
 		{
-			Effect* dust = new Effect(mX, mRect.bottom-45, mDustImage);
+			Effect* dust = new Effect(mX, mRect.bottom-45, IMAGEMANAGER->FindImage(L"Dust_OverWolrd"));
 			mDustCount = 0;
 		}
 	}
 	mDustCount++;
+	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 }
 
 void Cuphead_OverWorld::Render(HDC hdc)
