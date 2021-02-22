@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Animation.h"
 
 Animation::Animation()
@@ -16,14 +16,14 @@ void Animation::Update()
 
 	if (mCurrentFrameTime >= mFrameUpdateTime)
 	{
-		//¼Õ½Ç ´Ù ¾ø¾ÖÁØ´Ù
+		//ì†ì‹¤ ë‹¤ ì—†ì• ì¤€ë‹¤
 		while (mCurrentFrameTime >= mFrameUpdateTime)
 		{
 			mCurrentFrameTime -= mFrameUpdateTime;
 		}
 
 		mCurrentFrameIndex++;
-		//ÇÁ·¹ÀÓÀÌ ¸¶Áö¸· ÇÁ·¹ÀÓº¸´Ù Ä¿Áö·Á°í ÇÑ´Ù¸é
+		//í”„ë ˆìž„ì´ ë§ˆì§€ë§‰ í”„ë ˆìž„ë³´ë‹¤ ì»¤ì§€ë ¤ê³  í•œë‹¤ë©´
 		if (mCurrentFrameIndex >= mFrameList.size())
 		{
 			if (mIsLoop == false)
@@ -35,7 +35,7 @@ void Animation::Update()
 			{
 				mCurrentFrameIndex = 0;
 			}
-			//ÄÝ¹éÇÔ¼ö°¡ ¹ÙÀÎµù µÇ¾î ÀÖ´Ù¸é ±× ÇÔ¼ö ½ÇÇà
+			//ì½œë°±í•¨ìˆ˜ê°€ ë°”ì¸ë”© ë˜ì–´ ìžˆë‹¤ë©´ ê·¸ í•¨ìˆ˜ ì‹¤í–‰
 			if (mCallbackFunc != nullptr)
 			{
 				mCallbackFunc();
@@ -82,6 +82,29 @@ void Animation::InitFrameByStartEnd(int startX, int startY, int endX, int endY, 
 		for (int y = endY; y >= startY; --y)
 		{
 			for (int x = endX; x >= startX; --x)
+			{
+				mFrameList.push_back(make_pair(x, y));
+			}
+		}
+	}
+}
+
+//ì—­ë°©í–¥ ìž¬ìƒ
+void Animation::InitFrameByBackStartEnd(int startX, int startY, int endX, int endY, bool isReverse)
+{
+	for (int y = startY; y >= endY; --y)
+	{
+		for (int x = startX; x >= endX; --x)
+		{
+			mFrameList.push_back(make_pair(x, y));
+		}
+	}
+
+	if (isReverse)
+	{
+		for (int y = endY; y <= startY; ++y)
+		{
+			for (int x = endX; x <= startX; ++x)
 			{
 				mFrameList.push_back(make_pair(x, y));
 			}
