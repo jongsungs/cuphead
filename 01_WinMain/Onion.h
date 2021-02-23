@@ -1,25 +1,26 @@
 #pragma once
 #include "GameObject.h"
 #include "Enemy.h"
-
+class Image;
+class Animation;
 class Onion : public Enemy {
-	class Image* mDeathLeaveImage;
-	class Image* mBashfulImage;
-	class Image* mBashfulLeaveImage;
-	class Image* mCryImage;
+	Image* mDeathLeaveImage;
+	Image* mBashfulImage;
+	Image* mBashfulLeaveImage;
+	Image* mCryImage;
 
-	class Image* mArmIntroImage;
-	class Image* mArmIdleImage;
-	class Image* mArmBashfulImage;
+	Image* mArmIntroImage;
+	Image* mArmIdleImage;
+	Image* mArmBashfulImage;
 
-	class Image* mTearAImage;
-	class Image* mTearBImage;
+	Image* mTearAImage;
+	Image* mTearBImage;
 
-	class Animation* mDeathLeaveAnimation;
-	class Animation* mArmBashfulAnimation;
+	Animation* mDeathLeaveAnimation;
+	Animation* mArmBashfulAnimation;
 
-	class Animation* mTearAAnimation;
-	class Animation* mTearBAnimation;
+	Animation* mTearAAnimation;
+	Animation* mTearBAnimation;
 
 	float mAttackStartDelay;
 	int mAttackCount;

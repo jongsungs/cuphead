@@ -54,6 +54,7 @@ void ImageSet::SetImage() //첫 scene1 로드
 
 	//당근
 	IMAGEMANAGER->LoadFromFile(L"CarrotIntro", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Intro.bmp"), 14800, 549, 25, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"CarrotAttack", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Attack .bmp"), 10252, 501, 22, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"CarrotBeam", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Beam.bmp"), 5954, 522, 13, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"CarrotDeath", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Death.bmp"), 1072, 139, 8, 1, true);
 
@@ -61,6 +62,7 @@ void ImageSet::SetImage() //첫 scene1 로드
 	//양파
 	IMAGEMANAGER->LoadFromFile(L"OnionIntro", Resources(L"Boss/BotanicPanic/Onion/Onion_Intro.bmp"), 12312, 643, 24, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"OnionIdle", Resources(L"Boss/BotanicPanic/Onion/Onion_Idle.bmp"), 7440, 563, 15, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"OnionCry", Resources(L"Boss/BotanicPanic/Onion/Onion_Cry.bmp"), 10384, 570, 22, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"OnionDeath", Resources(L"Boss/BotanicPanic/Onion/Onion_Death.bmp"), 2976, 599, 6, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"OnionDeathLeave", Resources(L"Boss/BotanicPanic/Onion/Onion_Death_Leave.bmp"), 16768, 596, 31, 1, true);
 

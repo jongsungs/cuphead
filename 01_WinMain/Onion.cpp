@@ -20,13 +20,12 @@ void Onion::Init() {
 	//캐릭터 상태에 따라 다른 이미지를 보여주기 위함
 	mIntroImage = IMAGEMANAGER->FindImage(L"OnionIntro");
 	mIdleImage = IMAGEMANAGER->FindImage(L"OnionIdle");
-	mAttackImage = IMAGEMANAGER->FindImage(L"EnemyAttack");
+	mAttackImage = IMAGEMANAGER->FindImage(L"OnionCry");
 	mDeathImage = IMAGEMANAGER->FindImage(L"OnionDeath");
 	mDeathLeaveImage = IMAGEMANAGER->FindImage(L"OnionDeathLeave");
 
 	mBashfulImage = IMAGEMANAGER->FindImage(L"OnionDeath");
 	mBashfulLeaveImage = IMAGEMANAGER->FindImage(L"OnionDeath");
-	mCryImage = IMAGEMANAGER->FindImage(L"OnionDeath");
 
 	mArmIntroImage = IMAGEMANAGER->FindImage(L"OnionDeath");
 	mArmIdleImage = IMAGEMANAGER->FindImage(L"OnionDeath");
@@ -48,13 +47,13 @@ void Onion::Init() {
 	mIdleAnimation->SetFrameUpdateTime(0.1f);
 	//공격 애니메이션
 	mAttackAnimation = new Animation();
-	mAttackAnimation->InitFrameByStartEnd(0, 0, 11, 0, false);
+	mAttackAnimation->InitFrameByStartEnd(0, 0, 21, 0, false);
 	mAttackAnimation->SetIsLoop(true);
 	mAttackAnimation->SetFrameUpdateTime(0.1f);
 	//사망 애니메이션
 	mDeathAnimation = new Animation();
-	mDeathAnimation->InitFrameByStartEnd(0, 0, 5, 0, false);
-	mDeathAnimation->SetIsLoop(false);
+	mDeathAnimation->InitFrameByStartEnd(0, 0, 5, 0, true);
+	mDeathAnimation->SetIsLoop(true);
 	mDeathAnimation->SetFrameUpdateTime(0.1f);
 	//퇴장 애니메이션
 	mDeathLeaveAnimation = new Animation();
@@ -112,19 +111,19 @@ void Onion::Update() {
 		mCurrentAnimation = mIdleAnimation;
 		if (mCurrentAnimation->GetIsPlay() == false)
 			mState = EnemyState::Attack;
+			
 		mCurrentAnimation->Play();
 		break;
 
-	//case EnemyState::Attack:
-	//	mImage = mAttackImage;
-	//	mSizeX = mImage->GetFrameWidth();
-	//	mSizeY = mImage->GetFrameHeight();
-	//	mCurrentAnimation = mAttackAnimation;
-	//	mCurrentAnimation->Play();
-
-	//	mAttackStartDelay += Time::GetInstance()->DeltaTime();
-
-	//	break;
+	case EnemyState::Attack:
+		mImage = mAttackImage;
+		mSizeX = mImage->GetFrameWidth();
+		mSizeY = mImage->GetFrameHeight();
+		mCurrentAnimation = mAttackAnimation;
+		//if (mCurrentAnimation->GetIsPlay() == false)
+		//	mState = EnemyState::Death;
+		mCurrentAnimation->Play();
+		break;
 
 	case EnemyState::Death:
 		mImage = mDeathImage;
@@ -132,9 +131,7 @@ void Onion::Update() {
 		mSizeY = mImage->GetFrameHeight();
 		mCurrentAnimation = mDeathAnimation;
 		mCurrentAnimation->Play();
-		if (mCurrentAnimation->GetNowFrameX() >= 5) {
-			mState = EnemyState::End;
-		}
+	
 		break;
 
 	case EnemyState::End:
