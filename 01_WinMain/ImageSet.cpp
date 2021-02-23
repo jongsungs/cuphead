@@ -89,5 +89,6 @@ void ImageSet::SetFxImage() {
 		}
 		IMAGEMANAGER->LoadFromFile(key, ResourcesImage(file), 1024, 517, false);
 	}
-	IMAGEMANAGER->LoadFromFile(L"BlackGround", ResourcesImage(L"FX/BlackGround.bmp"), 1024, 517, false);
+	IMAGEMANAGER->LoadFromFile(L"LoadingHourGlass", ResourcesImage(L"Loading/LoadingHourGlass.bmp"), 1024, 517, false);
+	IMAGEMANAGER->LoadFromFile(L"BlackGround", ResourcesImage(L"Loading/BlackGround.bmp"), 1024, 517, false);
 }
