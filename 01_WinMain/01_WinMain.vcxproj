@@ -155,10 +155,12 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Carrot.h" />
+    <ClInclude Include="CarrotProj.h" />
     <ClInclude Include="Cuphead_OverWorld.h" />
     <ClInclude Include="DefineHeader.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyProj.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameEvent.h" />
@@ -174,10 +176,12 @@
     <ClInclude Include="NPC.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Onion.h" />
+    <ClInclude Include="OnionProj.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PlatformerPlayer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Potato.h" />
+    <ClInclude Include="PotatoProj.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
@@ -199,9 +203,11 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Carrot.cpp" />
+    <ClCompile Include="CarrotProj.cpp" />
     <ClCompile Include="Cuphead_OverWorld.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyProj.cpp" />
     <ClCompile Include="GameEvent.cpp" />
     <ClCompile Include="GameEventManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -216,6 +222,7 @@
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Onion.cpp" />
+    <ClCompile Include="OnionProj.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -225,6 +232,7 @@
     <ClCompile Include="PlatformerPlayer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Potato.cpp" />
+    <ClCompile Include="PotatoProj.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Scene1.cpp" />

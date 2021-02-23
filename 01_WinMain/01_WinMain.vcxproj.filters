@@ -115,6 +115,12 @@
     <Filter Include="MainGame\Object\Boss\Onion">
       <UniqueIdentifier>{b3ad93a8-43b2-4ee7-aebe-db507c273210}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Object\Boss\Flower">
+      <UniqueIdentifier>{52046f2a-3546-4a8b-a7c6-1c274a9906f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Bullet\EnemyBullet">
+      <UniqueIdentifier>{3f04bf07-7900-411b-be77-0c7819c58b10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -243,6 +249,18 @@
     <ClInclude Include="Building.h">
       <Filter>MainGame\Object\Player\OverWorld</Filter>
     </ClInclude>
+    <ClInclude Include="OnionProj.h">
+      <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CarrotProj.h">
+      <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyProj.h">
+      <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="PotatoProj.h">
+      <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="01_WinMain.cpp">
@@ -358,6 +376,18 @@
     </ClCompile>
     <ClCompile Include="Building.cpp">
       <Filter>MainGame\Object\Player\OverWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="OnionProj.cpp">
+      <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CarrotProj.cpp">
+      <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyProj.cpp">
+      <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="PotatoProj.cpp">
+      <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

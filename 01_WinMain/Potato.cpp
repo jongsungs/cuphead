@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Potato.h"
 
 #include "Player.h"
@@ -12,45 +12,45 @@ Potato::Potato(const string& name, float x, float y)
 }
 
 void Potato::Init() {
-	//»óÅÂ ¼³Á¤
+	//ìƒíƒœ ì„¤ì •
 	mState = EnemyState::Intro;
 
-	//ÀÌ¹ÌÁö ¼³Á¤
+	//ì´ë¯¸ì§€ ì„¤ì •
 	mIntroImage = IMAGEMANAGER->FindImage(L"PotatoIntro");
 	mIdleImage = IMAGEMANAGER->FindImage(L"PotatoIdle");
 	mAttackImage = IMAGEMANAGER->FindImage(L"PotatoSpitAttack");
 	mDeathImage = IMAGEMANAGER->FindImage(L"PotatoDeath");
 	
-	//¾Ö´Ï¸ŞÀÌ¼Ç ¼³Á¤
-	//µîÀå ¾Ö´Ï¸ŞÀÌ¼Ç
+	//ì• ë‹ˆë©”ì´ì…˜ ì„¤ì •
+	//ë“±ì¥ ì• ë‹ˆë©”ì´ì…˜
 	mIntroAnimation = new Animation();
 	mIntroAnimation->InitFrameByStartEnd(0, 0, 7, 0, false);
 	mIntroAnimation->SetIsLoop(false);
 	mIntroAnimation->SetFrameUpdateTime(0.1f);
-	//±âº» ¾Ö´Ï¸ŞÀÌ¼Ç
+	//ê¸°ë³¸ ì• ë‹ˆë©”ì´ì…˜
 	mIdleAnimation = new Animation();
 	mIdleAnimation->InitFrameByStartEnd(0, 0, 6, 0, false);
 	mIdleAnimation->SetIsLoop(true);
 	mIdleAnimation->SetFrameUpdateTime(0.1f);
-	//°ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç
+	//ê³µê²© ì• ë‹ˆë©”ì´ì…˜
 	mAttackAnimation = new Animation();
 	mAttackAnimation->InitFrameByStartEnd(0, 0, 19, 0, false);
 	mAttackAnimation->SetIsLoop(false);
 	mAttackAnimation->SetFrameUpdateTime(0.1f);
-	//»ç¸Á ¾Ö´Ï¸ŞÀÌ¼Ç
+	//ì‚¬ë§ ì• ë‹ˆë©”ì´ì…˜
 	mDeathAnimation = new Animation();
 	mDeathAnimation->InitFrameByStartEnd(0, 0, 8, 0, false);
 	mDeathAnimation->SetIsLoop(false);
 	mDeathAnimation->SetFrameUpdateTime(0.1f);
 	
-	//ÃÊ±â»ı¼º½Ã µé¾î°¡¾ß ÇÒ µ¥ÀÌÅÍ
+	//ì´ˆê¸°ìƒì„±ì‹œ ë“¤ì–´ê°€ì•¼ í•  ë°ì´í„°
 	mCurrentAnimation = mIntroAnimation;
 	mImage = mIntroImage;
 	mSizeX = mImage->GetFrameWidth();
 	mSizeY = mImage->GetFrameHeight();
 	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);	
 	
-	//HP ÀÓÀÇ¼³Á¤
+	//HP ì„ì˜ì„¤ì •
 	mHP = 50;
 	mAttackStartDelay = 0;
 	mAttackCount = 0;
@@ -67,7 +67,7 @@ void Potato::Update() {
 	if (mHP <= 0)
 		mState = EnemyState::Death;
 
-	//»óÅÂ¿¡ µû¸¥ ´Ù¸¥ ¾Ö´Ï¸ŞÀÌ¼Ç Ãâ·Â
+	//ìƒíƒœì— ë”°ë¥¸ ë‹¤ë¥¸ ì• ë‹ˆë©”ì´ì…˜ ì¶œë ¥
 	switch (mState) {
 		case EnemyState::Intro:
 			mImage = mIntroImage;
@@ -114,11 +114,16 @@ void Potato::Update() {
 
 			if (mAttackStartDelay > 50) {
 				mAttackCount++;
-				//¹ß»çÃ¼ »ı¼º
+				//ë°œì‚¬ì²´ ìƒì„±
 				while (mAttackCount < 4) {
-					//ÆĞ¸µºÒ°¡´É ¿ÀºêÁ§Æ®
+					//	Bullet* bullet = new Bullet();
+					//	bullet->Init();
+					//	mBullet.push_back(bullet);
 					if (mAttackCount == 3) {
-						//ÆĞ¸µ°¡´É ¿ÀºêÁ§Æ®
+						//íŒ¨ë§ê°€ëŠ¥ ì˜¤ë¸Œì íŠ¸
+						//	Bullet* bullet = new Bullet();
+						//	bullet->Init();
+						//	mBullet.push_back(bullet);
 						mAttackCount = 0;
 					}
 				}
