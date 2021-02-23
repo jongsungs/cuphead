@@ -2,11 +2,13 @@
 #include "GameObject.h"
 #include "Enemy.h"
 
+class Animation;
+
 class Carrot : public Enemy {
 	float mAttackStartDelay;
 	int mAttackCount;
 
-	class Animation* mInitAttackAnimation;
+	Animation* mInitAttackAnimation;
 public:
 	Carrot(const string& name, float x, float y);
 

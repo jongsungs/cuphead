@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "GameObject.h"
-
+class Image;
+class Animation;
 enum class EnemyState : int {
 	Intro,
 	Idle,
@@ -12,24 +13,24 @@ enum class EnemyState : int {
 class Enemy : public GameObject {
 	
 protected:
-	class Image* mImage;
+	Image* mImage;
 
-	class Image* mIntroImage;
-	class Image* mIdleImage;
-	class Image* mAttackImage;
-	class Image* mDeathImage;
+	Image* mIntroImage;
+	Image* mIdleImage;
+	Image* mAttackImage;
+	Image* mDeathImage;
 
 	class Player* mPlayer;
 	EnemyState mState;
 
 	float mAttackStartDelay;
 
-	class Animation* mIntroAnimation;
-	class Animation* mIdleAnimation;
-	class Animation* mAttackAnimation;
-	class Animation* mDeathAnimation;
+	Animation* mIntroAnimation;
+	Animation* mIdleAnimation;
+	Animation* mAttackAnimation;
+	Animation* mDeathAnimation;
 
-	class Animation* mCurrentAnimation;	//현재 애니메이션
+	Animation* mCurrentAnimation;	//현재 애니메이션
 public:
 	Enemy(const string& name, float x, float y);
 
