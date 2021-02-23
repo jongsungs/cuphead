@@ -5,44 +5,103 @@ enum class PlayerState : int
 {
 	RightIdle,
 	LeftIdle,
-	LeftDownIdle,
-	RightDownIdle,
+	LeftDuckIdle,
+	RightDuckIdle,
 	RightRun,
+	RightRunturn,
 	LeftRun,
+	LeftRunturn,
 	LeftJump,
 	RightJump,
-	RightDown,
-	LeftDown,
-	RightDownShoot,
-	LeftDownShoot,
+	RightDuck,
+	LeftDuck,
+	RightDuckShoot,
+	LeftDuckShoot,
 	RightShoot,
+	RightUpShoot,
+	RightDiagonalUpShoot,
 	LeftShoot,
+	LeftUpShoot,
+	LeftDiagonalUpShoot,
 	LeftRunShoot,
-	RightRunShot,
+	LeftRunShootturn,
+	LeftRunDiagonalUpShoot,
+	LeftRunDiagonalUpShootturn,
+	RightRunShoot,
+	RightRunShootturn,
+	RightRunDiagonalUpShoot,
+	RightRunDiagonalUpShootturn,
 	RightSpecialAttack,
 	LeftSpecialAttack,
 	UpSpecialAttack,
-	RightGroundHit,//오른쪽땅에서 피격
-	RightAirHit, // 오른쪽 공중 피격
-	LeftGroundHit,
-	LeftAirHit,
+	RightHit,//오른쪽땅에서 피격
+	LeftHit,
 	LeftDash,
 	RightDash,
 	LeftAirDash,
 	RightAirDash,
 	Die,
+	RightParring,
+	LeftParring,
+	RightUpaim,
+	LeftUpaim
 
 };
 
 class PlatformerPlayer : public GameObject
 {
+	
 	Image* mImage;
 	RECT mGround;
 	float mGravity;
 	float mJumpPower;
 	PlayerState mPlayerState;
 	vector<Bullet*> mBullet;
-	Animation* mAnimation;
+
+	Animation* mCurrentAnimation;
+
+	Animation* mRightIdleAnimation;
+	Animation* mLeftIdleAnimation;
+	Animation* mLeftDuckIdleAnimation;
+	Animation* mRightDuckIdleAnimation;
+	Animation* mRightRunAnimation;
+	Animation* mRightRunturnAnimation;
+	Animation* mLeftRunAnimation;
+	Animation* mLeftRunturnAnimation;
+	Animation* mLeftJumpAnimation;
+	Animation* mRightJumpAnimation;
+	Animation* mRightDuckAnimation;
+	Animation* mLeftDuckAnimation;
+	Animation* mRightDuckShootAnimation;
+	Animation* mLeftDuckShootAnimation;
+	Animation* mRightShootAnimation;
+	Animation* mRightUpShootAnimation;
+	Animation* mRightDiagonalUpShootAnimation;
+	Animation* mLeftShootAnimation;
+	Animation* mLeftUpShootAnimation;
+	Animation* mLeftDiagonalUpShootAnimation;
+	Animation* mLeftRunShootAnimation;
+	Animation* mLeftRunShootturnAnimation;
+	Animation* mLeftRunDiagonalUpShootAnimation;
+	Animation* mLeftRunDiagonalUpShootturnAnimation;
+	Animation* mRightRunShootAnimation;
+	Animation* mRightRunShootturnAnimation;
+	Animation* mRightRunDiagonalUpShootAnimation;
+	Animation* mRightRunDiagonalUpShootturnAnimation;
+	Animation* mRightSpecialAttackAnimation;
+	Animation* mLeftSpecialAttackAnimation;
+	Animation* mUpSpecialAttackAnimation;
+	Animation* mRightHitAnimation;
+	Animation* mLeftHitAnimation;
+	Animation* mLeftDashAnimation;
+	Animation* mRightDashAnimation;
+	Animation* mLeftAirDashAnimation;
+	Animation* mRightAirDashAnimation;
+	Animation* mDieAnimation;
+	Animation* mRightParringAnimation;
+	Animation* mLeftParringAnimation;
+	Animation* mRightUpaimAnimation;
+	Animation* mLeftUpaimAnimation;
 public:
 	PlatformerPlayer(const string& name, float x, float y);
 
