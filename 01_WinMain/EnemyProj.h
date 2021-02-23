@@ -1,5 +1,19 @@
 #pragma once
-class EnemyProj
-{
-};
+#include "GameObject.h"
 
+class Animation;
+class EnemyProj : public GameObject {
+protected:
+	float mSpeed;
+	float mAngle;
+	bool mParryAble;
+public:
+	EnemyProj(string name, float x, float y, float speed, float angle, bool parryAble);
+
+	void virtual Init()override;
+	void virtual Release()override;
+	void virtual Update()override;
+	void virtual Render(HDC hdc)override;
+
+	bool GetParryAble() const { return mParryAble; }
+};

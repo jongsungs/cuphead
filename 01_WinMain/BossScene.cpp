@@ -13,8 +13,8 @@
 void BossScene::Init()
 {
 	//Enemy* enemy = new Potato("Potato", WINSIZEX / 2, WINSIZEY / 2);
-	//Enemy* enemy = new Potato("Onion", WINSIZEX / 2, WINSIZEY / 2);
-	Enemy* enemy = new Onion("Carrot", WINSIZEX / 2, WINSIZEY / 2);
+	//Enemy* enemy = new Carrot("Carrot", WINSIZEX / 2, WINSIZEY / 2);
+	Enemy* enemy = new Onion("Onion", WINSIZEX / 2, WINSIZEY / 2);
 
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, enemy);
 	//((Potato*)enemy)->PotatoMasisu();
