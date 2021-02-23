@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "GameObject.h"
 
 class Camera : public GameObject
@@ -10,7 +10,7 @@ public:
 	};
 protected:
 	Mode mMode;
-	GameObject* mTarget;		//ÂÑ¾Æ°¡¾ßÇÒ Å¸°Ù
+	GameObject* mTarget;		//ì«“ì•„ê°€ì•¼í•  íƒ€ê²Ÿ
 
 	float mMoveSpeed;
 public:
@@ -33,12 +33,14 @@ public:
 	void AlphaScaleFrameRender(HDC hdc, class Image* image, int x, int y, int frameX, int frameY, int width, int height, float alpha);
 	void CenterRender(HDC hdc, Image* image, int x, int y);
 	void CenterFrameRender(HDC hdc, Image* image, int x, int y, int frameIndexX, int frameIndexY);
-	void CnterAlphaRender(HDC hdc, Image* image, int x, int y, float alpha);
-	void CnterAlphaFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, float alpha);
-	void CnterScaleRender(HDC hdc, Image* image, int x, int y, int width, int height);
-	void CnterScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height);
-	void CnterAlphaScaleRender(HDC hdc, Image* image, int x, int y, int width, int height, float alpha);
-	void CnterAlphaScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height, float alpha);
+	void CenterAlphaRender(HDC hdc, Image* image, int x, int y, float alpha);
+	void CenterAlphaFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, float alpha);
+	void CenterScaleRender(HDC hdc, Image* image, int x, int y, int width, int height);
+	void CenterScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height);
+	void CenterAlphaScaleRender(HDC hdc, Image* image, int x, int y, int width, int height, float alpha);
+	void CenterAlphaScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height, float alpha);
+	void ScaleRenderFromBottom(HDC hdc, Image* image, int x, int y, int width, int height);
+	void ScaleFrameRenderFromBottom(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height);
 	void RenderRect(HDC hdc, RECT rc);
 	void RenderEllipse(HDC hdc, float x, float y, float radius);
 

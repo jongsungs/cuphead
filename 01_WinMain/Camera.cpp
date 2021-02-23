@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Camera.h"
 
 #include "Image.h"
@@ -17,7 +17,7 @@ void Camera::Init()
 
 void Camera::Release()
 {
-	//¾êµµ ¾µÀÏÀÌ ¾ø´Ù . . . 
+	//ì–˜ë„ ì“¸ì¼ì´ ì—†ë‹¤ . . . 
 }
 
 void Camera::Update()
@@ -29,7 +29,7 @@ void Camera::Update()
 		{
 			//mX = mTarget->GetX();
 			//mY = mTarget->GetY();
-			//¸Ö¸®ÀÖÀ¸¸é »¡¸® ÂÑ¾Æ°¡¾ßÇÏ°í °¡±îÀÌ ÀÖÀ¸¸é ÃµÃµÈ÷ ÂÑ¾Æ°¡¾ßÇÔ
+			//ë©€ë¦¬ìžˆìœ¼ë©´ ë¹¨ë¦¬ ì«“ì•„ê°€ì•¼í•˜ê³  ê°€ê¹Œì´ ìžˆìœ¼ë©´ ì²œì²œížˆ ì«“ì•„ê°€ì•¼í•¨
 			mX = Math::Lerp(mX, mTarget->GetX(), 2.f * Time::GetInstance()->DeltaTime());
 			mY = Math::Lerp(mY, mTarget->GetY(), 2.f * Time::GetInstance()->DeltaTime());
 
@@ -57,7 +57,7 @@ void Camera::Update()
 
 void Camera::Render(HDC hdc)
 {
-	//¾µÀÏÀÌ ¾ø´Ù . . . . 
+	//ì“¸ì¼ì´ ì—†ë‹¤ . . . . 
 }
 
 void Camera::Render(HDC hdc, Image * image, int x, int y)
@@ -120,46 +120,59 @@ void Camera::CenterFrameRender(HDC hdc, Image* image, int x, int y, int frameX, 
 	FrameRender(hdc,image, x, y, frameX, frameY);
 }
 
-void Camera::CnterAlphaRender(HDC hdc, Image* image, int x, int y, float alpha)
+void Camera::CenterAlphaRender(HDC hdc, Image* image, int x, int y, float alpha)
 {
 	x += -(image->GetWidth() / 2);
 	y += -(image->GetHeight() / 2);
 	AlphaRender(hdc,image, x, y, alpha);
 }
 
-void Camera::CnterAlphaFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, float alpha)
+void Camera::CenterAlphaFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, float alpha)
 {
 	x += -(image->GetFrameWidth() / 2);
 	y += -(image->GetFrameHeight() / 2);
 	AlphaFrameRender(hdc, image, x, y, frameX, frameY, alpha);
 }
 
-void Camera::CnterScaleRender(HDC hdc, Image* image, int x, int y, int width, int height)
+void Camera::CenterScaleRender(HDC hdc, Image* image, int x, int y, int width, int height)
 {
-	x += -(image->GetWidth() / 2);
-	y += -(image->GetHeight() / 2);
+	x += -width / 2;
+	y += -height / 2;
 	ScaleRender(hdc, image, x, y, width, height);
 }
 
-void Camera::CnterScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height)
+void Camera::CenterScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height)
 {
-	x += -(image->GetFrameWidth() / 2);
-	y += -(image->GetFrameHeight() / 2);
+	x += -width / 2;
+	y += -height / 2;
 	ScaleFrameRender(hdc, image, x, y, frameX, frameY, width, height);
 }
 
-void Camera::CnterAlphaScaleRender(HDC hdc, Image* image, int x, int y, int width, int height, float alpha)
+void Camera::CenterAlphaScaleRender(HDC hdc, Image* image, int x, int y, int width, int height, float alpha)
 {
-	x += -(image->GetWidth() / 2);
-	y += -(image->GetHeight() / 2);
+	x += -width / 2;
+	y += -height / 2;
 	AlphaScaleRender(hdc, image, x, y, width, height, alpha);
 }
 
-void Camera::CnterAlphaScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height, float alpha)
+void Camera::CenterAlphaScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height, float alpha)
 {
-	x += -(image->GetFrameWidth() / 2);
-	y += -(image->GetFrameHeight() / 2);
+	x += -width / 2;
+	y += -height / 2;
 	AlphaScaleFrameRender(hdc, image, x, y, frameX, frameY, width, height, alpha);
+}
+void Camera::ScaleRenderFromBottom(HDC hdc,Image* image, int x, int y, int width, int height)
+{
+	x += -(width / 2);
+	y += -height;
+	ScaleRender(hdc,image, x, y, width, height);
+}
+
+void Camera::ScaleFrameRenderFromBottom(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height)
+{
+	x += -(width / 2);
+	y += -height;
+	ScaleFrameRender(hdc,image ,x, y, frameX, frameY, width, height);
 }
 
 

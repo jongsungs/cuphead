@@ -68,18 +68,21 @@ public://렌더링 관련 ~
 	//센터 좌표 지정해서 프레임 렌더
 	void CenterFrameRender(HDC hdc, int x, int y, int frameIndexX, int frameIndexY);
 	//센터 좌표 알파값주는 렌더링
-	void CnterAlphaRender(HDC hdc, int x, int y, float alpha);
+	void CenterAlphaRender(HDC hdc, int x, int y, float alpha);
 	//센터 좌표 알파값주는 프레임 렌더링
-	void CnterAlphaFrameRender(HDC hdc, int x, int y, int frameX, int frameY, float alpha);
+	void CenterAlphaFrameRender(HDC hdc, int x, int y, int frameX, int frameY, float alpha);
 	//센터 좌표 크기 조정해주는 렌더링
-	void CnterScaleRender(HDC hdc, int x, int y, int width, int height);
+	void CenterScaleRender(HDC hdc, int x, int y, int width, int height);
 	//센터 좌표 크기 조정해주는 프레임 렌더링
-	void CnterScaleFrameRender(HDC hdc, int x, int y, int frameX, int frameY, int width, int height);
+	void CenterScaleFrameRender(HDC hdc, int x, int y, int frameX, int frameY, int width, int height);
 	//센터 좌표 알파값에 크기 조정하는 렌더링
-	void CnterAlphaScaleRender(HDC hdc, int x, int y, int width, int height, float alpha);
+	void CenterAlphaScaleRender(HDC hdc, int x, int y, int width, int height, float alpha);
 	//센터 좌표 알파값 + 프레임렌더링 + 크기 조정
-	void CnterAlphaScaleFrameRender(HDC hdc, int x, int y, int frameX, int frameY, int width, int height, float alpha);
+	void CenterAlphaScaleFrameRender(HDC hdc, int x, int y, int frameX, int frameY, int width, int height, float alpha);
 
+	//
+	void ScaleRenderFromBottom(HDC hdc, int x, int y, int width, int height);
+	void ScaleFrameRenderFromBottom(HDC hdc, int x, int y, int frameX, int frameY, int width, int height);
 public:// 접근 관련~
 	inline HDC GetHDC()const { return mImageBuffer->hdc; }
 	inline int GetFrameX()const { return mImageBuffer->frameX; }
