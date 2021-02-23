@@ -5,7 +5,7 @@ class Image;
 class NPC : public GameObject
 {
 	Image* mImage;
-	Image* mFullImage;
+	Image* mTalkImage1;
 	RECT mRange;
 	bool mIsTalk;
 	class Animation* mAnimaition;
