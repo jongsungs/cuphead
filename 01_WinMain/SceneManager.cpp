@@ -29,7 +29,6 @@ void SceneManager::Update()
 		}
 		mCurrentScene->Update();
 	}
-		
 }
 
 void SceneManager::Render(HDC hdc)

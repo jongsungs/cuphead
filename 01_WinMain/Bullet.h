@@ -2,16 +2,18 @@
 #include"GameObject.h"
 class Bullet : public GameObject
 {
+protected:
 	float mSpeed;
 	float mAngle;
+	float mDistance; //발사거리
 	class Animation* RightBullet;
 	class Animation* LeftBullet;
 	class Animation* UpBullet;
 
 public:
 	Bullet(string name, float x, float y, float speed, float angle);
-	void Init()override;
-	void Release()override;
-	void Update()override;
-	void Render(HDC hdc)override;
+	void virtual Init()override;
+	void virtual Release()override;
+	void virtual Update()override;
+	void virtual Render(HDC hdc)override;
 };

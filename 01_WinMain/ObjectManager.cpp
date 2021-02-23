@@ -83,6 +83,7 @@ void ObjectManager::AddObject(ObjectLayer layer, GameObject * object)
 	//없으면 새로 생성해버림. 주의해야함
 	mObjectList[layer].push_back(object);
 }
+
 void  ObjectManager::AddObject(ObjectLayer layer, GameObject * object, const string& name) {
 	GameObject* findObject = FindObject(layer, name);
 	if (findObject ==nullptr) {

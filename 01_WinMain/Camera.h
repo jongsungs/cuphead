@@ -39,8 +39,11 @@ public:
 	void CenterScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height);
 	void CenterAlphaScaleRender(HDC hdc, Image* image, int x, int y, int width, int height, float alpha);
 	void CenterAlphaScaleFrameRender(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height, float alpha);
+	void RenderFromBottom(HDC hdc, class Image* image, int x, int y);
+	void FrameRenderFromBottom(HDC hdc, class Image* image, int x, int y, int frameX, int frameY);
 	void ScaleRenderFromBottom(HDC hdc, Image* image, int x, int y, int width, int height);
 	void ScaleFrameRenderFromBottom(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height);
+
 	void RenderRect(HDC hdc, RECT rc);
 	void RenderEllipse(HDC hdc, float x, float y, float radius);
 

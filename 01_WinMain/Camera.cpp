@@ -161,6 +161,18 @@ void Camera::CenterAlphaScaleFrameRender(HDC hdc, Image* image, int x, int y, in
 	y += -height / 2;
 	AlphaScaleFrameRender(hdc, image, x, y, frameX, frameY, width, height, alpha);
 }
+void Camera::RenderFromBottom(HDC hdc, Image * image, int x, int y)
+{
+	x += -(image->GetWidth() / 2);
+	y += -image->GetHeight();
+	Render(hdc, image, x, y);
+}
+void Camera::FrameRenderFromBottom(HDC hdc, Image * image, int x, int y, int frameX, int frameY)
+{
+	x += -(image->GetFrameWidth()/2);
+	y += -image->GetFrameHeight();
+	FrameRender(hdc, image, x, y, frameX, frameY);
+}
 void Camera::ScaleRenderFromBottom(HDC hdc,Image* image, int x, int y, int width, int height)
 {
 	x += -(width / 2);

@@ -5,6 +5,7 @@ class LoadingScene : public Scene
 {
 	vector<function<void(void)>> mLoadList;
 	int mLoadIndex;
+	class Animation* mAnimation;
 public:
 	void AddLoadFunc(const function<void(void)>& func);
 

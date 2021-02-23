@@ -525,3 +525,16 @@ void Image::ScaleFrameRenderFromBottom(HDC hdc, int x, int y, int frameX, int fr
 	ScaleFrameRender(hdc, x, y, frameX, frameY, width, height);
 }
 
+void Image::RenderFromBottom(HDC hdc, int x, int y)
+{
+	x += -(mImageBuffer->width / 2);
+	y += -mImageBuffer->height;
+}
+
+void Image::FrameRenderFromBottom(HDC hdc, int x, int y, int frameX, int frameY)
+{
+	x += -(mImageBuffer->frameWidth / 2);
+	y += -mImageBuffer->frameHeight;
+	FrameRender(hdc, x, y, frameX, frameY);
+}
+

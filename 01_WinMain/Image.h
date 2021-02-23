@@ -80,9 +80,12 @@ public://렌더링 관련 ~
 	//센터 좌표 알파값 + 프레임렌더링 + 크기 조정
 	void CenterAlphaScaleFrameRender(HDC hdc, int x, int y, int frameX, int frameY, int width, int height, float alpha);
 
-	//
+	//X 중심 , Y 하단
+	void RenderFromBottom(HDC hdc, int x, int y);
+	void FrameRenderFromBottom(HDC hdc, int x, int y, int frameX, int frameY);
 	void ScaleRenderFromBottom(HDC hdc, int x, int y, int width, int height);
 	void ScaleFrameRenderFromBottom(HDC hdc, int x, int y, int frameX, int frameY, int width, int height);
+	
 public:// 접근 관련~
 	inline HDC GetHDC()const { return mImageBuffer->hdc; }
 	inline int GetFrameX()const { return mImageBuffer->frameX; }

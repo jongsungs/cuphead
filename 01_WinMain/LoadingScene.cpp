@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "LoadingScene.h"
-
+#include "Image.h"
+#include "Animation.h"
 void LoadingScene::AddLoadFunc(const function<void(void)>& func)
 {
 	mLoadList.push_back(func);
@@ -10,14 +11,21 @@ void LoadingScene::Init()
 {
 	mLoadIndex = 0;
 	mIsEndLoading = false;
+	mAnimation = new Animation();
+	mAnimation->InitFrameByStartEnd(0,0,45,0,false);
+	mAnimation->SetFrameUpdateTime(0.05f);
+	mAnimation->SetIsLoop(true);
+	mAnimation->Play();
 }
 
 void LoadingScene::Release()
 {
+	SafeDelete(mAnimation);
 }
 
 void LoadingScene::Update()
 {
+	mAnimation->Update();
 	if (mLoadIndex >= mLoadList.size())
 	{
 		if (Input::GetInstance()->GetKeyDown(VK_SPACE))
@@ -26,11 +34,6 @@ void LoadingScene::Update()
 		}
 		return;
 	}
-	//if (mLoadIndex >= mLoadList.size())
-	//{
-	//	mIsEndLoading = true;
-	//	return;
-	//}
 
 	function<void(void)> func = mLoadList[mLoadIndex];
 	func();
@@ -39,13 +42,6 @@ void LoadingScene::Update()
 
 void LoadingScene::Render(HDC hdc)
 {
-	if (mLoadIndex >= mLoadList.size()) {
-		wstring CheckString = L"로딩 완료 스페이스를 눌러 주세요.";
-		TextOut(hdc, WINSIZEX / 2 - CheckString.size(), WINSIZEY / 2 - 30, CheckString.c_str(), CheckString.size());
-	}
-	TextOut(hdc, WINSIZEX / 4, WINSIZEY / 2 + 10, wstring(L"0%").c_str(), wstring(L"0%").size());
-	TextOut(hdc, WINSIZEX / 4 * 3 - (wstring(L"100%").length() * 2), WINSIZEY / 2 + 10, wstring(L"100%").c_str(), wstring(L"100%").size());
-	RenderLine(hdc, WINSIZEX / 4, WINSIZEY / 2, Math::Lerp(WINSIZEX / 4, WINSIZEX / 4 * 3, (float)mLoadIndex / mLoadList.size()), WINSIZEY / 2);
-	wstring Index = to_wstring(mLoadIndex) + L"/" + to_wstring(mLoadList.size());
-	TextOut(hdc, WINSIZEX / 2, 10, Index.c_str(), Index.size());
+	ImageManager::GetInstance()->FindImage(L"BlackGround")->ScaleRender(hdc,0,0,WINSIZEX,WINSIZEY);
+	ImageManager::GetInstance()->FindImage(L"LoadingHourGlass")->FrameRenderFromBottom(hdc, WINSIZEX/8*7,WINSIZEY,mAnimation->GetNowFrameX(), mAnimation->GetNowFrameY());
 }
