@@ -488,179 +488,99 @@ void PlatformerPlayer::Release()
 
 void PlatformerPlayer::Update()
 {
-	if (!Input::GetInstance()->GetKey(VK_LEFT)&&Input::GetInstance()->GetKey(VK_RIGHT)) {
-		//오른쪽으로 달릴때
-		if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
-		{
-			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::RightRun;
-			mCurrentAnimation = mRightRunAnimation;
-			mCurrentAnimation->Play();
-		}
-		//달리면서 업샷 및 점프
-		if (Input::GetInstance()->GetKey(VK_RIGHT))
-		{
-			mX += 1;
-			if (Input::GetInstance()->GetKey(VK_UP))
-			{
-				if (Input::GetInstance()->GetKeyDown('X'))
-				{
-					mPlayerState = PlayerState::RightRunDiagonalUpShoot;
-					if (mCurrentAnimation != mRightRunDiagonalUpShootAnimation) {
-						mCurrentAnimation->Stop();
-						mCurrentAnimation = mRightRunDiagonalUpShootAnimation;
-					}
-					mCurrentAnimation->Play();
-				}
-
-			}
-			if (Input::GetInstance()->GetKeyDown('Z'))
-			{
-				mJumpPower = 5.f;
-				mCurrentAnimation->Stop();
-				mPlayerState = PlayerState::RightJump;
-				mCurrentAnimation = mRightJumpAnimation;
-				mCurrentAnimation->Play();
-			}
-		}
-	}
-	else if (!Input::GetInstance()->GetKey(VK_RIGHT)&&Input::GetInstance()->GetKey(VK_LEFT))
+	
+	
+	
+	
+	//왼쪽으로 달릴때
+	if (Input::GetInstance()->GetKeyDown(VK_LEFT))
 	{
-		//왼쪽으로 달릴때
-		if (Input::GetInstance()->GetKeyDown(VK_LEFT))
+		mCurrentAnimation->Stop();
+		mPlayerState = PlayerState::LeftRun;
+		mCurrentAnimation = mLeftRunAnimation;
+		mCurrentAnimation->Play();
+	}
+	if (Input::GetInstance()->GetKey(VK_LEFT))
+	{
+		mX -= 1;
+		if (Input::GetInstance()->GetKey(VK_UP))
 		{
-			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::LeftRun;
-			mCurrentAnimation = mLeftRunAnimation;
-			mCurrentAnimation->Play();
-		}
-		if (Input::GetInstance()->GetKey(VK_LEFT))
-		{
-			mX -= 1;
-			if (Input::GetInstance()->GetKey(VK_UP))
+			if (Input::GetInstance()->GetKeyDown('X'))
 			{
-				if (Input::GetInstance()->GetKeyDown('X'))
+				mPlayerState = PlayerState::LeftRunDiagonalUpShoot;
+				if (mCurrentAnimation != mLeftRunDiagonalUpShootAnimation)
 				{
-					mPlayerState = PlayerState::LeftRunDiagonalUpShoot;
-					if (mCurrentAnimation != mLeftRunDiagonalUpShootAnimation)
-					{
-						mCurrentAnimation->Stop();
-						mCurrentAnimation = mLeftRunDiagonalUpShootAnimation;
-					}
-					mCurrentAnimation->Play();
+					mCurrentAnimation->Stop();
+					mCurrentAnimation = mLeftRunDiagonalUpShootAnimation;
 				}
-			}
-			else if (Input::GetInstance()->GetKeyDown('Z'))
-			{
-				mJumpPower = 5.f;
-				mCurrentAnimation->Stop();
-				mPlayerState = PlayerState::LeftJump;
-				mCurrentAnimation = mLeftJumpAnimation;
 				mCurrentAnimation->Play();
 			}
 		}
-		
-	}
-	else {
-		if (Input::GetInstance()->GetKeyUp(VK_RIGHT))
+		if (Input::GetInstance()->GetKeyDown('Z'))
 		{
+			mJumpPower = 5.f;
 			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::RightIdle;
-			mCurrentAnimation = mRightIdleAnimation;
+			mPlayerState = PlayerState::LeftJump;
+			mCurrentAnimation = mLeftJumpAnimation;
 			mCurrentAnimation->Play();
 		}
-		if (Input::GetInstance()->GetKeyUp(VK_LEFT))
+		if (Input::GetInstance()->GetKeyDown('V'))
 		{
+			mX += 0.5f;
 			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::LeftIdle;
-			mCurrentAnimation = mLeftIdleAnimation;
+			mPlayerState = PlayerState::LeftSpecialAttack;
 			mCurrentAnimation->Play();
 		}
 	}
-	
-	
-	
-	////왼쪽으로 달릴때
-	//if (!Input::GetInstance()->GetKey(VK_RIGHT) && Input::GetInstance()->GetKeyDown(VK_LEFT))
-	//{
-	//	mCurrentAnimation->Stop();
-	//	mPlayerState = PlayerState::LeftRun;
-	//	mCurrentAnimation = mLeftRunAnimation;
-	//	mCurrentAnimation->Play();
-	//}
-	//if (!Input::GetInstance()->GetKeyDown(VK_RIGHT) && Input::GetInstance()->GetKey(VK_LEFT))
-	//{
-	//	mX -= 1;
-	//	if (Input::GetInstance()->GetKey(VK_UP))
-	//	{
-	//		if (Input::GetInstance()->GetKeyDown('X'))
-	//		{
-	//			mPlayerState = PlayerState::LeftRunDiagonalUpShoot;
-	//			if (mCurrentAnimation != mLeftRunDiagonalUpShootAnimation)
-	//			{
-	//				mCurrentAnimation->Stop();
-	//				mCurrentAnimation = mLeftRunDiagonalUpShootAnimation;
-	//			}
-	//			mCurrentAnimation->Play();
-	//		}
-	//	}
-	//	else if (Input::GetInstance()->GetKeyDown('Z'))
-	//	{
-	//		mJumpPower = 5.f;
-	//		mCurrentAnimation->Stop();
-	//		mPlayerState = PlayerState::LeftJump;
-	//		mCurrentAnimation = mLeftJumpAnimation;
-	//		mCurrentAnimation->Play();
-	//	}
-	//}
-	//if (!Input::GetInstance()->GetKey(VK_RIGHT) && Input::GetInstance()->GetKeyUp(VK_LEFT))
-	//{
-	//	mCurrentAnimation->Stop();
-	//	mPlayerState = PlayerState::LeftIdle;
-	//	mCurrentAnimation = mLeftIdleAnimation;
-	//	mCurrentAnimation->Play();
-	//}
-	////오른쪽으로 달릴때
-	//if (!Input::GetInstance()->GetKey(VK_LEFT)&&Input::GetInstance()->GetKeyDown(VK_RIGHT))
-	//{
-	//	mCurrentAnimation->Stop();
-	//	mPlayerState = PlayerState::RightRun;
-	//	mCurrentAnimation = mRightRunAnimation;
-	//	mCurrentAnimation->Play();
-	//}
-	////달리면서 업샷 및 점프
-	//if (!Input::GetInstance()->GetKeyDown(VK_LEFT) && Input::GetInstance()->GetKey(VK_RIGHT))
-	//{
-	//	mX += 1;
-	//	if (Input::GetInstance()->GetKey(VK_UP))
-	//	{
-	//		if (Input::GetInstance()->GetKeyDown('X'))
-	//		{
-	//			mPlayerState = PlayerState::RightRunDiagonalUpShoot;
-	//			if (mCurrentAnimation != mRightRunDiagonalUpShootAnimation) {
-	//				mCurrentAnimation->Stop();
-	//				mCurrentAnimation = mRightRunDiagonalUpShootAnimation;
-	//			}
-	//			mCurrentAnimation->Play();
-	//		}
+	if (Input::GetInstance()->GetKeyUp(VK_LEFT))
+	{
+		mCurrentAnimation->Stop();
+		mPlayerState = PlayerState::LeftIdle;
+		mCurrentAnimation = mLeftIdleAnimation;
+		mCurrentAnimation->Play();
+	}
+	//오른쪽으로 달릴때
+	if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
+	{
+		mCurrentAnimation->Stop();
+		mPlayerState = PlayerState::RightRun;
+		mCurrentAnimation = mRightRunAnimation;
+		mCurrentAnimation->Play();
+	}
+	//달리면서 업샷 및 점프
+	if (Input::GetInstance()->GetKey(VK_RIGHT))
+	{
+		mX += 1;
+		if (Input::GetInstance()->GetKey(VK_UP))
+		{
+			if (Input::GetInstance()->GetKeyDown('X'))
+			{
+				mPlayerState = PlayerState::RightRunDiagonalUpShoot;
+				if (mCurrentAnimation != mRightRunDiagonalUpShootAnimation) {
+					mCurrentAnimation->Stop();
+					mCurrentAnimation = mRightRunDiagonalUpShootAnimation;
+				}
+				mCurrentAnimation->Play();
+			}
 
-	//	}
-	//	if (Input::GetInstance()->GetKeyDown('Z'))
-	//	{
-	//		mJumpPower = 5.f;
-	//		mCurrentAnimation->Stop();
-	//		mPlayerState = PlayerState::RightJump;
-	//		mCurrentAnimation = mRightJumpAnimation;
-	//		mCurrentAnimation->Play();
-	//	}
-	//}
-	//if ( Input::GetInstance()->GetKeyUp(VK_RIGHT))
-	//{
-	//	mCurrentAnimation->Stop();
-	//	mPlayerState = PlayerState::RightIdle;
-	//	mCurrentAnimation = mRightIdleAnimation;
-	//	mCurrentAnimation->Play();
-	//}
+		}
+		if (Input::GetInstance()->GetKeyDown('Z'))
+		{
+			mJumpPower = 5.f;
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightJump;
+			mCurrentAnimation = mRightJumpAnimation;
+			mCurrentAnimation->Play();
+			
+		}
+	}
+	if ( Input::GetInstance()->GetKeyUp(VK_RIGHT))
+	{
+		mCurrentAnimation->Stop();
+		mPlayerState = PlayerState::RightIdle;
+		mCurrentAnimation = mRightIdleAnimation;
+		mCurrentAnimation->Play();
+	}
 	//if (Input::GetInstance()->GetKey(VK_SPACE))
 	//{
 	//	Bullet* bullet = new Bullet();
