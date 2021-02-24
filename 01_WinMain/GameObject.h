@@ -13,9 +13,9 @@ protected:
 	RECT mAttakArea;
 	int mHP;
 
-	bool mIsAttak;		//공격하는 오브제트인가
 	bool mIsActive;		//활성화 상태
 	bool mIsDestroy;	//삭제할지 말지
+	bool mIsDelete = true; //Delete 함수에서 삭제할 지 여부 체크
 public:
 	GameObject();
 	GameObject(const string& name);
@@ -42,9 +42,8 @@ public:
 	inline void SetAttakArea(RECT rect) { mAttakArea = rect; }
 	inline RECT GetAttakArea()const { return mAttakArea; }
 
-
-	inline bool GetIsAttak()const { return mIsAttak; }
-	inline void SetIsAttak(bool b) { mIsAttak = b; }
+	inline bool GetIsDelete()const { return mIsDelete; }
+	inline void SetIsDelete(bool b) { mIsDelete = b; }
 	inline bool GetIsActive()const { return mIsActive; }
 	inline void SetIsActive(bool b) { mIsActive = b; }
 	inline bool GetIsDestroy()const { return mIsDestroy; }

@@ -75,6 +75,26 @@ void ObjectManager::Render(HDC hdc)
 	}
 }
 
+void ObjectManager::Delete()
+{
+	ObjectIter iter = mObjectList.begin();
+	for (; iter != mObjectList.end(); ++iter)
+	{
+;		for (int i = 0; i < iter->second.size(); ++i)
+		{
+			if (!iter->second[i]->GetIsDelete()) {
+				iter->second[i]->SetIsActive(false);
+			}
+			else {
+				iter->second[i]->Release();
+				SafeDelete(iter->second[i]);
+				iter->second.erase(iter->second.begin()+i);
+				--i;
+			}
+		}
+	}
+}
+
 void ObjectManager::AddObject(ObjectLayer layer, GameObject * object)
 {
 	//map도 배열연산자가 정의되어 있다. 
@@ -87,6 +107,18 @@ void ObjectManager::AddObject(ObjectLayer layer, GameObject * object)
 void  ObjectManager::AddObject(ObjectLayer layer, GameObject * object, const string& name) {
 	GameObject* findObject = FindObject(layer, name);
 	if (findObject ==nullptr) {
+		mObjectList[layer].push_back(object);
+	}
+	else {
+		findObject->SetIsActive(true);
+	}
+}
+void ObjectManager::AddObjectNoDelete(ObjectLayer layer, GameObject * object)
+{
+	string name = object->GetName();
+	GameObject* findObject = FindObject(layer, name);
+	if (findObject == nullptr) {
+		object->SetIsDelete(false);
 		mObjectList[layer].push_back(object);
 	}
 	else {
