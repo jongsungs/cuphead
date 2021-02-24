@@ -276,9 +276,6 @@
     <ClInclude Include="Scene_ElderHouse.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ImageRotation.h">
-      <Filter>FrameWork\ImageManager</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="01_WinMain.cpp">
@@ -415,9 +412,6 @@
     </ClCompile>
     <ClCompile Include="Scene_ElderHouse.cpp">
       <Filter>MainGame\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageRotation.cpp">
-      <Filter>FrameWork\ImageManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

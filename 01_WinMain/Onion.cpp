@@ -27,10 +27,6 @@ void Onion::Init() {
 	mBashfulImage = IMAGEMANAGER->FindImage(L"OnionDeath");
 	mBashfulLeaveImage = IMAGEMANAGER->FindImage(L"OnionDeath");
 
-	mArmIntroImage = IMAGEMANAGER->FindImage(L"OnionDeath");
-	mArmIdleImage = IMAGEMANAGER->FindImage(L"OnionDeath");
-	mArmBashfulImage = IMAGEMANAGER->FindImage(L"OnionArmBashful");
-
 	mTearAImage = IMAGEMANAGER->FindImage(L"OnionTearA");
 	mTearBImage = IMAGEMANAGER->FindImage(L"OnionTearB");
 
@@ -39,33 +35,28 @@ void Onion::Init() {
 	mIntroAnimation = new Animation();
 	mIntroAnimation->InitFrameByStartEnd(0, 0, 23, 0, false);
 	mIntroAnimation->SetIsLoop(false);
-	mIntroAnimation->SetFrameUpdateTime(0.1f);
+	mIntroAnimation->SetFrameUpdateTime(0.07f);
 	//일반 애니메이션
 	mIdleAnimation = new Animation();
 	mIdleAnimation->InitFrameByStartEnd(0, 0, 14, 0, true);
 	mIdleAnimation->SetIsLoop(true);
-	mIdleAnimation->SetFrameUpdateTime(0.1f);
+	mIdleAnimation->SetFrameUpdateTime(0.07f);
 	//공격 애니메이션
 	mAttackAnimation = new Animation();
 	mAttackAnimation->InitFrameByStartEnd(0, 0, 21, 0, false);
 	mAttackAnimation->SetIsLoop(true);
-	mAttackAnimation->SetFrameUpdateTime(0.1f);
+	mAttackAnimation->SetFrameUpdateTime(0.07f);
 	//사망 애니메이션
 	mDeathAnimation = new Animation();
 	mDeathAnimation->InitFrameByStartEnd(0, 0, 5, 0, true);
 	mDeathAnimation->SetIsLoop(true);
-	mDeathAnimation->SetFrameUpdateTime(0.1f);
+	mDeathAnimation->SetFrameUpdateTime(0.07f);
 	//퇴장 애니메이션
 	mDeathLeaveAnimation = new Animation();
 	mDeathLeaveAnimation->InitFrameByStartEnd(0, 0, 30, 0, false);
 	mDeathLeaveAnimation->SetIsLoop(false);
-	mDeathLeaveAnimation->SetFrameUpdateTime(0.1f);
-
-	mArmBashfulAnimation = new Animation();
-	mArmBashfulAnimation->InitFrameByStartEnd(0, 0, 6, 0, false);
-	mArmBashfulAnimation->SetIsLoop(false);
-	mArmBashfulAnimation->SetFrameUpdateTime(0.1f);
-
+	mDeathLeaveAnimation->SetFrameUpdateTime(0.07f);
+	
 	//초기생성시 들어가야 할 데이터
 	mCurrentAnimation = mIntroAnimation;
 	mCurrentAnimation->Play();
@@ -85,23 +76,27 @@ void Onion::Release() {
 	SafeDelete(mAttackAnimation);
 	SafeDelete(mDeathAnimation);
 	SafeDelete(mDeathLeaveAnimation);
-	SafeDelete(mArmBashfulAnimation);
 }
 
 void Onion::Update() {
-	if (mHP <= 0)
+	if (Input::GetInstance()->GetKeyDown(VK_CONTROL))
+		mHP -= 25;
+
+	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
 		mState = EnemyState::Death;
+		mDelayTime = 0;
+	}
 
 	//상태에 따른 다른 애니메이션 출력
 	switch (mState) {
 	case EnemyState::Intro:
+		mY -= 270 * Time::GetInstance()->DeltaTime();
 		mImage = mIntroImage;
 		mSizeX = mImage->GetFrameWidth();
 		mSizeY = mImage->GetFrameHeight();
 		mCurrentAnimation = mIntroAnimation;
 		if (mCurrentAnimation->GetIsPlay() == false)
 			mState = EnemyState::Idle;
-		mCurrentAnimation->Play();
 		break;
 
 	case EnemyState::Idle:
@@ -127,16 +122,20 @@ void Onion::Update() {
 
 	case EnemyState::Death:
 		mImage = mDeathImage;
+		mY += 200 * Time::GetInstance()->DeltaTime();
 		mSizeX = mImage->GetFrameWidth();
 		mSizeY = mImage->GetFrameHeight();
 		mCurrentAnimation = mDeathAnimation;
 		mCurrentAnimation->Play();
-	
+		mDelayTime += Time::GetInstance()->DeltaTime();
+		if (mDelayTime > 1)
+			mState = EnemyState::End;
 		break;
 
 	case EnemyState::End:
 		mIsActive = false;
 		mIsDestroy = true;
+		ObjectManager::GetInstance()->FindObject("Carrot")->SetIsActive(true);
 		break;
 	}
 

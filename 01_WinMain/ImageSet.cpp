@@ -33,6 +33,7 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"RunDiagonalShoot", Resources(L"PlatformerPlayer/RunDiagonalShoot.bmp"), 2574, 350, 18, 2, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"UpShoot", Resources(L"PlatformerPlayer/UpShoot.bmp"), 708, 378, 6, 2, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"Upaim", Resources(L"PlatformerPlayer/Upaim.bmp"), 540, 350, 5, 2, true, RGB(99, 92, 99));
+
 	IMAGEMANAGER->LoadFromFile(L"Shootaim", Resources(L"PlatformerPlayer/Shootaim.bmp"), 670, 322, 5, 2, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"DiagonalUpaim", Resources(L"PlatformerPlayer/DiagonalUpaim.bmp"), 645, 302, 5, 2, true, RGB(99, 92, 99));
 	//적 이미지
@@ -43,13 +44,19 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"Back", Resources(L"Map1.bmp"), 1280, 720,false);
 
 	//보스 이미지
+	//맵 이미지
+	IMAGEMANAGER->LoadFromFile(L"BotanicPanicBackground1", Resources(L"Boss/BotanicPanic/BotanicPanicBackGround1.bmp"), 885, 567, true);
+	IMAGEMANAGER->LoadFromFile(L"BotanicPanicBackground2", Resources(L"Boss/BotanicPanic/BotanicPanicBackGround2.bmp"), 885, 567, true);
+	IMAGEMANAGER->LoadFromFile(L"BotanicPanicBackground3", Resources(L"Boss/BotanicPanic/BotanicPanicBackground3.bmp"), 885, 567, true);
+
+
 	//감자
 	IMAGEMANAGER->LoadFromFile(L"PotatoIntro", Resources(L"Boss/BotanicPanic/Potato/Potato_Intro.bmp"), 4208, 512, 8, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"PotatoIntroEarth", Resources(L"Boss/BotanicPanic/Potato/Potato_Intro_Earth.bmp"), 10583, 461, 18, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"PotatoIdle", Resources(L"Boss/BotanicPanic/Potato/Potato_Idle.bmp"), 3682, 512, 7, 1, true);
-	IMAGEMANAGER->LoadFromFile(L"PotatoSpitAttack", Resources(L"Boss/BotanicPanic/Potato/Potato_Spit_Attack.bmp"), 10520, 512, 20, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"PotatoSpitAttack", Resources(L"Boss/BotanicPanic/Potato/Potato_Spit_Attack.bmp"), 12624, 512, 24, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"PotatoDeath", Resources(L"Boss/BotanicPanic/Potato/Potato_Death.bmp"), 2727, 439, 9, 1, true);
-
+	//감자 투사체
 	IMAGEMANAGER->LoadFromFile(L"PotatoParryable", Resources(L"Boss/BotanicPanic/Potato/Potato_Parryable.bmp"), 528, 142, 4, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"PotatoNonParryable", Resources(L"Boss/BotanicPanic/Potato/Potato_NonParryable.bmp"), 1072, 139, 8, 1, true);
 
@@ -57,9 +64,11 @@ void ImageSet::SetImage() //첫 scene1 로드
 	//당근
 	IMAGEMANAGER->LoadFromFile(L"CarrotIntro", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Intro.bmp"), 14800, 549, 25, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"CarrotAttack", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Attack .bmp"), 10252, 501, 22, 1, true);
-	IMAGEMANAGER->LoadFromFile(L"CarrotBeam", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Beam.bmp"), 5954, 522, 13, 1, true);
-	IMAGEMANAGER->LoadFromFile(L"CarrotDeath", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Death.bmp"), 1072, 139, 8, 1, true);
-
+	IMAGEMANAGER->LoadFromFile(L"CarrotChangeToBeam", Resources(L"Boss/BotanicPanic/Carrot/Carrot_ChangeToBeam.bmp"), 4122, 1044, 9, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"CarrotBeam", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Beam.bmp"), 1832, 522, 4, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"CarrotDeath", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Death.bmp"), 4199, 456, 13, 1, true);
+	//당근 투사체
+	IMAGEMANAGER->LoadFromFile(L"CarrotMissile", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Missile.bmp"), 492, 137, 6, 1, true);
 
 	//양파
 	IMAGEMANAGER->LoadFromFile(L"OnionIntro", Resources(L"Boss/BotanicPanic/Onion/Onion_Intro.bmp"), 12312, 643, 24, 1, true);
@@ -68,10 +77,16 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"OnionDeath", Resources(L"Boss/BotanicPanic/Onion/Onion_Death.bmp"), 2976, 599, 6, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"OnionDeathLeave", Resources(L"Boss/BotanicPanic/Onion/Onion_Death_Leave.bmp"), 16768, 596, 31, 1, true);
 
-	IMAGEMANAGER->LoadFromFile(L"OnionArmBashful", Resources(L"Boss/BotanicPanic/Onion/Onion_Arm_Bashful.bmp"), 3171, 195, 7, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"OnionTearEffect", Resources(L"Boss/BotanicPanic/Onion/Onion_Tears.bmp"), 10560, 407, 16, 1, true);
+	//양파 투사체
+	IMAGEMANAGER->LoadFromFile(L"OnionNonParryAbleA", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_NonParryableA.bmp"), 111, 68, 3, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"OnionNonParryAbleB", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_NonParryableB.bmp"), 111, 67, 3, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"OnionNonParryAbleC", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_NonParryableC.bmp"), 117, 72, 3, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"OnionNonParryAbleD", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_NonParryableD.bmp"), 120, 68, 3, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"OnionNonParryAbleE", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_NonParryableE.bmp"), 117, 69, 3, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"OnionParryable", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_Parryable.bmp"), 117, 69, 3, 1, true);
 
-	IMAGEMANAGER->LoadFromFile(L"OnionTearA", Resources(L"Boss/BotanicPanic/Onion/Onion_TearA.bmp"), 111, 68, 3, 1, true);
-	IMAGEMANAGER->LoadFromFile(L"OnionTearB", Resources(L"Boss/BotanicPanic/Onion/Onion_TearB.bmp"), 111, 67, 3, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"OnionNonParryAbleASplash", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_NonParryableASplash.bmp"), 1540, 136, 7, 1, true);
 }
 
 void ImageSet::SetFxImage() {

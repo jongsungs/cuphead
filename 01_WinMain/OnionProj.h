@@ -3,10 +3,26 @@
 
 class OnionProj :public EnemyProj {
 protected:
+	Image* NonParryAbleAImg;
+	Image* NonParryAbleBImg;
+	Image* NonParryAbleCImg;
+	Image* NonParryAbleDImg;
+	Image* NonParryAbleEImg;
+	Image* ParryAbleImg;
 
+	Image* NonParryableASplashImg;
+
+	Animation* NonParryAbleAAnimation;
+	Animation* NonParryAbleBAnimation;
+	Animation* NonParryAbleCAnimation;
+	Animation* NonParryAbleDAnimation;
+	Animation* NonParryAbleEAnimation;
+	Animation* ParryAbleAnimation;
+
+	Animation* NonParryableASplashAnimation;
 public:
-	void virtual Init()override;
-	void virtual Release()override;
-	void virtual Update()override;
-	void virtual Render(HDC hdc)override;
+	virtual void Init()override;
+	virtual void Release()override;
+	virtual void Update()override;
+	virtual void Render(HDC hdc)override;
 };

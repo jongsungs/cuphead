@@ -29,7 +29,7 @@ void MainGame::Init()
 	mLoading->AddLoadFunc([]()->void {ImageSet::GetInstance()->SetImage();});
 	mLoading->AddLoadFunc([]()->void {SoundSet::GetInstance()->SetSound(); });
 	SceneManager::GetInstance()->AddScene(L"Scene1LoadingScene", mLoading);
-	SceneManager::GetInstance()->LoadSceneLoading(L"BotanicPanic",L"Scene1LoadingScene");
+	SceneManager::GetInstance()->LoadSceneLoading(L"Scene1",L"Scene1LoadingScene");
 }
 
 /*
@@ -50,6 +50,7 @@ Update : 매 프레임 실행되는 함수, 여기서 연산 처리 한다.
 */
 void MainGame::Update()
 {
+	Input::GetInstance()->Update();
 	SceneManager::GetInstance()->Update();
 }
 
