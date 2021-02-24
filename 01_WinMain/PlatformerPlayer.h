@@ -44,7 +44,11 @@ enum class PlayerState : int
 	RightParring,
 	LeftParring,
 	RightUpaim,
-	LeftUpaim
+	LeftUpaim,
+	LeftShootaim,
+	RightShootaim,
+	LeftDiagonalUpaim,
+	RightDiagonalUpaim,
 
 };
 
@@ -102,6 +106,12 @@ class PlatformerPlayer : public GameObject
 	Animation* mLeftParringAnimation;
 	Animation* mRightUpaimAnimation;
 	Animation* mLeftUpaimAnimation;
+	Animation* mRightShootaimAnimation;
+	Animation* mLeftShootaimAnimation;
+	Animation* mLeftDiagonalUpaimAnimation;
+	Animation* mRightDiagonalUpaimAnimation;
+
+	bool isMove;
 public:
 	PlatformerPlayer(const string& name, float x, float y);
 

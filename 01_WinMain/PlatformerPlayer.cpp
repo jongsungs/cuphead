@@ -23,6 +23,7 @@ void PlatformerPlayer::Init()
 	mJumpPower = 0.f;
 	mPlayerState = PlayerState::RightIdle;
 
+	isMove = true;
 
 	mCurrentAnimation = new Animation();
 	mCurrentAnimation->InitFrameByStartEnd(0, 0, 4, 0, false);
@@ -348,7 +349,7 @@ void PlatformerPlayer::Init()
 	mRightShootAnimation
 		->InitFrameByStartEnd(0, 0, 5, 0, false);
 	mRightShootAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mRightShootAnimation
 		->SetFrameUpdateTime(0.1f);
 	mRightShootAnimation
@@ -358,7 +359,7 @@ void PlatformerPlayer::Init()
 	mLeftShootAnimation
 		->InitFrameByBackStartEnd(5, 1, 0, 1, false);
 	mLeftShootAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mLeftShootAnimation
 		->SetFrameUpdateTime(0.1f);
 	mLeftShootAnimation
@@ -368,7 +369,7 @@ void PlatformerPlayer::Init()
 	mRightUpShootAnimation
 		->InitFrameByStartEnd(0, 0, 5, 0, false);
 	mRightUpShootAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mRightUpShootAnimation
 		->SetFrameUpdateTime(0.1f);
 	mRightUpShootAnimation
@@ -378,7 +379,7 @@ void PlatformerPlayer::Init()
 	mLeftUpShootAnimation
 		->InitFrameByBackStartEnd(5, 1, 0, 1, false);
 	mLeftUpShootAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mLeftUpShootAnimation
 		->SetFrameUpdateTime(0.1f);
 	mLeftUpShootAnimation
@@ -388,7 +389,7 @@ void PlatformerPlayer::Init()
 	mRightDiagonalUpShootAnimation
 		->InitFrameByStartEnd(0, 0, 5, 0, false);
 	mRightDiagonalUpShootAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mRightDiagonalUpShootAnimation
 		->SetFrameUpdateTime(0.1f);
 	mRightDiagonalUpShootAnimation
@@ -398,7 +399,7 @@ void PlatformerPlayer::Init()
 	mLeftDiagonalUpShootAnimation
 		->InitFrameByBackStartEnd(5, 1, 0, 1, false);
 	mLeftDiagonalUpShootAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mLeftDiagonalUpShootAnimation
 		->SetFrameUpdateTime(0.1f);
 	mLeftDiagonalUpShootAnimation
@@ -427,17 +428,40 @@ void PlatformerPlayer::Init()
 		->Play();
 
 	mRightUpaimAnimation = new Animation();
-	mRightUpaimAnimation->InitFrameByStartEnd(0, 0, 4, 0, false);
-	mRightUpaimAnimation->SetIsLoop(false);
+	mRightUpaimAnimation->InitFrameByStartEnd(0, 0, 4, 0, true);
+	mRightUpaimAnimation->SetIsLoop(true);
 	mRightUpaimAnimation->SetFrameUpdateTime(0.1f);
 	mRightUpaimAnimation->Play();
 
 	mLeftUpaimAnimation = new Animation();
-	mLeftUpaimAnimation->InitFrameByBackStartEnd(4, 1, 0, 1, false);
-	mLeftUpaimAnimation->SetIsLoop(false);
+	mLeftUpaimAnimation->InitFrameByBackStartEnd(4, 1, 0, 1, true);
+	mLeftUpaimAnimation->SetIsLoop(true);
 	mLeftUpaimAnimation->SetFrameUpdateTime(0.1f);
 	mLeftUpaimAnimation->Play();
 
+	mLeftShootaimAnimation = new Animation();
+	mLeftShootaimAnimation->InitFrameByBackStartEnd(4, 1, 0, 1, true);
+	mLeftShootaimAnimation->SetIsLoop(true);
+	mLeftShootaimAnimation->SetFrameUpdateTime(0.1f);
+	mLeftShootaimAnimation->Play();
+
+	mRightShootaimAnimation = new Animation();
+	mRightShootaimAnimation->InitFrameByStartEnd(0, 0, 4, 0, true);
+	mRightShootaimAnimation->SetIsLoop(true);
+	mRightShootaimAnimation->SetFrameUpdateTime(0.1f);
+	mRightShootaimAnimation->Play();
+
+	mRightDiagonalUpaimAnimation = new Animation();
+	mRightDiagonalUpaimAnimation->InitFrameByStartEnd(0, 0, 4, 0, true);
+	mRightDiagonalUpaimAnimation->SetIsLoop(true);
+	mRightDiagonalUpaimAnimation->SetFrameUpdateTime(0.1f);
+	mRightDiagonalUpaimAnimation->Play();
+
+	mLeftDiagonalUpaimAnimation = new Animation();
+	mLeftDiagonalUpaimAnimation->InitFrameByBackStartEnd(4, 1, 0, 1, true);
+	mLeftDiagonalUpaimAnimation->SetIsLoop(true);
+	mLeftDiagonalUpaimAnimation->SetFrameUpdateTime(0.1f);
+	mLeftDiagonalUpaimAnimation->Play();
 }
 
 void PlatformerPlayer::Release()
@@ -482,110 +506,316 @@ void PlatformerPlayer::Release()
 	SafeDelete(mLeftParringAnimation);
 	SafeDelete(mLeftUpaimAnimation);
 	SafeDelete(mRightUpaimAnimation);
-	
-
+	SafeDelete(mRightShootaimAnimation);
+	SafeDelete(mLeftShootaimAnimation);
+	SafeDelete(mLeftDiagonalUpaimAnimation);
+	SafeDelete(mRightDiagonalUpaimAnimation);
 }
 
 void PlatformerPlayer::Update()
 {
 	
 	
-	
-	
-	//왼쪽으로 달릴때
-	if (Input::GetInstance()->GetKeyDown(VK_LEFT))
+
+	if (isMove)
 	{
-		mCurrentAnimation->Stop();
-		mPlayerState = PlayerState::LeftRun;
-		mCurrentAnimation = mLeftRunAnimation;
-		mCurrentAnimation->Play();
-	}
-	if (Input::GetInstance()->GetKey(VK_LEFT))
-	{
-		mX -= 1;
-		if (Input::GetInstance()->GetKey(VK_UP))
+		//왼쪽으로 달릴때
+		if (Input::GetInstance()->GetKeyDown(VK_LEFT))
 		{
-			if (Input::GetInstance()->GetKeyDown('X'))
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftRun;
+			mCurrentAnimation = mLeftRunAnimation;
+			mCurrentAnimation->Play();
+		}
+		if (Input::GetInstance()->GetKey(VK_LEFT))
+		{
+			mX -= 1;
+			if (Input::GetInstance()->GetKey(VK_UP))
 			{
-				mPlayerState = PlayerState::LeftRunDiagonalUpShoot;
-				if (mCurrentAnimation != mLeftRunDiagonalUpShootAnimation)
+				if (Input::GetInstance()->GetKeyDown('X'))
+				{
+					mPlayerState = PlayerState::LeftRunDiagonalUpShoot;
+					if (mCurrentAnimation != mLeftRunDiagonalUpShootAnimation)
+					{
+						mCurrentAnimation->Stop();
+						mCurrentAnimation = mLeftRunDiagonalUpShootAnimation;
+					}
+					mCurrentAnimation->Play();
+				}
+			}
+			if (Input::GetInstance()->GetKeyUp(VK_UP))
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::LeftRun;
+				mCurrentAnimation = mLeftRunAnimation;
+				mCurrentAnimation->Play();
+			}
+			if (Input::GetInstance()->GetKeyDown('Z'))
+			{
+				mJumpPower = 5.f;
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::LeftJump;
+				mCurrentAnimation = mLeftJumpAnimation;
+				mCurrentAnimation->Play();
+			}
+			if (Input::GetInstance()->GetKeyDown('V'))
+			{
+				mX += 0.5f;
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::LeftSpecialAttack;
+				mCurrentAnimation->Play();
+			}
+		}
+		if (Input::GetInstance()->GetKeyUp(VK_LEFT))
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftIdle;
+			mCurrentAnimation = mLeftIdleAnimation;
+			mCurrentAnimation->Play();
+		}
+		//오른쪽으로 달릴때
+		if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightRun;
+			mCurrentAnimation = mRightRunAnimation;
+			mCurrentAnimation->Play();
+		}
+		//달리면서 업샷 및 점프
+		if (Input::GetInstance()->GetKey(VK_RIGHT))
+		{
+			mX += 1;
+			if (Input::GetInstance()->GetKey(VK_UP))
+			{
+				if (Input::GetInstance()->GetKeyDown('X'))
+				{
+					mPlayerState = PlayerState::RightRunDiagonalUpShoot;
+					if (mCurrentAnimation != mRightRunDiagonalUpShootAnimation) {
+						mCurrentAnimation->Stop();
+						mCurrentAnimation = mRightRunDiagonalUpShootAnimation;
+					}
+					mCurrentAnimation->Play();
+				}
+
+			}
+			if (Input::GetInstance()->GetKeyUp(VK_UP))
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::RightRun;
+				mCurrentAnimation = mRightRunAnimation;
+				mCurrentAnimation->Play();
+			}
+			if (Input::GetInstance()->GetKeyDown('Z'))
+			{
+				mJumpPower = 5.f;
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::RightJump;
+				mCurrentAnimation = mRightJumpAnimation;
+				mCurrentAnimation->Play();
+
+			}
+		}
+		if (Input::GetInstance()->GetKeyUp(VK_RIGHT))
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightIdle;
+			mCurrentAnimation = mRightIdleAnimation;
+			mCurrentAnimation->Play();
+		}
+	}
+	else
+	{
+
+		//제자리에임
+		if (Input::GetInstance()->GetKey('C'))
+		{
+			if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::RightShootaim;
+				mCurrentAnimation = mRightShootaimAnimation;
+				mCurrentAnimation->Play();
+
+			}
+			else if (Input::GetInstance()->GetKeyDown(VK_LEFT))
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::LeftShootaim;
+				mCurrentAnimation = mLeftShootaimAnimation;
+				mCurrentAnimation->Play();
+			}
+			else if (Input::GetInstance()->GetKeyDown(VK_UP))
+			{
+				if (mPlayerState == PlayerState::LeftShootaim)
 				{
 					mCurrentAnimation->Stop();
-					mCurrentAnimation = mLeftRunDiagonalUpShootAnimation;
+					mPlayerState = PlayerState::LeftUpaim;
+					mCurrentAnimation = mLeftUpaimAnimation;
+					mCurrentAnimation->Play();
 				}
-				mCurrentAnimation->Play();
+				if (mPlayerState == PlayerState::RightShootaim)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::RightUpaim;
+					mCurrentAnimation = mRightUpaimAnimation;
+					mCurrentAnimation->Play();
+				}
 			}
-		}
-		if (Input::GetInstance()->GetKeyDown('Z'))
-		{
-			mJumpPower = 5.f;
-			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::LeftJump;
-			mCurrentAnimation = mLeftJumpAnimation;
-			mCurrentAnimation->Play();
-		}
-		if (Input::GetInstance()->GetKeyDown('V'))
-		{
-			mX += 0.5f;
-			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::LeftSpecialAttack;
-			mCurrentAnimation->Play();
-		}
-	}
-	if (Input::GetInstance()->GetKeyUp(VK_LEFT))
-	{
-		mCurrentAnimation->Stop();
-		mPlayerState = PlayerState::LeftIdle;
-		mCurrentAnimation = mLeftIdleAnimation;
-		mCurrentAnimation->Play();
-	}
-	//오른쪽으로 달릴때
-	if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
-	{
-		mCurrentAnimation->Stop();
-		mPlayerState = PlayerState::RightRun;
-		mCurrentAnimation = mRightRunAnimation;
-		mCurrentAnimation->Play();
-	}
-	//달리면서 업샷 및 점프
-	if (Input::GetInstance()->GetKey(VK_RIGHT))
-	{
-		mX += 1;
-		if (Input::GetInstance()->GetKey(VK_UP))
-		{
+			else if (Input::GetInstance()->GetKeyUp(VK_UP))
+			{
+				if (mPlayerState == PlayerState::LeftUpaim)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::LeftShootaim;
+					mCurrentAnimation = mLeftShootaimAnimation;
+					mCurrentAnimation->Play();
+				}
+				else if (mPlayerState == PlayerState::RightUpaim)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::RightShootaim;
+					mCurrentAnimation = mRightShootAnimation;
+					mCurrentAnimation->Play();
+				}
+			}
+			else if (Input::GetInstance()->GetKey(VK_LEFT))
+			{
+				if(Input::GetInstance()->GetKeyDown(VK_UP))
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::LeftDiagonalUpaim;
+					mCurrentAnimation = mLeftDiagonalUpaimAnimation;
+					mCurrentAnimation->Play();
+				}
+				if (Input::GetInstance()->GetKeyUp(VK_UP))
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::LeftShootaim;
+					mCurrentAnimation = mLeftShootaimAnimation;
+					mCurrentAnimation->Play();
+				}
+			}
+			//총알발사
 			if (Input::GetInstance()->GetKeyDown('X'))
 			{
-				mPlayerState = PlayerState::RightRunDiagonalUpShoot;
-				if (mCurrentAnimation != mRightRunDiagonalUpShootAnimation) {
+				if (mPlayerState == PlayerState::RightShootaim)
+				{
 					mCurrentAnimation->Stop();
-					mCurrentAnimation = mRightRunDiagonalUpShootAnimation;
+					mPlayerState = PlayerState::RightShoot;
+					mCurrentAnimation = mRightShootAnimation;
+					mCurrentAnimation->Play();
 				}
-				mCurrentAnimation->Play();
+				else if (mPlayerState == PlayerState::LeftShootaim)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::LeftShoot;
+					mCurrentAnimation = mLeftShootAnimation;
+					mCurrentAnimation->Play();
+				}
+				else if (mPlayerState == PlayerState::RightDiagonalUpaim)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::RightDiagonalUpShoot;
+					mCurrentAnimation = mRightDiagonalUpShootAnimation;
+					mCurrentAnimation->Play();
+				}
+				else if (mPlayerState == PlayerState::LeftDiagonalUpShoot)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::LeftDiagonalUpShoot;
+					mCurrentAnimation = mLeftDiagonalUpShootAnimation;
+					mCurrentAnimation->Play();
+				}
+			}
+			if (Input::GetInstance()->GetKeyUp('X'))
+			{
+				if (mPlayerState == PlayerState::RightShoot)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::RightShootaim;
+					mCurrentAnimation = mRightShootaimAnimation;
+					mCurrentAnimation->Play();
+				}
+				else if (mPlayerState == PlayerState::LeftShoot)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::LeftShootaim;
+					mCurrentAnimation = mLeftShootaimAnimation;
+					mCurrentAnimation->Play();
+				}
 			}
 
+			if (Input::GetInstance()->GetKeyUp('C'))
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::LeftIdle;
+				mCurrentAnimation = mLeftIdleAnimation;
+				mCurrentAnimation->Play();
+				isMove = true;
+			}
 		}
-		if (Input::GetInstance()->GetKeyDown('Z'))
+
+
+
+	if (Input::GetInstance()->GetKey('C'))
+	{
+
+		if (Input::GetInstance()->GetKeyDown('X'))
 		{
-			mJumpPower = 5.f;
 			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::RightJump;
-			mCurrentAnimation = mRightJumpAnimation;
+			mPlayerState = PlayerState::RightShoot;
+			mCurrentAnimation = mRightShootAnimation;
 			mCurrentAnimation->Play();
-			
+		}
+		if (Input::GetInstance()->GetKeyUp('X'))
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightShootaim;
+			mCurrentAnimation = mRightIdleAnimation;
+			mCurrentAnimation->Play();
 		}
 	}
-	if ( Input::GetInstance()->GetKeyUp(VK_RIGHT))
+	if (Input::GetInstance()->GetKeyUp('C'))
 	{
 		mCurrentAnimation->Stop();
 		mPlayerState = PlayerState::RightIdle;
 		mCurrentAnimation = mRightIdleAnimation;
 		mCurrentAnimation->Play();
+		isMove = true;
+	}
+
+	}
+	//제자리쏘기
+	if (Input::GetInstance()->GetKeyDown('C'))
+	{
+		if (mPlayerState == PlayerState::LeftIdle)
+		{
+			isMove = false;
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftShootaim;
+			mCurrentAnimation = mLeftShootaimAnimation;
+			mCurrentAnimation->Play();
+		}
+		else if (mPlayerState == PlayerState::RightIdle)
+		{
+			isMove = false;
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightShootaim;
+			mCurrentAnimation = mRightShootaimAnimation;
+			mCurrentAnimation->Play();
+		}
 	}
 	//if (Input::GetInstance()->GetKey(VK_SPACE))
 	//{
 	//	Bullet* bullet = new Bullet();
 	//	bullet->Init();
 	//	mBullet.push_back(bullet);
+	//}
+	//제자리상태 보정
+	//if (mPlayerState == PlayerState::LeftShootaim || mPlayerState == PlayerState::RightShootaim || mPlayerState == PlayerState::LeftUpaim
+	//	|| mPlayerState == PlayerState::RightUpaim)
+	//{
+	//	mX -= 0;
 	//}
 	mRect = RectMakeCenter(mX, mY, 98, 155);
 	//중력
@@ -609,161 +839,137 @@ void PlatformerPlayer::Update()
 	{
 		mImage = IMAGEMANAGER->FindImage(L"PlatformerPlayerIdle");
 	}
-	if (mPlayerState == PlayerState::LeftIdle)
+	else if (mPlayerState == PlayerState::LeftIdle)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"PlatformerPlayerIdle");
 	}
-	if (mPlayerState == PlayerState::RightDash)
+	else if (mPlayerState == PlayerState::RightDash)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Dash");
 	}
-	if (mPlayerState == PlayerState::LeftDash)
+	else if (mPlayerState == PlayerState::LeftDash)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Dash");
 	}
-	if (mPlayerState == PlayerState::Die)
+	else if (mPlayerState == PlayerState::Die)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Die");
 	}
-	if (mPlayerState == PlayerState::RightDuckIdle)
+	else if (mPlayerState == PlayerState::RightDuckIdle)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Duckidle");
 	}
-	if (mPlayerState == PlayerState::LeftDuckIdle)
+	else if (mPlayerState == PlayerState::LeftDuckIdle)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Duckidle");
 	}
-	if (mPlayerState == PlayerState::RightDuck)
+	else if (mPlayerState == PlayerState::RightDuck)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Duckidle");
 	}
-	if (mPlayerState == PlayerState::LeftDuck)
+	else if (mPlayerState == PlayerState::LeftDuck)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Duckidle");
 	}
-	if (mPlayerState == PlayerState::RightDuckShoot)
+	else if (mPlayerState == PlayerState::RightDuckShoot)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"DuckShoot");
 	}
-	if (mPlayerState == PlayerState::LeftDuckShoot)
+	else if (mPlayerState == PlayerState::LeftDuckShoot)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"DuckShoot");
 	}
-	if (mPlayerState == PlayerState::RightHit)
+	else if (mPlayerState == PlayerState::RightHit)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Groundhit");
 	}
-	if (mPlayerState == PlayerState::LeftHit)
+	else if (mPlayerState == PlayerState::LeftHit)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Groundhit");
 	}
-	if (mPlayerState == PlayerState::RightSpecialAttack)
+	else if (mPlayerState == PlayerState::RightSpecialAttack)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"GroundSpecialAttack");
 	}
-	if (mPlayerState == PlayerState::LeftSpecialAttack)
+	else if (mPlayerState == PlayerState::LeftSpecialAttack)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"GroundSpecialAttack");
 	}
-	if (mPlayerState == PlayerState::UpSpecialAttack)
+	else if (mPlayerState == PlayerState::UpSpecialAttack)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"UpSpecialAttack");
 	}
-	if (mPlayerState == PlayerState::RightJump)
+	else if (mPlayerState == PlayerState::RightJump)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Jump");
 	}
-	if (mPlayerState == PlayerState::LeftJump)
+	else if (mPlayerState == PlayerState::LeftJump)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Jump");
 	}
-	if (mPlayerState == PlayerState::RightRun)
+	else if (mPlayerState == PlayerState::RightRun)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Run");
 	}
-	if (mPlayerState == PlayerState::LeftRun)
+	else if (mPlayerState == PlayerState::LeftRun)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Run");
 	}
-	if (mPlayerState == PlayerState::RightRunturn)
+	else if (mPlayerState == PlayerState::RightRunturn)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Run");
 	}
-	if (mPlayerState == PlayerState::LeftRunturn)
+	else if (mPlayerState == PlayerState::LeftRunturn)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Run");
 	}
-	if (mPlayerState == PlayerState::RightRunShoot)
+	else if (mPlayerState == PlayerState::RightRunShoot)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"RunShoot");
 	}
-	if (mPlayerState == PlayerState::LeftRunShoot)
+	else if (mPlayerState == PlayerState::LeftRunShoot)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"RunShoot");
 	}
-	if (mPlayerState == PlayerState::RightRunShootturn)
+	else if (mPlayerState == PlayerState::RightRunShootturn)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"RunShoot");
 	}
-	if (mPlayerState == PlayerState::LeftRunShootturn)
+	else if (mPlayerState == PlayerState::LeftRunShootturn)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"RunShoot");
 	}
-	if (mPlayerState == PlayerState::RightRunDiagonalUpShoot)
+	else if (mPlayerState == PlayerState::RightRunDiagonalUpShoot || mPlayerState == PlayerState::LeftRunDiagonalUpShoot || mPlayerState == PlayerState::RightRunDiagonalUpShootturn || mPlayerState == PlayerState::LeftRunDiagonalUpShootturn)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"RunDiagonalShoot");
 	}
-	if (mPlayerState == PlayerState::LeftRunDiagonalUpShoot)
-	{
-		mImage = IMAGEMANAGER->FindImage(L"RunDiagonalShoot");
-	}
-	if (mPlayerState == PlayerState::RightRunDiagonalUpShootturn)
-	{
-		mImage = IMAGEMANAGER->FindImage(L"RunDiagonalShoot");
-	}
-	if (mPlayerState == PlayerState::LeftRunDiagonalUpShootturn)
-	{
-		mImage = IMAGEMANAGER->FindImage(L"RunDiagonalShoot");
-	}
-	if (mPlayerState == PlayerState::RightShoot)
+	else if (mPlayerState == PlayerState::RightShoot || mPlayerState == PlayerState::LeftShoot)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"StraightShoot");
 	}
-	if (mPlayerState == PlayerState::LeftShoot)
-	{
-		mImage = IMAGEMANAGER->FindImage(L"StraightShoot");
-	}
-	if (mPlayerState == PlayerState::RightUpShoot)
+	else if (mPlayerState == PlayerState::RightUpShoot || mPlayerState == PlayerState::LeftUpShoot)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"UpShoot");
 	}
-	if (mPlayerState == PlayerState::LeftUpShoot)
-	{
-		mImage = IMAGEMANAGER->FindImage(L"UpShoot");
-	}
-	if (mPlayerState == PlayerState::RightDiagonalUpShoot)
+	else if (mPlayerState == PlayerState::RightDiagonalUpShoot || mPlayerState == PlayerState::LeftDiagonalUpShoot)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"DiagonalUp");
 	}
-	if (mPlayerState == PlayerState::LeftDiagonalUpShoot)
-	{
-		mImage = IMAGEMANAGER->FindImage(L"DiagonalUp");
-	}
-	if (mPlayerState == PlayerState::RightParring)
+	else if (mPlayerState == PlayerState::RightParring || mPlayerState == PlayerState::LeftParring)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Parring");
 	}
-	if (mPlayerState == PlayerState::LeftParring)
-	{
-		mImage = IMAGEMANAGER->FindImage(L"Parring");
-	}
-	if (mPlayerState == PlayerState::RightUpaim)
+	else if (mPlayerState == PlayerState::RightUpaim || mPlayerState == PlayerState::LeftUpaim)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"Upaim");
 	}
-	if (mPlayerState == PlayerState::LeftUpaim)
+	else if (mPlayerState == PlayerState::LeftShootaim || mPlayerState == PlayerState::RightShootaim)
 	{
-		mImage = IMAGEMANAGER->FindImage(L"Upaim");
+		mImage = IMAGEMANAGER->FindImage(L"Shootaim");
+	}
+	else if (mPlayerState == PlayerState::LeftDiagonalUpaim || mPlayerState == PlayerState::RightDiagonalUpaim)
+	{
+		mImage = IMAGEMANAGER->FindImage(L"DiagonalUpaim");
 	}
 }
 

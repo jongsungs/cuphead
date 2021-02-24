@@ -33,6 +33,8 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"RunDiagonalShoot", Resources(L"PlatformerPlayer/RunDiagonalShoot.bmp"), 2574, 350, 18, 2, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"UpShoot", Resources(L"PlatformerPlayer/UpShoot.bmp"), 708, 378, 6, 2, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"Upaim", Resources(L"PlatformerPlayer/Upaim.bmp"), 540, 350, 5, 2, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"Shootaim", Resources(L"PlatformerPlayer/Shootaim.bmp"), 670, 322, 5, 2, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"DiagonalUpaim", Resources(L"PlatformerPlayer/DiagonalUpaim.bmp"), 645, 302, 5, 2, true, RGB(99, 92, 99));
 	//적 이미지
 
 	//플레이어 이미지
