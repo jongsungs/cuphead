@@ -7,6 +7,10 @@ protected:
 	float mSpeed;
 	float mAngle;
 	bool mParryAble;
+
+	Image* mImage;
+	Animation* mCurrentAnimation;
+
 public:
 	EnemyProj(string name, float x, float y, float speed, float angle, bool parryAble);
 

@@ -5,10 +5,15 @@
 class Animation;
 
 class Carrot : public Enemy {
+	Image* mBeamImage;
+	Image* mChangeToBeamImage;
 	float mAttackStartDelay;
 	int mAttackCount;
 
-	Animation* mInitAttackAnimation;
+	Animation* mChangeToBeamAnimation;
+	Animation* mChangeFromBeamAnimation;
+	Animation* mBeamAnimation;
+
 public:
 	Carrot(const string& name, float x, float y);
 

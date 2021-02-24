@@ -5,13 +5,14 @@ class Animation;
 enum class EnemyState : int {
 	Intro,
 	Idle,
-	InitAttack,
+	ToBeam,
+	Beam,
+	FromBeam,
 	Attack,
 	Death,
 	End
 };
 class Enemy : public GameObject {
-	
 protected:
 	Image* mImage;
 
@@ -20,10 +21,11 @@ protected:
 	Image* mAttackImage;
 	Image* mDeathImage;
 
-	class Player* mPlayer;
+	class PlatformerPlayer* mPlayer;
 	EnemyState mState;
 
 	float mAttackStartDelay;
+	float mDelayTime;
 
 	Animation* mIntroAnimation;
 	Animation* mIdleAnimation;
@@ -47,5 +49,6 @@ public:
 	int GetHP() const { return mHP; }
 	void SetHP(int hp) { mHP = hp;}
 
-	void SetPlayerPtr(Player* player) { mPlayer = player; }
+	void SetPlayerPtr(PlatformerPlayer* player) { mPlayer = player; }
+
 };

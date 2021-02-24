@@ -3,10 +3,14 @@
 
 class CarrotProj:public EnemyProj{
 protected:
+	Image* CarrotMissile;
+	Image* CarrotBeam;
 
+	Animation* CarrotBeamAnimation;
+	Animation* CarrotMissileAnimation;
 public:
-	void virtual Init()override;
-	void virtual Release()override;
-	void virtual Update()override;
-	void virtual Render(HDC hdc)override;
+	virtual void Init()override;
+	virtual void Release()override;
+	virtual void Update()override;
+	virtual void Render(HDC hdc)override;
 };

@@ -31,7 +31,9 @@ void MainGame::Init()
 	mLoading->AddLoadFunc([]()->void {ImageSet::GetInstance()->SetImage();});
 	mLoading->AddLoadFunc([]()->void {SoundSet::GetInstance()->SetSound(); });
 	SceneManager::GetInstance()->AddScene(L"Scene1LoadingScene", mLoading);
+
 	SceneManager::GetInstance()->LoadSceneLoading(L"OverWorld",L"Scene1LoadingScene");
+
 }
 
 /*

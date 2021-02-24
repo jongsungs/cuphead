@@ -6,4 +6,7 @@ Enemy::Enemy(const string& name, float x, float y)
 {
 	mX = x;
 	mY = y;
+	mIsActive = false;
 }
+
+

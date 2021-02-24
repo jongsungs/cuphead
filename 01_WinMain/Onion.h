@@ -8,16 +8,11 @@ class Onion : public Enemy {
 	Image* mBashfulImage;
 	Image* mBashfulLeaveImage;
 	Image* mCryImage;
-
-	Image* mArmIntroImage;
-	Image* mArmIdleImage;
-	Image* mArmBashfulImage;
-
+	
 	Image* mTearAImage;
 	Image* mTearBImage;
 
 	Animation* mDeathLeaveAnimation;
-	Animation* mArmBashfulAnimation;
 
 	Animation* mTearAAnimation;
 	Animation* mTearBAnimation;
