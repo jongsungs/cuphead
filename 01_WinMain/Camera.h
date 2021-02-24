@@ -6,20 +6,21 @@ class Camera : public GameObject
 public:
 	enum class Mode : int
 	{
-		Follow, Free , Talk
+		Follow, Free , Talk, Platformer, Boss
 	};
 protected:
 	Mode mMode;
 	GameObject* mTarget;		//쫓아가야할 타겟
-
+	RECT mCamerArea;
 	float mMoveSpeed;
 public:
+	Camera(Mode mode = Mode::Follow, float x = WINSIZEX/2, float y = WINSIZEX/2);
 	void Init()override; 
 	void Release()override; 
 	void Update()override; 
 	void Render(HDC hdc)override;
 
-	void SetTarget(GameObject* target) { mTarget = target; }
+	void SetTarget(GameObject* target) { mTarget = target; mX = mTarget->GetX(); mY = mTarget->GetY(); }
 	void ChangeMode(Mode mode) { mMode = mode; }
 public:
 	void Render(HDC hdc, class Image* image, int x, int y);
@@ -52,7 +53,7 @@ public:
 
 	inline float GetMoveSpeed()const { return mMoveSpeed; }
 	inline void SetMoveSpeed(float speed) { mMoveSpeed = speed; }
-
+	inline void SetCamerArea(RECT rc) { mCamerArea = rc; }
 	inline void SetMode(Mode mode) { mMode = mode; };
 };
 
