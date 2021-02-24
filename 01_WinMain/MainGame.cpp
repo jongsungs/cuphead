@@ -6,6 +6,7 @@
 #include "Scene1.h"
 #include "BossScene.h"
 #include "LoadingScene.h"
+#include "Scene_OverWorld.h"
 #include "Animation.h"
 /*
 Scene : 스테이지 단위를 씬이라고 함
@@ -24,12 +25,13 @@ void MainGame::Init()
 	SceneManager::GetInstance()->AddScene(L"BotanicPanic", new BossScene);
 	SceneManager::GetInstance()->AddScene(L"Scene1", new Scene1);
 	SceneManager::GetInstance()->AddScene(L"Scene2", new Scene2);
-	
+	SceneManager::GetInstance()->AddScene(L"OverWorld", new Scene_OverWorld);
+
 	LoadingScene* mLoading = new LoadingScene;
 	mLoading->AddLoadFunc([]()->void {ImageSet::GetInstance()->SetImage();});
 	mLoading->AddLoadFunc([]()->void {SoundSet::GetInstance()->SetSound(); });
 	SceneManager::GetInstance()->AddScene(L"Scene1LoadingScene", mLoading);
-	SceneManager::GetInstance()->LoadSceneLoading(L"BotanicPanic",L"Scene1LoadingScene");
+	SceneManager::GetInstance()->LoadSceneLoading(L"OverWorld",L"Scene1LoadingScene");
 }
 
 /*
@@ -50,6 +52,7 @@ Update : 매 프레임 실행되는 함수, 여기서 연산 처리 한다.
 */
 void MainGame::Update()
 {
+	Input::GetInstance()->Update();
 	SceneManager::GetInstance()->Update();
 }
 
@@ -78,16 +81,16 @@ void MainGame::Render(HDC hdc)
 
 void MainGame::RenderTime(HDC hdc)
 {
-	float worldTime = Time::GetInstance()->GetWorldTime();
-	float deltaTime = Time::GetInstance()->DeltaTime();
+	//float worldTime = Time::GetInstance()->GetWorldTime();
+	//float deltaTime = Time::GetInstance()->DeltaTime();
 	ULONG fps = Time::GetInstance()->GetmFrameRate();
-	wstring strWorldTime = L"WorldTime : " + to_wstring(worldTime);
-	wstring strDeltaTime = L"DeltaTime : " + to_wstring(deltaTime);
-	wstring strFPS = L"FPS : " + to_wstring(fps);
+	//wstring strWorldTime = L"WorldTime : " + to_wstring(worldTime);
+	//wstring strDeltaTime = L"DeltaTime : " + to_wstring(deltaTime);
+	//wstring strFPS = L"FPS : " + to_wstring(fps);
 
-	TextOut(hdc, 10, 10, strWorldTime.c_str(), strWorldTime.length());
-	TextOut(hdc, 10, 25, strDeltaTime.c_str(), strDeltaTime.length());
-	TextOut(hdc, 10, 40, strFPS.c_str(), strFPS.length());
+	//TextOut(hdc, 10, 10, strWorldTime.c_str(), strWorldTime.length());
+	//TextOut(hdc, 10, 25, strDeltaTime.c_str(), strDeltaTime.length());
+	//TextOut(hdc, 10, 40, strFPS.c_str(), strFPS.length());
 }
 void MainGame::RenderFilter(HDC hdc)
 {
