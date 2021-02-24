@@ -73,9 +73,6 @@
     <Filter Include="MainGame\Object\Effect">
       <UniqueIdentifier>{cd7fc9b0-6bbe-4010-bd45-e62154dd3090}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainGame\Object\NPC">
-      <UniqueIdentifier>{2fa7d8a8-676c-4eca-a29e-c01dfbd55435}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MainGame\Object\Player">
       <UniqueIdentifier>{104eaf54-5058-46a7-9a60-69d546ea4f06}</UniqueIdentifier>
     </Filter>
@@ -100,9 +97,6 @@
     <Filter Include="FrameWork\Setting\SoundSet">
       <UniqueIdentifier>{970ac68e-f89f-4107-bc76-d9b20640a9e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainGame\Object\Player\OverWorld">
-      <UniqueIdentifier>{6890e317-594c-40d9-b998-1d3909c24da7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MainGame\Object\Boss">
       <UniqueIdentifier>{820474eb-d045-4d0c-a8d0-2f0b92790eb2}</UniqueIdentifier>
     </Filter>
@@ -120,6 +114,18 @@
     </Filter>
     <Filter Include="MainGame\Object\Bullet\EnemyBullet">
       <UniqueIdentifier>{3f04bf07-7900-411b-be77-0c7819c58b10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\OverWorld">
+      <UniqueIdentifier>{6890e317-594c-40d9-b998-1d3909c24da7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\OverWorld\NPC">
+      <UniqueIdentifier>{2fa7d8a8-676c-4eca-a29e-c01dfbd55435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\OverWorld\BackGround">
+      <UniqueIdentifier>{c3d3dbbf-1245-4794-af44-6821e90f08de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\OverWorld\Talk">
+      <UniqueIdentifier>{4685a549-e78c-4ee2-9d34-8594c2c1f5db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -217,7 +223,7 @@
       <Filter>MainGame\Object\Boss</Filter>
     </ClInclude>
     <ClInclude Include="NPC.h">
-      <Filter>MainGame\Object\NPC</Filter>
+      <Filter>MainGame\Object\OverWorld\NPC</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>MainGame\Object\Player</Filter>
@@ -232,7 +238,7 @@
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Cuphead_OverWorld.h">
-      <Filter>MainGame\Object\Player\OverWorld</Filter>
+      <Filter>MainGame\Object\OverWorld</Filter>
     </ClInclude>
     <ClInclude Include="Onion.h">
       <Filter>MainGame\Object\Boss\Onion</Filter>
@@ -247,7 +253,7 @@
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Building.h">
-      <Filter>MainGame\Object\Player\OverWorld</Filter>
+      <Filter>MainGame\Object\OverWorld</Filter>
     </ClInclude>
     <ClInclude Include="OnionProj.h">
       <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
@@ -260,6 +266,15 @@
     </ClInclude>
     <ClInclude Include="PotatoProj.h">
       <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>MainGame\Object\OverWorld\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Talk.h">
+      <Filter>MainGame\Object\OverWorld\Talk</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_ElderHouse.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -345,7 +360,7 @@
       <Filter>MainGame\Object\Boss</Filter>
     </ClCompile>
     <ClCompile Include="NPC.cpp">
-      <Filter>MainGame\Object\NPC</Filter>
+      <Filter>MainGame\Object\OverWorld\NPC</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>MainGame\Object\Player</Filter>
@@ -360,7 +375,7 @@
       <Filter>MainGame\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Cuphead_OverWorld.cpp">
-      <Filter>MainGame\Object\Player\OverWorld</Filter>
+      <Filter>MainGame\Object\OverWorld</Filter>
     </ClCompile>
     <ClCompile Include="Onion.cpp">
       <Filter>MainGame\Object\Boss\Onion</Filter>
@@ -375,7 +390,7 @@
       <Filter>MainGame\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Building.cpp">
-      <Filter>MainGame\Object\Player\OverWorld</Filter>
+      <Filter>MainGame\Object\OverWorld</Filter>
     </ClCompile>
     <ClCompile Include="OnionProj.cpp">
       <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
@@ -388,6 +403,15 @@
     </ClCompile>
     <ClCompile Include="PotatoProj.cpp">
       <Filter>MainGame\Object\Bullet\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>MainGame\Object\OverWorld\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Talk.cpp">
+      <Filter>MainGame\Object\OverWorld\Talk</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_ElderHouse.cpp">
+      <Filter>MainGame\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

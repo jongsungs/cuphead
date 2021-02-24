@@ -48,7 +48,7 @@ void Camera::Update()
 		if (mTarget)
 		{
 			mX = mTarget->GetX();
-			mY = mTarget->GetY()+300;
+			mY = mTarget->GetY()+100;
 			mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 		}
 		break;
