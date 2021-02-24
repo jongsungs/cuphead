@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Image.h"
 #include "Animation.h"
 #include "Camera.h"
@@ -31,7 +31,7 @@ void PlatformerPlayer::Init()
 
 	mCurrentAnimation->Play();
 	
-	//¾ÆÀÌµé
+	//ì•„ì´ë“¤
 
 	mRightIdleAnimation = new Animation();
 	mRightIdleAnimation
@@ -52,7 +52,7 @@ void PlatformerPlayer::Init()
 		->SetFrameUpdateTime(0.1f);
 	mLeftIdleAnimation
 		->Play();
-	//´ë½¬
+	//ëŒ€ì‰¬
 
 	mRightDashAnimation = new Animation();
 	mRightDashAnimation
@@ -73,7 +73,7 @@ void PlatformerPlayer::Init()
 		->SetFrameUpdateTime(0.1f);
 	mLeftDashAnimation
 		->Play();
-	//Á×À½
+	//ì£½ìŒ
 
 	mDieAnimation = new Animation();
 	mDieAnimation
@@ -84,7 +84,7 @@ void PlatformerPlayer::Init()
 		->SetFrameUpdateTime(0.1f);
 	mDieAnimation
 		->Play();
-	//´ö ¾ÆÀÌµé
+	//ë• ì•„ì´ë“¤
 
 	mRightDuckIdleAnimation = new Animation();
 	mRightDuckIdleAnimation
@@ -105,7 +105,7 @@ void PlatformerPlayer::Init()
 		->SetFrameUpdateTime(0.1f);
 	mLeftDuckIdleAnimation
 		->Play();
-	//´ö
+	//ë•
 
 	mRightDuckAnimation = new Animation();
 	mRightDuckAnimation
@@ -126,7 +126,7 @@ void PlatformerPlayer::Init()
 		->SetFrameUpdateTime(0.1f);
 	mLeftDuckAnimation
 		->Play();
-	//´ö¼¦
+	//ë•ìƒ·
 
 	mRightDuckShootAnimation = new Animation();
 	mRightDuckShootAnimation
@@ -147,7 +147,7 @@ void PlatformerPlayer::Init()
 		->SetFrameUpdateTime(0.1f);
 	mLeftDuckShootAnimation
 		->Play();
-	//ÇÇ°Ý
+	//í”¼ê²©
 
 	mRightHitAnimation = new Animation();
 	mRightHitAnimation
@@ -168,7 +168,7 @@ void PlatformerPlayer::Init()
 		->SetFrameUpdateTime(0.1f);
 	mLeftHitAnimation
 		->Play();
-	//ÇÊ»ì±â
+	//í•„ì‚´ê¸°
 
 	mRightSpecialAttackAnimation = new Animation();
 	mRightSpecialAttackAnimation
@@ -199,13 +199,13 @@ void PlatformerPlayer::Init()
 		->SetFrameUpdateTime(0.1f);
 	mUpSpecialAttackAnimation
 		->Play();
-	//Á¡ÇÁ
+	//ì í”„
 
 	mRightJumpAnimation = new Animation();
 	mRightJumpAnimation
 		->InitFrameByStartEnd(0, 0, 7, 0, false);
 	mRightJumpAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mRightJumpAnimation
 		->SetFrameUpdateTime(0.1f);
 	mRightJumpAnimation
@@ -220,7 +220,7 @@ void PlatformerPlayer::Init()
 		->SetFrameUpdateTime(0.1f);
 	mLeftJumpAnimation
 		->Play();
-	//´Þ¸®±â
+	//ë‹¬ë¦¬ê¸°
 
 	mRightRunAnimation = new Animation();
 	mRightRunAnimation
@@ -261,7 +261,7 @@ void PlatformerPlayer::Init()
 		->SetFrameUpdateTime(0.1f);
 	mLeftRunturnAnimation
 		->Play();
-	//´Þ¸®¸é¼­ ½î±â
+	//ë‹¬ë¦¬ë©´ì„œ ì˜ê¸°
 
 	mRightRunShootAnimation = new Animation();
 	mRightRunShootAnimation
@@ -342,7 +342,7 @@ void PlatformerPlayer::Init()
 		->SetFrameUpdateTime(0.1f);
 	mLeftRunDiagonalUpShootturnAnimation
 		->Play();
-	//Á¦ÀÚ¸® ¹ß»ç
+	//ì œìžë¦¬ ë°œì‚¬
 
 	mRightShootAnimation = new Animation();
 	mRightShootAnimation
@@ -404,7 +404,7 @@ void PlatformerPlayer::Init()
 	mLeftDiagonalUpShootAnimation
 		->Play();
 
-	//ÆÐ¸µ
+	//íŒ¨ë§
 
 	mRightParringAnimation = new Animation();
 	mRightParringAnimation
@@ -488,83 +488,179 @@ void PlatformerPlayer::Release()
 
 void PlatformerPlayer::Update()
 {
-	
-	
-	//¿ÞÂÊÀ¸·Î ´Þ¸±¶§
-	if (Input::GetInstance()->GetKeyDown(VK_LEFT))
-	{
-		mCurrentAnimation->Stop();
-		mPlayerState = PlayerState::LeftRun;
-		mCurrentAnimation = mLeftRunAnimation;
-		mLeftRunAnimation->Play();
-	}
-	if (Input::GetInstance()->GetKey(VK_LEFT))
-	{
-		mX -= 0.1;
-		if (Input::GetInstance()->GetKey(VK_UP))
+	if (!Input::GetInstance()->GetKey(VK_LEFT)&&Input::GetInstance()->GetKey(VK_RIGHT)) {
+		//ì˜¤ë¥¸ìª½ìœ¼ë¡œ ë‹¬ë¦´ë•Œ
+		if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
 		{
-			if (Input::GetInstance()->GetKeyDown('X'))
-			{
 			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::LeftRunDiagonalUpShoot;
-			mCurrentAnimation = mLeftRunDiagonalUpShootAnimation;
+			mPlayerState = PlayerState::RightRun;
+			mCurrentAnimation = mRightRunAnimation;
 			mCurrentAnimation->Play();
+		}
+		//ë‹¬ë¦¬ë©´ì„œ ì—…ìƒ· ë° ì í”„
+		if (Input::GetInstance()->GetKey(VK_RIGHT))
+		{
+			mX += 1;
+			if (Input::GetInstance()->GetKey(VK_UP))
+			{
+				if (Input::GetInstance()->GetKeyDown('X'))
+				{
+					mPlayerState = PlayerState::RightRunDiagonalUpShoot;
+					if (mCurrentAnimation != mRightRunDiagonalUpShootAnimation) {
+						mCurrentAnimation->Stop();
+						mCurrentAnimation = mRightRunDiagonalUpShootAnimation;
+					}
+					mCurrentAnimation->Play();
+				}
+
 			}
-		}
-		else if (Input::GetInstance()->GetKeyDown('Z'))
-		{
-			mJumpPower = 5.f;
-			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::LeftJump;
-			mCurrentAnimation = mLeftJumpAnimation;
-			mCurrentAnimation->Play();
-		}
-	}
-	if (Input::GetInstance()->GetKeyUp(VK_LEFT))
-	{
-		mCurrentAnimation->Stop();
-		mPlayerState = PlayerState::LeftIdle;
-		mCurrentAnimation = mLeftIdleAnimation;
-		mLeftIdleAnimation->Play();
-	}
-	//¿À¸¥ÂÊÀ¸·Î ´Þ¸±¶§
-	if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
-	{
-		mCurrentAnimation->Stop();
-		mPlayerState = PlayerState::RightRun;
-		mCurrentAnimation = mRightRunAnimation;
-		mRightRunAnimation->Play();
-	}
-	if (Input::GetInstance()->GetKey(VK_RIGHT))
-	{
-		mX += 0.1;
-		if (Input::GetInstance()->GetKey(VK_UP))
-		{
-			if (Input::GetInstance()->GetKeyDown('X'))
+			if (Input::GetInstance()->GetKeyDown('Z'))
 			{
+				mJumpPower = 5.f;
 				mCurrentAnimation->Stop();
-				mPlayerState = PlayerState::RightRunDiagonalUpShoot;
-				mCurrentAnimation = mRightRunDiagonalUpShootAnimation;
+				mPlayerState = PlayerState::RightJump;
+				mCurrentAnimation = mRightJumpAnimation;
 				mCurrentAnimation->Play();
 			}
-
 		}
-		if (Input::GetInstance()->GetKey('Z'))
+	}
+	else if (!Input::GetInstance()->GetKey(VK_RIGHT)&&Input::GetInstance()->GetKey(VK_LEFT))
+	{
+		//ì™¼ìª½ìœ¼ë¡œ ë‹¬ë¦´ë•Œ
+		if (Input::GetInstance()->GetKeyDown(VK_LEFT))
 		{
-			mJumpPower = 5.f;
 			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::RightJump;
-			mCurrentAnimation = mRightJumpAnimation;
+			mPlayerState = PlayerState::LeftRun;
+			mCurrentAnimation = mLeftRunAnimation;
+			mCurrentAnimation->Play();
+		}
+		if (Input::GetInstance()->GetKey(VK_LEFT))
+		{
+			mX -= 1;
+			if (Input::GetInstance()->GetKey(VK_UP))
+			{
+				if (Input::GetInstance()->GetKeyDown('X'))
+				{
+					mPlayerState = PlayerState::LeftRunDiagonalUpShoot;
+					if (mCurrentAnimation != mLeftRunDiagonalUpShootAnimation)
+					{
+						mCurrentAnimation->Stop();
+						mCurrentAnimation = mLeftRunDiagonalUpShootAnimation;
+					}
+					mCurrentAnimation->Play();
+				}
+			}
+			else if (Input::GetInstance()->GetKeyDown('Z'))
+			{
+				mJumpPower = 5.f;
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::LeftJump;
+				mCurrentAnimation = mLeftJumpAnimation;
+				mCurrentAnimation->Play();
+			}
+		}
+		
+	}
+	else {
+		if (Input::GetInstance()->GetKeyUp(VK_RIGHT))
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightIdle;
+			mCurrentAnimation = mRightIdleAnimation;
+			mCurrentAnimation->Play();
+		}
+		if (Input::GetInstance()->GetKeyUp(VK_LEFT))
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftIdle;
+			mCurrentAnimation = mLeftIdleAnimation;
 			mCurrentAnimation->Play();
 		}
 	}
-	if (Input::GetInstance()->GetKeyUp(VK_RIGHT))
-	{
-		mCurrentAnimation->Stop();
-		mPlayerState = PlayerState::RightIdle;
-		mCurrentAnimation = mRightIdleAnimation;
-		mLeftIdleAnimation->Play();
-	}
+	
+	
+	
+	////ì™¼ìª½ìœ¼ë¡œ ë‹¬ë¦´ë•Œ
+	//if (!Input::GetInstance()->GetKey(VK_RIGHT) && Input::GetInstance()->GetKeyDown(VK_LEFT))
+	//{
+	//	mCurrentAnimation->Stop();
+	//	mPlayerState = PlayerState::LeftRun;
+	//	mCurrentAnimation = mLeftRunAnimation;
+	//	mCurrentAnimation->Play();
+	//}
+	//if (!Input::GetInstance()->GetKeyDown(VK_RIGHT) && Input::GetInstance()->GetKey(VK_LEFT))
+	//{
+	//	mX -= 1;
+	//	if (Input::GetInstance()->GetKey(VK_UP))
+	//	{
+	//		if (Input::GetInstance()->GetKeyDown('X'))
+	//		{
+	//			mPlayerState = PlayerState::LeftRunDiagonalUpShoot;
+	//			if (mCurrentAnimation != mLeftRunDiagonalUpShootAnimation)
+	//			{
+	//				mCurrentAnimation->Stop();
+	//				mCurrentAnimation = mLeftRunDiagonalUpShootAnimation;
+	//			}
+	//			mCurrentAnimation->Play();
+	//		}
+	//	}
+	//	else if (Input::GetInstance()->GetKeyDown('Z'))
+	//	{
+	//		mJumpPower = 5.f;
+	//		mCurrentAnimation->Stop();
+	//		mPlayerState = PlayerState::LeftJump;
+	//		mCurrentAnimation = mLeftJumpAnimation;
+	//		mCurrentAnimation->Play();
+	//	}
+	//}
+	//if (!Input::GetInstance()->GetKey(VK_RIGHT) && Input::GetInstance()->GetKeyUp(VK_LEFT))
+	//{
+	//	mCurrentAnimation->Stop();
+	//	mPlayerState = PlayerState::LeftIdle;
+	//	mCurrentAnimation = mLeftIdleAnimation;
+	//	mCurrentAnimation->Play();
+	//}
+	////ì˜¤ë¥¸ìª½ìœ¼ë¡œ ë‹¬ë¦´ë•Œ
+	//if (!Input::GetInstance()->GetKey(VK_LEFT)&&Input::GetInstance()->GetKeyDown(VK_RIGHT))
+	//{
+	//	mCurrentAnimation->Stop();
+	//	mPlayerState = PlayerState::RightRun;
+	//	mCurrentAnimation = mRightRunAnimation;
+	//	mCurrentAnimation->Play();
+	//}
+	////ë‹¬ë¦¬ë©´ì„œ ì—…ìƒ· ë° ì í”„
+	//if (!Input::GetInstance()->GetKeyDown(VK_LEFT) && Input::GetInstance()->GetKey(VK_RIGHT))
+	//{
+	//	mX += 1;
+	//	if (Input::GetInstance()->GetKey(VK_UP))
+	//	{
+	//		if (Input::GetInstance()->GetKeyDown('X'))
+	//		{
+	//			mPlayerState = PlayerState::RightRunDiagonalUpShoot;
+	//			if (mCurrentAnimation != mRightRunDiagonalUpShootAnimation) {
+	//				mCurrentAnimation->Stop();
+	//				mCurrentAnimation = mRightRunDiagonalUpShootAnimation;
+	//			}
+	//			mCurrentAnimation->Play();
+	//		}
+
+	//	}
+	//	if (Input::GetInstance()->GetKeyDown('Z'))
+	//	{
+	//		mJumpPower = 5.f;
+	//		mCurrentAnimation->Stop();
+	//		mPlayerState = PlayerState::RightJump;
+	//		mCurrentAnimation = mRightJumpAnimation;
+	//		mCurrentAnimation->Play();
+	//	}
+	//}
+	//if ( Input::GetInstance()->GetKeyUp(VK_RIGHT))
+	//{
+	//	mCurrentAnimation->Stop();
+	//	mPlayerState = PlayerState::RightIdle;
+	//	mCurrentAnimation = mRightIdleAnimation;
+	//	mCurrentAnimation->Play();
+	//}
 	//if (Input::GetInstance()->GetKey(VK_SPACE))
 	//{
 	//	Bullet* bullet = new Bullet();
@@ -572,6 +668,7 @@ void PlatformerPlayer::Update()
 	//	mBullet.push_back(bullet);
 	//}
 	mRect = RectMakeCenter(mX, mY, 98, 155);
+	//ì¤‘ë ¥
 	//mJumpPower -= mGravity;
 	//mY -= mJumpPower;
 	if (mY<= WINSIZEY)
@@ -754,7 +851,7 @@ void PlatformerPlayer::Render(HDC hdc)
 {
 	
 	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
-	////Á×À½
+	////ì£½ìŒ
 	//if (mCurrentAnimation == mDieAnimation)
 	//{
 	//	CameraManager::GetInstance()->GetMainCamera()->ScaleFrameRender(hdc, mImage4, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 80, 120);
