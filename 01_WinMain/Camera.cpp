@@ -3,12 +3,32 @@
 
 #include "Image.h"
 
+Camera::Camera(Mode mode,float x, float y):GameObject("Main_Camera")
+{
+	mMode = mode;
+	mX = x;
+	mY = y;
+	mTarget = nullptr;
+}
 void Camera::Init()
 {
-	mMode = Mode::Follow;
-	//mTarget = nullptr;
-	//mX = WINSIZEX / 2;
-	//mY = WINSIZEY / 2;
+	switch (mMode)
+	{
+	case Camera::Mode::Follow:
+		break;
+	case Camera::Mode::Free:
+		break;
+	case Camera::Mode::Talk:
+		break;
+	case Camera::Mode::Platformer:
+		mX = WINSIZEX / 2;
+		mY = WINSIZEY / 2;
+		break;
+	case Camera::Mode::Boss:
+		mX = WINSIZEX / 2;
+		mY = WINSIZEY / 2;
+		break;
+	}
 	mSizeX = WINSIZEX;
 	mSizeY = WINSIZEY;
 	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
@@ -51,6 +71,29 @@ void Camera::Update()
 			mY = mTarget->GetY()+100;
 			mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 		}
+		break;
+	case Camera::Mode::Platformer:
+		if (mTarget)
+		{
+			mX = mTarget->GetX();
+			mY = mTarget->GetY() - 250;
+			mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+		}
+		break;
+	case Camera::Mode::Boss:
+		if (Input::GetInstance()->GetKey(VK_LEFT))
+		{
+			if (mCamerArea.left < mRect.left ) {
+				mX -= 1;
+			}
+		}
+		if (Input::GetInstance()->GetKey(VK_RIGHT))
+		{
+			if (mCamerArea.right > mRect.right) {
+				mX += 1;
+			}
+		}
+		mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 		break;
 	}
 }

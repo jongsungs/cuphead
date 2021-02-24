@@ -19,6 +19,8 @@ enum class ObjectLayer : int
 	Player_Bullet_Effect,
 	Enemy_Bullet,
 	Player_Bullet,
+	Enemy_Death_Effect,
+	FrontGround,
 	UI,
 	Talk,
 	End
@@ -37,11 +39,13 @@ public:
 	void Release();
 	void Update();
 	void Render(HDC hdc);
+	void Delete();
 
 	void AllActiveFalse(); //모든 오브젝트 액티브 = false 변경
 	void AllActiveTrue();
 	void AddObject(ObjectLayer layer, class GameObject* object);
 	void AddObject(ObjectLayer layer, class GameObject* object, const string& name); //같은 이름의 오브젝트를 찾는다. 있으면 활성화를 시켜준다. 없으면 생성
+	void AddObjectNoDelete(ObjectLayer layer, class GameObject* object);
 	void DeleteObject(ObjectLayer layer);
 	class GameObject* FindObject(const string& name);
 	class GameObject* FindObject(ObjectLayer layer, const string& name);
