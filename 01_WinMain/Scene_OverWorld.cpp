@@ -7,6 +7,7 @@
 #include "Cuphead_OverWorld.h"
 #include "Building.h"
 #include "NPC.h"
+#include "BackGround.h"
 void Scene_OverWorld::Init()
 {
 
@@ -22,6 +23,16 @@ void Scene_OverWorld::Init()
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_BotanicPanic", Resources(L"/overworld/Buildings/BotanicPanic.bmp"), 330, 270, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"Dust_OverWolrd", Resources(L"/overworld/Cuphead/Dust_Overworld.bmp"), 1622, 498, 20, 6, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"ZPopUp", Resources(L"/overworld/Z.bmp"), 42, 52, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"NPC_Apple_Talk1", Resources(L"/overworld/NPC/Talk1.bmp"), 1016, 263, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"NPC_Apple_Talk2", Resources(L"/overworld/NPC/Talk2.bmp"), 899, 335, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"NPC_Apple_Talk3", Resources(L"/overworld/NPC/Talk3.bmp"), 693, 265, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"NPC_Apple_Talk4", Resources(L"/overworld/NPC/Talk4.bmp"), 903, 339, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"NPC_Apple_Talk5", Resources(L"/overworld/NPC/Talk5.bmp"), 881, 285, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"ElderHouse_Talk", Resources(L"/overworld/buildings/ElderHouse_Title.bmp"), 785, 418, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"BotanicPanic_Talk1", Resources(L"/overworld/buildings/BotanicPanic_Title_Simple.bmp"), 1165, 834, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"BotanicPanic_Talk2", Resources(L"/overworld/buildings/BotanicPanic_Title_Regular.bmp"), 1165, 834, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"Black", Resources(L"/overworld/buildings/Black.bmp"), 1280, 720, false);
+
 
 
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Building, new Building("Flatformer", IMAGEMANAGER->FindImage(L"OverWorld_Building_Flatformer"), 2000, 800));
@@ -40,14 +51,23 @@ void Scene_OverWorld::Init()
 	CameraManager::GetInstance()->SetMainCamera(camera);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::UI, camera);
 	//배경 layer1 : 오버월드 이미지
-	mBackGroundImage_Layer1 = IMAGEMANAGER->FindImage(L"OverWorld");
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Background, 
+		new BackGround("BackGroundImage_Layer1", 
+		IMAGEMANAGER->FindImage(L"OverWorld"), 0, 0));
 	
 	//배경 Layer2 : 이동가능한곳.
 	mBackGroundImage_Layer2 = IMAGEMANAGER->FindImage(L"OverWorld_CanMove");
-
 	//배경 Layer3 : 배경중 맨위에 그려지는녀석들
-	mBackGroundImage_Layer3 = IMAGEMANAGER->FindImage(L"OverWorld_Front");
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::FrontGround,
+		new BackGround("BackGroundImage_Layer3",
+			IMAGEMANAGER->FindImage(L"OverWorld_Front"), 0, 0));
 
+	//NPC 대화
+	mTalkImage1 = IMAGEMANAGER->FindImage(L"NPC_Apple_Talk1");
+	mTalkImage2 = IMAGEMANAGER->FindImage(L"NPC_Apple_Talk2");
+	mTalkImage3 = IMAGEMANAGER->FindImage(L"NPC_Apple_Talk3");
+	mTalkImage4 = IMAGEMANAGER->FindImage(L"NPC_Apple_Talk4");
+	mTalkImage5 = IMAGEMANAGER->FindImage(L"NPC_Apple_Talk5");
 
 	ObjectManager::GetInstance()->Init();
 }
@@ -99,16 +119,57 @@ void Scene_OverWorld::Update()
 void Scene_OverWorld::Render(HDC hdc)
 {
 	
-	CameraManager::GetInstance()->GetMainCamera()->Render(hdc, mBackGroundImage_Layer1, 0, 0);
 	ObjectManager::GetInstance()->Render(hdc);
-	CameraManager::GetInstance()->GetMainCamera()->Render(hdc, mBackGroundImage_Layer3, 0, 0);
-	SetBkMode(hdc, 1);
-	HFONT newFont, oldFont;
-	newFont = CreateFont(50, 0, 0, 0, 1000, 0, 0, 0,
-		HANGUL_CHARSET, 0, 0, 0,
-		VARIABLE_PITCH || FF_ROMAN, TEXT("HY얕은샘물M"));
-	oldFont = (HFONT)SelectObject(hdc, newFont);
-	TextOut(hdc, 250, 300, L"어이친구들! 다시만나니 반가운걸!", strlen("어이친구들! 다시만나니 반가운걸!"));
-	SelectObject(hdc, oldFont);
-	DeleteObject(newFont);
+	//대화할때
+	NPC* npc_apple = (NPC*)ObjectManager::GetInstance()->FindObject("NPC_Apple");
+	if (npc_apple->GetIsTalk())
+	{
+		if (npc_apple->GetTalkNum() == 1)
+		{
+			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,
+				mTalkImage1,
+				npc_apple->GetX() - 150,
+				npc_apple->GetY()  ,
+				mTalkImage1->GetWidth() * 0.5f,
+				mTalkImage1->GetHeight() * 0.5f);
+		}
+		else if (npc_apple->GetTalkNum() == 2)
+		{
+			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,
+				mTalkImage2,
+				npc_apple->GetX() - 150,
+				npc_apple->GetY() ,
+				mTalkImage2->GetWidth() * 0.5f,
+				mTalkImage2->GetHeight() * 0.5f);
+		}
+		else if (npc_apple->GetTalkNum() == 3)
+		{
+			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,
+				mTalkImage3,
+				npc_apple->GetX() - 100,
+				npc_apple->GetY() ,
+				mTalkImage3->GetWidth() * 0.5f,
+				mTalkImage3->GetHeight() * 0.5f);
+		}
+		else if (npc_apple->GetTalkNum() == 4)
+		{
+			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,
+				mTalkImage4,
+				npc_apple->GetX() - 120,
+				npc_apple->GetY() ,
+				mTalkImage4->GetWidth() * 0.5f,
+				mTalkImage4->GetHeight() * 0.5f);
+		}
+		else if (npc_apple->GetTalkNum() == 5)
+		{
+			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,
+				mTalkImage5,
+				npc_apple->GetX() - 110,
+				npc_apple->GetY() ,
+				mTalkImage5->GetWidth() * 0.5f,
+				mTalkImage5->GetHeight() * 0.5f);
+		}
+
+	}
+
 }

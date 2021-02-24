@@ -20,6 +20,7 @@ enum class ObjectLayer : int
 	Enemy_Bullet,
 	Player_Bullet,
 	UI,
+	Talk,
 	End
 };
 
@@ -41,6 +42,7 @@ public:
 	void AllActiveTrue();
 	void AddObject(ObjectLayer layer, class GameObject* object);
 	void AddObject(ObjectLayer layer, class GameObject* object, const string& name); //같은 이름의 오브젝트를 찾는다. 있으면 활성화를 시켜준다. 없으면 생성
+	void DeleteObject(ObjectLayer layer);
 	class GameObject* FindObject(const string& name);
 	class GameObject* FindObject(ObjectLayer layer, const string& name);
 

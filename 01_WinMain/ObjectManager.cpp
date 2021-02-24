@@ -93,7 +93,10 @@ void  ObjectManager::AddObject(ObjectLayer layer, GameObject * object, const str
 		findObject->SetIsActive(true);
 	}
 }
-
+void ObjectManager::DeleteObject(ObjectLayer layer)
+{
+	mObjectList.erase(layer);
+}
 //해당 이름의 오브젝트 찾아오기
 GameObject * ObjectManager::FindObject(const string & name)
 {
