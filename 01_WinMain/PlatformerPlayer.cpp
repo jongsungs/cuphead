@@ -678,11 +678,11 @@ void PlatformerPlayer::Update()
 					mCurrentAnimation->Play();
 				}
 			}
-			else if (Input::GetInstance()->GetKey(VK_LEFT))
+			if (Input::GetInstance()->GetKey(VK_LEFT))
 			{
-				if(Input::GetInstance()->GetKeyDown(VK_UP))
+				if(Input::GetInstance()->GetKey(VK_UP))
 				{
-					mCurrentAnimation->Stop();
+					
 					mPlayerState = PlayerState::LeftDiagonalUpaim;
 					mCurrentAnimation = mLeftDiagonalUpaimAnimation;
 					mCurrentAnimation->Play();
@@ -695,6 +695,7 @@ void PlatformerPlayer::Update()
 					mCurrentAnimation->Play();
 				}
 			}
+			
 			//총알발사
 			if (Input::GetInstance()->GetKeyDown('X'))
 			{
@@ -777,11 +778,22 @@ void PlatformerPlayer::Update()
 	}
 	if (Input::GetInstance()->GetKeyUp('C'))
 	{
-		mCurrentAnimation->Stop();
-		mPlayerState = PlayerState::RightIdle;
-		mCurrentAnimation = mRightIdleAnimation;
-		mCurrentAnimation->Play();
-		isMove = true;
+		if (mPlayerState == PlayerState::RightShootaim)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightIdle;
+			mCurrentAnimation = mRightIdleAnimation;
+			mCurrentAnimation->Play();
+			isMove = true;
+		}
+		if (mPlayerState == PlayerState::LeftShootaim)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftIdle;
+			mCurrentAnimation = mLeftIdleAnimation;
+			mCurrentAnimation->Play();
+			isMove = true;
+		}
 	}
 
 	}
