@@ -1,56 +1,59 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Input.h"
 
+/****************************************************
+## Input ##
+*****************************************************/
 Input::Input()
 {
-	//ZeroMemory : ÀÎÀÚ·Î µé¾î¿Â ¹üÀ§ ³»ÀÇ ¸ğµç ¸Ş¸ğ¸®¿¡ Á¢±ÙÇØ¼­ 0À¸·Î ÃÊ±âÈ­!!!
-	//Ã¹¹øÂ° ÀÎÀÚ : ÃÊ±âÈ­ÇÒ ¸Ş¸ğ¸® Ã¹ ÁÖ¼Ò
-	//µÎ¹øÂ° ÀÎÀÚ : ÃÊ±âÈ­ÇÒ ¸Ş¸ğ¸® Å©±â(Ã¹ ÁÖ¼Ò·ÎºÎÅÍ)
+	//ì²˜ìŒì—” ëª¨ë“  í‚¤ë¥¼ ëˆŒë ¤ìˆì§€ ì•Šì€ ìƒíƒœë¡œ ì´ˆê¸°í™”
+	mKeyCurrent.reset();
+	mKeyPast.reset();
 
-	ZeroMemory(mKeyDownList, sizeof(bool) * KEYMAX);
-	ZeroMemory(mKeyUpList, sizeof(bool) * KEYMAX);
+}
+Input::~Input() {}
 
-	//for (int i = 0; i < KEYMAX; ++i)
-	//{
-	//	mKeyDownList[i] = false;
-	//	mKeyUpList[i] = false;
-	//}
+/****************************************************
+## Update ##
+*****************************************************/
+void Input::Update()
+{
+	//ê³„ì† ê³¼ê±°í‚¤ë¥¼ í˜„ì¬í‚¤ë¡œ ê°±ì‹ í•´ì¤€ë‹¤
+	mKeyPast = mKeyCurrent;
 }
 
-bool Input::GetKeyDown(int key)
+
+bool Input::GetKeyDown(const int& key)
 {
-	//GetAsyncKeyState : ÇöÀç Å°°¡ ´­·È´ÂÁö ¾È´­·È´ÂÁö µî Å°¿¡ ´ëÇÑ »óÅÂ¸¦ ¹İÈ¯ÇØÁÖ´Â ÇÔ¼ö
-	//ÇØ´ç Å°°¡ ´­·ÁÀÖ´Ù¸é
+	//í•´ë‹¹ í‚¤ë¥¼ ëˆ„ë¥¸ ìƒíƒœ
 	if (GetAsyncKeyState(key) & 0x8000)
 	{
-		//ÇØ´çÅ°°¡ ´­¸®Áö ¾Ê¾Ò´Ù¸é
-		if (mKeyDownList[key] == false)
+		//ê·¸ í‚¤ê°€ ëˆŒë ¤ìˆì§€ ì•Šì•˜ë‹¤ë©´
+		if (!mKeyPast[key])
 		{
-			mKeyDownList[key] = true;
+			//í˜„ì¬í‚¤ë¥¼ ëˆŒë¦° ìƒíƒœë¡œ ë°”ê¾¸ê³  return true
+			mKeyCurrent.set(key, true);
 			return true;
 		}
 	}
-	//ÇØ´ç Å°°¡ ´­·ÁÀÖÁö ¾Ê´Ù¸é
-	else
-	{
-		//Å°´­¸² »óÅÂ´Â false
-		mKeyDownList[key] = false;
-	}
+	//í•´ë‹¹ í‚¤ë¥¼ ëˆ„ë¥´ì§€ ì•Šì€ ìƒíƒœ
+	else mKeyCurrent.set(key, false);   //í˜„ì¬í‚¤ë¥¼ ëˆ„ë¥´ì§€ ì•Šì€ ìƒíƒœë¡œ ë°”ê¿ˆ
 
 	return false;
 }
 
-bool Input::GetKeyUp(int key)
+bool Input::GetKeyUp(const int& key)
 {
-	if (GetAsyncKeyState(key) & 0x8000)
-	{
-		mKeyUpList[key] = true;
-	}
+	//í•´ë‹¹ í‚¤ë¥¼ ëˆ„ë¥¸ ìƒíƒœ					í˜„ì¬í‚¤ë¥¼ ëˆŒë¦° ìƒíƒœë¡œ ë°”ê¿ˆ
+	if (GetAsyncKeyState(key) & 0x8000) mKeyCurrent.set(key, true);
+	//í•´ë‹¹ í‚¤ë¥¼ ëˆ„ë¥´ì§€ ì•Šì€ ìƒíƒœ
 	else
 	{
-		if (mKeyUpList[key] == true)
+		//ê·¸ í‚¤ê°€ ëˆŒë ¤ìˆì—ˆë‹¤ë©´
+		if (mKeyPast[key])
 		{
-			mKeyUpList[key] = false;
+			//í˜„ì¬í‚¤ë¥¼ ëˆ„ë¥´ì§€ ì•Šì€ ìƒíƒœë¡œ ë°”ê¾¸ê³  return true
+			mKeyCurrent.set(key, false);
 			return true;
 		}
 	}
@@ -58,17 +61,16 @@ bool Input::GetKeyUp(int key)
 	return false;
 }
 
-bool Input::GetKey(int key)
+bool Input::GetKey(const int& key)
 {
-	if (GetAsyncKeyState(key) & 0x8000)
-		return true;
+	if (GetAsyncKeyState(key) & 0x8000) return true;
+
 	return false;
 }
 
-bool Input::GetToggleKey(int key)
+bool Input::ToggleKey(const int& key)
 {
-	if (GetAsyncKeyState(key) & 0x0001)
-		return true;
+	if (GetKeyState(key) & 0x0001) return true;
 
 	return false;
 }

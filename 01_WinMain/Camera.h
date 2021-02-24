@@ -20,7 +20,7 @@ public:
 	void Update()override; 
 	void Render(HDC hdc)override;
 
-	void SetTarget(GameObject* target) { mTarget = target; mX = mTarget->GetX(); mY = mTarget->GetY(); }
+	void SetTarget(GameObject* target) { mTarget = target; if(target)mX = mTarget->GetX(); if (target)mY = mTarget->GetY(); }
 	void ChangeMode(Mode mode) { mMode = mode; }
 public:
 	void Render(HDC hdc, class Image* image, int x, int y);

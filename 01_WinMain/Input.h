@@ -1,22 +1,37 @@
-#pragma once
+ï»¿#pragma once
 #include <bitset>
 
 #define KEYMAX 256
 
-class Input
+
+class Input final
 {
+	//static Input* GetInstance()
+	//{
+	//	static Input _instance;
+	//	return &_instance;
+	//}
 	Singleton(Input)
 private:
-	//1: bitset : Á¶»ç
-	//2. GetAsyncKeyState : Á¶»ç
-	bool mKeyUpList[KEYMAX];		//¾î¶² Å°¿¡¼­ ¼ÕÀ» ¶®´ÂÁö
-	bool mKeyDownList[KEYMAX];		//¾î¶² Å°¸¦ ´­·¶´ÂÁö 
-public:
+	enum : int { KeyMax = 256 };
+private:
+	//ì¤‘ë³µ í‚¤ í—ˆìš©ì„ ìœ„í•´ ì´ì „ í‚¤ì™€ í˜„ì¬ í‚¤ ë³€ìˆ˜ ì‚¬ìš©
+	std::bitset<KeyMax> mKeyPast;
+	std::bitset<KeyMax> mKeyCurrent;
+private:
+	//friend class SingletonBase<Input>;
 	Input();
-
-	bool GetKeyDown(int key);	//Å°°¡ ´­·ÈÀ»¶§ true¹İÈ¯
-	bool GetKeyUp(int key);		//Å°¿¡¼­ ¼ÕÀ» ¶®À» ¶§ true¹İÈ¯
-	bool GetKey(int key);		//Å°¸¦ °è¼Ó ´©¸£°í ÀÖ´Ù¸é true¹İÈ¯
-	bool GetToggleKey(int key);	//Toggle
+	virtual ~Input();
+public:
+	void Update();
+	//í•œë²ˆ ëˆŒë ¸ë‹¤ë©´
+	bool GetKeyDown(const int& key);
+	//í‚¤ì—ì„œ ì†ì„ ë• ë‹¤ë©´
+	bool GetKeyUp(const int& key);
+	//í‚¤ë¥¼ ëˆ„ë¥´ê³  ìˆë‹¤ë©´
+	bool GetKey(const int& key);
+	//í† ê¸€ í‚¤
+	bool ToggleKey(const int& key);
 };
 
+#define _Input Input::Get()
