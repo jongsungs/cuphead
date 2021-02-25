@@ -3,7 +3,8 @@
 #include "Image.h"
 #include "Camera.h"
 #include "Talk.h"
-
+#include "Scene_ElderHouse.h"
+#include "Animation.h"
 Building::Building(const string& name, Image* image, float x, float y)
 	:GameObject(name)
 {
@@ -14,13 +15,20 @@ Building::Building(const string& name, Image* image, float x, float y)
 
 void Building::Init()
 {
+	mFlagAnimation = new Animation();
+	mFlagAnimation->InitFrameByStartEnd(0, 0, 11, 0, false);
+	mFlagAnimation->SetIsLoop(true);
+	mFlagAnimation->SetFrameUpdateTime(0.2f);
+	mFlagAnimation->Play();
+	mFlagImage = IMAGEMANAGER->FindImage(L"OverWorld_Flag");
 	mIsTalk = 0;
 	mSizeX = mImage->GetWidth();
 	mSizeY = mImage->GetHeight();
 	mRect = RectMakeCenter(mX+mSizeX/2, mY+mSizeY/2, mSizeX, mSizeY);
 	mZImage = IMAGEMANAGER->FindImage(L"ZPopUp");
 	mZImageSizeX = 0;
-	mIsClear = 0;
+	mIsClear = 1;
+	mIsRegular = 0;
 }
 
 void Building::Release()
@@ -29,6 +37,7 @@ void Building::Release()
 
 void Building::Update()
 {
+	mFlagAnimation->Update();
 	RECT cupheadRectTemp = ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetRect();
 	RECT recttemp;
 	if (IntersectRect(&recttemp, &cupheadRectTemp, &mRect))
@@ -70,6 +79,12 @@ void Building::Update()
 					ObjectManager::GetInstance()->DeleteObject(ObjectLayer::Talk);
 					mIsTalk = 0;
 				}
+				if (Input::GetInstance()->GetKeyDown('Z'))
+				{
+					ObjectManager::GetInstance()->Delete();
+					SceneManager::GetInstance()->AddScene(L"Scene_ElderHouse", new Scene_ElderHouse);
+					SceneManager::GetInstance()->LoadScene(L"Scene_ElderHouse");
+				}
 			}
 
 		}
@@ -81,47 +96,45 @@ void Building::Update()
 				{
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
 						new Talk("BotanicPanic_Talk1",
-							IMAGEMANAGER->FindImage(L"BotanicPanic_Talk1"), 350, 200));
+							IMAGEMANAGER->FindImage(L"BotanicPanic_Talk1"), 200, 100));
 					mIsTalk = 1;
 				}
 			}
 			else
 			{
+				if (Input::GetInstance()->GetKeyDown(VK_LEFT))
+				{
+					if (mIsRegular)
+					{
+						ObjectManager::GetInstance()->DeleteObject(ObjectLayer::Talk);
+						ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
+							new Talk("BotanicPanic_Talk1",
+								IMAGEMANAGER->FindImage(L"BotanicPanic_Talk1"), 200, 100));
+						mIsRegular = 0;
+					}
+				}
+				if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
+				{
+					if (!mIsRegular)
+					{
+						ObjectManager::GetInstance()->DeleteObject(ObjectLayer::Talk);
+						ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
+							new Talk("BotanicPanic_Talk2",
+								IMAGEMANAGER->FindImage(L"BotanicPanic_Talk2"), 200, 100));
+						mIsRegular = 1;
+					}
+				}
 				if (Input::GetInstance()->GetKeyDown(VK_ESCAPE))
 				{
 					ObjectManager::GetInstance()->DeleteObject(ObjectLayer::Talk);
 					mIsTalk = 0;
 				}
-			}
-		}
-		if (!mIsTalk)
-		{
-			if (Input::GetInstance()->GetKeyDown('Z'))
-			{
-				if (mName == "Flatformer")
+				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
-
+					ObjectManager::GetInstance()->Delete();
+					SceneManager::GetInstance()->LoadScene(L"BotanicPanic");
+					mIsTalk = 0;
 				}
-				else if (mName == "ElderHouse")
-				{
-					ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
-						new Talk("ElderHouse_Talk", 
-							IMAGEMANAGER->FindImage(L"ElderHouse_Talk"), 350, 200));
-
-				}
-				else if (mName == "BotanicPanic")
-				{
-
-				}
-				mIsTalk = true;
-			}
-		}
-		else
-		{
-			if (Input::GetInstance()->GetKeyDown(VK_ESCAPE))
-			{
-				ObjectManager::GetInstance()->DeleteObject(ObjectLayer::Talk);
-				mIsTalk = 0;
 			}
 		}
 	}
@@ -141,6 +154,6 @@ void Building::Render(HDC hdc)
 		ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetRect().top,mZImageSizeX,mZImageSizeY);
 	if (mIsClear)
 	{
-		//깃발그려주기.
+		CameraManager::GetInstance()->GetMainCamera()->FrameRender(hdc, mFlagImage, mX+100, mY-50, mFlagAnimation->GetNowFrameX(),mFlagAnimation->GetNowFrameY());
 	}
 }

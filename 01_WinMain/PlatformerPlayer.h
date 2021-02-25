@@ -51,7 +51,7 @@ enum class PlayerState : int
 	RightDiagonalUpaim,
 
 };
-
+class Animation;
 class PlatformerPlayer : public GameObject
 {
 	

@@ -270,9 +270,6 @@
     <ClInclude Include="Talk.h">
       <Filter>MainGame\Object\OverWorld\Talk</Filter>
     </ClInclude>
-    <ClInclude Include="Scene_ElderHouse.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="SceneBoss1.h">
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
@@ -281,6 +278,9 @@
     </ClInclude>
     <ClInclude Include="Flower.h">
       <Filter>MainGame\Object\Boss\Flower</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_ElderHouse.h">
+      <Filter>MainGame\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

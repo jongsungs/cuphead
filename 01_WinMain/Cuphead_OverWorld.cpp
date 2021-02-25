@@ -98,8 +98,7 @@ void Cuphead_OverWorld::Init()
 
 void Cuphead_OverWorld::Release()
 {
-	delete(mImage);
-	SafeDelete(mImage);
+	
 }
 
 void Cuphead_OverWorld::Update()

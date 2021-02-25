@@ -10,9 +10,6 @@
 #include "BackGround.h"
 void Scene_OverWorld::Init()
 {
-
-	AddFontResourceW(L"../02_Resources/overworld/Madness Hyperactive.otf");
-	
 	IMAGEMANAGER->LoadFromFile(L"CupHead_OverWolrd", Resources(L"/overworld/Cuphead/CupHead_OverWorld.bmp"), 1649, 1130, 16, 10, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"NPC_Apple", Resources(L"/overworld/NPC/NPC_Apple.bmp"), 2600, 100, 26, 1, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"OverWorld", Resources(L"/overworld/OverWorld.bmp"), 4000, 2200, true);
@@ -32,33 +29,42 @@ void Scene_OverWorld::Init()
 	IMAGEMANAGER->LoadFromFile(L"BotanicPanic_Talk1", Resources(L"/overworld/buildings/BotanicPanic_Title_Simple.bmp"), 1165, 834, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"BotanicPanic_Talk2", Resources(L"/overworld/buildings/BotanicPanic_Title_Regular.bmp"), 1165, 834, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"Black", Resources(L"/overworld/buildings/Black.bmp"), 1280, 720, false);
+	IMAGEMANAGER->LoadFromFile(L"FadeOut", Resources(L"/FadeOut.bmp"), 11520, 720, 9, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"OverWorld_Flag", Resources(L"/overworld/Flag.bmp"), 1788, 220, 12, 1, true, RGB(99, 92, 99));
 
 
-
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Building, new Building("Flatformer", IMAGEMANAGER->FindImage(L"OverWorld_Building_Flatformer"), 2000, 800));
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Building, new Building("ElderHouse", IMAGEMANAGER->FindImage(L"OverWorld_Building_ElderHouse"), 650, 650));
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Building, new Building("BotanicPanic", IMAGEMANAGER->FindImage(L"OverWorld_Building_BotanicPanic"), 1680, 1490));
+	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("Flatformer", IMAGEMANAGER->FindImage(L"OverWorld_Building_Flatformer"), 2000, 800));
+	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("ElderHouse", IMAGEMANAGER->FindImage(L"OverWorld_Building_ElderHouse"), 650, 650));
+	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("BotanicPanic", IMAGEMANAGER->FindImage(L"OverWorld_Building_BotanicPanic"), 1680, 1490));
 	//오브젝트매니저에 컵헤드 추가.
-	mCupHead = new Cuphead_OverWorld("CupHead_OverWorld", 2000, 800);
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, mCupHead);
+	if (ObjectManager::GetInstance()->FindObject("CupHead_OverWorld") == nullptr)
+	{
+		mCupHead = new Cuphead_OverWorld("CupHead_OverWorld", 1700, 1400);
+
+	}
+	else
+	{
+		mCupHead = (Cuphead_OverWorld*)ObjectManager::GetInstance()->FindObject("CupHead_OverWorld");
+	}
+	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Player, mCupHead);
 	//오브젝트매니저에NPC추가
 	
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::NPC, new NPC("NPC_Apple", 1715, 1010));
+	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::NPC, new NPC("NPC_Apple", 1715, 1010));
 	//카메라 추가
 	Camera* camera = new Camera();
-	camera->SetTarget(mCupHead);
+	camera->SetTarget(ObjectManager::GetInstance()->FindObject("CupHead_OverWorld"));
 	camera->ChangeMode(Camera::Mode::Follow);
 	CameraManager::GetInstance()->SetMainCamera(camera);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::UI, camera);
 	//배경 layer1 : 오버월드 이미지
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Background, 
+	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Background,
 		new BackGround("BackGroundImage_Layer1", 
 		IMAGEMANAGER->FindImage(L"OverWorld"), 0, 0));
 	
 	//배경 Layer2 : 이동가능한곳.
 	mBackGroundImage_Layer2 = IMAGEMANAGER->FindImage(L"OverWorld_CanMove");
 	//배경 Layer3 : 배경중 맨위에 그려지는녀석들
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::FrontGround,
+	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::FrontGround,
 		new BackGround("BackGroundImage_Layer3",
 			IMAGEMANAGER->FindImage(L"OverWorld_Front"), 0, 0));
 
@@ -74,7 +80,7 @@ void Scene_OverWorld::Init()
 
 void Scene_OverWorld::Release()
 {
-	ObjectManager::GetInstance()->Release();
+	ObjectManager::GetInstance()->Delete();
 }
 
 void Scene_OverWorld::Update()
