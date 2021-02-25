@@ -249,9 +249,6 @@
     <ClInclude Include="Potato.h">
       <Filter>MainGame\Object\Boss\Potato</Filter>
     </ClInclude>
-    <ClInclude Include="BossScene.h">
-      <Filter>MainGame\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Building.h">
       <Filter>MainGame\Object\OverWorld</Filter>
     </ClInclude>
@@ -275,6 +272,15 @@
     </ClInclude>
     <ClInclude Include="Scene_ElderHouse.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBoss1.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBoss2.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Flower.h">
+      <Filter>MainGame\Object\Boss\Flower</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -386,9 +392,6 @@
     <ClCompile Include="Potato.cpp">
       <Filter>MainGame\Object\Boss\Potato</Filter>
     </ClCompile>
-    <ClCompile Include="BossScene.cpp">
-      <Filter>MainGame\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Building.cpp">
       <Filter>MainGame\Object\OverWorld</Filter>
     </ClCompile>
@@ -412,6 +415,15 @@
     </ClCompile>
     <ClCompile Include="Scene_ElderHouse.cpp">
       <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBoss1.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBoss2.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Flower.cpp">
+      <Filter>MainGame\Object\Boss\Flower</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

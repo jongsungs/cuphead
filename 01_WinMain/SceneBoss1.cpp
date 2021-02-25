@@ -1,7 +1,6 @@
 #include "pch.h"
-#include "BossScene.h"
+#include "SceneBoss1.h"
 
-#include "Player.h"
 #include "PlatformerPlayer.h"
 #include "Camera.h"
 #include "GameEvent.h"
@@ -11,13 +10,13 @@
 #include "Onion.h"
 #include "Carrot.h"
 
-void BossScene::Init(){
+void SceneBoss1::Init(){
 	mBackGround1 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground1");
 	mBackGround2 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground2");
 	mBackGround3 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground3");
+
 	PlatformerPlayer* player = new PlatformerPlayer("Player", WINSIZEX / 4, WINSIZEY * 3 / 4);
-	//
-	//ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, player);
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, player);
 
 	Enemy* potato = new Potato("Potato", WINSIZEX * 3 / 4, WINSIZEY / 2 + 500);
 	Enemy* carrot = new Carrot("Carrot", WINSIZEX / 2, WINSIZEY * 3 / 8 + 549);
@@ -36,6 +35,8 @@ void BossScene::Init(){
 	if (potato->GetIsActive() == false && onion->GetIsActive() == false)
 		carrot->SetIsActive(true);
 
+	SoundPlayer::GetInstance()->Play(L"BotanicPanicBGM", 0.2f);
+
 	Camera* camera = new Camera(Camera::Mode::Boss,WINSIZEX/2,WINSIZEY/2);
 	camera->SetCamerArea(RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, WINSIZEX + 10,WINSIZEY));
 	CameraManager::GetInstance()->SetMainCamera(camera);
@@ -43,15 +44,15 @@ void BossScene::Init(){
 	ObjectManager::GetInstance()->Init();
 }
 
-void BossScene::Release(){
+void SceneBoss1::Release(){
 	ObjectManager::GetInstance()->Release();
 }
 
-void BossScene::Update(){
+void SceneBoss1::Update(){
 	ObjectManager::GetInstance()->Update();
 }
 
-void BossScene::Render(HDC hdc){
+void SceneBoss1::Render(HDC hdc){
 	CameraManager::GetInstance()->GetMainCamera()->ScaleRender(hdc, mBackGround1, -5, 0, WINSIZEX + 10, WINSIZEY);
 	
 	if (ObjectManager::GetInstance()->FindObject("Carrot")->GetIsActive()) {

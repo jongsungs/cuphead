@@ -4,7 +4,8 @@
 #include "Image.h"
 #include "Scene2.h"
 #include "Scene1.h"
-#include "BossScene.h"
+#include "SceneBoss1.h"
+#include "SceneBoss2.h"
 #include "LoadingScene.h"
 #include "Scene_OverWorld.h"
 #include "Animation.h"
@@ -22,9 +23,10 @@ void MainGame::Init()
 	mBackBuffer = new Image();
 	mBackBuffer->CreateEmpty(WINSIZEX, WINSIZEY);
 	ImageSet::GetInstance()->SetFxImage();
-	SceneManager::GetInstance()->AddScene(L"BotanicPanic", new BossScene);
+	SceneManager::GetInstance()->AddScene(L"BotanicPanic", new SceneBoss1);
+	SceneManager::GetInstance()->AddScene(L"FloralFury", new SceneBoss2);
 	SceneManager::GetInstance()->AddScene(L"Scene1", new Scene1);
-	SceneManager::GetInstance()->AddScene(L"Scene2", new Scene2);
+	//SceneManager::GetInstance()->AddScene(L"Scene2", new Scene2);
 	SceneManager::GetInstance()->AddScene(L"OverWorld", new Scene_OverWorld);
 
 	LoadingScene* mLoading = new LoadingScene;
@@ -54,7 +56,6 @@ Update : 매 프레임 실행되는 함수, 여기서 연산 처리 한다.
 */
 void MainGame::Update()
 {
-	Input::GetInstance()->Update();
 	SceneManager::GetInstance()->Update();
 }
 
