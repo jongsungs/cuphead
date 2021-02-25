@@ -133,7 +133,7 @@ void PlatformerPlayer::Init()
 	mRightDuckShootAnimation
 		->InitFrameByStartEnd(0, 0, 5, 0, false);
 	mRightDuckShootAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mRightDuckShootAnimation
 		->SetFrameUpdateTime(0.1f);
 	mRightDuckShootAnimation
@@ -141,9 +141,9 @@ void PlatformerPlayer::Init()
 
 	mLeftDuckShootAnimation = new Animation();
 	mLeftDuckShootAnimation
-		->InitFrameByBackStartEnd(5, 1, 0, 0, false);
+		->InitFrameByBackStartEnd(5, 1, 0, 1, false);
 	mLeftDuckShootAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mLeftDuckShootAnimation
 		->SetFrameUpdateTime(0.1f);
 	mLeftDuckShootAnimation
@@ -622,6 +622,24 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation = mRightIdleAnimation;
 			mCurrentAnimation->Play();
 		}
+		//제자리 점프
+		if (Input::GetInstance()->GetKeyDown('Z'))
+		{
+			if (mPlayerState == PlayerState::RightIdle)
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::RightJump;
+				mCurrentAnimation = mRightJumpAnimation;
+				mCurrentAnimation->Play();
+			}
+			else if (mPlayerState == PlayerState::LeftIdle)
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::LeftJump;
+				mCurrentAnimation = mLeftJumpAnimation;
+				mCurrentAnimation->Play();
+			}
+		}
 	}
 	else
 	{
@@ -816,8 +834,81 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 		}
 	}
+	//덕 샷
+	if (Input::GetInstance()->GetKeyDown('X'))
+	{
+		if (mPlayerState == PlayerState::RightDuckIdle)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightDuckShoot;
+			mCurrentAnimation = mRightDuckShootAnimation;
+			mCurrentAnimation->Play();
+		}
+		else if (mPlayerState == PlayerState::LeftDuckIdle)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftDuckShoot;
+			mCurrentAnimation = mLeftDuckShootAnimation;
+			mCurrentAnimation->Play();
+		}
+	}
+	if (Input::GetInstance()->GetKeyUp('X'))
+	{
+		if (mPlayerState == PlayerState::RightDuckShoot)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightDuckIdle;
+			mCurrentAnimation = mRightDuckIdleAnimation;
+			mCurrentAnimation->Play();
+		}
+		else if (mPlayerState == PlayerState::LeftDuckShoot)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftDuckIdle;
+			mCurrentAnimation = mLeftDuckIdleAnimation;
+			mCurrentAnimation->Play();
+		}
+	}
+	if (Input::GetInstance()->GetKey(VK_UP))
+	{
+		if (Input::GetInstance()->GetKeyDown('X'))
+		{
+			if (mPlayerState == PlayerState::LeftUpaim)
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::LeftUpShoot;
+				mCurrentAnimation = mLeftUpShootAnimation;
+				mCurrentAnimation->Play();
+			}
+			else if (mPlayerState == PlayerState::RightUpaim)
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::RightUpShoot;
+				mCurrentAnimation = mRightUpShootAnimation;
+				mCurrentAnimation->Play();
+			}
+		}
+		if (Input::GetInstance()->GetKeyUp('X'))
+		{
+			if (mPlayerState == PlayerState::LeftUpShoot)
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::LeftUpaim;
+				mCurrentAnimation = mLeftUpaimAnimation;
+				mCurrentAnimation->Play();
+			}
+			else if (mPlayerState == PlayerState::RightUpShoot)
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::RightUpaim;
+				mCurrentAnimation = mRightUpaimAnimation;
+				mCurrentAnimation->Play();
+			}
+		}
+	}
 
 	}
+	//else 끝
 	//제자리쏘기
 	if (Input::GetInstance()->GetKeyDown('C'))
 	{
@@ -858,6 +949,7 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 		}
 	}
+	
 	if (Input::GetInstance()->GetKeyUp(VK_DOWN))
 	{
 		if (mPlayerState == PlayerState::LeftDuckIdle)
@@ -877,6 +969,45 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 		}
 	}
+	if (Input::GetInstance()->GetKeyDown(VK_UP))
+	{
+		if (mPlayerState == PlayerState::LeftIdle)
+		{
+			isMove = false;
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftUpaim;
+			mCurrentAnimation = mLeftUpaimAnimation;
+			mCurrentAnimation->Play();
+		}
+		else if (mPlayerState == PlayerState::RightIdle)
+		{
+			isMove = false;
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightUpaim;
+			mCurrentAnimation = mRightUpaimAnimation;
+			mCurrentAnimation->Play();
+		}
+	}
+	if (Input::GetInstance()->GetKeyUp(VK_UP))
+	{
+		if (mPlayerState == PlayerState::LeftUpaim)
+		{
+			isMove = true;
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftIdle;
+			mCurrentAnimation = mLeftIdleAnimation;
+			mCurrentAnimation->Play();
+		}
+		else if (mPlayerState == PlayerState::RightUpaim)
+		{
+			isMove = true;
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightIdle;
+			mCurrentAnimation = mRightIdleAnimation;
+			mCurrentAnimation->Play();
+		}
+	}
+	
 
 	//if (Input::GetInstance()->GetKey(VK_SPACE))
 	//{
