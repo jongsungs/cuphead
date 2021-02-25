@@ -1,4 +1,4 @@
-#include "pch.h"
+Ôªø#include "pch.h"
 #include "Onion.h"
 
 #include "Player.h"
@@ -14,58 +14,86 @@ Onion::Onion(const string& name, float x, float y)
 }
 
 void Onion::Init() {
-	//±‚∫ª ªÛ≈¬∑Œ √ ±‚ ª˝º∫
+	//Í∏∞Î≥∏ ÏÉÅÌÉúÎ°ú Ï¥àÍ∏∞ ÏÉùÏÑ±
 	mState = EnemyState::Intro;
 
-	//ƒ≥∏Ø≈Õ ªÛ≈¬ø° µ˚∂Û ¥Ÿ∏• ¿ÃπÃ¡ˆ∏¶ ∫∏ø©¡÷±‚ ¿ß«‘
+	//Ï∫êÎ¶≠ÌÑ∞ ÏÉÅÌÉúÏóê Îî∞Îùº Îã§Î•∏ Ïù¥ÎØ∏ÏßÄÎ•º Î≥¥Ïó¨Ï£ºÍ∏∞ ÏúÑÌï®
 	mIntroImage = IMAGEMANAGER->FindImage(L"OnionIntro");
 	mIdleImage = IMAGEMANAGER->FindImage(L"OnionIdle");
-	mAttackImage = IMAGEMANAGER->FindImage(L"OnionCry");
+
+	mChangeToAttackImage = IMAGEMANAGER->FindImage(L"OnionChangeToAttack");
+	mAttackImage = IMAGEMANAGER->FindImage(L"OnionAttack");
+	mBeforeAttackImage = IMAGEMANAGER->FindImage(L"OnionBeforeAttack");
 	mDeathImage = IMAGEMANAGER->FindImage(L"OnionDeath");
+
 	mDeathLeaveImage = IMAGEMANAGER->FindImage(L"OnionDeathLeave");
 
-	mBashfulImage = IMAGEMANAGER->FindImage(L"OnionDeath");
-	mBashfulLeaveImage = IMAGEMANAGER->FindImage(L"OnionDeath");
+	mTearEffectImage = IMAGEMANAGER->FindImage(L"OnionTearEffect");
 
 	mTearAImage = IMAGEMANAGER->FindImage(L"OnionTearA");
 	mTearBImage = IMAGEMANAGER->FindImage(L"OnionTearB");
-
-	//ƒ≥∏Ø≈Õ ªÛ≈¬ø° µ˚∂Û ¥Ÿ∏• æ÷¥œ∏ﬁ¿Ãº«¿ª ∫∏ø©¡÷±‚ ¿ß«‘
-	//µÓ¿Â æ÷¥œ∏ﬁ¿Ãº«
+	
+	//Ï∫êÎ¶≠ÌÑ∞ ÏÉÅÌÉúÏóê Îî∞Îùº Îã§Î•∏ Ïï†ÎãàÎ©îÏù¥ÏÖòÏùÑ Î≥¥Ïó¨Ï£ºÍ∏∞ ÏúÑÌï®
+	//Îì±Ïû• Ïï†ÎãàÎ©îÏù¥ÏÖò
 	mIntroAnimation = new Animation();
 	mIntroAnimation->InitFrameByStartEnd(0, 0, 23, 0, false);
 	mIntroAnimation->SetIsLoop(false);
 	mIntroAnimation->SetFrameUpdateTime(0.07f);
-	//¿œπ› æ÷¥œ∏ﬁ¿Ãº«
+	//ÏùºÎ∞ò Ïï†ÎãàÎ©îÏù¥ÏÖò
 	mIdleAnimation = new Animation();
 	mIdleAnimation->InitFrameByStartEnd(0, 0, 14, 0, true);
 	mIdleAnimation->SetIsLoop(true);
 	mIdleAnimation->SetFrameUpdateTime(0.07f);
-	//∞¯∞› æ÷¥œ∏ﬁ¿Ãº«
+	//Í≥µÍ≤© Ï†ÑÏóê ÎÇòÏò§Îäî ÏùºÌöåÏö© Ïï†ÎãàÎ©îÏù¥ÏÖò
+	mBeforeAttackAnimation = new Animation();
+	mBeforeAttackAnimation->InitFrameByStartEnd(0, 0, 5, 0, false);
+	mBeforeAttackAnimation->SetIsLoop(false);
+	mBeforeAttackAnimation->SetFrameUpdateTime(0.07f);
+	mBeforeAttackAnimation->Play();
+	//Í≥µÍ≤©ÏúºÎ°ú Î≥ÄÌôî
+	mChangeToAttackAnimation = new Animation();
+	mChangeToAttackAnimation->InitFrameByStartEnd(0, 0, 7, 0, false);
+	mChangeToAttackAnimation->SetIsLoop(false);
+	mChangeToAttackAnimation->SetFrameUpdateTime(0.1f);
+	mChangeToAttackAnimation->Play();
+	//Í≥µÍ≤© Ïï†ÎãàÎ©îÏù¥ÏÖò
 	mAttackAnimation = new Animation();
-	mAttackAnimation->InitFrameByStartEnd(0, 0, 21, 0, false);
+	mAttackAnimation->InitFrameByStartEnd(0, 0, 7, 0, true);
 	mAttackAnimation->SetIsLoop(true);
 	mAttackAnimation->SetFrameUpdateTime(0.07f);
-	//ªÁ∏¡ æ÷¥œ∏ﬁ¿Ãº«
+	//Í≥µÍ≤©ÏóêÏÑú Î≥ÄÌôî
+	mChangeFromAttackAnimation = new Animation();
+	mChangeFromAttackAnimation->InitFrameByStartEnd(0, 1, 7, 1, false);
+	mChangeFromAttackAnimation->SetIsLoop(false);
+	mChangeFromAttackAnimation->SetFrameUpdateTime(0.1f);
+	mChangeFromAttackAnimation->Play();
+	//ÏÇ¨Îßù Ïï†ÎãàÎ©îÏù¥ÏÖò
 	mDeathAnimation = new Animation();
 	mDeathAnimation->InitFrameByStartEnd(0, 0, 5, 0, true);
 	mDeathAnimation->SetIsLoop(true);
 	mDeathAnimation->SetFrameUpdateTime(0.07f);
-	//≈¿Â æ÷¥œ∏ﬁ¿Ãº«
+	//Ìá¥Ïû• Ïï†ÎãàÎ©îÏù¥ÏÖò
 	mDeathLeaveAnimation = new Animation();
 	mDeathLeaveAnimation->InitFrameByStartEnd(0, 0, 30, 0, false);
 	mDeathLeaveAnimation->SetIsLoop(false);
 	mDeathLeaveAnimation->SetFrameUpdateTime(0.07f);
+	//Í≥µÍ≤©Ïãú ÎÇòÏò§Îäî ÎààÎ¨º Ìö®Í≥º Ïï†ÎãàÎ©îÏù¥ÏÖò
+	mTearEffectAnimation = new Animation();
+	mTearEffectAnimation->InitFrameByStartEnd(0, 0, 3, 0, false);
+	mTearEffectAnimation->SetIsLoop(true);
+	mTearEffectAnimation->SetFrameUpdateTime(0.07f);
 	
-	//√ ±‚ª˝º∫Ω√ µÈæÓ∞°æﬂ «“ µ•¿Ã≈Õ
+	//Ï¥àÍ∏∞ÏÉùÏÑ±Ïãú Îì§Ïñ¥Í∞ÄÏïº Ìï† Îç∞Ïù¥ÌÑ∞
 	mCurrentAnimation = mIntroAnimation;
 	mCurrentAnimation->Play();
+	
+	mTearEffectAnimation->Play();
 	mImage = mIntroImage;
 	mSizeX = mImage->GetFrameWidth();
 	mSizeY = mImage->GetFrameHeight();
 	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 
-	//HP ¿”¿«º≥¡§
+	//HP ÏûÑÏùòÏÑ§Ï†ï
 	mHP = 50;
 	mAttackStartDelay = 0;
 }
@@ -76,6 +104,12 @@ void Onion::Release() {
 	SafeDelete(mAttackAnimation);
 	SafeDelete(mDeathAnimation);
 	SafeDelete(mDeathLeaveAnimation);
+	SafeDelete(mBeforeAttackAnimation);
+	SafeDelete(mChangeToAttackAnimation);
+	SafeDelete(mChangeFromAttackAnimation);
+	SafeDelete(mTearEffectAnimation);
+	SafeDelete(mTearAAnimation);
+	SafeDelete(mTearBAnimation);
 }
 
 void Onion::Update() {
@@ -83,30 +117,57 @@ void Onion::Update() {
 		mHP -= 25;
 
 	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
-		mState = EnemyState::Death;
+		mState = EnemyState::End;
 		mDelayTime = 0;
 	}
 
-	//ªÛ≈¬ø° µ˚∏• ¥Ÿ∏• æ÷¥œ∏ﬁ¿Ãº« √‚∑¬
+	//ÏÉÅÌÉúÏóê Îî∞Î•∏ Îã§Î•∏ Ïï†ÎãàÎ©îÏù¥ÏÖò Ï∂úÎ†•
 	switch (mState) {
 	case EnemyState::Intro:
-		mY -= 270 * Time::GetInstance()->DeltaTime();
 		mImage = mIntroImage;
 		mSizeX = mImage->GetFrameWidth();
 		mSizeY = mImage->GetFrameHeight();
 		mCurrentAnimation = mIntroAnimation;
-		if (mCurrentAnimation->GetIsPlay() == false)
+		if (mCurrentAnimation->GetIsPlay() == false) {
 			mState = EnemyState::Idle;
+			mDelayTime = 0;
+		}
 		break;
-
+		
+		
 	case EnemyState::Idle:
 		mImage = mIdleImage;
 		mSizeX = mImage->GetFrameWidth();
 		mSizeY = mImage->GetFrameHeight();
 		mCurrentAnimation = mIdleAnimation;
-		if (mCurrentAnimation->GetIsPlay() == false)
-			mState = EnemyState::Attack;
+		mDelayTime += Time::GetInstance()->DeltaTime();
+		if(mDelayTime > 3)
+			mState = EnemyState::BeforeAttack;
 			
+		mCurrentAnimation->Play();
+		break;
+
+	case EnemyState::BeforeAttack:
+		mImage = mBeforeAttackImage;
+		mSizeX = mImage->GetFrameWidth();
+		mSizeY = mImage->GetFrameHeight();
+		mCurrentAnimation = mBeforeAttackAnimation;
+		if (mCurrentAnimation->GetIsPlay() == false) {
+			mState = EnemyState::ToAttack;
+			mCurrentAnimation->Stop();
+		}
+		mCurrentAnimation->Play();
+		break;
+
+	case EnemyState::ToAttack:
+		mImage = mChangeToAttackImage;
+		mSizeX = mImage->GetFrameWidth();
+		mSizeY = mImage->GetFrameHeight();
+		mCurrentAnimation = mChangeToAttackAnimation;
+		if (mCurrentAnimation->GetIsPlay() == false) {
+			mDelayTime = 0;
+			mState = EnemyState::Attack;
+		}
 		mCurrentAnimation->Play();
 		break;
 
@@ -115,21 +176,37 @@ void Onion::Update() {
 		mSizeX = mImage->GetFrameWidth();
 		mSizeY = mImage->GetFrameHeight();
 		mCurrentAnimation = mAttackAnimation;
-		//if (mCurrentAnimation->GetIsPlay() == false)
-		//	mState = EnemyState::Death;
+		mDelayTime += Time::GetInstance()->DeltaTime();
+		if (mDelayTime > 5) {
+			mState = EnemyState::FromAttack;
+			mTearEffectAnimation->Stop();
+		}
+		mTearEffectAnimation->Play();
+		mCurrentAnimation->Play();
+		break;
+
+	case EnemyState::FromAttack:
+		mImage = mChangeToAttackImage;
+		mSizeX = mImage->GetFrameWidth();
+		mSizeY = mImage->GetFrameHeight();
+		mCurrentAnimation = mChangeFromAttackAnimation;
+		if (mCurrentAnimation->GetIsPlay() == false) {
+			mState = EnemyState::ToAttack;
+			mCurrentAnimation->Stop();
+		}
 		mCurrentAnimation->Play();
 		break;
 
 	case EnemyState::Death:
 		mImage = mDeathImage;
-		mY += 200 * Time::GetInstance()->DeltaTime();
 		mSizeX = mImage->GetFrameWidth();
 		mSizeY = mImage->GetFrameHeight();
 		mCurrentAnimation = mDeathAnimation;
 		mCurrentAnimation->Play();
-		mDelayTime += Time::GetInstance()->DeltaTime();
-		if (mDelayTime > 1)
+		
+		if (mCurrentAnimation->GetIsPlay() == false)
 			mState = EnemyState::End;
+	
 		break;
 
 	case EnemyState::End:
@@ -140,11 +217,16 @@ void Onion::Update() {
 	}
 
 	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+	if(mTearEffectAnimation->GetIsPlay())
+		mTearEffectAnimation->Update();
 	mCurrentAnimation->Update();
 }
 
 void Onion::Render(HDC hdc) {
 	CameraManager::GetInstance()->GetMainCamera()
-		->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
+		->ScaleFrameRenderFromBottom(hdc, mImage, mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 472, 570);
+	if(mState == EnemyState::Attack)
+		CameraManager::GetInstance()->GetMainCamera()
+			->FrameRenderFromBottom(hdc, mTearEffectImage, mX+355, mY-60, mTearEffectAnimation->GetNowFrameX(), mTearEffectAnimation->GetNowFrameY());
 	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 }

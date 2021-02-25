@@ -1,10 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "Image.h"
-class SceneBoss2
-	: public Scene
-{
-	vector<class Enemy*> mEnemys;
+class SceneBoss2: public Scene{
 	Image* mBackGround1;
 	Image* mBackGround2;
 	Image* mBackGround3;

@@ -16,6 +16,7 @@ protected:
 	bool mIsActive;		//활성화 상태
 	bool mIsDestroy;	//삭제할지 말지
 	bool mIsDelete = true; //Delete 함수에서 삭제할 지 여부 체크
+	bool mIsRender = true;
 public:
 	GameObject();
 	GameObject(const string& name);
@@ -48,6 +49,8 @@ public:
 	inline void SetIsActive(bool b) { mIsActive = b; }
 	inline bool GetIsDestroy()const { return mIsDestroy; }
 	inline void SetIsDestroy(bool b) { mIsDestroy = b; }
+	inline bool GetIsRender()const { return mIsRender; }
+	inline void SetIsRender(bool b) { mIsRender = b; }
 
 	//상시 충돌값 함수
 	void virtual InInterscet(){}

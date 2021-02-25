@@ -11,6 +11,7 @@ Carrot::Carrot(const string& name, float x, float y)
 {
 	mX = x;
 	mY = y;
+	mIsRender = false;
 }
 
 void Carrot::Init() {
@@ -109,12 +110,12 @@ void Carrot::Update() {
 		mCurrentAnimation = mAttackAnimation;
 		mDelayTime += Time::GetInstance()->DeltaTime();
 		if (mDelayTime > 5)	
-			mState = EnemyState::ToBeam;
+			mState = EnemyState::ToAttack;
 
 		mCurrentAnimation->Play();
 		break;
 
-	case EnemyState::ToBeam:
+	case EnemyState::ToAttack:
 		if (mCurrentAnimation != mChangeToBeamAnimation) {
 			mCurrentAnimation->Stop();
 			mChangeToBeamAnimation->Play();
@@ -141,11 +142,11 @@ void Carrot::Update() {
 		mCurrentAnimation = mBeamAnimation;
 		mDelayTime += Time::GetInstance()->DeltaTime();
 		if (mDelayTime > 5)
-			mState = EnemyState::FromBeam;
+			mState = EnemyState::FromAttack;
 		mCurrentAnimation->Play();
 		break;
 
-	case EnemyState::FromBeam:
+	case EnemyState::FromAttack:
 		if (mCurrentAnimation != mChangeFromBeamAnimation) {
 			mCurrentAnimation->Stop();
 			mChangeFromBeamAnimation->Play();
@@ -172,6 +173,8 @@ void Carrot::Update() {
 	case EnemyState::End:
 		mIsActive = false;
 		mIsDestroy = true;
+		//ObjectManager::GetInstance()->FindObject(ObjectLayer::Building,"BotanicPanic")
+		//깃발 올릴 수 있도록 수정해줄 것.
 		break;
 	}
 

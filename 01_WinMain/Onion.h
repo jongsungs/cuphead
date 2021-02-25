@@ -5,15 +5,21 @@ class Image;
 class Animation;
 class Onion : public Enemy {
 	Image* mDeathLeaveImage;
-	Image* mBashfulImage;
-	Image* mBashfulLeaveImage;
-	Image* mCryImage;
+	Image* mChangeToAttackImage;
+	Image* mBeforeAttackImage;
 	
+	Image* mTearEffectImage;
 	Image* mTearAImage;
 	Image* mTearBImage;
 
 	Animation* mDeathLeaveAnimation;
+	Animation* mBeforeAttackAnimation;
+	Animation* mChangeToAttackAnimation;
+	Animation* mChangeFromAttackAnimation;
 
+	Animation* mTearEffectLoopAnimation;
+	
+	Animation* mTearEffectAnimation;
 	Animation* mTearAAnimation;
 	Animation* mTearBAnimation;
 

@@ -18,9 +18,9 @@ void SceneBoss1::Init(){
 	PlatformerPlayer* player = new PlatformerPlayer("Player", WINSIZEX / 4, WINSIZEY * 3 / 4);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, player);
 
-	Enemy* potato = new Potato("Potato", WINSIZEX * 3 / 4, WINSIZEY / 2 + 500);
+	Enemy* potato = new Potato("Potato", WINSIZEX * 3 / 4, WINSIZEY / 2);
 	Enemy* carrot = new Carrot("Carrot", WINSIZEX / 2, WINSIZEY * 3 / 8 + 549);
-	Enemy* onion = new Onion("Onion", WINSIZEX / 2, WINSIZEY * 3 / 8 + 500);
+	Enemy* onion = new Onion("Onion", WINSIZEX / 2, WINSIZEY * 3 / 8);
 
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, potato);
 	potato->SetPlayerPtr(player);
@@ -54,16 +54,14 @@ void SceneBoss1::Update(){
 
 void SceneBoss1::Render(HDC hdc){
 	CameraManager::GetInstance()->GetMainCamera()->ScaleRender(hdc, mBackGround1, -5, 0, WINSIZEX + 10, WINSIZEY);
-	
+
 	if (ObjectManager::GetInstance()->FindObject("Carrot")->GetIsActive()) {
 		ObjectManager::GetInstance()->FindObject("Carrot")->Render(hdc);
 	}
 
 	CameraManager::GetInstance()->GetMainCamera()->ScaleRender(hdc, mBackGround2, -5, 0, WINSIZEX + 10, WINSIZEY);
 
-	if (!ObjectManager::GetInstance()->FindObject("Carrot")->GetIsActive()) {
-		ObjectManager::GetInstance()->Render(hdc);
-	}
-		
+	ObjectManager::GetInstance()->Render(hdc);
+
 	mBackGround3->ScaleRender(hdc, -5, 0, WINSIZEX + 10, WINSIZEY);
 }

@@ -3,8 +3,8 @@
 
 void SoundSet::SetSound() {
 	//게임 OST
-	SoundPlayer::GetInstance()->LoadFromFile(L"BotanicPanicBGM", Resources(L"Boss/BotanicPanic/07 Botanic Panic.mp3"), false);
-	SoundPlayer::GetInstance()->LoadFromFile(L"FloralFuryBGM", Resources(L"Boss/FloralFury/13 Floral Fury.mp3"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"BotanicPanicBGM", Resources(L"Boss/BotanicPanic/07 Botanic Panic.mp3"), true);
+	SoundPlayer::GetInstance()->LoadFromFile(L"FloralFuryBGM", Resources(L"Boss/FloralFury/13 Floral Fury.mp3"), true);
 	//아나운서 게임 시작 안내
 	SoundPlayer::GetInstance()->LoadFromFile(L"Start1", Resources(L"Announcer Voice/A brawl is surely brewing!.mp3"), false);
 	SoundPlayer::GetInstance()->LoadFromFile(L"Start2", Resources(L"Announcer Voice/A good day for a swell battle!.mp3"), false);

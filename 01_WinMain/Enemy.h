@@ -5,9 +5,10 @@ class Animation;
 enum class EnemyState : int {
 	Intro,
 	Idle,
-	ToBeam,
+	BeforeAttack,
+	ToAttack,
 	Beam,
-	FromBeam,
+	FromAttack,
 	Attack,
 	Death,
 	End

@@ -14,12 +14,15 @@ Potato::Potato(const string& name, float x, float y)
 void Potato::Init() {
 	//상태 설정
 	mState = EnemyState::Intro;
-
 	//이미지 설정
 	mIntroImage = IMAGEMANAGER->FindImage(L"PotatoIntro");
 	mIdleImage = IMAGEMANAGER->FindImage(L"PotatoIdle");
 	mAttackImage = IMAGEMANAGER->FindImage(L"PotatoSpitAttack");
 	mDeathImage = IMAGEMANAGER->FindImage(L"PotatoDeath");
+
+	IntroEarthImage = IMAGEMANAGER->FindImage(L"PotatoIntroEarth");
+	IntroEarthImage1 = IMAGEMANAGER->FindImage(L"PotatoIntroEarth1");
+	IntroEarthImage2 = IMAGEMANAGER->FindImage(L"PotatoIntroEarth2");
 	
 	//애니메이션 설정
 	//등장 애니메이션
@@ -39,10 +42,16 @@ void Potato::Init() {
 	mAttackAnimation->SetFrameUpdateTime(0.07f);
 	//사망 애니메이션
 	mDeathAnimation = new Animation();
-	mDeathAnimation->InitFrameByStartEnd(0, 0, 8, 0, true);
-	mDeathAnimation->SetIsLoop(true);
+	mDeathAnimation->InitFrameByStartEnd(0, 0, 8, 0, false);
+	mDeathAnimation->SetIsLoop(false);
 	mDeathAnimation->SetFrameUpdateTime(0.07f);
-	
+
+	mIntroEarthAnimation = new Animation();
+	mIntroEarthAnimation->InitFrameByStartEnd(0, 0, 17, 0, false);
+	mIntroEarthAnimation->SetIsLoop(false);
+	mIntroEarthAnimation->SetFrameUpdateTime(0.02f);
+	mIntroEarthAnimation->Play();
+
 	//초기생성시 들어가야 할 데이터
 	mCurrentAnimation = mIntroAnimation;
 	mCurrentAnimation->Play();
@@ -70,15 +79,12 @@ void Potato::Update() {
 	
 	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
 		mState = EnemyState::Death;
-		mDelayTime = 0;
 	}
 
 	//상태에 따른 다른 애니메이션 출력
 	switch (mState) {
 		case EnemyState::Intro:
 			mImage = mIntroImage;
-
-			mY -= 850 * Time::GetInstance()->DeltaTime();
 			mSizeX = mImage->GetFrameWidth();
 			mSizeY = mImage->GetFrameHeight();
 			mCurrentAnimation = mIntroAnimation;
@@ -156,12 +162,10 @@ void Potato::Update() {
 				mDeathAnimation->Play();
 			}
 			mImage = mDeathImage;
-			mY += 500 * Time::GetInstance()->DeltaTime();
 			mSizeX = mImage->GetFrameWidth();
 			mSizeY = mImage->GetFrameHeight();
 			mCurrentAnimation = mDeathAnimation;
-			mDelayTime += Time::GetInstance()->DeltaTime();		
-			if (mDelayTime > 1)
+			if (mCurrentAnimation->GetIsPlay() == false)
 				mState = EnemyState::End;
 			mCurrentAnimation->Play();
 			break;
@@ -173,11 +177,25 @@ void Potato::Update() {
 			break;
 	}
 	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+	mIntroEarthAnimation->Update();
 	mCurrentAnimation->Update();
 }
 
 void Potato::Render(HDC hdc) {
-	CameraManager::GetInstance()->GetMainCamera()
-		->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
+	if (mState == EnemyState::Intro) {
+		CameraManager::GetInstance()->GetMainCamera()
+			->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
+		CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromBottom(hdc, IntroEarthImage, 960, 660, mIntroEarthAnimation->GetNowFrameX(), mIntroAnimation->GetNowFrameY());
+	}
+
+	else {
+		CameraManager::GetInstance()->GetMainCamera()->RenderFromBottom(hdc, IntroEarthImage1, 960, 660);
+		CameraManager::GetInstance()->GetMainCamera()
+			->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
+		CameraManager::GetInstance()->GetMainCamera()->RenderFromBottom(hdc, IntroEarthImage2, 960, 660);
+	}
+	//wstring check = to_wstring(mX);
+	//TextOut(hdc, 10, 10, check.c_str(), check.length());
+
 	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 }

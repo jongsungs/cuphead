@@ -67,7 +67,7 @@ void ObjectManager::Render(HDC hdc)
 	{
 		for (int i = 0; i < iter->second.size(); ++i)
 		{
-			if (iter->second[i]->GetIsActive() == true)
+			if (iter->second[i]->GetIsActive() == true && iter->second[i]->GetIsRender() == true)
 			{
 				iter->second[i]->Render(hdc);
 			}
