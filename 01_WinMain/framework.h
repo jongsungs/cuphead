@@ -42,6 +42,7 @@ using namespace std;
 #include "ImageSet.h"
 #include "SoundSet.h"
 #include "BulletManager.h"
+#include "ThreadManager.h"
 
 extern POINT _mousePosition;	//마우스 좌표
 extern HWND	_hWnd;
