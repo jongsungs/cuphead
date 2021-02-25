@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -23,7 +23,7 @@
     <ProjectGuid>{ADD52605-596E-43E8-879D-E81A28A8BB13}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>My01WinMain</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -150,7 +150,9 @@
     <ClInclude Include="01_WinMain.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="BulletManager.h" />
     <ClInclude Include="Flower.h" />
+    <ClInclude Include="Peashooter.h" />
     <ClInclude Include="SceneBoss1.h" />
     <ClInclude Include="Building.h" />
     <ClInclude Include="Bullet.h" />
@@ -195,6 +197,7 @@
     <ClInclude Include="Scene_OverWorld.h" />
     <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="SoundSet.h" />
+    <ClInclude Include="Spread.h" />
     <ClInclude Include="Talk.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Time.h" />
@@ -203,7 +206,9 @@
     <ClCompile Include="01_WinMain.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="Flower.cpp" />
+    <ClCompile Include="Peashooter.cpp" />
     <ClCompile Include="SceneBoss1.cpp" />
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="Bullet.cpp" />
@@ -250,6 +255,7 @@
     <ClCompile Include="Scene_OverWorld.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="SoundSet.cpp" />
+    <ClCompile Include="Spread.cpp" />
     <ClCompile Include="Talk.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
