@@ -81,7 +81,7 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"OnionDeath", Resources(L"Boss/BotanicPanic/Onion/Onion_Death.bmp"), 2976, 599, 6, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"OnionDeathLeave", Resources(L"Boss/BotanicPanic/Onion/Onion_Death_Leave.bmp"), 16768, 596, 31, 1, true);
 	
-	IMAGEMANAGER->LoadFromFile(L"OnionTearEffect", Resources(L"Boss/BotanicPanic/Onion/Onion_Tears.bmp"), 2640, 407, 4, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"OnionTearEffect", Resources(L"Boss/BotanicPanic/Onion/Onion_Tears.bmp"), 5460, 407, 4, 1, true);
 	//양파 투사체
 	IMAGEMANAGER->LoadFromFile(L"OnionNonParryAbleA", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_NonParryableA.bmp"), 111, 68, 3, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"OnionNonParryAbleB", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_NonParryableB.bmp"), 111, 67, 3, 1, true);

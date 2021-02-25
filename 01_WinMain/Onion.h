@@ -19,12 +19,13 @@ class Onion : public Enemy {
 
 	Animation* mTearEffectLoopAnimation;
 	
+	int mProjInitX;
+
 	Animation* mTearEffectAnimation;
 	Animation* mTearAAnimation;
 	Animation* mTearBAnimation;
 
-	float mAttackStartDelay;
-	int mAttackCount;
+	float mBetweenAttackDelay;
 public:
 	Onion(const string& name, float x, float y);
 

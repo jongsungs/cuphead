@@ -5,6 +5,7 @@
 #include "Image.h"
 #include "Animation.h"
 #include "Camera.h"
+#include "CarrotProj.h"
 
 Carrot::Carrot(const string& name, float x, float y)
 	:Enemy(name, x, y)

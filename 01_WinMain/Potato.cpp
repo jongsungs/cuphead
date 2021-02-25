@@ -5,6 +5,7 @@
 #include "Image.h"
 #include "Animation.h"
 #include "Camera.h"
+#include "PotatoProj.h"
 
 Potato::Potato(const string& name, float x, float y)
 	:Enemy(name,x,y)
@@ -133,19 +134,19 @@ void Potato::Update() {
 			mCurrentAnimation = mAttackAnimation;
 			mAttackStartDelay += Time::GetInstance()->DeltaTime();
 
-			if (mAttackStartDelay > 50) {
+			if (mAttackStartDelay > 0.5) {
 				mAttackCount++;
-				//발사체 생성
-				while (mAttackCount < 4) {
-					//	Bullet* bullet = new Bullet();
-					//	bullet->Init();
-					//	mBullet.push_back(bullet);
+				if (mAttackCount < 4) {
+					PotatoProj* proj = new PotatoProj("proj", mX, mY, 50, PI, false);
+					proj->Init();
+					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
+					mAttackStartDelay = 0;
 					if (mAttackCount == 3) {
-						//패링가능 오브젝트
-						//	Bullet* bullet = new Bullet();
-						//	bullet->Init();
-						//	mBullet.push_back(bullet);
+						PotatoProj* proj = new PotatoProj("proj", mX, mY, 50, PI, true);
+						proj->Init();
+						ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
 						mAttackCount = 0;
+						mAttackStartDelay = 0;
 					}
 				}
 			}

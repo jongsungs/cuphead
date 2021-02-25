@@ -5,6 +5,7 @@
 #include "Image.h"
 #include "Animation.h"
 #include "Camera.h"
+#include "OnionProj.h"
 
 Onion::Onion(const string& name, float x, float y)
 	:Enemy(name, x, y)
@@ -181,6 +182,14 @@ void Onion::Update() {
 			mState = EnemyState::FromAttack;
 			mTearEffectAnimation->Stop();
 		}
+		mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
+		if (mBetweenAttackDelay > 0.4) {
+			mProjInitX = Random::GetInstance()->RandomInt(WINSIZEX);
+			//OnionProj* proj = new OnionProj("proj", mProjInitX, 0);
+			//ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
+			mBetweenAttackDelay = 0;
+		}
+
 		mTearEffectAnimation->Play();
 		mCurrentAnimation->Play();
 		break;
@@ -227,6 +236,6 @@ void Onion::Render(HDC hdc) {
 		->ScaleFrameRenderFromBottom(hdc, mImage, mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 472, 570);
 	if(mState == EnemyState::Attack)
 		CameraManager::GetInstance()->GetMainCamera()
-			->FrameRenderFromBottom(hdc, mTearEffectImage, mX+355, mY-60, mTearEffectAnimation->GetNowFrameX(), mTearEffectAnimation->GetNowFrameY());
+			->FrameRenderFromBottom(hdc, mTearEffectImage, mX, mY-60, mTearEffectAnimation->GetNowFrameX(), mTearEffectAnimation->GetNowFrameY());
 	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 }

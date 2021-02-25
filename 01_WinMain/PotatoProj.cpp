@@ -43,13 +43,11 @@ void PotatoProj::Update(){
 	if (mParryAble == true) {
 		mImage = ParryAbleImg;
 		mCurrentAnimation = ParryAbleAnimation;
-		mCurrentAnimation->Play();
 	}
 		
 	else {
 		mImage = NonParryAbleImg;
 		mCurrentAnimation = NonParryAbleAnimation;
-		mCurrentAnimation->Play();
 	}
 	mSizeX = mImage->GetFrameWidth();
 	mSizeY = mImage->GetFrameHeight();

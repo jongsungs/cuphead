@@ -151,6 +151,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="BulletManager.h" />
+    <ClInclude Include="FadeOut.h" />
     <ClInclude Include="Flower.h" />
     <ClInclude Include="Peashooter.h" />
     <ClInclude Include="SceneBoss1.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BulletManager.cpp" />
+    <ClCompile Include="FadeOut.cpp" />
     <ClCompile Include="Flower.cpp" />
     <ClCompile Include="Peashooter.cpp" />
     <ClCompile Include="SceneBoss1.cpp" />
