@@ -11,7 +11,6 @@ public :
 	void LoadStartFunts();
 	void SetFunts(const function<void(void)>& funts);
 	void Loding();
-	void Update();
 	void LoadStartEnd();
 
 	void SetIsPlay(bool d) { mIsPlay = d; }
