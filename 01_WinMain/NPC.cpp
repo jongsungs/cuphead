@@ -47,16 +47,20 @@ void NPC::Update()
 		}
 		if (Input::GetInstance()->GetKeyDown('Z'))
 		{
-			CameraManager::GetInstance()->GetMainCamera()->SetTarget(this);
-			CameraManager::GetInstance()->GetMainCamera()->SetMode(Camera::Mode::Talk);
-			mIsTalk = 1;
-			mTalkNum++;
-			if (mTalkNum > 5)
+			if (mName == "NPC_Apple")
 			{
-				mTalkNum = 0;
-				mIsTalk = 0;
-				CameraManager::GetInstance()->GetMainCamera()->SetTarget(ObjectManager::GetInstance()->FindObject("CupHead_OverWorld"));
-				CameraManager::GetInstance()->GetMainCamera()->SetMode(Camera::Mode::Follow);
+				CameraManager::GetInstance()->GetMainCamera()->SetTarget(this);
+				CameraManager::GetInstance()->GetMainCamera()->SetMode(Camera::Mode::Talk);
+				mIsTalk = 1;
+				mTalkNum++;
+				if (mTalkNum > 5)
+				{
+					mTalkNum = 0;
+					mIsTalk = 0;
+					CameraManager::GetInstance()->GetMainCamera()->SetTarget(ObjectManager::GetInstance()->FindObject("CupHead_OverWorld"));
+					CameraManager::GetInstance()->GetMainCamera()->SetMode(Camera::Mode::Follow);
+				}
+
 			}
 		}
 		
@@ -70,7 +74,6 @@ void NPC::Update()
 
 void NPC::Render(HDC hdc)
 {
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRange);
 	CameraManager::GetInstance()->GetMainCamera()
 		->ScaleFrameRender(hdc, mImage, mRect.left, mRect.top,
 			mAnimaition->GetNowFrameX(), mAnimaition->GetNowFrameY(),

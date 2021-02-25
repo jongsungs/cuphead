@@ -6,12 +6,11 @@
 /*
 처음 호출 시 x 좌표, y좌표 셋팅 및 이미지 셋팅
 */
-Effect::Effect(float x, float y, Image* image , float frameTime)
+Effect::Effect(float x, float y, Image* image , float frameTime, bool isReverse)
 {
 	mX = x;
 	mY = y;
 	mImage = image;
-	
 	mEffectAnimation = new Animation();
 	mEffectAnimation->InitFrameByStartEnd(0, 0, mImage->GetFrameX() - 1, 0, false);
 	mEffectAnimation->SetIsLoop(false);

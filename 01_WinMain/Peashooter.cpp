@@ -2,12 +2,13 @@
 #include "Peashooter.h"
 #include "Image.h"
 #include "Camera.h"
-Peashooter::Peashooter(string name, float x, float y, float speed, float angle) 
-:Bullet(name, x, y ,speed, angle)
+Peashooter::Peashooter(string name, float x, float y, float angle) 
+:Bullet(name, x, y,angle)
 {
+	mImage = ImageManager::GetInstance()->FindImage(L"Testbullet");
+	mSpeed = 10.f;
 }
 void Peashooter::Init() {
-	mImage;
 	vector<GameObject*>* PlayerBullet = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Player_Bullet);
 	mName = "Peashooter";
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, this);
@@ -17,12 +18,20 @@ void Peashooter::Release() {
 }
 
 void Peashooter::Update() {
-	mX += mSpeed *cos(mAngle);
+	if (Range < 0) {
+		mIsDestroy = true;
+		return;
+	}
+	mX += mSpeed * cos(mAngle);
 	mY -= mSpeed * sin(mAngle);
-	mRect = RectMakeCenter(mX,mY,20,20);
+	mRect = RectMakeCenter(mX,mY,21,21);
+	Range -= mSpeed;
 }
 void Peashooter::Render(HDC hdc) {
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	RenderRect(hdc, mRect);
+	mImage->Render(hdc, mX, mY);
+	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	//CameraManager::GetInstance()->GetMainCamera()->Render(hdc,mImage,mX,mY);
 }
 
 void Peashooter::InIntersectDamage() { //삭제 처리

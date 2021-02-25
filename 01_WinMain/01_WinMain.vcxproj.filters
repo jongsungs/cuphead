@@ -270,9 +270,6 @@
     <ClInclude Include="Talk.h">
       <Filter>MainGame\Object\OverWorld\Talk</Filter>
     </ClInclude>
-    <ClInclude Include="Scene_ElderHouse.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="SceneBoss1.h">
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
@@ -281,6 +278,18 @@
     </ClInclude>
     <ClInclude Include="Flower.h">
       <Filter>MainGame\Object\Boss\Flower</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_ElderHouse.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Peashooter.h">
+      <Filter>MainGame\Object\Bullet\Peashooter</Filter>
+    </ClInclude>
+    <ClInclude Include="Spread.h">
+      <Filter>MainGame\Object\Bullet\Spread</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletManager.h">
+      <Filter>MainGame\Object\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -424,6 +433,15 @@
     </ClCompile>
     <ClCompile Include="Flower.cpp">
       <Filter>MainGame\Object\Boss\Flower</Filter>
+    </ClCompile>
+    <ClCompile Include="Peashooter.cpp">
+      <Filter>MainGame\Object\Bullet\Peashooter</Filter>
+    </ClCompile>
+    <ClCompile Include="Spread.cpp">
+      <Filter>MainGame\Object\Bullet\Spread</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>MainGame\Object\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
