@@ -56,7 +56,6 @@ Update : 매 프레임 실행되는 함수, 여기서 연산 처리 한다.
 */
 void MainGame::Update()
 {
-	Input::GetInstance()->Update();
 	SceneManager::GetInstance()->Update();
 }
 
