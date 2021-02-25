@@ -373,6 +373,5 @@ void Cuphead_OverWorld::Update()
 
 void Cuphead_OverWorld::Render(HDC hdc)
 {
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	CameraManager::GetInstance()->GetMainCamera()->FrameRender(hdc, mImage, mX-mSizeX/2, mY-mSizeY/2, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 }

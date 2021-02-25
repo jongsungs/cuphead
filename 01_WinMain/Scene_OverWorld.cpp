@@ -8,6 +8,7 @@
 #include "Building.h"
 #include "NPC.h"
 #include "BackGround.h"
+#include "FadeOut.h"
 void Scene_OverWorld::Init()
 {
 	IMAGEMANAGER->LoadFromFile(L"CupHead_OverWolrd", Resources(L"/overworld/Cuphead/CupHead_OverWorld.bmp"), 1649, 1130, 16, 10, true, RGB(99, 92, 99));
@@ -29,17 +30,18 @@ void Scene_OverWorld::Init()
 	IMAGEMANAGER->LoadFromFile(L"BotanicPanic_Talk1", Resources(L"/overworld/buildings/BotanicPanic_Title_Simple.bmp"), 1165, 834, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"BotanicPanic_Talk2", Resources(L"/overworld/buildings/BotanicPanic_Title_Regular.bmp"), 1165, 834, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"Black", Resources(L"/overworld/buildings/Black.bmp"), 1280, 720, false);
-	IMAGEMANAGER->LoadFromFile(L"FadeOut", Resources(L"/FadeOut.bmp"), 11520, 720, 9, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"FadeOut", Resources(L"/FadeOut.bmp"), 12800, 720, 10, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Flag", Resources(L"/overworld/Flag.bmp"), 1788, 220, 12, 1, true, RGB(99, 92, 99));
 
 
+	FadeOut* fadeout = new FadeOut(true);
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("Flatformer", IMAGEMANAGER->FindImage(L"OverWorld_Building_Flatformer"), 2000, 800));
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("ElderHouse", IMAGEMANAGER->FindImage(L"OverWorld_Building_ElderHouse"), 650, 650));
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("BotanicPanic", IMAGEMANAGER->FindImage(L"OverWorld_Building_BotanicPanic"), 1680, 1490));
 	//오브젝트매니저에 컵헤드 추가.
 	if (ObjectManager::GetInstance()->FindObject("CupHead_OverWorld") == nullptr)
 	{
-		mCupHead = new Cuphead_OverWorld("CupHead_OverWorld", 1700, 1400);
+		mCupHead = new Cuphead_OverWorld("CupHead_OverWorld", 500, 700);
 
 	}
 	else
@@ -48,8 +50,8 @@ void Scene_OverWorld::Init()
 	}
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Player, mCupHead);
 	//오브젝트매니저에NPC추가
-	
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::NPC, new NPC("NPC_Apple", 1715, 1010));
+
 	//카메라 추가
 	Camera* camera = new Camera();
 	camera->SetTarget(ObjectManager::GetInstance()->FindObject("CupHead_OverWorld"));

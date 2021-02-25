@@ -47,6 +47,7 @@ public:
 	inline pair<int, int> GetNowFrame()const { return mFrameList[mCurrentFrameIndex]; }
 	inline int GetNowFrameX()const { return mFrameList[mCurrentFrameIndex].first; }
 	inline int GetNowFrameY()const { return mFrameList[mCurrentFrameIndex].second; }
+	inline vector<pair<int, int>> GetFrameList() { return mFrameList; };
 
 };
 

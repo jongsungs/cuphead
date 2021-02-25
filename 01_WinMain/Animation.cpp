@@ -69,19 +69,23 @@ void Animation::InitFrameByVector(const vector<pair<int, int>>& frameList)
 
 void Animation::InitFrameByStartEnd(int startX, int startY, int endX, int endY, bool isReverse)
 {
-	for (int y = startY; y <= endY; ++y)
-	{
-		for (int x = startX; x <= endX; ++x)
-		{
-			mFrameList.push_back(make_pair(x, y));
-		}
-	} 
+	
 
 	if (isReverse)
 	{
 		for (int y = endY; y >= startY; --y)
 		{
 			for (int x = endX; x >= startX; --x)
+			{
+				mFrameList.push_back(make_pair(x, y));
+			}
+		}
+	}
+	else
+	{
+		for (int y = startY; y <= endY; ++y)
+		{
+			for (int x = startX; x <= endX; ++x)
 			{
 				mFrameList.push_back(make_pair(x, y));
 			}

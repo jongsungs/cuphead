@@ -4,7 +4,7 @@
 #include "Cuphead_OverWorld.h"
 #include "Scene_OverWorld.h"
 #include "LoadingScene.h"
-#include "Effect.h"
+#include "FadeOut.h"
 void Scene_ElderHouse::Init()
 {
 	
@@ -37,17 +37,9 @@ void Scene_ElderHouse::Update()
 	if(IntersectRect(&rctemp, &playerrctemp,&mDoorRect))
 	{
 		
-		/*Effect* fadeout = new Effect(
-			300,
-			300,
-			IMAGEMANAGER->FindImage(L"FadeOut"));*/
-		//if (fadeout->GetIsDestroy())
+		if (Input::GetInstance()->GetKeyDown('Z'))
 		{
-			ObjectManager::GetInstance()->Delete();
-			/*SceneManager::GetInstance()->AddScene(L"Scene1LoadingScene", new LoadingScene);
-			SceneManager::GetInstance()->LoadSceneLoading(L"Scene_OverWorld", L"Scene1LoadingScene");*/
-			SceneManager::GetInstance()->AddScene(L"Scene_OverWorld", new Scene_OverWorld);
-			SceneManager::GetInstance()->LoadScene(L"Scene_OverWorld");
+			FadeOut* fadeout = new FadeOut(false, L"Scene_OverWorld", L"Scene1LoadingScene");
 		}
 		
 	}

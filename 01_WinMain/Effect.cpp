@@ -11,7 +11,6 @@ Effect::Effect(float x, float y, Image* image , float frameTime, bool isReverse)
 	mX = x;
 	mY = y;
 	mImage = image;
-	
 	mEffectAnimation = new Animation();
 	mEffectAnimation->InitFrameByStartEnd(0, 0, mImage->GetFrameX() - 1, 0, false);
 	mEffectAnimation->SetIsLoop(false);

@@ -70,6 +70,7 @@ void Building::Update()
 						new Talk("ElderHouse_Talk",
 							IMAGEMANAGER->FindImage(L"ElderHouse_Talk"), 350, 200));
 					mIsTalk = 1;
+					
 				}
 			}
 			else
@@ -81,6 +82,8 @@ void Building::Update()
 				}
 				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
+					mZImageSizeX = 0;
+					mZImageSizeY = 0;
 					ObjectManager::GetInstance()->Delete();
 					SceneManager::GetInstance()->AddScene(L"Scene_ElderHouse", new Scene_ElderHouse);
 					SceneManager::GetInstance()->LoadScene(L"Scene_ElderHouse");
@@ -98,6 +101,7 @@ void Building::Update()
 						new Talk("BotanicPanic_Talk1",
 							IMAGEMANAGER->FindImage(L"BotanicPanic_Talk1"), 200, 100));
 					mIsTalk = 1;
+					
 				}
 			}
 			else
@@ -131,6 +135,8 @@ void Building::Update()
 				}
 				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
+					mZImageSizeX = 0;
+					mZImageSizeY = 0;
 					ObjectManager::GetInstance()->Delete();
 					SceneManager::GetInstance()->LoadScene(L"BotanicPanic");
 					mIsTalk = 0;
@@ -147,12 +153,11 @@ void Building::Update()
 
 void Building::Render(HDC hdc)
 {
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	CameraManager::GetInstance()->GetMainCamera()->Render(hdc, mImage, mX, mY);
 	CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,mZImage,
 		ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetX(),
 		ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetRect().top,mZImageSizeX,mZImageSizeY);
-	if (mIsClear)
+	if (mName == "BotanicPanic" && mIsClear)
 	{
 		CameraManager::GetInstance()->GetMainCamera()->FrameRender(hdc, mFlagImage, mX+100, mY-50, mFlagAnimation->GetNowFrameX(),mFlagAnimation->GetNowFrameY());
 	}
