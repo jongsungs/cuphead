@@ -6,8 +6,8 @@ protected:
 	Image* CarrotMissile;
 	Image* CarrotBeam;
 
-	Animation* CarrotBeamAnimation;
 	Animation* CarrotMissileAnimation;
+	Animation* CarrotBeamAnimation;
 public:
 	virtual void Init()override;
 	virtual void Release()override;
