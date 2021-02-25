@@ -31,10 +31,10 @@ void LoadingScene::Update()
 		if (Input::GetInstance()->GetKeyDown(VK_SPACE))
 		{
 			mIsEndLoading = true;
+			mLoadList.clear();
 		}
 		return;
 	}
-
 	function<void(void)> func = mLoadList[mLoadIndex];
 	func();
 	mLoadIndex++;
