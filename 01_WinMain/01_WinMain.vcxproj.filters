@@ -282,6 +282,15 @@
     <ClInclude Include="Scene_ElderHouse.h">
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Peashooter.h">
+      <Filter>MainGame\Object\Bullet\Peashooter</Filter>
+    </ClInclude>
+    <ClInclude Include="Spread.h">
+      <Filter>MainGame\Object\Bullet\Spread</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletManager.h">
+      <Filter>MainGame\Object\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="01_WinMain.cpp">
@@ -424,6 +433,15 @@
     </ClCompile>
     <ClCompile Include="Flower.cpp">
       <Filter>MainGame\Object\Boss\Flower</Filter>
+    </ClCompile>
+    <ClCompile Include="Peashooter.cpp">
+      <Filter>MainGame\Object\Bullet\Peashooter</Filter>
+    </ClCompile>
+    <ClCompile Include="Spread.cpp">
+      <Filter>MainGame\Object\Bullet\Spread</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>MainGame\Object\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,7 @@ protected:
 	class Animation* UpBullet;
 
 public:
-	Bullet(string name, float x, float y, float speed, float angle);
+	Bullet(string name, float x, float y, float angle);
 	void virtual Init()override;
 	void virtual Release()override;
 	void virtual Update()override;

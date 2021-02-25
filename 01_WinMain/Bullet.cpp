@@ -2,11 +2,10 @@
 #include"Image.h"
 #include "Bullet.h"
 
-Bullet::Bullet(string name, float x, float y, float speed, float angle)
+Bullet::Bullet(string name, float x, float y, float angle)
 :GameObject(name){
 	mX = x;
 	mY = y;
-	mSpeed = speed;
 	mAngle = angle;
 	mRect = RectMakeCenter(mX, mY, 20, 10); // 높이 너비 msize로 대체
 }

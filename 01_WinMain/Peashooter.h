@@ -2,9 +2,11 @@
 #include "Bullet.h"
 class Peashooter : public Bullet
 {
+private:
 	class Image* mImage;
+	float Range = 1000.f;
 public :
-	Peashooter(string name, float x, float y, float speed, float angle);
+	Peashooter(string name, float x, float y,float angle);
 	void Init()override;
 	void Release()override;
 	void Update()override;
