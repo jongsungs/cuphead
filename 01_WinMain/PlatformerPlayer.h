@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 class Bullet;
+class Animation;
 enum class PlayerState : int
 {
 	RightIdle,
