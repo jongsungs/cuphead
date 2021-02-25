@@ -54,7 +54,7 @@ void PlatformerPlayer::Init()
 	mLeftIdleAnimation
 		->Play();
 	//대쉬
-
+	
 	mRightDashAnimation = new Animation();
 	mRightDashAnimation
 		->InitFrameByStartEnd(0, 0, 7, 0, false);
@@ -268,7 +268,7 @@ void PlatformerPlayer::Init()
 	mRightRunShootAnimation
 		->InitFrameByStartEnd(0, 0, 15, 0, false);
 	mRightRunShootAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mRightRunShootAnimation
 		->SetFrameUpdateTime(0.1f);
 	mRightRunShootAnimation
@@ -278,7 +278,7 @@ void PlatformerPlayer::Init()
 	mLeftRunShootAnimation
 		->InitFrameByBackStartEnd(17, 1, 2, 1, false);
 	mLeftRunShootAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mLeftRunShootAnimation
 		->SetFrameUpdateTime(0.1f);
 	mLeftRunShootAnimation
@@ -288,7 +288,7 @@ void PlatformerPlayer::Init()
 	mRightRunShootturnAnimation
 		->InitFrameByStartEnd(16, 0, 17, 0, false);
 	mRightRunShootturnAnimation
-		->SetIsLoop(false);
+		->SetIsLoop(true);
 	mRightRunShootturnAnimation
 		->SetFrameUpdateTime(0.1f);
 	mRightRunShootturnAnimation
@@ -543,6 +543,18 @@ void PlatformerPlayer::Update()
 					mCurrentAnimation->Play();
 				}
 			}
+			if (Input::GetInstance()->GetKeyDown('X'))
+			{
+				if (mPlayerState == PlayerState::LeftRun)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::LeftRunShoot;
+					mCurrentAnimation = mLeftRunShootAnimation;
+					mCurrentAnimation->Play();
+				}
+				
+			}
+			
 			if (Input::GetInstance()->GetKeyUp(VK_UP))
 			{
 				mCurrentAnimation->Stop();
@@ -585,6 +597,8 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation = mLeftIdleAnimation;
 			mCurrentAnimation->Play();
 		}
+		
+		
 		//오른쪽으로 달릴때
 		if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
 		{
@@ -610,6 +624,18 @@ void PlatformerPlayer::Update()
 				}
 
 			}
+			if (Input::GetInstance()->GetKeyDown('X'))
+			{
+				if (mPlayerState == PlayerState::RightRun)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::RightRunShoot;
+					mCurrentAnimation = mRightRunShootAnimation;
+					mCurrentAnimation->Play();
+				}
+
+			}
+			
 			if (Input::GetInstance()->GetKeyUp(VK_UP))
 			{
 				mCurrentAnimation->Stop();
@@ -645,6 +671,7 @@ void PlatformerPlayer::Update()
 				mCurrentAnimation = mRightSpecialAttackAnimation;
 				mCurrentAnimation->Play();
 			}
+			
 		}
 		if (Input::GetInstance()->GetKeyUp(VK_RIGHT))
 		{
@@ -1145,6 +1172,7 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 		}
 	}
+	//필살기
 	if (Input::GetInstance()->GetKeyDown('V'))
 	{
 		if (mPlayerState == PlayerState::LeftIdle)
@@ -1185,6 +1213,58 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 		}
 	}
+	//대쉬
+	if (Input::GetInstance()->GetKeyDown(VK_LSHIFT))
+	{
+		if (mPlayerState == PlayerState::RightRun)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightDash;
+			mCurrentAnimation = mRightDashAnimation;
+			mCurrentAnimation->Play();
+			mX += 100;
+		}
+		else if (mPlayerState == PlayerState::LeftRun)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftDash;
+			mCurrentAnimation = mLeftDashAnimation;
+			mCurrentAnimation->Play();
+			mX -= 100;
+		}
+		else if (mPlayerState == PlayerState::LeftIdle)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftDash;
+			mCurrentAnimation = mLeftDashAnimation;
+			mCurrentAnimation->Play();
+			mX -= 100;
+		}
+		
+	}
+	if (mPlayerState == PlayerState::RightDash)
+	{
+		if (mCurrentAnimation->GetIsPlay() == false)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightRun;
+			mCurrentAnimation = mRightRunAnimation;
+			mCurrentAnimation->Play();
+		}
+	}
+	if (mPlayerState == PlayerState::LeftDash)
+	{
+		if (mCurrentAnimation->GetIsPlay() == false)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftRun;
+			mCurrentAnimation = mLeftRunAnimation;
+			mCurrentAnimation->Play();
+		}
+	}
+
+
+
 	//if (Input::GetInstance()->GetKeyUp('V'))
 	//{
 	//	if (mPlayerState == PlayerState::LeftSpecialAttack)
@@ -1202,25 +1282,16 @@ void PlatformerPlayer::Update()
 	//		mCurrentAnimation->Play();
 	//	}
 	//}
-	//
+	
+	
 
 
-	//if (Input::GetInstance()->GetKey(VK_SPACE))
-	//{
-	//	Bullet* bullet = new Bullet();
-	//	bullet->Init();
-	//	mBullet.push_back(bullet);
-	//}
-	//제자리상태 보정
-	//if (mPlayerState == PlayerState::LeftShootaim || mPlayerState == PlayerState::RightShootaim || mPlayerState == PlayerState::LeftUpaim
-	//	|| mPlayerState == PlayerState::RightUpaim)
-	//{
-	//	mX -= 0;
-	//}
+	
+
 	mRect = RectMakeCenter(mX, mY, 98, 155);
 	//중력
-	//mJumpPower -= mGravity;
-	//mY -= mJumpPower;
+	mJumpPower -= mGravity;
+	mY -= mJumpPower;
 	if (mY<= WINSIZEY)
 	{
 		mY = WINSIZEY - 180;
@@ -1228,7 +1299,7 @@ void PlatformerPlayer::Update()
 	
 
 
-	//mCurrentAnimation->Update();
+	
 	for (int i = 0; i < mBullet.size(); i++)
 	{
 		mBullet[i]->Update();
