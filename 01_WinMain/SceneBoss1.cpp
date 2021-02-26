@@ -66,6 +66,7 @@ void SceneBoss1::Update(){
 		FadeOut* fadeout = new FadeOut(false, L"OverWorld", L"Overworld_LoadingScene");
 	}
 	ObjectManager::GetInstance()->Update();
+	IntersectManager::GetInstance()->IntersectPlayerAndFloor();
 }
 
 void SceneBoss1::Render(HDC hdc){

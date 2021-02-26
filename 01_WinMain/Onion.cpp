@@ -178,7 +178,7 @@ void Onion::Update() {
 			mTearEffectAnimation->Stop();
 		}
 		mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
-		if (mBetweenAttackDelay > 0.4) {
+		if (mBetweenAttackDelay > 1) {
 			mProjInitX = Random::GetInstance()->RandomInt(WINSIZEX);
 			OnionProj* proj = new OnionProj("proj", mProjInitX, 0, 5, PI*3/2, false);
 			proj->Init();

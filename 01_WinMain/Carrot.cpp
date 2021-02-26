@@ -114,11 +114,11 @@ void Carrot::Update() {
 
 		mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
 
-		if (mBetweenAttackDelay > 0.1) {
+		if (mBetweenAttackDelay > 0.25) {
 			count++;
-			CarrotProj* proj = new CarrotProj("proj", WINSIZEX - WINSIZEX / 20 * count, 0, 10, PI*3/2, 1);
+			CarrotProj* proj = new CarrotProj("proj", WINSIZEX - WINSIZEX / 8 * count, -50, 10, PI*3/2, 1);
 			proj->Init();
-			ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet,proj);
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss,proj);
 			mBetweenAttackDelay = 0;
 		}
 

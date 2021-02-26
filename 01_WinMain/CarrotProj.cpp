@@ -58,7 +58,7 @@ void CarrotProj::Update(){
 	mSizeX = mImage->GetFrameWidth();
 	mSizeY = mImage->GetFrameHeight();
 
-	mRect = RectMakeCenter(mX, mY, 20, 10);
+	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 	mCurrentAnimation->Update();
 }
 
