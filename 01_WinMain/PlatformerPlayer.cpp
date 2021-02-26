@@ -1174,6 +1174,7 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::LeftShoot;
 			mCurrentAnimation = mLeftShootAnimation;
 			mCurrentAnimation->Play();
+			BulletManager::GetInstance()->Player_Shoot(mX, mY, PI);
 		}
 		else if (mPlayerState == PlayerState::RightIdle)
 		{
@@ -1191,6 +1192,8 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::LeftIdle;
 			mCurrentAnimation = mLeftIdleAnimation;
 			mCurrentAnimation->Play();
+			
+			
 		}
 		else if (mPlayerState == PlayerState::RightShoot)
 		{
@@ -1488,7 +1491,7 @@ void PlatformerPlayer::Render(HDC hdc)
 	//{
 	//	CameraManager::GetInstance()->GetMainCamera()->ScaleFrameRender(hdc, mImage4, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 80, 120);
 	//}
-	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromBottom(hdc,mImage,mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 
 	//RenderRect(hdc, mGround);
@@ -1511,6 +1514,5 @@ void PlatformerPlayer::InIntersectBlock(RECT rc)
 	if ((rc.bottom - rc.top) > (rc.right - rc.left) && rc.right == mRect.right)
 		mX -= rc.right - rc.left;
 	
-	mGravity = 0.f;
-
+	mJumpPower = 0.f;
 }

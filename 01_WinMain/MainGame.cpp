@@ -37,8 +37,9 @@ void MainGame::Init()
 
 	SceneManager::GetInstance()->AddScene(L"Scene1LoadingScene", mLoading);
 
-	SceneManager::GetInstance()->LoadSceneLoading(L"OverWorld",L"Scene1LoadingScene");
+	SceneManager::GetInstance()->LoadSceneLoading(L"Scene1",L"Scene1LoadingScene");
 	//ThreadManager::GetInstance()->LoadStartFunts();
+	IntersectManager::GetInstance()->SetObjectPt();
 }
 
 /*
@@ -61,6 +62,7 @@ void MainGame::Update()
 {
 	ThreadManager::GetInstance()->Update();
 	SceneManager::GetInstance()->Update();
+	IntersectManager::GetInstance()->IntersectPlayerAndFloor();
 }
 
 /*
