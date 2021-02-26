@@ -29,6 +29,7 @@ void Building::Init()
 	mRect = RectMakeCenter(mX+mSizeX/2, mY+mSizeY/2, mSizeX, mSizeY);
 	mZImage = IMAGEMANAGER->FindImage(L"ZPopUp");
 	mZImageSizeX = 0;
+	mZImageSizeY = 0;
 	mIsClear = 1;
 	mIsRegular = 0;
 }
@@ -84,8 +85,7 @@ void Building::Update()
 				}
 				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
-					mZImageSizeX = 0;
-					mZImageSizeY = 0;
+					
 
 					FadeOut* fadeout = new FadeOut(false, L"ElderHouse", L"ElderHouse_LoadingScene");
 				}

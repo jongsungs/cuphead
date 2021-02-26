@@ -17,11 +17,12 @@ void Scene_ElderHouse::Init()
 	ObjectManager::GetInstance()->Init();
 	
 	Camera* camera = new Camera();
-	camera->SetMode(Camera::Mode::Follow);
-
-	CameraManager::GetInstance()->GetMainCamera()->SetTarget(mPlayer);
+	camera->SetX(250);
+	camera->SetY(50);
+	camera->SetMode(Camera::Mode::Free);
 	CameraManager::GetInstance()->SetMainCamera(camera);
-	mDoorRect = RectMakeCenter(100, 500, 100, 100);
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::UI, camera);
+	mDoorRect = RectMakeCenter(300, 600, 200, 200);
 }
 
 void Scene_ElderHouse::Release()

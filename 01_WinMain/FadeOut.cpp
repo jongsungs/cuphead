@@ -20,7 +20,7 @@ FadeOut::FadeOut(bool isReverse, float frameTime)
 
 	mIsActive = true;
 	mIsDestroy = false;
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::UI, this);
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::FadeOut, this);
 
 	mRect = RectMakeCenter(mX, mY, mImage->GetFrameWidth(), mImage->GetFrameHeight());
 }
@@ -41,7 +41,7 @@ FadeOut::FadeOut(bool isReverse, wstring targetSceneName, wstring loadingSceneNa
 
 	mIsActive = true;
 	mIsDestroy = false;
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::UI, this);
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::FadeOut, this);
 
 	mRect = RectMakeCenter(mX, mY, mImage->GetFrameWidth(), mImage->GetFrameHeight());
 }
