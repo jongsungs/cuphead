@@ -694,6 +694,7 @@ void PlatformerPlayer::Update()
 	{
 
 		//제자리에임
+		
 		if (Input::GetInstance()->GetKey('C'))
 		{
 			if (Input::GetInstance()->GetKey(VK_LEFT))
@@ -921,6 +922,7 @@ void PlatformerPlayer::Update()
 			isMove = true;
 		}
 	}
+	//덕 샷
 	if (Input::GetInstance()->GetKey(VK_DOWN))
 	{
 		if (Input::GetInstance()->GetKeyDown(VK_LEFT))
@@ -938,7 +940,6 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 		}
 	}
-	//덕 샷
 	if (Input::GetInstance()->GetKeyDown('X'))
 	{
 		if (mPlayerState == PlayerState::RightDuckIdle)
@@ -973,6 +974,30 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 		}
 	}
+	
+	}
+	//else 끝
+	//위보고 있을때 쏨
+	
+	if (Input::GetInstance()->GetKeyDown(VK_UP))
+	{
+		if (mPlayerState == PlayerState::LeftIdle)
+		{
+			
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftUpaim;
+			mCurrentAnimation = mLeftUpaimAnimation;
+			mCurrentAnimation->Play();
+		}
+		if (mPlayerState == PlayerState::RightIdle)
+		{
+			
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightUpaim;
+			mCurrentAnimation = mRightUpaimAnimation;
+			mCurrentAnimation->Play();
+		}
+	}
 	if (Input::GetInstance()->GetKey(VK_UP))
 	{
 		if (Input::GetInstance()->GetKeyDown('X'))
@@ -984,7 +1009,7 @@ void PlatformerPlayer::Update()
 				mCurrentAnimation = mLeftUpShootAnimation;
 				mCurrentAnimation->Play();
 			}
-			else if (mPlayerState == PlayerState::RightUpaim)
+			if (mPlayerState == PlayerState::RightUpaim)
 			{
 				mCurrentAnimation->Stop();
 				mPlayerState = PlayerState::RightUpShoot;
@@ -1010,9 +1035,25 @@ void PlatformerPlayer::Update()
 			}
 		}
 	}
-
+	if (Input::GetInstance()->GetKeyUp(VK_UP))
+	{
+		if (mPlayerState == PlayerState::LeftUpaim)
+		{
+			
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftIdle;
+			mCurrentAnimation = mLeftIdleAnimation;
+			mCurrentAnimation->Play();
+		}
+		else if (mPlayerState == PlayerState::RightUpaim)
+		{
+			
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightIdle;
+			mCurrentAnimation = mRightIdleAnimation;
+			mCurrentAnimation->Play();
+		}
 	}
-	//else 끝
 	//제자리쏘기
 	if (Input::GetInstance()->GetKeyDown('C'))
 	{
@@ -1073,25 +1114,7 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 		}
 	}
-	if (Input::GetInstance()->GetKeyDown(VK_UP))
-	{
-		if (mPlayerState == PlayerState::LeftIdle)
-		{
-			isMove = false;
-			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::LeftUpaim;
-			mCurrentAnimation = mLeftUpaimAnimation;
-			mCurrentAnimation->Play();
-		}
-		else if (mPlayerState == PlayerState::RightIdle)
-		{
-			isMove = false;
-			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::RightUpaim;
-			mCurrentAnimation = mRightUpaimAnimation;
-			mCurrentAnimation->Play();
-		}
-	}
+
 	//위로보고 필살기
 	if (Input::GetInstance()->GetKey(VK_UP))
 	{
@@ -1113,25 +1136,7 @@ void PlatformerPlayer::Update()
 			}
 		}
 	}
-	if (Input::GetInstance()->GetKeyUp(VK_UP))
-	{
-		if (mPlayerState == PlayerState::LeftUpaim)
-		{
-			isMove = true;
-			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::LeftIdle;
-			mCurrentAnimation = mLeftIdleAnimation;
-			mCurrentAnimation->Play();
-		}
-		else if (mPlayerState == PlayerState::RightUpaim)
-		{
-			isMove = true;
-			mCurrentAnimation->Stop();
-			mPlayerState = PlayerState::RightIdle;
-			mCurrentAnimation = mRightIdleAnimation;
-			mCurrentAnimation->Play();
-		}
-	}
+
 	//제자리점프
 	if (Input::GetInstance()->GetKeyDown('Z'))
 	{
