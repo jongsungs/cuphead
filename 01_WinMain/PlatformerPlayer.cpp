@@ -588,6 +588,7 @@ void PlatformerPlayer::Update()
 			}
 			if (Input::GetInstance()->GetKeyDown('V'))
 			{
+				isMove = false;
 				mX += 0.5f;
 				mCurrentAnimation->Stop();
 				mPlayerState = PlayerState::LeftSpecialAttack;
@@ -670,6 +671,7 @@ void PlatformerPlayer::Update()
 			}
 			if (Input::GetInstance()->GetKeyDown('V'))
 			{
+				isMove = false;
 				mX += 0.5f;
 				mCurrentAnimation->Stop();
 				mPlayerState = PlayerState::RightSpecialAttack;
@@ -1227,6 +1229,7 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::LeftIdle;
 			mCurrentAnimation = mLeftIdleAnimation;
 			mCurrentAnimation->Play();
+			isMove = true;
 		}
 	}
 	if (mPlayerState == PlayerState::RightSpecialAttack)
@@ -1237,6 +1240,7 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::RightIdle;
 			mCurrentAnimation = mRightIdleAnimation;
 			mCurrentAnimation->Play();
+			isMove = true;
 		}
 	}
 	if (mPlayerState == PlayerState::RightUpSpecialAttack)
@@ -1497,5 +1501,20 @@ void PlatformerPlayer::Render(HDC hdc)
 		mBullet[i]->Render(hdc);
 	}
 	
+
+}
+
+void PlatformerPlayer::InIntersectBlock(RECT rc)
+{
+	if ((rc.bottom - rc.top) < (rc.right - rc.left)&&rc.bottom == mRect.bottom)
+		mY -= rc.bottom - rc.top;
+	if ((rc.bottom - rc.top) < (rc.right - rc.left) && rc.top == mRect.top)
+		mY += rc.bottom - rc.top;
+	if ((rc.bottom - rc.top) > (rc.right - rc.left) && rc.left == mRect.left)
+		mX += rc.right - rc.left;
+	if ((rc.bottom - rc.top) > (rc.right - rc.left) && rc.right == mRect.right)
+		mX -= rc.right - rc.left;
+	
+
 
 }
