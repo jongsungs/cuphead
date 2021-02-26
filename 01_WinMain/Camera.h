@@ -13,6 +13,9 @@ protected:
 	GameObject* mTarget;		//쫓아가야할 타겟
 	RECT mCamerArea;
 	float mMoveSpeed;
+	bool mCamerAreaCheck = false;
+	float mPlayerX;
+	float mPlayerY;
 public:
 	Camera(Mode mode = Mode::Follow, float x = WINSIZEX/2, float y = WINSIZEX/2);
 	void Init()override; 
@@ -53,7 +56,7 @@ public:
 
 	inline float GetMoveSpeed()const { return mMoveSpeed; }
 	inline void SetMoveSpeed(float speed) { mMoveSpeed = speed; }
-	inline void SetCamerArea(RECT rc) { mCamerArea = rc; }
+	inline void SetCamerArea(RECT rc) { mCamerArea = rc; mCamerAreaCheck = true; }
 	inline void SetMode(Mode mode) { mMode = mode; };
 };
 
