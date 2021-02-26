@@ -138,7 +138,7 @@ void IntersectManager::IntersectPlayerAndFloor()
 			RECT playerRect = (*mPlayer)[a]->GetRect();
 			RECT dump;
 			if (IntersectRect(&dump, &floorRect, &playerRect)) {
-				(*mPlayer)[a]->InInterscet();
+				(*mPlayer)[a]->InIntersectFloor(dump);
 				(*mFloor)[b]->InInterscet();
 				return;
 			}

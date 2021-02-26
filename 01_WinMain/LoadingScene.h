@@ -8,7 +8,7 @@ class LoadingScene : public Scene
 	class Animation* mAnimation;
 public:
 	void AddLoadFunc(const function<void(void)>& func);
-
+	void AddLoadFunc(const vector<function<void(void)>>& funcs);
 	void Init()override;
 	void Release()override;
 	void Update()override;

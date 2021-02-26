@@ -22,6 +22,7 @@ static ClassName* GetInstance()\
 	static ClassName instance;\
 	return &instance;\
 }
+#define setLambda(type) []()->##type
 
 #define Resources(Path) (wstring(L"../02_Resources/").append(Path))
 #define ResourcesImage(Path) (wstring(L"../02_Resources/Image/").append(Path))
@@ -32,3 +33,4 @@ static ClassName* GetInstance()\
 protected: VarType VarName;\
 public: inline VarType Get##FuncName(void)const{return VarName;}\
 public: inline void Set##FuncName(VarType value){VarName = value;}
+

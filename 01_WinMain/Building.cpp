@@ -5,6 +5,8 @@
 #include "Talk.h"
 #include "Scene_ElderHouse.h"
 #include "Animation.h"
+#include "FadeOut.h"
+#include "LoadingScene.h"
 Building::Building(const string& name, Image* image, float x, float y)
 	:GameObject(name)
 {
@@ -27,6 +29,7 @@ void Building::Init()
 	mRect = RectMakeCenter(mX+mSizeX/2, mY+mSizeY/2, mSizeX, mSizeY);
 	mZImage = IMAGEMANAGER->FindImage(L"ZPopUp");
 	mZImageSizeX = 0;
+	mZImageSizeY = 0;
 	mIsClear = 1;
 	mIsRegular = 0;
 }
@@ -82,11 +85,9 @@ void Building::Update()
 				}
 				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
-					mZImageSizeX = 0;
-					mZImageSizeY = 0;
-					ObjectManager::GetInstance()->Delete();
-					SceneManager::GetInstance()->AddScene(L"Scene_ElderHouse", new Scene_ElderHouse);
-					SceneManager::GetInstance()->LoadScene(L"Scene_ElderHouse");
+					
+
+					FadeOut* fadeout = new FadeOut(false, L"ElderHouse", L"ElderHouse_LoadingScene");
 				}
 			}
 
@@ -137,8 +138,8 @@ void Building::Update()
 				{
 					mZImageSizeX = 0;
 					mZImageSizeY = 0;
-					ObjectManager::GetInstance()->Delete();
-					SceneManager::GetInstance()->LoadScene(L"BotanicPanic");
+
+					FadeOut* fadeout = new FadeOut(false, L"BotanicPanic", L"BotanicPanic_LoadingScene");
 					mIsTalk = 0;
 				}
 			}

@@ -8,7 +8,6 @@
 void Scene_ElderHouse::Init()
 {
 	
-	IMAGEMANAGER->LoadFromFile(L"ElderHouse_Inside", Resources(L"/ElderHouse/ElderHouse_Inside.bmp"), 1695, 834, true);
 
 	mImage = IMAGEMANAGER->GetInstance()->FindImage(L"ElderHouse_Inside");
 	
@@ -18,11 +17,12 @@ void Scene_ElderHouse::Init()
 	ObjectManager::GetInstance()->Init();
 	
 	Camera* camera = new Camera();
-	camera->SetMode(Camera::Mode::Follow);
-
-	CameraManager::GetInstance()->GetMainCamera()->SetTarget(mPlayer);
+	camera->SetX(250);
+	camera->SetY(50);
+	camera->SetMode(Camera::Mode::Free);
 	CameraManager::GetInstance()->SetMainCamera(camera);
-	mDoorRect = RectMakeCenter(100, 500, 100, 100);
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::UI, camera);
+	mDoorRect = RectMakeCenter(300, 600, 200, 200);
 }
 
 void Scene_ElderHouse::Release()
@@ -39,7 +39,7 @@ void Scene_ElderHouse::Update()
 		
 		if (Input::GetInstance()->GetKeyDown('Z'))
 		{
-			FadeOut* fadeout = new FadeOut(false, L"Scene_OverWorld", L"Scene1LoadingScene");
+			FadeOut* fadeout = new FadeOut(false, L"OverWorld", L"OverWorld_LoadingScene");
 		}
 		
 	}

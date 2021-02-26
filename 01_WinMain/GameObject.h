@@ -54,6 +54,7 @@ public:
 
 	//상시 충돌값 함수
 	void virtual InInterscet(){}
+	void virtual InIntersectFloor(RECT rc) {}
 	void virtual InIntersectDamage() {}
 };
 

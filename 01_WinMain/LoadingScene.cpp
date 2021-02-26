@@ -4,9 +4,15 @@
 #include "Animation.h"
 void LoadingScene::AddLoadFunc(const function<void(void)>& func)
 {
-	mLoadList.push_back(func);
+	ThreadManager::GetInstance()->SetFunts(func);
 }
-
+void LoadingScene::AddLoadFunc(const vector<function<void(void)>>& funcs) // vector 통짜형 -> 스테이지 변경, 맵 변경 등 대량의 데이터들
+{
+	mIsEndLoading = false;
+	for (int i = 0; i < funcs.size(); ++i) {
+		mLoadList.push_back(funcs[i]);
+	}
+}
 void LoadingScene::Init()
 {
 	mLoadIndex = 0;
@@ -26,18 +32,19 @@ void LoadingScene::Release()
 void LoadingScene::Update()
 {
 	mAnimation->Update();
-	if (mLoadIndex >= mLoadList.size())
-	{
-		if (Input::GetInstance()->GetKeyDown(VK_SPACE))
-		{
-			mIsEndLoading = true;
-			mLoadList.clear();
-		}
-		return;
-	}
-	function<void(void)> func = mLoadList[mLoadIndex];
-	func();
-	mLoadIndex++;
+	if(!ThreadManager::GetInstance()->GetIsThreadPlay())
+		mIsEndLoading = true;
+
+
+	//if (mLoadIndex >= mLoadList.size())
+	//{
+	//	mIsEndLoading = true;
+	//	mLoadList.clear();
+	//	return;
+	//}
+	//function<void(void)> func = mLoadList[mLoadIndex];
+	//func();
+	//mLoadIndex++;
 }
 
 void LoadingScene::Render(HDC hdc)

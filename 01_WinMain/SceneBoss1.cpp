@@ -42,21 +42,29 @@ void SceneBoss1::Init(){
 	CameraManager::GetInstance()->SetMainCamera(camera);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, camera);
 	ObjectManager::GetInstance()->Init();
+	mSceneDelayTime = 0.f;
 }
 
 void SceneBoss1::Release(){
-	ObjectManager::GetInstance()->Release();
+	ObjectManager::GetInstance()->Delete();
 }
 
 void SceneBoss1::Update(){
+	float CarrotHp = ObjectManager::GetInstance()->FindObject(ObjectLayer::Boss, "Carrot")->GetHP();
+	if(CarrotHp < 0){
+		mSceneDelayTime += Time::GetInstance()->DeltaTime();
+	}
+	if (mSceneDelayTime > 5) {
+		SceneManager::GetInstance()->LoadScene(L"OverWorld");
+	}
 	ObjectManager::GetInstance()->Update();
 }
 
 void SceneBoss1::Render(HDC hdc){
 	CameraManager::GetInstance()->GetMainCamera()->ScaleRender(hdc, mBackGround1, -5, 0, WINSIZEX + 10, WINSIZEY);
 
-	if (ObjectManager::GetInstance()->FindObject("Carrot")->GetIsActive()) {
-		ObjectManager::GetInstance()->FindObject("Carrot")->Render(hdc);
+	if (ObjectManager::GetInstance()->FindObject(ObjectLayer::Boss, "Carrot")->GetIsActive()) {
+		ObjectManager::GetInstance()->FindObject(ObjectLayer::Boss, "Carrot")->Render(hdc);
 	}
 
 	CameraManager::GetInstance()->GetMainCamera()->ScaleRender(hdc, mBackGround2, -5, 0, WINSIZEX + 10, WINSIZEY);

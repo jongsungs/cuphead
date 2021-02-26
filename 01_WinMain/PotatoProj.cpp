@@ -21,7 +21,6 @@ void PotatoProj::Init(){
 
 	vector<GameObject*>* EnemyProj = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Enemy_Bullet);
 	mName = to_string(EnemyProj->size());
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, this);
 
 	ParryAbleAnimation = new Animation();
 	ParryAbleAnimation->InitFrameByStartEnd(0, 0, 3, 0, false);

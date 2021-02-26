@@ -23,6 +23,7 @@ enum class ObjectLayer : int
 	FrontGround,
 	UI,
 	Talk,
+	FadeOut,
 	End
 };
 

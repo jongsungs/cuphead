@@ -20,7 +20,7 @@ private:
 	Player_Bullet_Type mPlayerBulletType;
 	map<Player_Bullet_Type, Player_Have> mPlayerHaveBullet;
 public :
-	BulletManager();
+	BulletManager(); 
 	void Player_Shoot(float x, float y, float angle);
 	void Enmey_Shoot(Enemy_Bullet_Type type, float x, float y, float speed, float angle);
 
