@@ -20,22 +20,25 @@ Initialize : 초기화
 *///
 void MainGame::Init()
 {
+	ImageSet::GetInstance()->SetFxImage();
 	mBackBuffer = new Image();
 	mBackBuffer->CreateEmpty(WINSIZEX, WINSIZEY);
-	ImageSet::GetInstance()->SetFxImage();
+	
 	SceneManager::GetInstance()->AddScene(L"BotanicPanic", new SceneBoss1);
 	SceneManager::GetInstance()->AddScene(L"FloralFury", new SceneBoss2);
 	SceneManager::GetInstance()->AddScene(L"Scene1", new Scene1);
-	//SceneManager::GetInstance()->AddScene(L"Scene2", new Scene2);
+	SceneManager::GetInstance()->AddScene(L"Scene2", new Scene2);
 	SceneManager::GetInstance()->AddScene(L"OverWorld", new Scene_OverWorld);
-
+	//ThreadManager::GetInstance()->SetFunts([]()->void {ImageSet::GetInstance()->SetImage(); });
 	LoadingScene* mLoading = new LoadingScene;
-	mLoading->AddLoadFunc([]()->void {ImageSet::GetInstance()->SetImage();});
+	mLoading->AddLoadFunc(ImageSet::GetInstance()->SetImage());
+	mLoading->AddLoadFunc(ImageSet::GetInstance()->SetOverWorldImage());
 	mLoading->AddLoadFunc([]()->void {SoundSet::GetInstance()->SetSound(); });
+
 	SceneManager::GetInstance()->AddScene(L"Scene1LoadingScene", mLoading);
 
 	SceneManager::GetInstance()->LoadSceneLoading(L"OverWorld",L"Scene1LoadingScene");
-
+	//ThreadManager::GetInstance()->LoadStartFunts();
 }
 
 /*

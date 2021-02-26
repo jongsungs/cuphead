@@ -201,6 +201,7 @@
     <ClInclude Include="Spread.h" />
     <ClInclude Include="Talk.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +260,7 @@
     <ClCompile Include="SoundSet.cpp" />
     <ClCompile Include="Spread.cpp" />
     <ClCompile Include="Talk.cpp" />
+    <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>

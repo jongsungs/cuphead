@@ -294,6 +294,9 @@
     <ClInclude Include="FadeOut.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="ThreadManager.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="01_WinMain.cpp">
@@ -448,6 +451,9 @@
     </ClCompile>
     <ClCompile Include="FadeOut.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadManager.cpp">
+      <Filter>FrameWork</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
