@@ -127,11 +127,16 @@ void Onion::Update() {
 		if (mCurrentAnimation->GetIsPlay() == false) {
 			mState = EnemyState::Idle;
 			mDelayTime = 0;
+			mCurrentAnimation->Stop();
 		}
 		break;
 		
 		
 	case EnemyState::Idle:
+		if (mCurrentAnimation != mIdleAnimation) {
+			mCurrentAnimation->Stop();
+			mIdleAnimation->Play();
+		}
 		mImage = mIdleImage;
 		mSizeX = mImage->GetFrameWidth();
 		mSizeY = mImage->GetFrameHeight();
@@ -228,6 +233,7 @@ void Onion::Update() {
 }
 
 void Onion::Render(HDC hdc) {
+
 	CameraManager::GetInstance()->GetMainCamera()
 		->ScaleFrameRenderFromBottom(hdc, mImage, mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 472, 570);
 	if(mState == EnemyState::Attack)
