@@ -31,8 +31,8 @@ void MainGame::Init()
 	SceneManager::GetInstance()->AddScene(L"OverWorld", new Scene_OverWorld);
 	//ThreadManager::GetInstance()->SetFunts([]()->void {ImageSet::GetInstance()->SetImage(); });
 	LoadingScene* mLoading = new LoadingScene;
-	mLoading->AddLoadFunc(ImageSet::GetInstance()->SetImage());
-	mLoading->AddLoadFunc(ImageSet::GetInstance()->SetOverWorldImage());
+	mLoading->AddLoadFunc([]()->void {ImageSet::GetInstance()->SetImage(); });
+	mLoading->AddLoadFunc([]()->void {ImageSet::GetInstance()->SetOverWorldImage(); });
 	mLoading->AddLoadFunc([]()->void {SoundSet::GetInstance()->SetSound(); });
 
 	SceneManager::GetInstance()->AddScene(L"Scene1LoadingScene", mLoading);
@@ -59,6 +59,7 @@ Update : 매 프레임 실행되는 함수, 여기서 연산 처리 한다.
 */
 void MainGame::Update()
 {
+	ThreadManager::GetInstance()->Update();
 	SceneManager::GetInstance()->Update();
 }
 

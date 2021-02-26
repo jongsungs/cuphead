@@ -3,15 +3,18 @@ class ThreadManager
 {
 	Singleton(ThreadManager)
 private:
-	bool mIsThreadPlay = false;
-	bool mIsPlay = false;
-	queue<function<void(void)>> mFunts;
+	bool mIsThreadPlay = true;
+	queue<function<void(void)>> mFuncs;
 	thread* mLoadingThread;
 public :
+	~ThreadManager();
 	void LoadStartFunts();
 	void SetFunts(const function<void(void)>& funts);
 	void Loding();
 	void LoadStartEnd();
+	void Update();
 
-	void SetIsPlay(bool d) { mIsPlay = d; }
+	int GetIsListSize() { return mFuncs.size(); }
+	bool GetIsThreadPlay() { return mIsThreadPlay; }
+
 };

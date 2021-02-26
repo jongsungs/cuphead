@@ -7,7 +7,7 @@ class ImageSet
 private:
 	vector<function<void(void)>> mImageLoadList;
 public :
-	vector<function<void(void)>> SetImage(); // 이미지 셋팅
+	void SetImage(); // 이미지 셋팅
 	void SetFxImage(); //필터 셋팅
-	vector<function<void(void)>> SetOverWorldImage();
+	void SetOverWorldImage();
 };
