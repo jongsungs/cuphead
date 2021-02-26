@@ -136,13 +136,13 @@ void Potato::Update() {
 			if (mAttackAnimation->GetNowFrameX() == 16) {
 				mAttackCount++;
 				if (mAttackCount < 4) {
-					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 205, 5, PI, false);
+					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 205, 7, PI, false);
 					proj->Init();
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
 					mIsAttack = true;
 				}
 				else {
-					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 205, 5, PI, true);
+					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 205, 7, PI, true);
 					proj->Init();
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
 					mIsAttack = true;

@@ -100,6 +100,7 @@ void Carrot::Update() {
 		if (mCurrentAnimation->GetIsPlay() == false) {
 			mState = EnemyState::Attack;
 			mDelayTime = 0;
+			count = 0;
 		}
 		mCurrentAnimation->Play();
 		break;
@@ -110,7 +111,18 @@ void Carrot::Update() {
 		mSizeY = mImage->GetFrameHeight();
 		mCurrentAnimation = mAttackAnimation;
 		mDelayTime += Time::GetInstance()->DeltaTime();
-		if (mDelayTime > 5)	
+
+		mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
+
+		if (mBetweenAttackDelay > 0.1) {
+			count++;
+			CarrotProj* proj = new CarrotProj("proj", WINSIZEX - WINSIZEX / 20 * count, 0, 10, PI*3/2, 1);
+			proj->Init();
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet,proj);
+			mBetweenAttackDelay = 0;
+		}
+
+		if (mDelayTime > 2)	
 			mState = EnemyState::ToAttack;
 
 		mCurrentAnimation->Play();
@@ -159,6 +171,7 @@ void Carrot::Update() {
 		if (mCurrentAnimation->GetIsPlay() == false) {
 			mState = EnemyState::Attack;
 			mDelayTime = 0;
+			count = 0;
 		}
 		mCurrentAnimation->Play();
 		break;

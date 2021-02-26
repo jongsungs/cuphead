@@ -3,12 +3,15 @@
 
 class CarrotProj:public EnemyProj{
 protected:
-	Image* CarrotMissile;
-	Image* CarrotBeam;
+	Image* CarrotMissileImage;
+	Image* CarrotBeamImage;
+
+	int mWeaponType;
 
 	Animation* CarrotMissileAnimation;
 	Animation* CarrotBeamAnimation;
 public:
+	CarrotProj(const string& name, float x, float y, float speed, float angle, int weapontype);
 	virtual void Init()override;
 	virtual void Release()override;
 	virtual void Update()override;

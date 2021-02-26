@@ -25,12 +25,12 @@ void PotatoProj::Init(){
 	ParryAbleAnimation = new Animation();
 	ParryAbleAnimation->InitFrameByStartEnd(0, 0, 3, 0, false);
 	ParryAbleAnimation->SetIsLoop(true);
-	ParryAbleAnimation->SetFrameUpdateTime(0.1f);
+	ParryAbleAnimation->SetFrameUpdateTime(0.07f);
 
 	NonParryAbleAnimation = new Animation();
 	NonParryAbleAnimation->InitFrameByStartEnd(0, 0, 7, 0, false);
 	NonParryAbleAnimation->SetIsLoop(true);
-	NonParryAbleAnimation->SetFrameUpdateTime(0.1f);
+	NonParryAbleAnimation->SetFrameUpdateTime(0.07f);
 }
 
 void PotatoProj::Release(){
@@ -43,13 +43,12 @@ void PotatoProj::Update(){
 		mImage = ParryAbleImg;
 		mCurrentAnimation = ParryAbleAnimation;
 	}
-		
 	else {
 		mImage = NonParryAbleImg;
 		mCurrentAnimation = NonParryAbleAnimation;
 	}
-	mSizeX = mImage->GetFrameWidth();
-	mSizeY = mImage->GetFrameHeight();
+	mSizeX = mImage->GetFrameWidth()*3/4;
+	mSizeY = mImage->GetFrameHeight()*3/4;
 
 	mCurrentAnimation->Play();
 
@@ -57,6 +56,11 @@ void PotatoProj::Update(){
 	mY += -sinf(mAngle) * mSpeed;
 
 	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+	if (mRect.right < 0) {
+		mIsActive = false;
+		mIsDestroy = true;
+	}
+		
 	mCurrentAnimation->Update();
 }
 
@@ -64,5 +68,5 @@ void PotatoProj::Render(HDC hdc){
 	RenderRect(hdc, mRect);
 	
 	CameraManager::GetInstance()->GetMainCamera()
-		->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
+		->FrameRender(hdc, mImage, mX - mImage->GetFrameWidth()/2, mY - mImage->GetFrameHeight()/2, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 }

@@ -9,21 +9,15 @@ class Onion : public Enemy {
 	Image* mBeforeAttackImage;
 	
 	Image* mTearEffectImage;
-	Image* mTearAImage;
-	Image* mTearBImage;
 
 	Animation* mDeathLeaveAnimation;
 	Animation* mBeforeAttackAnimation;
 	Animation* mChangeToAttackAnimation;
 	Animation* mChangeFromAttackAnimation;
-
-	Animation* mTearEffectLoopAnimation;
 	
 	int mProjInitX;
 
 	Animation* mTearEffectAnimation;
-	Animation* mTearAAnimation;
-	Animation* mTearBAnimation;
 
 	float mBetweenAttackDelay;
 public:
