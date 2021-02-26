@@ -13,7 +13,7 @@ FadeOut::FadeOut(bool isReverse, float frameTime)
 	mY = WINSIZEY/2;
 	mImage = IMAGEMANAGER->FindImage(L"FadeOut");
 	mAnimation = new Animation();
-	mAnimation->InitFrameByStartEnd(0, 0, mImage->GetFrameX() - 1, 0, true);
+	mAnimation->InitFrameByBackStartEnd(mImage->GetFrameX() - 1, 0, 0, 0, false);
 	mAnimation->SetIsLoop(false);
 	mAnimation->SetFrameUpdateTime(frameTime);
 	mAnimation->Play();
