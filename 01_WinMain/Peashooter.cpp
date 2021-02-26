@@ -9,9 +9,9 @@ Peashooter::Peashooter(string name, float x, float y, float angle)
 	mSpeed = 10.f;
 }
 void Peashooter::Init() {
-	vector<GameObject*>* PlayerBullet = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Player_Bullet);
+	//vector<GameObject*>* PlayerBullet = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Player_Bullet);
 	mName = "Peashooter";
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, this);
+	//ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, this);
 };
 void Peashooter::Release() {
 	
@@ -28,8 +28,8 @@ void Peashooter::Update() {
 	Range -= mSpeed;
 }
 void Peashooter::Render(HDC hdc) {
-	RenderRect(hdc, mRect);
-	mImage->Render(hdc, mX, mY);
+	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	CameraManager::GetInstance()->GetMainCamera()->Render(hdc, mImage,mX, mY);
 	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	//CameraManager::GetInstance()->GetMainCamera()->Render(hdc,mImage,mX,mY);
 }
