@@ -7,6 +7,7 @@
 #include "GameEvent.h"
 #include "Enemy.h"
 #include "GameObject.h"
+#include "Block.h"
 void Scene1::Init()
 {
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, new PlatformerPlayer("Player",WINSIZEX,WINSIZEY - 150));
@@ -24,8 +25,11 @@ void Scene1::Init()
 	camera->SetY(WINSIZEY / 2);
 	camera->SetTarget(ObjectManager::GetInstance()->FindObject("Player"));
 	CameraManager::GetInstance()->SetMainCamera(camera);
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, camera);
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Camera, camera);
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground",0,WINSIZEY/8*7,WINSIZEX,100));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Trap",WINSIZEX/8*6, WINSIZEY-200, 100, 100));
 	ObjectManager::GetInstance()->Init();
+
 }
 
 void Scene1::Release()
@@ -35,7 +39,9 @@ void Scene1::Release()
 
 void Scene1::Update()
 {
+	//IntersectManager::GetInstance()->IntersectPlayerAndFloor();
 	ObjectManager::GetInstance()->Update();
+	
 }
 
 void Scene1::Render(HDC hdc)

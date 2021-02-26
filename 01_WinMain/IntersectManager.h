@@ -11,7 +11,7 @@ class IntersectManager
 {
 	Singleton(IntersectManager)
 private:
-	vector<class GameObject*>* mFloor;
+	vector<class GameObject*>* mBlock;
 	vector<class GameObject*>* mBullet;
 	vector<class GameObject*>* mEnemyBullet;
 	vector<class GameObject*>* mEnemy;

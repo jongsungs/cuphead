@@ -4,7 +4,7 @@
 
 void IntersectManager::SetObjectPt()
 {
-	mFloor;
+	mBlock = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Block);
 	mBullet =ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Player_Bullet);
 	mEnemyBullet = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Enemy_Bullet);
 	mEnemy = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Enemy);
@@ -28,10 +28,10 @@ bool IntersectManager::IntersectObjectList(GameObject* object, ObjectLayer name)
 }
 void IntersectManager::IntersectEnemyAndBullet()
 {
-	if (mBullet->size()){
+	if (!mBullet->size()){
 		return;
 	}
-	if (mEnemy->size() && mBoss->size()) {
+	if (!mEnemy->size() && !mBoss->size()) {
 		return;
 	}
 	for (int a = 0; a < mBullet->size(); ++a) {
@@ -66,7 +66,7 @@ void IntersectManager::IntersectEnemyAndBullet()
 
 void IntersectManager::IntersectPlayerAndEnemyBullet()
 {
-	if (mEnemyBullet->size()) {
+	if (!mEnemyBullet->size()) {
 		return;
 	}
 	for (int a = 0; a < mEnemyBullet->size(); ++a) {
@@ -89,10 +89,10 @@ void IntersectManager::IntersectPlayerAndEnemyBullet()
 
 void IntersectManager::IntersectPlayerAndEnemy()
 {
-	if (mPlayer->size()) {
+	if (!mPlayer->size()) {
 		return;
 	}
-	if (mEnemy->size() && mBoss->size()) {
+	if (!mEnemy->size() && !mBoss->size()) {
 		return;
 	}
 	for (int a = 0; a < mPlayer->size(); ++a) {
@@ -125,21 +125,21 @@ void IntersectManager::IntersectPlayerAndEnemy()
 
 void IntersectManager::IntersectPlayerAndFloor()
 {
-	if (mPlayer->size() || mFloor->size()) {
+	if (!mPlayer->size() || !mBlock->size()) {
 		return;
 	}
 	for (int a = 0; a < mPlayer->size(); ++a) {
 		if (!(*mPlayer)[a]->GetIsActive() && (*mPlayer)[a]->GetIsDestroy())
 			continue;
-		for (int b = 0; b < mFloor->size(); ++b) {
-			if (!(*mFloor)[a]->GetIsActive() && (*mFloor)[a]->GetIsDestroy())
+		for (int b = 0; b < mBlock->size(); ++b) {
+			if (!(*mBlock)[b]->GetIsActive() && (*mBlock)[b]->GetIsDestroy())
 				continue;
-			RECT floorRect = (*mFloor)[a]->GetRect();
+			RECT floorRect = (*mBlock)[b]->GetRect();
 			RECT playerRect = (*mPlayer)[a]->GetRect();
 			RECT dump;
 			if (IntersectRect(&dump, &floorRect, &playerRect)) {
-				(*mPlayer)[a]->InIntersectFloor(dump);
-				(*mFloor)[b]->InInterscet();
+				(*mPlayer)[a]->InIntersectBlock(dump);
+				(*mBlock)[b]->InInterscet();
 				return;
 			}
 		}

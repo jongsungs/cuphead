@@ -127,6 +127,15 @@
     <Filter Include="MainGame\Object\OverWorld\Talk">
       <UniqueIdentifier>{4685a549-e78c-4ee2-9d34-8594c2c1f5db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FrameWork\IntersectManager">
+      <UniqueIdentifier>{81712943-4559-4bba-bcb9-7bb1fc31a726}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\PlayerInfo">
+      <UniqueIdentifier>{6e5c8fa0-6cae-4c42-a23b-e087d3742b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Block">
+      <UniqueIdentifier>{28a818cb-7dc7-4501-b3f7-24aad66e4f65}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -294,14 +303,23 @@
     <ClInclude Include="ThreadManager.h">
       <Filter>FrameWork</Filter>
     </ClInclude>
+    <ClInclude Include="FadeOut.h">
+      <Filter>MainGame\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="IntersectManager.h">
+      <Filter>FrameWork\IntersectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInfo.h">
+      <Filter>MainGame\PlayerInfo</Filter>
+    </ClInclude>
     <ClInclude Include="Scene_Start1.h">
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Scene_Start2.h">
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="FadeOut.h">
-      <Filter>MainGame\Object\Effect</Filter>
+    <ClInclude Include="Block.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -458,14 +476,23 @@
     <ClCompile Include="ThreadManager.cpp">
       <Filter>FrameWork</Filter>
     </ClCompile>
+    <ClCompile Include="FadeOut.cpp">
+      <Filter>MainGame\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="IntersectManager.cpp">
+      <Filter>FrameWork\IntersectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInfo.cpp">
+      <Filter>MainGame\PlayerInfo</Filter>
+    </ClCompile>
     <ClCompile Include="Scene_Start1.cpp">
       <Filter>MainGame\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Scene_Start2.cpp">
       <Filter>MainGame\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="FadeOut.cpp">
-      <Filter>MainGame\Object\Effect</Filter>
+    <ClCompile Include="Block.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
