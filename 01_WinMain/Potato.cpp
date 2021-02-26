@@ -8,7 +8,7 @@
 #include "PotatoProj.h"
 
 Potato::Potato(const string& name, float x, float y)
-	:Enemy(name,x,y)
+	:Enemy(name, x, y)
 {
 }
 
@@ -24,7 +24,7 @@ void Potato::Init() {
 	IntroEarthImage = IMAGEMANAGER->FindImage(L"PotatoIntroEarth");
 	IntroEarthImage1 = IMAGEMANAGER->FindImage(L"PotatoIntroEarth1");
 	IntroEarthImage2 = IMAGEMANAGER->FindImage(L"PotatoIntroEarth2");
-	
+
 	//애니메이션 설정
 	//등장 애니메이션
 	mIntroAnimation = new Animation();
@@ -59,8 +59,8 @@ void Potato::Init() {
 	mImage = mIntroImage;
 	mSizeX = mImage->GetFrameWidth();
 	mSizeY = mImage->GetFrameHeight();
-	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);	
-	
+	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+
 	//HP 임의설정
 	mHP = 50;
 	mAttackStartDelay = 0;
@@ -77,105 +77,107 @@ void Potato::Release() {
 void Potato::Update() {
 	if (Input::GetInstance()->GetKeyDown(VK_CONTROL))
 		mHP -= 25;
-	
+
 	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
 		mState = EnemyState::Death;
 	}
 
 	//상태에 따른 다른 애니메이션 출력
 	switch (mState) {
-		case EnemyState::Intro:
-			mImage = mIntroImage;
-			mSizeX = mImage->GetFrameWidth();
-			mSizeY = mImage->GetFrameHeight();
-			mCurrentAnimation = mIntroAnimation;
-			if (mCurrentAnimation->GetIsPlay() == false) {
-				mDelayTime = 0;
-				mState = EnemyState::Idle;
-			}
-				
-			mCurrentAnimation->Play();
-			break;
-		case EnemyState::Idle:
-			if (mCurrentAnimation != mIdleAnimation) {
-				mCurrentAnimation->Stop();
-				mIdleAnimation->Play();
-			}
-			mImage = mIdleImage;
-			mSizeX = mImage->GetFrameWidth();
-			mSizeY = mImage->GetFrameHeight();
-			mCurrentAnimation = mIdleAnimation;
-			mDelayTime += Time::GetInstance()->DeltaTime();
-			if (mAttackCount == 0) {
-				if (mDelayTime > 1) {
-					mCurrentAnimation->Stop();
-					mAttackStartDelay = 0;
-					mDelayTime = 0;
-					mState = EnemyState::Attack;
-				}
-			}
-			else {
+	case EnemyState::Intro:
+		mImage = mIntroImage;
+		mSizeX = mImage->GetFrameWidth();
+		mSizeY = mImage->GetFrameHeight();
+		mCurrentAnimation = mIntroAnimation;
+		if (mCurrentAnimation->GetIsPlay() == false) {
+			mDelayTime = 0;
+			mState = EnemyState::Idle;
+		}
+
+		mCurrentAnimation->Play();
+		break;
+	case EnemyState::Idle:
+		if (mCurrentAnimation != mIdleAnimation) {
+			mCurrentAnimation->Stop();
+			mIdleAnimation->Play();
+		}
+		mImage = mIdleImage;
+		mSizeX = mImage->GetFrameWidth();
+		mSizeY = mImage->GetFrameHeight();
+		mCurrentAnimation = mIdleAnimation;
+		mDelayTime += Time::GetInstance()->DeltaTime();
+		if (mAttackCount == 0) {
+			if (mDelayTime > 1) {
 				mCurrentAnimation->Stop();
 				mAttackStartDelay = 0;
 				mDelayTime = 0;
 				mState = EnemyState::Attack;
 			}
-			mCurrentAnimation->Play();
-			break;
+		}
+		else {
+			mCurrentAnimation->Stop();
+			mAttackStartDelay = 0;
+			mDelayTime = 0;
+			mState = EnemyState::Attack;
+		}
+		mCurrentAnimation->Play();
+		break;
 
-		case EnemyState::Attack:
-			if (mCurrentAnimation != mAttackAnimation) {
-				mCurrentAnimation->Stop();
-				mAttackAnimation->Play();
-			}
-			mImage = mAttackImage;
-			mSizeX = mImage->GetFrameWidth();
-			mSizeY = mImage->GetFrameHeight();
-			mCurrentAnimation = mAttackAnimation;
-			mAttackStartDelay += Time::GetInstance()->DeltaTime();
-
-			if (mAttackStartDelay > 0.5) {
+	case EnemyState::Attack:
+		if (mCurrentAnimation != mAttackAnimation) {
+			mCurrentAnimation->Stop();
+			mAttackAnimation->Play();
+		}
+		mImage = mAttackImage;
+		mSizeX = mImage->GetFrameWidth();
+		mSizeY = mImage->GetFrameHeight();
+		mCurrentAnimation = mAttackAnimation;
+		if (mIsAttack == false) {
+			if (mAttackAnimation->GetNowFrameX() == 16) {
 				mAttackCount++;
 				if (mAttackCount < 4) {
-					PotatoProj* proj = new PotatoProj("proj", mX, mY, 50, PI, false);
+					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 205, 5, PI, false);
 					proj->Init();
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
-					mAttackStartDelay = 0;
-					if (mAttackCount == 3) {
-						PotatoProj* proj = new PotatoProj("proj", mX, mY, 50, PI, true);
-						proj->Init();
-						ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
-						mAttackCount = 0;
-						mAttackStartDelay = 0;
-					}
+					mIsAttack = true;
+				}
+				else {
+					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 205, 5, PI, true);
+					proj->Init();
+					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
+					mIsAttack = true;
+					mAttackCount = 0;
 				}
 			}
-			if (mCurrentAnimation->GetIsPlay() == false) {
- 				mState = EnemyState::Idle;
-				mCurrentAnimation->Stop();
-			}
-			mCurrentAnimation->Play();
-			break;
+		}
 
-		case EnemyState::Death:
-			if (mCurrentAnimation != mDeathAnimation) {
-				mCurrentAnimation->Stop();
-				mDeathAnimation->Play();
-			}
-			mImage = mDeathImage;
-			mSizeX = mImage->GetFrameWidth();
-			mSizeY = mImage->GetFrameHeight();
-			mCurrentAnimation = mDeathAnimation;
-			if (mCurrentAnimation->GetIsPlay() == false)
-				mState = EnemyState::End;
-			mCurrentAnimation->Play();
-			break;
+		if (mCurrentAnimation->GetIsPlay() == false) {
+			mState = EnemyState::Idle;
+			mCurrentAnimation->Stop();
+			mIsAttack = false;
+		}
+		mCurrentAnimation->Play();
+		break;
 
-		case EnemyState::End:
-			mIsActive = false;
-			mIsDestroy = true;
-			ObjectManager::GetInstance()->FindObject("Onion")->SetIsActive(true);
-			break;
+	case EnemyState::Death:
+		if (mCurrentAnimation != mDeathAnimation) {
+			mCurrentAnimation->Stop();
+			mDeathAnimation->Play();
+		}
+		mImage = mDeathImage;
+		mSizeX = mImage->GetFrameWidth();
+		mSizeY = mImage->GetFrameHeight();
+		mCurrentAnimation = mDeathAnimation;
+		if (mCurrentAnimation->GetIsPlay() == false)
+			mState = EnemyState::End;
+		mCurrentAnimation->Play();
+		break;
+
+	case EnemyState::End:
+		mIsActive = false;
+		mIsDestroy = true;
+		ObjectManager::GetInstance()->FindObject("Onion")->SetIsActive(true);
+		break;
 	}
 	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 	mIntroEarthAnimation->Update();

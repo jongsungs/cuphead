@@ -9,6 +9,7 @@ class Potato : public Enemy {
 	float mAttackStartDelay;
 	int mAttackCount;
 	float mDelayTime;
+	bool mIsAttack;
 	Animation* mIntroEarthAnimation;
 public:
 	Potato(const string& name, float x, float y);
