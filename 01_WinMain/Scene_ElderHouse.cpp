@@ -8,7 +8,6 @@
 void Scene_ElderHouse::Init()
 {
 	
-	IMAGEMANAGER->LoadFromFile(L"ElderHouse_Inside", Resources(L"/ElderHouse/ElderHouse_Inside.bmp"), 1695, 834, true);
 
 	mImage = IMAGEMANAGER->GetInstance()->FindImage(L"ElderHouse_Inside");
 	
@@ -39,7 +38,7 @@ void Scene_ElderHouse::Update()
 		
 		if (Input::GetInstance()->GetKeyDown('Z'))
 		{
-			FadeOut* fadeout = new FadeOut(false, L"Scene_OverWorld", L"Scene1LoadingScene");
+			FadeOut* fadeout = new FadeOut(false, L"OverWorld", L"OverWorld_LoadingScene");
 		}
 		
 	}

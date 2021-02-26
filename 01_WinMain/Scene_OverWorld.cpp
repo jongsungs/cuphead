@@ -11,6 +11,9 @@
 #include "FadeOut.h"
 void Scene_OverWorld::Init()
 {
+	//이미지
+	IMAGEMANAGER->LoadFromFile(L"FadeOut", Resources(L"/FadeOut.bmp"), 12800, 720, 10, 1, true);
+	//월드맵이미지
 	IMAGEMANAGER->LoadFromFile(L"CupHead_OverWolrd", Resources(L"/overworld/Cuphead/CupHead_OverWorld.bmp"), 1649, 1130, 16, 10, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"NPC_Apple", Resources(L"/overworld/NPC/NPC_Apple.bmp"), 2600, 100, 26, 1, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"OverWorld", Resources(L"/overworld/OverWorld.bmp"), 4000, 2200, true);
@@ -30,9 +33,11 @@ void Scene_OverWorld::Init()
 	IMAGEMANAGER->LoadFromFile(L"BotanicPanic_Talk1", Resources(L"/overworld/buildings/BotanicPanic_Title_Simple.bmp"), 1165, 834, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"BotanicPanic_Talk2", Resources(L"/overworld/buildings/BotanicPanic_Title_Regular.bmp"), 1165, 834, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"Black", Resources(L"/overworld/buildings/Black.bmp"), 1280, 720, false);
-	IMAGEMANAGER->LoadFromFile(L"FadeOut", Resources(L"/FadeOut.bmp"), 12800, 720, 10, 1, true);
+	
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Flag", Resources(L"/overworld/Flag.bmp"), 1788, 220, 12, 1, true, RGB(99, 92, 99));
 
+	//장로집 이미지
+	IMAGEMANAGER->LoadFromFile(L"ElderHouse_Inside", Resources(L"/ElderHouse/ElderHouse_Inside.bmp"), 1695, 834, true);
 
 	FadeOut* fadeout = new FadeOut(true);
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("Flatformer", IMAGEMANAGER->FindImage(L"OverWorld_Building_Flatformer"), 2000, 800));
