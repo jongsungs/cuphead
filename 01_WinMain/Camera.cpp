@@ -27,6 +27,10 @@ void Camera::Init()
 	case Camera::Mode::Boss:
 		mX = WINSIZEX / 2;
 		mY = WINSIZEY / 2;
+		if (mTarget) {
+			mPlayerX = mTarget->GetX();
+			mPlayerY = mTarget->GetY();
+		}
 		break;
 	}
 	mSizeX = WINSIZEX;
@@ -50,10 +54,30 @@ void Camera::Update()
 			//mX = mTarget->GetX();
 			//mY = mTarget->GetY();
 			//멀리있으면 빨리 쫓아가야하고 가까이 있으면 천천히 쫓아가야함
-			mX = Math::Lerp(mX, mTarget->GetX(), 2.f * Time::GetInstance()->DeltaTime());
-			mY = Math::Lerp(mY, mTarget->GetY(), 2.f * Time::GetInstance()->DeltaTime());
+			if (mCamerAreaCheck) {
+				float dumpX = Math::Lerp(mX, mTarget->GetX(), 2.f * Time::GetInstance()->DeltaTime());
+				float dumpmY = Math::Lerp(mY, mTarget->GetY(), 2.f * Time::GetInstance()->DeltaTime());
 
-			mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+				RECT dump = RectMakeCenter(dumpX, dumpmY, mSizeX, mSizeY);
+				if (mCamerArea.left < mRect.left) {
+					mX = Math::Lerp(mX, mTarget->GetX(), 2.f * Time::GetInstance()->DeltaTime());
+					mY = Math::Lerp(mY, mTarget->GetY(), 2.f * Time::GetInstance()->DeltaTime());
+
+					mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+				}
+				if (mCamerArea.right > mRect.right) {
+					mX = Math::Lerp(mX, mTarget->GetX(), 2.f * Time::GetInstance()->DeltaTime());
+					mY = Math::Lerp(mY, mTarget->GetY(), 2.f * Time::GetInstance()->DeltaTime());
+
+					mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+				}
+			}
+			else {
+				mX = Math::Lerp(mX, mTarget->GetX(), 2.f * Time::GetInstance()->DeltaTime());
+				mY = Math::Lerp(mY, mTarget->GetY(), 2.f * Time::GetInstance()->DeltaTime());
+
+				mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+			}
 		}
 		break;
 	case Camera::Mode::Free:
@@ -81,16 +105,33 @@ void Camera::Update()
 		}
 		break;
 	case Camera::Mode::Boss:
-		if (Input::GetInstance()->GetKey(VK_LEFT))
-		{
-			if (mCamerArea.left < mRect.left ) {
-				mX -= 1;
+		if (mTarget) {	
+			float mDumpX = mTarget->GetX();
+			float chaX= mDumpX - mPlayerX ;
+			if (chaX > 0) {
+				if (mCamerArea.right > mRect.right) {
+					mX += chaX;
+				}
 			}
+			else if (chaX <0) {
+				if (mCamerArea.left < mRect.left) {
+					mX += chaX;
+				}
+			}
+			mPlayerX = mTarget->GetX();
 		}
-		if (Input::GetInstance()->GetKey(VK_RIGHT))
-		{
-			if (mCamerArea.right > mRect.right) {
-				mX += 1;
+		else {
+			if (Input::GetInstance()->GetKey(VK_LEFT))
+			{
+				if (mCamerArea.left < mRect.left) {
+					mX -= 1;
+				}
+			}
+			if (Input::GetInstance()->GetKey(VK_RIGHT))
+			{
+				if (mCamerArea.right > mRect.right) {
+					mX += 1;
+				}
 			}
 		}
 		mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
