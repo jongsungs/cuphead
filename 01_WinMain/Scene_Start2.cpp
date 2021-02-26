@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Scene_Start2.h"
 #include "Image.h"
+#include "LoadingScene.h"
 void Scene_Start2::Init()
 {
 	IMAGEMANAGER->LoadFromFile(L"StartScene", Resources(L"/Start/StartScene_CupHead.bmp"), 1280, 720, true);
@@ -36,7 +37,8 @@ void Scene_Start2::Update()
 		switch (mNum)
 		{
 		case 0:
-			SceneManager::GetInstance()->LoadScene(L"OverWorld");
+			SceneManager::GetInstance()->AddScene(L"OverWorldLoadingScene", new LoadingScene);
+			SceneManager::GetInstance()->LoadSceneLoading(L"OverWorld", L"OverWorldLoadingScene");
 			break;
 		case 1:
 			break;

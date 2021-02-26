@@ -9,6 +9,10 @@
 #include "LoadingScene.h"
 #include "Scene_OverWorld.h"
 #include "Animation.h"
+#include "Scene_Start1.h"
+#include "Scene_Start2.h"
+#include "Scene_ElderHouse.h"
+
 /*
 Scene : 스테이지 단위를 씬이라고 함
 */
@@ -26,18 +30,19 @@ void MainGame::Init()
 	
 	SceneManager::GetInstance()->AddScene(L"BotanicPanic", new SceneBoss1);
 	SceneManager::GetInstance()->AddScene(L"FloralFury", new SceneBoss2);
-	SceneManager::GetInstance()->AddScene(L"Scene1", new Scene1);
-	SceneManager::GetInstance()->AddScene(L"Scene2", new Scene2);
 	SceneManager::GetInstance()->AddScene(L"OverWorld", new Scene_OverWorld);
+	SceneManager::GetInstance()->AddScene(L"Scene_Start2", new Scene_Start2);
+	SceneManager::GetInstance()->AddScene(L"Scene_Start1", new Scene_Start1);
+	SceneManager::GetInstance()->AddScene(L"Scene_ElderHouse", new Scene_ElderHouse);
 	//ThreadManager::GetInstance()->SetFunts([]()->void {ImageSet::GetInstance()->SetImage(); });
 	LoadingScene* mLoading = new LoadingScene;
 	mLoading->AddLoadFunc([]()->void {ImageSet::GetInstance()->SetImage(); });
 	mLoading->AddLoadFunc([]()->void {ImageSet::GetInstance()->SetOverWorldImage(); });
 	mLoading->AddLoadFunc([]()->void {SoundSet::GetInstance()->SetSound(); });
 
-	SceneManager::GetInstance()->AddScene(L"Scene1LoadingScene", mLoading);
+	SceneManager::GetInstance()->AddScene(L"Start1LoadingScene", mLoading);
 
-	SceneManager::GetInstance()->LoadSceneLoading(L"Scene1",L"Scene1LoadingScene");
+	SceneManager::GetInstance()->LoadScene(L"Scene_Start1");
 	//ThreadManager::GetInstance()->LoadStartFunts();
 	IntersectManager::GetInstance()->SetObjectPt();
 }

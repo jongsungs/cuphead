@@ -9,6 +9,9 @@
 #include "Potato.h"
 #include "Onion.h"
 #include "Carrot.h"
+#include "Block.h"
+#include "FadeOut.h"
+#include "LoadingScene.h"
 
 void SceneBoss1::Init(){
 	mBackGround1 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground1");
@@ -17,6 +20,8 @@ void SceneBoss1::Init(){
 
 	PlatformerPlayer* player = new PlatformerPlayer("Player", WINSIZEX / 4, WINSIZEY * 3 / 4);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, player);
+
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", 0, WINSIZEY / 8 * 7, WINSIZEX, 100));
 
 	Enemy* potato = new Potato("Potato", WINSIZEX * 3 / 4, WINSIZEY / 2);
 	Enemy* carrot = new Carrot("Carrot", WINSIZEX / 2, WINSIZEY * 3 / 8 + 549);
@@ -55,7 +60,10 @@ void SceneBoss1::Update(){
 		mSceneDelayTime += Time::GetInstance()->DeltaTime();
 	}
 	if (mSceneDelayTime > 5) {
-		SceneManager::GetInstance()->LoadScene(L"OverWorld");
+		LoadingScene* loadingScene = new LoadingScene();
+		SceneManager::GetInstance()->AddScene(L"Overworld_LoadingScene", loadingScene);
+
+		FadeOut* fadeout = new FadeOut(false, L"OverWorld", L"Overworld_LoadingScene");
 	}
 	ObjectManager::GetInstance()->Update();
 }
