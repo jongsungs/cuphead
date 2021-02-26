@@ -23,7 +23,7 @@
     <ProjectGuid>{ADD52605-596E-43E8-879D-E81A28A8BB13}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>My01WinMain</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -196,6 +196,8 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Scene_ElderHouse.h" />
     <ClInclude Include="Scene_OverWorld.h" />
+    <ClInclude Include="Scene_Start1.h" />
+    <ClInclude Include="Scene_Start2.h" />
     <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="SoundSet.h" />
     <ClInclude Include="Spread.h" />
@@ -256,6 +258,8 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Scene_ElderHouse.cpp" />
     <ClCompile Include="Scene_OverWorld.cpp" />
+    <ClCompile Include="Scene_Start1.cpp" />
+    <ClCompile Include="Scene_Start2.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="SoundSet.cpp" />
     <ClCompile Include="Spread.cpp" />

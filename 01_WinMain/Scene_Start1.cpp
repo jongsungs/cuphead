@@ -4,7 +4,6 @@
 #include "Image.h"
 #include "Animation.h"
 
-
 void Scene_Start1::Init()
 {
 	IMAGEMANAGER->LoadFromFile(L"StartScene", Resources(L"/Start/StartScene_CupHead.bmp"), 1280, 720, true);
