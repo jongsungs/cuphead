@@ -1327,10 +1327,6 @@ void PlatformerPlayer::Update()
 	//중력
 	mJumpPower -= mGravity;
 	mY -= mJumpPower;
-	if (mY<= WINSIZEY)
-	{
-		mY = WINSIZEY - 180;
-	}
 	
 
 
@@ -1492,8 +1488,8 @@ void PlatformerPlayer::Render(HDC hdc)
 	//{
 	//	CameraManager::GetInstance()->GetMainCamera()->ScaleFrameRender(hdc, mImage4, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 80, 120);
 	//}
-	RenderRect(hdc, mRect);
-	mImage->FrameRenderFromBottom(hdc,mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
+	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromBottom(hdc,mImage,mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 
 	//RenderRect(hdc, mGround);
 	for (int i = 0; i < mBullet.size(); ++i)
@@ -1515,6 +1511,6 @@ void PlatformerPlayer::InIntersectBlock(RECT rc)
 	if ((rc.bottom - rc.top) > (rc.right - rc.left) && rc.right == mRect.right)
 		mX -= rc.right - rc.left;
 	
-
+	mGravity = 0.f;
 
 }
