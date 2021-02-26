@@ -34,7 +34,8 @@ enum class PlayerState : int
 	RightRunDiagonalUpShootturn,
 	RightSpecialAttack,
 	LeftSpecialAttack,
-	UpSpecialAttack,
+	LeftUpSpecialAttack,
+	RightUpSpecialAttack,
 	RightHit,//오른쪽땅에서 피격
 	LeftHit,
 	LeftDash,
@@ -95,7 +96,6 @@ class PlatformerPlayer : public GameObject
 	Animation* mRightRunDiagonalUpShootturnAnimation;
 	Animation* mRightSpecialAttackAnimation;
 	Animation* mLeftSpecialAttackAnimation;
-	Animation* mUpSpecialAttackAnimation;
 	Animation* mRightHitAnimation;
 	Animation* mLeftHitAnimation;
 	Animation* mLeftDashAnimation;
@@ -111,7 +111,8 @@ class PlatformerPlayer : public GameObject
 	Animation* mLeftShootaimAnimation;
 	Animation* mLeftDiagonalUpaimAnimation;
 	Animation* mRightDiagonalUpaimAnimation;
-
+	Animation* mLeftUpSpecialAttackAnimation;
+	Animation* mRightUpSpecialAttackAnimation;
 	bool isMove;
 public:
 	PlatformerPlayer(const string& name, float x, float y);

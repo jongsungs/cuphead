@@ -191,15 +191,6 @@ void PlatformerPlayer::Init()
 	mLeftSpecialAttackAnimation
 		->Play();
 
-	mUpSpecialAttackAnimation = new Animation();
-	mUpSpecialAttackAnimation
-		->InitFrameByStartEnd(0, 0, 12, 0, false);
-	mUpSpecialAttackAnimation
-		->SetIsLoop(false);
-	mUpSpecialAttackAnimation
-		->SetFrameUpdateTime(0.1f);
-	mUpSpecialAttackAnimation
-		->Play();
 	//점프
 
 	mRightJumpAnimation = new Animation();
@@ -462,6 +453,19 @@ void PlatformerPlayer::Init()
 	mLeftDiagonalUpaimAnimation->SetIsLoop(true);
 	mLeftDiagonalUpaimAnimation->SetFrameUpdateTime(0.1f);
 	mLeftDiagonalUpaimAnimation->Play();
+	//위로보고 필살기
+
+	mLeftUpSpecialAttackAnimation = new Animation();
+	mLeftUpSpecialAttackAnimation->InitFrameByBackStartEnd(12, 1, 0, 1, false);
+	mLeftUpSpecialAttackAnimation->SetIsLoop(false);
+	mLeftUpSpecialAttackAnimation->SetFrameUpdateTime(0.1f);
+	mLeftUpSpecialAttackAnimation->Play();
+
+	mRightUpSpecialAttackAnimation = new Animation();
+	mRightUpSpecialAttackAnimation->InitFrameByStartEnd(0, 0, 12, 0, false);
+	mRightUpSpecialAttackAnimation->SetIsLoop(false);
+	mRightUpSpecialAttackAnimation->SetFrameUpdateTime(0.1f);
+	mRightUpSpecialAttackAnimation->Play();
 }
 
 void PlatformerPlayer::Release()
@@ -496,7 +500,8 @@ void PlatformerPlayer::Release()
 	SafeDelete(mRightRunDiagonalUpShootturnAnimation);
 	SafeDelete(mRightSpecialAttackAnimation);
 	SafeDelete(mLeftSpecialAttackAnimation);
-	SafeDelete(mUpSpecialAttackAnimation);
+	SafeDelete(mLeftUpSpecialAttackAnimation);
+	SafeDelete(mRightUpSpecialAttackAnimation);
 	SafeDelete(mRightHitAnimation);
 	SafeDelete(mLeftHitAnimation);
 	SafeDelete(mLeftDashAnimation);
@@ -1085,6 +1090,27 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 		}
 	}
+	//위로보고 필살기
+	if (Input::GetInstance()->GetKey(VK_UP))
+	{
+		if (Input::GetInstance()->GetKeyDown('V'))
+		{
+			if (mPlayerState == PlayerState::LeftUpaim)
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::LeftUpSpecialAttack;
+				mCurrentAnimation = mLeftUpSpecialAttackAnimation;
+				mCurrentAnimation->Play();
+			}
+			else if (mPlayerState == PlayerState::RightUpaim)
+			{
+				mCurrentAnimation->Stop();
+				mPlayerState = PlayerState::RightUpSpecialAttack;
+				mCurrentAnimation = mRightUpSpecialAttackAnimation;
+				mCurrentAnimation->Play();
+			}
+		}
+	}
 	if (Input::GetInstance()->GetKeyUp(VK_UP))
 	{
 		if (mPlayerState == PlayerState::LeftUpaim)
@@ -1213,6 +1239,28 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 		}
 	}
+	if (mPlayerState == PlayerState::RightUpSpecialAttack)
+	{
+		if (mCurrentAnimation->GetIsPlay() == false)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightIdle;
+			mCurrentAnimation = mRightIdleAnimation;
+			mCurrentAnimation->Play();
+			isMove = true;
+		}
+	}
+	if (mPlayerState == PlayerState::LeftUpSpecialAttack)
+	{
+		if (mCurrentAnimation->GetIsPlay() == false)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftIdle;
+			mCurrentAnimation = mLeftIdleAnimation;
+			mCurrentAnimation->Play();
+			isMove = true;
+		}
+	}
 	//대쉬
 	if (Input::GetInstance()->GetKeyDown(VK_LSHIFT))
 	{
@@ -1265,23 +1313,6 @@ void PlatformerPlayer::Update()
 
 
 
-	//if (Input::GetInstance()->GetKeyUp('V'))
-	//{
-	//	if (mPlayerState == PlayerState::LeftSpecialAttack)
-	//	{
-	//		mCurrentAnimation->Stop();
-	//		mPlayerState = PlayerState::LeftIdle;
-	//		mCurrentAnimation = mLeftIdleAnimation;
-	//		mCurrentAnimation->Play();
-	//	}
-	//	else if (mPlayerState == PlayerState::RightSpecialAttack)
-	//	{
-	//		mCurrentAnimation->Stop();
-	//		mPlayerState = PlayerState::RightIdle;
-	//		mCurrentAnimation = mRightIdleAnimation;
-	//		mCurrentAnimation->Play();
-	//	}
-	//}
 	
 	
 
@@ -1366,9 +1397,13 @@ void PlatformerPlayer::Update()
 	{
 		mImage = IMAGEMANAGER->FindImage(L"GroundSpecialAttack");
 	}
-	else if (mPlayerState == PlayerState::UpSpecialAttack)
+	else if (mPlayerState == PlayerState::LeftUpSpecialAttack)
 	{
-		mImage = IMAGEMANAGER->FindImage(L"UpSpecialAttack");
+		mImage = IMAGEMANAGER->FindImage(L"UpspecialAttack");
+	}
+	else if (mPlayerState == PlayerState::RightUpSpecialAttack)
+	{
+		mImage = IMAGEMANAGER->FindImage(L"UpspecialAttack");
 	}
 	else if (mPlayerState == PlayerState::RightJump)
 	{
