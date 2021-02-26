@@ -30,10 +30,7 @@ void Onion::Init() {
 	mDeathLeaveImage = IMAGEMANAGER->FindImage(L"OnionDeathLeave");
 
 	mTearEffectImage = IMAGEMANAGER->FindImage(L"OnionTearEffect");
-
-	mTearAImage = IMAGEMANAGER->FindImage(L"OnionTearA");
-	mTearBImage = IMAGEMANAGER->FindImage(L"OnionTearB");
-	
+		
 	//캐릭터 상태에 따라 다른 애니메이션을 보여주기 위함
 	//등장 애니메이션
 	mIntroAnimation = new Animation();
@@ -109,8 +106,6 @@ void Onion::Release() {
 	SafeDelete(mChangeToAttackAnimation);
 	SafeDelete(mChangeFromAttackAnimation);
 	SafeDelete(mTearEffectAnimation);
-	SafeDelete(mTearAAnimation);
-	SafeDelete(mTearBAnimation);
 }
 
 void Onion::Update() {
@@ -185,8 +180,9 @@ void Onion::Update() {
 		mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
 		if (mBetweenAttackDelay > 0.4) {
 			mProjInitX = Random::GetInstance()->RandomInt(WINSIZEX);
-			//OnionProj* proj = new OnionProj("proj", mProjInitX, 0);
-			//ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
+			OnionProj* proj = new OnionProj("proj", mProjInitX, 0, 5, PI*3/2, false);
+			proj->Init();
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
 			mBetweenAttackDelay = 0;
 		}
 

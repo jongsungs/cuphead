@@ -5,6 +5,17 @@
 #include "OnionProj.h"
 #include "Camera.h"
 
+OnionProj::OnionProj(const string& name, float x, float y, float speed, float angle, bool parryAble)
+	:EnemyProj(name, x, y, speed, angle, parryAble)
+{
+	mX = x;
+	mY = y;
+	mSpeed = speed;
+	mAngle = angle;
+	mParryAble = parryAble;
+	mIndex = Random::GetInstance()->RandomInt(5);
+}
+
 void OnionProj::Init(){
 	vector<GameObject*>* EnemyProj = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Enemy_Bullet);
 	mName = to_string(EnemyProj->size());
@@ -66,15 +77,35 @@ void OnionProj::Release(){
 }
 
 void OnionProj::Update(){
-	if (mParryAble == true) {
-		mImage = ParryAbleImg;
-		mCurrentAnimation = ParryAbleAnimation;
+	if (mParryAble == false) {
+		switch (mIndex) {
+		case 0:
+			mImage = NonParryAbleAImg;
+			mCurrentAnimation = NonParryAbleAAnimation;
+			break;
+		case 1:
+			mImage = NonParryAbleBImg;
+			mCurrentAnimation = NonParryAbleBAnimation;
+			break;
+		case 2:
+			mImage = NonParryAbleCImg;
+			mCurrentAnimation = NonParryAbleCAnimation;
+			break;
+		case 3:
+			mImage = NonParryAbleDImg;
+			mCurrentAnimation = NonParryAbleDAnimation;
+			break;
+		case 4:
+			mImage = NonParryAbleEImg;
+			mCurrentAnimation = NonParryAbleEAnimation;
+			break;
+		}
 		mCurrentAnimation->Play();
 	}
 
 	else {
-		mImage = NonParryAbleAImg;
-		mCurrentAnimation = NonParryAbleAAnimation;
+		mImage = ParryAbleImg;
+		mCurrentAnimation = ParryAbleAnimation;
 		mCurrentAnimation->Play();
 	}
 	mSizeX = mImage->GetFrameWidth();

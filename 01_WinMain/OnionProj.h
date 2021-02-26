@@ -3,6 +3,7 @@
 
 class OnionProj :public EnemyProj {
 protected:
+	int mIndex;
 	Image* NonParryAbleAImg;
 	Image* NonParryAbleBImg;
 	Image* NonParryAbleCImg;
@@ -21,6 +22,7 @@ protected:
 
 	Animation* NonParryableASplashAnimation;
 public:
+	OnionProj(const string& name, float x, float y, float speed, float angle, bool parryAble);
 	virtual void Init()override;
 	virtual void Release()override;
 	virtual void Update()override;
