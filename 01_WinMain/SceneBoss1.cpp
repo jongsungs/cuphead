@@ -30,10 +30,10 @@ void SceneBoss1::Init(){
 
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, potato);
 	potato->SetPlayerPtr(player);
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, carrot);
-	carrot->SetPlayerPtr(player);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, onion);
 	onion->SetPlayerPtr(player);
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, carrot);
+	carrot->SetPlayerPtr(player);
 
 	potato->SetIsActive(true);
 	if (potato->GetIsActive() == false)
@@ -59,7 +59,6 @@ void SceneBoss1::Update(){
 	float CarrotHp = ObjectManager::GetInstance()->FindObject(ObjectLayer::Boss, "Carrot")->GetHP();
 	if(CarrotHp < 0){
 		mSceneDelayTime += Time::GetInstance()->DeltaTime();
-
 	}
 	if (mSceneDelayTime > 5) {
 		LoadingScene* loadingScene = new LoadingScene();
@@ -70,6 +69,7 @@ void SceneBoss1::Update(){
 	ObjectManager::GetInstance()->Update();
 	IntersectManager::GetInstance()->IntersectPlayerAndFloor();
 	IntersectManager::GetInstance()->IntersectPlayerAndEnemyBullet();
+	IntersectManager::GetInstance()->IntersectPlayerAndEnemy();
 	IntersectManager::GetInstance()->IntersectEnemyAndBullet();
 }
 
