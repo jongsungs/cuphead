@@ -87,6 +87,7 @@ void Carrot::Update() {
 	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
 		mState = EnemyState::Death;
 		mDelayTime = 0;
+		SoundPlayer::GetInstance()->Play(L"End1", 0.2f);
 	}
 
 	//상태에 따른 다른 애니메이션 출력

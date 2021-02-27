@@ -41,14 +41,32 @@ void SceneBoss1::Init(){
 	if (potato->GetIsActive() == false && onion->GetIsActive() == false)
 		carrot->SetIsActive(true);
 
-	SoundPlayer::GetInstance()->Play(L"BotanicPanicBGM", 0.2f);
-
 	Camera* camera = new Camera(Camera::Mode::Boss,WINSIZEX/2,WINSIZEY/2);
 	camera->SetCamerArea(RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, WINSIZEX + 10,WINSIZEY));
 	CameraManager::GetInstance()->SetMainCamera(camera);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, camera);
 	ObjectManager::GetInstance()->Init();
 	mSceneDelayTime = 0.f;
+	SoundPlayer::GetInstance()->Play(L"BotanicPanicBGM", 0.2f);
+	randomReady = Random::GetInstance()->RandomInt(5);
+	randomStart = Random::GetInstance()->RandomInt(5);
+	switch (randomReady) {
+	case 0:
+		SoundPlayer::GetInstance()->Play(L"Ready1", 0.2f);
+		break;
+	case 1:
+		SoundPlayer::GetInstance()->Play(L"Ready2", 0.2f);
+		break;
+	case 2:
+		SoundPlayer::GetInstance()->Play(L"Ready3", 0.2f);
+		break;
+	case 3:
+		SoundPlayer::GetInstance()->Play(L"Ready4", 0.2f);
+		break;
+	case 4:
+		SoundPlayer::GetInstance()->Play(L"Ready5", 0.2f);
+		break;
+	}
 }
 
 void SceneBoss1::Release(){
@@ -56,11 +74,37 @@ void SceneBoss1::Release(){
 }
 
 void SceneBoss1::Update(){
+	mDelayTime += Time::GetInstance()->DeltaTime();
+	if (mDelayTime > 2.2 && mIsPlay == false) {
+		switch (randomStart) {
+		case 0:
+			SoundPlayer::GetInstance()->Play(L"Start1", 0.2f);
+			mIsPlay = true;
+			break;
+		case 1:
+			SoundPlayer::GetInstance()->Play(L"Start2", 0.2f);
+			mIsPlay = true;
+			break;
+		case 2:
+			SoundPlayer::GetInstance()->Play(L"Start3", 0.2f);
+			mIsPlay = true;
+			break;
+		case 3:
+			SoundPlayer::GetInstance()->Play(L"Start4", 0.2f);
+			mIsPlay = true;
+			break;
+		case 4:
+			SoundPlayer::GetInstance()->Play(L"Start5", 0.2f);
+			mIsPlay = true;
+			break;
+		}
+	}
+
 	float CarrotHp = ObjectManager::GetInstance()->FindObject(ObjectLayer::Boss, "Carrot")->GetHP();
 	if(CarrotHp < 0){
 		mSceneDelayTime += Time::GetInstance()->DeltaTime();
 	}
-	if (mSceneDelayTime > 5) {
+	if (mSceneDelayTime > 3) {
 		LoadingScene* loadingScene = new LoadingScene();
 		SceneManager::GetInstance()->AddScene(L"Overworld_LoadingScene", loadingScene);
 		SoundPlayer::GetInstance()->Stop(L"BotanicPanicBGM");

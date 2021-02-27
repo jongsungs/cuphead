@@ -229,8 +229,7 @@ void Onion::Update() {
 		break;
 	}
 
-	mRect = RectMakeCenter(mX, mY, mSizeX*3/4, mSizeY/2);
-	//mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+	mRect = RectMakeCenter(mX, mY, mSizeX * 3 / 4, mSizeY / 2);
 	if(mTearEffectAnimation->GetIsPlay())
 		mTearEffectAnimation->Update();
 	mCurrentAnimation->Update();
@@ -243,9 +242,6 @@ void Onion::Render(HDC hdc) {
 	if(mState == EnemyState::Attack)
 		CameraManager::GetInstance()->GetMainCamera()
 			->FrameRenderFromBottom(hdc, mTearEffectImage, mX, mY-60, mTearEffectAnimation->GetNowFrameX(), mTearEffectAnimation->GetNowFrameY());
-
-	wstring check = to_wstring(_mousePosition.x);
-	TextOut(hdc, 10, 10, check.c_str(), check.length());
 }
 
 void Onion::InIntersectDamage(int dmage){
