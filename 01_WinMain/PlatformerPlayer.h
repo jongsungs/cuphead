@@ -114,6 +114,11 @@ class PlatformerPlayer : public GameObject
 	Animation* mLeftUpSpecialAttackAnimation;
 	Animation* mRightUpSpecialAttackAnimation;
 	bool isMove;
+	int bulletdelay;
+	int mJumpStack;
+	int mDashStack;
+	int mSpcialAttackStack;
+	int mParringStack;
 public:
 	PlatformerPlayer(const string& name, float x, float y);
 
