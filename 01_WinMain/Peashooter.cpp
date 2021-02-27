@@ -5,6 +5,7 @@
 Peashooter::Peashooter(string name, float x, float y, float angle) 
 :Bullet(name, x, y,angle)
 {
+	mHP = 1; // ì´ì•Œ ëŒ€ë¯¸ì§€
 	mImage = ImageManager::GetInstance()->FindImage(L"Testbullet");
 	mSpeed = 10.f;
 }
@@ -34,6 +35,6 @@ void Peashooter::Render(HDC hdc) {
 	//CameraManager::GetInstance()->GetMainCamera()->Render(hdc,mImage,mX,mY);
 }
 
-void Peashooter::InIntersectDamage() { //»èÁ¦ Ã³¸®
+void Peashooter::InIntersectDamage(int dmage = 0) { //ì‚­ì œ ì²˜ë¦¬
 	mIsDestroy = true;
 }

@@ -35,28 +35,28 @@ void IntersectManager::IntersectEnemyAndBullet()
 		return;
 	}
 	for (int a = 0; a < mBullet->size(); ++a) {
-		if (!(*mBullet)[a]->GetIsActive() && (*mBullet)[a]->GetIsDestroy() )
+		if (!(*mBullet)[a]->GetIsActive() || (*mBullet)[a]->GetIsDestroy() )
 			continue;
 		for (int b = 0; b < mEnemy->size(); ++b) {
-			if (!(*mEnemy)[a]->GetIsActive() && (*mEnemy)[a]->GetIsDestroy())
+			if (!(*mEnemy)[a]->GetIsActive() || (*mEnemy)[a]->GetIsDestroy())
 				continue;
 			RECT enemyRect = (*mEnemy)[b]->GetRect();
 			RECT bulletRect = (*mBullet)[a]->GetRect();
 			RECT dump;
 			if (IntersectRect(&dump, &enemyRect, &bulletRect)) {
-				(*mEnemy)[b]->InIntersectDamage();
+				(*mEnemy)[b]->InIntersectDamage((*mBullet)[a]->GetHP());
 				(*mBullet)[a]->InIntersectDamage();
 				break;
 			}
 		}
 		for (int b = 0; b < mBoss->size(); ++b) {
-			if (!(*mBoss)[a]->GetIsActive() && (*mBoss)[a]->GetIsDestroy())
+			if (!(*mBoss)[b]->GetIsActive() || (*mBoss)[b]->GetIsDestroy())
 				continue;
 			RECT bossRect = (*mBoss)[b]->GetRect();
 			RECT bulletRect = (*mBullet)[a]->GetRect();
 			RECT dump;
 			if (IntersectRect(&dump, &bossRect, &bulletRect)) {
-				(*mBoss)[b]->InIntersectDamage();
+				(*mBoss)[b]->InIntersectDamage((*mBullet)[a]->GetHP());
 				(*mBullet)[a]->InIntersectDamage();
 				break;
 			}
@@ -70,7 +70,7 @@ void IntersectManager::IntersectPlayerAndEnemyBullet()
 		return;
 	}
 	for (int a = 0; a < mEnemyBullet->size(); ++a) {
-		if (!(*mEnemyBullet)[a]->GetIsActive() && (*mEnemyBullet)[a]->GetIsDestroy())
+		if (!(*mEnemyBullet)[a]->GetIsActive() || (*mEnemyBullet)[a]->GetIsDestroy())
 			continue;
 		for (int b = 0; b < mPlayer->size(); ++b) {
 			if (!(*mPlayer)[b]->GetIsActive() && (*mPlayer)[b]->GetIsDestroy())
@@ -96,10 +96,10 @@ void IntersectManager::IntersectPlayerAndEnemy()
 		return;
 	}
 	for (int a = 0; a < mPlayer->size(); ++a) {
-		if (!(*mPlayer)[a]->GetIsActive() && (*mPlayer)[a]->GetIsDestroy())
+		if (!(*mPlayer)[a]->GetIsActive() || (*mPlayer)[a]->GetIsDestroy())
 			continue;
 		for (int b = 0; b < mEnemy->size(); ++b) {
-			if (!(*mEnemy)[b]->GetIsActive() && (*mEnemy)[b]->GetIsDestroy())
+			if (!(*mEnemy)[b]->GetIsActive() || (*mEnemy)[b]->GetIsDestroy())
 				continue;
 			RECT enemyRect = (*mEnemy)[b]->GetRect();
 			RECT playerRect = (*mPlayer)[a]->GetRect();
@@ -110,7 +110,7 @@ void IntersectManager::IntersectPlayerAndEnemy()
 			}
 		}
 		for (int b = 0; b < mBoss->size(); ++b) {
-			if (!(*mBoss)[b]->GetIsActive() && (*mBoss)[b]->GetIsDestroy())
+			if (!(*mBoss)[b]->GetIsActive() || (*mBoss)[b]->GetIsDestroy())
 				continue;
 			RECT bossRect = (*mBoss)[b]->GetRect();
 			RECT playerRect = (*mPlayer)[a]->GetRect();
@@ -129,10 +129,10 @@ void IntersectManager::IntersectPlayerAndFloor()
 		return;
 	}
 	for (int a = 0; a < mPlayer->size(); ++a) {
-		if (!(*mPlayer)[a]->GetIsActive() && (*mPlayer)[a]->GetIsDestroy())
+		if (!(*mPlayer)[a]->GetIsActive() || (*mPlayer)[a]->GetIsDestroy())
 			continue;
 		for (int b = 0; b < mBlock->size(); ++b) {
-			if (!(*mBlock)[b]->GetIsActive() && (*mBlock)[b]->GetIsDestroy())
+			if (!(*mBlock)[b]->GetIsActive() || (*mBlock)[b]->GetIsDestroy())
 				continue;
 			RECT floorRect = (*mBlock)[b]->GetRect();
 			RECT playerRect = (*mPlayer)[a]->GetRect();
