@@ -57,4 +57,3 @@ public:
 	void virtual InIntersectBlock(RECT rc) {}
 	void virtual InIntersectDamage(int dmage = 0) {}
 };
-

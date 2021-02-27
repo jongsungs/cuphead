@@ -12,6 +12,7 @@
 #include "Block.h"
 #include "FadeOut.h"
 #include "LoadingScene.h"
+#include "BackGround.h"
 
 void SceneBoss1::Init(){
 	mBackGround1 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground1");
@@ -58,6 +59,7 @@ void SceneBoss1::Update(){
 	float CarrotHp = ObjectManager::GetInstance()->FindObject(ObjectLayer::Boss, "Carrot")->GetHP();
 	if(CarrotHp < 0){
 		mSceneDelayTime += Time::GetInstance()->DeltaTime();
+		SoundPlayer::GetInstance()->Stop(L"BotanicPanicBGM");
 	}
 	if (mSceneDelayTime > 5) {
 		LoadingScene* loadingScene = new LoadingScene();
@@ -67,6 +69,8 @@ void SceneBoss1::Update(){
 	}
 	ObjectManager::GetInstance()->Update();
 	IntersectManager::GetInstance()->IntersectPlayerAndFloor();
+	IntersectManager::GetInstance()->IntersectPlayerAndEnemyBullet();
+	IntersectManager::GetInstance()->IntersectEnemyAndBullet();
 }
 
 void SceneBoss1::Render(HDC hdc){

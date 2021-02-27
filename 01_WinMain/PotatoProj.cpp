@@ -47,15 +47,15 @@ void PotatoProj::Update(){
 		mImage = NonParryAbleImg;
 		mCurrentAnimation = NonParryAbleAnimation;
 	}
-	mSizeX = mImage->GetFrameWidth()*3/4;
-	mSizeY = mImage->GetFrameHeight()*3/4;
+	mSizeX = mImage->GetFrameWidth();
+	mSizeY = mImage->GetFrameHeight();
 
 	mCurrentAnimation->Play();
 
 	mX += cosf(mAngle) * mSpeed;
 	mY += -sinf(mAngle) * mSpeed;
 
-	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+	mRect = RectMakeCenter(mX, mY, mSizeX/2, mSizeY/2);
 	if (mRect.right < 0) {
 		mIsActive = false;
 		mIsDestroy = true;

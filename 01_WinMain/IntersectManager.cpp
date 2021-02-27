@@ -123,8 +123,7 @@ void IntersectManager::IntersectPlayerAndEnemy()
 	}
 }
 
-void IntersectManager::IntersectPlayerAndFloor()
-{
+void IntersectManager::IntersectPlayerAndFloor(){
 	if (!mPlayer->size() || !mBlock->size()) {
 		return;
 	}

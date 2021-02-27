@@ -92,7 +92,7 @@ void Onion::Init() {
 	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 
 	//HP 임의설정
-	mHP = 50;
+	mHP = 10;
 	mAttackStartDelay = 0;
 }
 
@@ -110,7 +110,7 @@ void Onion::Release() {
 
 void Onion::Update() {
 	if (Input::GetInstance()->GetKeyDown(VK_CONTROL))
-		mHP -= 25;
+		mHP -= 5;
 
 	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
 		mState = EnemyState::End;
@@ -233,11 +233,14 @@ void Onion::Update() {
 }
 
 void Onion::Render(HDC hdc) {
-
+	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	CameraManager::GetInstance()->GetMainCamera()
 		->ScaleFrameRenderFromBottom(hdc, mImage, mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 472, 570);
 	if(mState == EnemyState::Attack)
 		CameraManager::GetInstance()->GetMainCamera()
 			->FrameRenderFromBottom(hdc, mTearEffectImage, mX, mY-60, mTearEffectAnimation->GetNowFrameX(), mTearEffectAnimation->GetNowFrameY());
-	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+}
+
+void Onion::InIntersectDamage(int dmage){
+	mHP -= 1;
 }

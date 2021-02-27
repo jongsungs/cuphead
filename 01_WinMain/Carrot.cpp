@@ -64,10 +64,9 @@ void Carrot::Init() {
 	mImage = mIntroImage;
 	mSizeX = mImage->GetFrameWidth();
 	mSizeY = mImage->GetFrameHeight();
-	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 
 	//HP 임의설정
-	mHP = 50;
+	mHP = 10;
 	mAttackStartDelay = 0;
 }
 
@@ -82,10 +81,10 @@ void Carrot::Release() {
 
 void Carrot::Update() {
 	if (Input::GetInstance()->GetKeyDown(VK_CONTROL))
-		mHP -= 25;
+		mHP -= 5;
 
 	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
-		mState = EnemyState::Death;
+		mState = EnemyState::End;
 		mDelayTime = 0;
 	}
 
@@ -187,18 +186,20 @@ void Carrot::Update() {
 	case EnemyState::End:
 		mIsActive = false;
 		mIsDestroy = true;
-		//ObjectManager::GetInstance()->FindObject(ObjectLayer::Building,"BotanicPanic")
-		//깃발 올릴 수 있도록 수정해줄 것.
 		break;
 	}
-
-	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+	
+	mRect = RectMakeCenter(mX, mY-mSizeY / 4, mSizeX*3/4, mSizeY/2);
 	mCurrentAnimation->Update();
 }
 
 void Carrot::Render(HDC hdc) {
+	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	//CameraManager::GetInstance()->GetMainCamera()
 	//	->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
-	mImage->FrameRender(hdc, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	mImage->FrameRender(hdc, mX - mSizeX / 2, mY-mSizeY/2, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
+}
+
+void Carrot::InIntersectDamage(int dmage){
+	mHP -= 1;
 }
