@@ -84,7 +84,7 @@ void Carrot::Update() {
 		mHP -= 5;
 
 	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
-		mState = EnemyState::End;
+		mState = EnemyState::Death;
 		mDelayTime = 0;
 	}
 

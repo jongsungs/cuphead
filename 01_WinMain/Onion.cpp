@@ -226,7 +226,8 @@ void Onion::Update() {
 		break;
 	}
 
-	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+	mRect = RectMakeCenter(mX, mY, mSizeX*3/4, mSizeY/2);
+	//mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 	if(mTearEffectAnimation->GetIsPlay())
 		mTearEffectAnimation->Update();
 	mCurrentAnimation->Update();
@@ -235,7 +236,7 @@ void Onion::Update() {
 void Onion::Render(HDC hdc) {
 	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	CameraManager::GetInstance()->GetMainCamera()
-		->ScaleFrameRenderFromBottom(hdc, mImage, mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 472, 570);
+		->ScaleFrameRenderFromBottom(hdc, mImage, mX, mRect.bottom+mSizeY/4, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 472, 570);
 	if(mState == EnemyState::Attack)
 		CameraManager::GetInstance()->GetMainCamera()
 			->FrameRenderFromBottom(hdc, mTearEffectImage, mX, mY-60, mTearEffectAnimation->GetNowFrameX(), mTearEffectAnimation->GetNowFrameY());

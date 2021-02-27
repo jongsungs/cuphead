@@ -14,6 +14,7 @@ CarrotProj::CarrotProj(const string & name, float x, float y, float speed, float
 	mAngle = angle;
 	mParryAble = false;
 	mWeaponType = weapontype;
+	mHP = 3;
 }
 
 void CarrotProj::Init(){
@@ -55,6 +56,12 @@ void CarrotProj::Update(){
 		mCurrentAnimation->Play();
 		break;*/
 	}
+
+	if (mWeaponType == 1 && mHP <= 0) {
+		mIsActive = false;
+		mIsDestroy = true;
+	}
+
 	mSizeX = mImage->GetFrameWidth();
 	mSizeY = mImage->GetFrameHeight();
 
@@ -67,4 +74,8 @@ void CarrotProj::Render(HDC hdc){
 	
 	CameraManager::GetInstance()->GetMainCamera()
 		->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
+}
+
+void CarrotProj::InIntersectDamage(int dmage) {
+	mHP -= 1;
 }

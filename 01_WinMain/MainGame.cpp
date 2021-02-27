@@ -42,7 +42,9 @@ void MainGame::Init()
 
 	SceneManager::GetInstance()->AddScene(L"Start1LoadingScene", mLoading);
 
-	SceneManager::GetInstance()->LoadScene(L"Scene_Start1");
+	SceneManager::GetInstance()->LoadSceneLoading(L"BotanicPanic", L"Start1LoadingScene");
+
+	//SceneManager::GetInstance()->LoadScene(L"Scene_Start1");
 	//ThreadManager::GetInstance()->LoadStartFunts();
 	IntersectManager::GetInstance()->SetObjectPt();
 }

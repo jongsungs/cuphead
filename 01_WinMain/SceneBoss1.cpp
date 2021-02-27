@@ -59,12 +59,12 @@ void SceneBoss1::Update(){
 	float CarrotHp = ObjectManager::GetInstance()->FindObject(ObjectLayer::Boss, "Carrot")->GetHP();
 	if(CarrotHp < 0){
 		mSceneDelayTime += Time::GetInstance()->DeltaTime();
-		SoundPlayer::GetInstance()->Stop(L"BotanicPanicBGM");
+
 	}
 	if (mSceneDelayTime > 5) {
 		LoadingScene* loadingScene = new LoadingScene();
 		SceneManager::GetInstance()->AddScene(L"Overworld_LoadingScene", loadingScene);
-
+		SoundPlayer::GetInstance()->Stop(L"BotanicPanicBGM");
 		FadeOut* fadeout = new FadeOut(false, L"OverWorld", L"Overworld_LoadingScene");
 	}
 	ObjectManager::GetInstance()->Update();
