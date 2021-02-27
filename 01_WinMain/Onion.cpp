@@ -183,8 +183,11 @@ void Onion::Update() {
 			mTearEffectAnimation->Stop();
 		}
 		mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
-		if (mBetweenAttackDelay > 1) {
-			mProjInitX = Random::GetInstance()->RandomInt(WINSIZEX);
+		if (mBetweenAttackDelay > 0.75) {
+			do {
+				mProjInitX = Random::GetInstance()->RandomInt(WINSIZEX);
+			} while (mProjInitX > 430 && mProjInitX < 860);
+				
 			OnionProj* proj = new OnionProj("proj", mProjInitX, 0, 5, PI*3/2, false);
 			proj->Init();
 			ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
@@ -240,6 +243,9 @@ void Onion::Render(HDC hdc) {
 	if(mState == EnemyState::Attack)
 		CameraManager::GetInstance()->GetMainCamera()
 			->FrameRenderFromBottom(hdc, mTearEffectImage, mX, mY-60, mTearEffectAnimation->GetNowFrameX(), mTearEffectAnimation->GetNowFrameY());
+
+	wstring check = to_wstring(_mousePosition.x);
+	TextOut(hdc, 10, 10, check.c_str(), check.length());
 }
 
 void Onion::InIntersectDamage(int dmage){
