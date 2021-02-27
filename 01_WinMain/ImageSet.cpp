@@ -3,6 +3,17 @@
 //사용할 이미지 입력
 void ImageSet::SetImage() //첫 scene1 로드
 {
+	//스타트씬1
+	IMAGEMANAGER->LoadFromFile(L"StartScene", Resources(L"/Start/StartScene_CupHead.bmp"), 1280, 720, true);
+	IMAGEMANAGER->LoadFromFile(L"StartScene_Cup&Mug", Resources(L"/Start/StartScene_Cup&Mug.bmp"), 8960, 720, 7, 1, true, RGB(99, 92, 99));
+	//스타트씬2
+	IMAGEMANAGER->LoadFromFile(L"Start_Select", Resources(L"/Start/StartScene_Start.bmp"), 1280, 720, true);
+	IMAGEMANAGER->LoadFromFile(L"Start_Exit", Resources(L"/Start/StartScene_Exit.bmp"), 1280, 720, true);
+	IMAGEMANAGER->LoadFromFile(L"Start_Option", Resources(L"/Start/StartScene_Option.bmp"), 1280, 720, true);
+
+	//장로집
+	IMAGEMANAGER->GetInstance()->LoadFromFile(L"NPC_ElderKettle", Resources(L"/ElderHouse/ElderKettle.bmp"), 900, 600, 3, 2, true, RGB(99, 92, 99));
+
 	//플레이어 이미지
 	IMAGEMANAGER->LoadFromFile(L"Player", Resources(L"Player.bmp"), 64, 96, 4, 4, true);																	
 	IMAGEMANAGER->LoadFromFile(L"SideSword", Resources(L"SideSword.bmp"), 15, 14, 1, 2, true);																
@@ -116,7 +127,9 @@ void ImageSet::SetOverWorldImage() {
 	IMAGEMANAGER->LoadFromFile(L"CupHead_OverWolrd", Resources(L"/overworld/Cuphead/CupHead_OverWorld.bmp"), 1649, 1130, 16, 10, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"NPC_Apple", Resources(L"/overworld/NPC/NPC_Apple.bmp"), 2600, 100, 26, 1, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"OverWorld", Resources(L"/overworld/OverWorld.bmp"), 4000, 2200, true);
-	IMAGEMANAGER->LoadFromFile(L"OverWorld_CanMove", Resources(L"/overworld/OverWorld_CanMove.bmp"), 4000, 2200, true);
+	IMAGEMANAGER->LoadFromFile(L"OverWorld2", Resources(L"/overworld/OverWorld2.bmp"), 4000, 2200, true);
+	IMAGEMANAGER->LoadFromFile(L"OverWorld_CanMove1", Resources(L"/overworld/OverWorld_CanMove1.bmp"), 4000, 2200, true);
+	IMAGEMANAGER->LoadFromFile(L"OverWorld_CanMove2", Resources(L"/overworld/OverWorld_CanMove2.bmp"), 4000, 2200, true);
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Front", Resources(L"/overworld/OverWorld_Front.bmp"), 4000, 2200, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_ElderHouse", Resources(L"/overworld/Buildings/ElderHouse.bmp"), 300, 350, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_Flatformer", Resources(L"/overworld/Buildings/flatformer.bmp"), 63, 46, true, RGB(99, 92, 99));

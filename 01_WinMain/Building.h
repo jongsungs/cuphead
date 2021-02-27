@@ -21,6 +21,7 @@ public :
 	void Update()override;
 	void Render(HDC hdc)override;
 
+	bool GetIsClear() { return mIsClear; };
 	void SetIsClear(bool b) { mIsClear = b; };
 };
 

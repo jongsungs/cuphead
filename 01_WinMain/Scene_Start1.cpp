@@ -6,8 +6,7 @@
 
 void Scene_Start1::Init()
 {
-	IMAGEMANAGER->LoadFromFile(L"StartScene", Resources(L"/Start/StartScene_CupHead.bmp"), 1280, 720, true);
-	IMAGEMANAGER->LoadFromFile(L"StartScene_Cup&Mug", Resources(L"/Start/StartScene_Cup&Mug.bmp"), 8960, 720, 7,1, true,RGB(99,92,99));
+	
 	mImage = IMAGEMANAGER->FindImage(L"StartScene_Cup&Mug");
 	mBackGroundImage = IMAGEMANAGER->FindImage(L"StartScene");
 

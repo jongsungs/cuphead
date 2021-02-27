@@ -13,8 +13,7 @@ NPC::NPC(const string& name, float x, float y)
 }
 void NPC::Init()
 {
-	IMAGEMANAGER->GetInstance()->LoadFromFile(L"NPC_ElderKettle", Resources(L"/ElderHouse/ElderKettle.bmp"), 900, 600, 3, 2, true,RGB(99,92,99));
-
+	
 	mIsTalk = 0;
 	mTalkNum = 0;
 	mZImage = IMAGEMANAGER->FindImage(L"ZPopUp");
@@ -57,8 +56,11 @@ void NPC::Release()
 void NPC::Update()
 {
 	mAnimaition->Update();
-
-	RECT cupheadRectTemp = ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetRect();
+	RECT cupheadRectTemp;
+	if (mIsOverWorld)
+		cupheadRectTemp = ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetRect();
+	else
+		cupheadRectTemp = ObjectManager::GetInstance()->FindObject("CupHead_ElderHouse")->GetRect();
 	RECT recttemp;
 	
 	if (IntersectRect(&recttemp, &cupheadRectTemp, &mRange))
@@ -143,9 +145,19 @@ void NPC::Render(HDC hdc)
 	
 	if(!mIsTalk)
 	{
-		CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc, mZImage,
-			ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetX(),
-			ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetRect().top, mZImageSizeX, mZImageSizeY);
+		if (mIsOverWorld)
+		{
+			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc, mZImage,
+				ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetX(),
+				ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetRect().top, mZImageSizeX, mZImageSizeY);
+
+		}
+		else
+		{
+			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc, mZImage,
+				ObjectManager::GetInstance()->FindObject("CupHead_ElderHouse")->GetX(),
+				ObjectManager::GetInstance()->FindObject("CupHead_ElderHouse")->GetRect().top, mZImageSizeX, mZImageSizeY);
+		}
 
 	}
 	else

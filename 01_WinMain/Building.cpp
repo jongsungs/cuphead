@@ -87,7 +87,7 @@ void Building::Update()
 				{
 					
 
-					FadeOut* fadeout = new FadeOut(false, L"ElderHouse", L"ElderHouse_LoadingScene");
+					FadeOut* fadeout = new FadeOut(false, L"Scene_ElderHouse", L"ElderHouse_LoadingScene");
 				}
 			}
 
@@ -141,6 +141,19 @@ void Building::Update()
 
 					FadeOut* fadeout = new FadeOut(false, L"BotanicPanic", L"BotanicPanic_LoadingScene");
 					mIsTalk = 0;
+				}
+			}
+		}
+		else if (mName == "Shop")
+		{
+			if (!mIsTalk)
+			{
+				if (Input::GetInstance()->GetKeyDown('Z'))
+				{
+					mZImageSizeX = 0;
+					mZImageSizeY = 0;
+					FadeOut* fadeout = new FadeOut(false, L"Shop", L"Shop_LoadingScene");
+
 				}
 			}
 		}

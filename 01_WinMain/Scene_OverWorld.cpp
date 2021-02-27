@@ -18,7 +18,7 @@ void Scene_OverWorld::Init()
 	//오브젝트매니저에 컵헤드 추가.
 	if (ObjectManager::GetInstance()->FindObject("CupHead_OverWorld") == nullptr)
 	{
-		mCupHead = new Cuphead_OverWorld("CupHead_OverWorld", 500, 700);
+		mCupHead = new Cuphead_OverWorld("CupHead_OverWorld", 800, 900);
 
 	}
 	else
@@ -36,12 +36,17 @@ void Scene_OverWorld::Init()
 	CameraManager::GetInstance()->SetMainCamera(camera);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::UI, camera);
 	//배경 layer1 : 오버월드 이미지
+	mBotanicPanic = (Building*)ObjectManager::GetInstance()->FindObject("BotanicPanic");
+	
+		
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Background,
-		new BackGround("BackGroundImage_Layer1", 
+		new BackGround("BackGroundImage_OverWorld",
 		IMAGEMANAGER->FindImage(L"OverWorld"), 0, 0));
 	
+	
 	//배경 Layer2 : 이동가능한곳.
-	mBackGroundImage_Layer2 = IMAGEMANAGER->FindImage(L"OverWorld_CanMove");
+	mBackGroundImage_CanMove1 = IMAGEMANAGER->FindImage(L"OverWorld_CanMove1");
+	mBackGroundImage_CanMove2 = IMAGEMANAGER->FindImage(L"OverWorld_CanMove2");
 	//배경 Layer3 : 배경중 맨위에 그려지는녀석들
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::FrontGround,
 		new BackGround("BackGroundImage_Layer3",
@@ -58,11 +63,24 @@ void Scene_OverWorld::Release()
 
 void Scene_OverWorld::Update()
 {
+	//보타닉패닉클리어시, 백그라운드 이미지 바까줌.
+	if (mBotanicPanic->GetIsClear())
+	{
+		ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Background,
+			new BackGround("BackGroundImage_OverWorld2",
+				IMAGEMANAGER->FindImage(L"OverWorld2"), 0, 0));
+	}
+
+	//마젠타값이면 못가게함.
 	int tempX = mCupHead->GetX();
 	int tempY = mCupHead->GetY();
 		for (int x = tempX - 10; x < tempX + 10; x++)
 		{
-			COLORREF pixelColor = GetPixel(mBackGroundImage_Layer2->GetHDC(),x, tempY);
+			COLORREF pixelColor;
+			if(mBotanicPanic->GetIsClear())
+				pixelColor = GetPixel(mBackGroundImage_CanMove2->GetHDC(),x, tempY);
+			else
+				pixelColor = GetPixel(mBackGroundImage_CanMove1->GetHDC(), x, tempY);
 			if (pixelColor == RGB(255, 0, 255))
 			{
 				if (x > tempX)
@@ -74,7 +92,11 @@ void Scene_OverWorld::Update()
 		}
 		for (int y = tempY - 10; y < tempY + 10; y++)
 		{
-			COLORREF pixelColor = GetPixel(mBackGroundImage_Layer2->GetHDC(), tempX, y);
+			COLORREF pixelColor;
+			if (mBotanicPanic->GetIsClear())
+				pixelColor = GetPixel(mBackGroundImage_CanMove2->GetHDC(), tempX, y);
+			else
+				pixelColor = GetPixel(mBackGroundImage_CanMove2->GetHDC(), tempX, y);
 			if (pixelColor == RGB(255, 0, 255))
 			{
 				if (y > tempY)

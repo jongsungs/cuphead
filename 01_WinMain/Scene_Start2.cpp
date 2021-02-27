@@ -4,10 +4,7 @@
 #include "LoadingScene.h"
 void Scene_Start2::Init()
 {
-	IMAGEMANAGER->LoadFromFile(L"StartScene", Resources(L"/Start/StartScene_CupHead.bmp"), 1280, 720, true);
-	IMAGEMANAGER->GetInstance()->LoadFromFile(L"Start_Select", Resources(L"/Start/StartScene_Start.bmp"), 1280, 720, true);
-	IMAGEMANAGER->GetInstance()->LoadFromFile(L"Start_Exit", Resources(L"/Start/StartScene_Exit.bmp"), 1280, 720, true);
-	IMAGEMANAGER->GetInstance()->LoadFromFile(L"Start_Option", Resources(L"/Start/StartScene_Option.bmp"), 1280, 720, true);
+	
 	mImages[0] = IMAGEMANAGER->FindImage(L"Start_Select");
 	mImages[1] = IMAGEMANAGER->FindImage(L"Start_Option");
 	mImages[2] = IMAGEMANAGER->FindImage(L"Start_Exit");

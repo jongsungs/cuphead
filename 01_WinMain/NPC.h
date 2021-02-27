@@ -11,6 +11,7 @@ class NPC : public GameObject
 	bool mIsTalk;
 	int mTalkNum;
 	class Animation* mAnimaition;
+	bool mIsOverWorld=1;
 public:
 	NPC(const string& name, float x, float y);
 	void Init()override;
@@ -22,5 +23,6 @@ public:
 	bool GetIsTalk() { return mIsTalk; };
 	void SetIsTalk(bool b) { mIsTalk = b; };
 	RECT GetRange() { return mRange; };
+	void SetIsOverWorld(bool b) { mIsOverWorld = b; };
 };
 

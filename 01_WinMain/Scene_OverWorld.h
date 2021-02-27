@@ -2,8 +2,9 @@
 #include "Scene.h"
 class Scene_OverWorld : public Scene
 {
-	Image* mBackGroundImage_Layer2;
-	
+	Image* mBackGroundImage_CanMove1;
+	Image* mBackGroundImage_CanMove2;
+	class Building* mBotanicPanic;
 	class Cuphead_OverWorld* mCupHead;
 
 public:
