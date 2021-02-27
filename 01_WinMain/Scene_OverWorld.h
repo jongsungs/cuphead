@@ -3,7 +3,7 @@
 class Scene_OverWorld : public Scene
 {
 	Image* mBackGroundImage_Layer2;
-	Image* mTalkImage1, * mTalkImage2, * mTalkImage3, * mTalkImage4, * mTalkImage5;
+	
 	class Cuphead_OverWorld* mCupHead;
 
 public:

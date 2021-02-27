@@ -4,6 +4,7 @@ class NPC : public GameObject
 {
 	Image* mImage;
 	Image* mZImage;
+	Image* mTalkImage1, * mTalkImage2, * mTalkImage3, * mTalkImage4, * mTalkImage5;
 	int mZImageSizeX;
 	int mZImageSizeY;
 	RECT mRange;

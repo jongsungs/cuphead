@@ -4,7 +4,7 @@ class Scene_ElderHouse :public Scene
 {
 	Image* mImage;
 	class Cuphead_OverWorld* mPlayer;
-
+	class NPC* mElderKettle;
 	RECT mDoorRect;
 public:
 	

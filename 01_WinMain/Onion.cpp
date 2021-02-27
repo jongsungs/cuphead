@@ -92,7 +92,7 @@ void Onion::Init() {
 	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 
 	//HP 임의설정
-	mHP = 50;
+	mHP = 10;
 	mAttackStartDelay = 0;
 }
 
@@ -110,7 +110,7 @@ void Onion::Release() {
 
 void Onion::Update() {
 	if (Input::GetInstance()->GetKeyDown(VK_CONTROL))
-		mHP -= 25;
+		mHP -= 5;
 
 	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
 		mState = EnemyState::End;
@@ -183,8 +183,11 @@ void Onion::Update() {
 			mTearEffectAnimation->Stop();
 		}
 		mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
-		if (mBetweenAttackDelay > 1) {
-			mProjInitX = Random::GetInstance()->RandomInt(WINSIZEX);
+		if (mBetweenAttackDelay > 0.75) {
+			do {
+				mProjInitX = Random::GetInstance()->RandomInt(WINSIZEX);
+			} while (mProjInitX > 430 && mProjInitX < 860);
+				
 			OnionProj* proj = new OnionProj("proj", mProjInitX, 0, 5, PI*3/2, false);
 			proj->Init();
 			ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
@@ -226,18 +229,21 @@ void Onion::Update() {
 		break;
 	}
 
-	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+	mRect = RectMakeCenter(mX, mY, mSizeX * 3 / 4, mSizeY / 2);
 	if(mTearEffectAnimation->GetIsPlay())
 		mTearEffectAnimation->Update();
 	mCurrentAnimation->Update();
 }
 
 void Onion::Render(HDC hdc) {
-
+	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	CameraManager::GetInstance()->GetMainCamera()
-		->ScaleFrameRenderFromBottom(hdc, mImage, mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 472, 570);
+		->ScaleFrameRenderFromBottom(hdc, mImage, mX, mRect.bottom+mSizeY/4, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 472, 570);
 	if(mState == EnemyState::Attack)
 		CameraManager::GetInstance()->GetMainCamera()
 			->FrameRenderFromBottom(hdc, mTearEffectImage, mX, mY-60, mTearEffectAnimation->GetNowFrameX(), mTearEffectAnimation->GetNowFrameY());
-	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+}
+
+void Onion::InIntersectDamage(int dmage){
+	mHP -= 1;
 }

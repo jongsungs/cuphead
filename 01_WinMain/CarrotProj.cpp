@@ -14,11 +14,12 @@ CarrotProj::CarrotProj(const string & name, float x, float y, float speed, float
 	mAngle = angle;
 	mParryAble = false;
 	mWeaponType = weapontype;
+	mHP = 3;
 }
 
 void CarrotProj::Init(){
 	CarrotMissileImage = IMAGEMANAGER->FindImage(L"CarrotMissile");
-	//CarrotBeamImage = IMAGEMANAGER->FindImage(L"CarrotBeam");
+	CarrotBeamImage = IMAGEMANAGER->FindImage(L"CarrotBeamProj");
 
 	vector<GameObject*>* EnemyProj = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Enemy_Bullet);
 	mName = to_string(EnemyProj->size());
@@ -30,8 +31,8 @@ void CarrotProj::Init(){
 	
 	CarrotBeamAnimation = new Animation();
 	CarrotBeamAnimation->InitFrameByStartEnd(0, 0, 5, 0, false);
-	CarrotBeamAnimation->SetIsLoop(true);
-	CarrotBeamAnimation->SetFrameUpdateTime(0.07f);
+	CarrotBeamAnimation->SetIsLoop(false);
+	CarrotBeamAnimation->SetFrameUpdateTime(0.15f);
 }
 
 void CarrotProj::Release(){
@@ -49,12 +50,18 @@ void CarrotProj::Update(){
 		mCurrentAnimation = CarrotMissileAnimation;
 		mCurrentAnimation->Play();
 		break;
-	/*case 2:
+	case 2:
 		mImage = CarrotBeamImage;
 		mCurrentAnimation = CarrotBeamAnimation;
 		mCurrentAnimation->Play();
-		break;*/
+		break;
 	}
+
+	if (mWeaponType == 1 && mHP <= 0) {
+		mIsActive = false;
+		mIsDestroy = true;
+	}
+
 	mSizeX = mImage->GetFrameWidth();
 	mSizeY = mImage->GetFrameHeight();
 
@@ -63,8 +70,10 @@ void CarrotProj::Update(){
 }
 
 void CarrotProj::Render(HDC hdc){
-	RenderRect(hdc, mRect);
-	
 	CameraManager::GetInstance()->GetMainCamera()
 		->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
+}
+
+void CarrotProj::InIntersectDamage(int dmage) {
+	mHP -= 1;
 }

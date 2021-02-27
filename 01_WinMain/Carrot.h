@@ -7,13 +7,15 @@ class Animation;
 class Carrot : public Enemy {
 	Image* mBeamImage;
 	Image* mChangeToBeamImage;
-	int count;
+	
 	Animation* mChangeToBeamAnimation;
 	Animation* mChangeFromBeamAnimation;
 	Animation* mBeamAnimation;
 
-	float mAttackStartDelay;
+	int count;
+	float mProjAngle;
 
+	float mAttackStartDelay;
 	float mBetweenAttackDelay;
 public:
 	Carrot(const string& name, float x, float y);
@@ -22,4 +24,6 @@ public:
 	void Release()override;
 	void Update()override;
 	void Render(HDC hdc)override;
+
+	void InIntersectDamage(int dmage = 0)override;
 };

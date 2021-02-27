@@ -1,7 +1,7 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Carrot.h"
 
-#include "Player.h"
+#include "PlatformerPlayer.h"
 #include "Image.h"
 #include "Animation.h"
 #include "Camera.h"
@@ -16,59 +16,59 @@ Carrot::Carrot(const string& name, float x, float y)
 }
 
 void Carrot::Init() {
-	//±âº» »óÅÂ·Î ÃÊ±â »ý¼º
+	//ê¸°ë³¸ ìƒíƒœë¡œ ì´ˆê¸° ìƒì„±
 	mState = EnemyState::Intro;
 
-	//Ä³¸¯ÅÍ »óÅÂ¿¡ µû¶ó ´Ù¸¥ ÀÌ¹ÌÁö¸¦ º¸¿©ÁÖ±â À§ÇÔ
+	//ìºë¦­í„° ìƒíƒœì— ë”°ë¼ ë‹¤ë¥¸ ì´ë¯¸ì§€ë¥¼ ë³´ì—¬ì£¼ê¸° ìœ„í•¨
 	mIntroImage = IMAGEMANAGER->FindImage(L"CarrotIntro");
 	mAttackImage = IMAGEMANAGER->FindImage(L"CarrotAttack");
 	mBeamImage = IMAGEMANAGER->FindImage(L"CarrotBeam");
 	mChangeToBeamImage = IMAGEMANAGER->FindImage(L"CarrotChangeToBeam");
 	mDeathImage = IMAGEMANAGER->FindImage(L"CarrotDeath");
 
-	//Ä³¸¯ÅÍ »óÅÂ¿¡ µû¶ó ´Ù¸¥ ¾Ö´Ï¸ÞÀÌ¼ÇÀ» º¸¿©ÁÖ±â À§ÇÔ
-	//ÀÏ¹Ý ¾Ö´Ï¸ÞÀÌ¼Ç
+	//ìºë¦­í„° ìƒíƒœì— ë”°ë¼ ë‹¤ë¥¸ ì• ë‹ˆë©”ì´ì…˜ì„ ë³´ì—¬ì£¼ê¸° ìœ„í•¨
+	//ì¼ë°˜ ì• ë‹ˆë©”ì´ì…˜
 	mIntroAnimation = new Animation();
 	mIntroAnimation->InitFrameByStartEnd(0, 0, 24, 0, false);
 	mIntroAnimation->SetIsLoop(false);
 	mIntroAnimation->SetFrameUpdateTime(0.07f);
-	//´ç±Ù ¼ÒÈ¯ ¾Ö´Ï¸ÞÀÌ¼Ç
+	//ë‹¹ê·¼ ì†Œí™˜ ì• ë‹ˆë©”ì´ì…˜
 	mAttackAnimation = new Animation();
 	mAttackAnimation->InitFrameByStartEnd(0, 0, 21, 0, false);
 	mAttackAnimation->SetIsLoop(true);
 	mAttackAnimation->SetFrameUpdateTime(0.07f);
-	//ºöÀ¸·Î ¾Ö´Ï¸ÞÀÌ¼Ç
+	//ë¹”ìœ¼ë¡œ ì• ë‹ˆë©”ì´ì…˜
 	mChangeToBeamAnimation = new Animation();
 	mChangeToBeamAnimation->InitFrameByStartEnd(0, 0, 8, 0, false);
 	mChangeToBeamAnimation->SetIsLoop(false);
 	mChangeToBeamAnimation->SetFrameUpdateTime(0.07f);
-	//ºö ¾Ö´Ï¸ÞÀÌ¼Ç
+	//ë¹” ì• ë‹ˆë©”ì´ì…˜
 	mBeamAnimation = new Animation();
 	mBeamAnimation->InitFrameByStartEnd(0, 0, 3, 0, false);
 	mBeamAnimation->SetIsLoop(true);
 	mBeamAnimation->SetFrameUpdateTime(0.07f);
-	//ºö¿¡¼­ ¾Ö´Ï¸ÞÀÌ¼Ç
+	//ë¹”ì—ì„œ ì• ë‹ˆë©”ì´ì…˜
 	mChangeFromBeamAnimation = new Animation();
 	mChangeFromBeamAnimation->InitFrameByStartEnd(0, 1, 8, 1, false);
 	mChangeFromBeamAnimation->SetIsLoop(false);
 	mChangeFromBeamAnimation->SetFrameUpdateTime(0.07f);
-	//»ç¸Á ¾Ö´Ï¸ÞÀÌ¼Ç
+	//ì‚¬ë§ ì• ë‹ˆë©”ì´ì…˜
 	mDeathAnimation = new Animation();
 	mDeathAnimation->InitFrameByStartEnd(0, 0, 12, 0, true);
 	mDeathAnimation->SetIsLoop(true);
 	mDeathAnimation->SetFrameUpdateTime(0.07f);
 
-	//ÃÊ±â»ý¼º½Ã µé¾î°¡¾ß ÇÒ µ¥ÀÌÅÍ
+	//ì´ˆê¸°ìƒì„±ì‹œ ë“¤ì–´ê°€ì•¼ í•  ë°ì´í„°
 	mCurrentAnimation = mIntroAnimation;
 	mCurrentAnimation->Play();
 	mImage = mIntroImage;
 	mSizeX = mImage->GetFrameWidth();
 	mSizeY = mImage->GetFrameHeight();
-	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 
-	//HP ÀÓÀÇ¼³Á¤
-	mHP = 50;
+	//HP ìž„ì˜ì„¤ì •
+	mHP = 10;
 	mAttackStartDelay = 0;
+	mProjAngle = 0;
 }
 
 void Carrot::Release() {
@@ -82,14 +82,15 @@ void Carrot::Release() {
 
 void Carrot::Update() {
 	if (Input::GetInstance()->GetKeyDown(VK_CONTROL))
-		mHP -= 25;
+		mHP -= 5;
 
 	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
 		mState = EnemyState::Death;
 		mDelayTime = 0;
+		SoundPlayer::GetInstance()->Play(L"End1", 0.2f);
 	}
 
-	//»óÅÂ¿¡ µû¸¥ ´Ù¸¥ ¾Ö´Ï¸ÞÀÌ¼Ç Ãâ·Â
+	//ìƒíƒœì— ë”°ë¥¸ ë‹¤ë¥¸ ì• ë‹ˆë©”ì´ì…˜ ì¶œë ¥
 	switch (mState) {
 	case EnemyState::Intro:
 		mImage = mIntroImage;
@@ -110,22 +111,26 @@ void Carrot::Update() {
 		mSizeX = mImage->GetFrameWidth();
 		mSizeY = mImage->GetFrameHeight();
 		mCurrentAnimation = mAttackAnimation;
-		mDelayTime += Time::GetInstance()->DeltaTime();
+		
+		mAttackStartDelay += Time::GetInstance()->DeltaTime();
 
-		mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
+		if (mAttackStartDelay > 1) {
+			mDelayTime += Time::GetInstance()->DeltaTime();
+			mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
 
-		if (mBetweenAttackDelay > 0.25) {
-			count++;
-			CarrotProj* proj = new CarrotProj("proj", WINSIZEX - WINSIZEX / 8 * count, -50, 10, PI*3/2, 1);
-			proj->Init();
-			ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss,proj);
-			mBetweenAttackDelay = 0;
+			if (mBetweenAttackDelay > 0.25) {
+				count++;
+				CarrotProj* proj = new CarrotProj("proj", WINSIZEX - WINSIZEX / 8 * count, -50, 10, PI * 3 / 2, 1);
+				proj->Init();
+				ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, proj);
+				mBetweenAttackDelay = 0;
+			}
+
+			if (mDelayTime > 4)
+				mState = EnemyState::ToAttack;
 		}
+			mCurrentAnimation->Play();
 
-		if (mDelayTime > 2)	
-			mState = EnemyState::ToAttack;
-
-		mCurrentAnimation->Play();
 		break;
 
 	case EnemyState::ToAttack:
@@ -140,6 +145,8 @@ void Carrot::Update() {
 		if (mCurrentAnimation->GetIsPlay() == false) {
 			mState = EnemyState::Beam;
 			mDelayTime = 0;
+			mBetweenAttackDelay = 0;
+			count = 0;
 		}
 		mCurrentAnimation->Play();
 		break;
@@ -154,8 +161,22 @@ void Carrot::Update() {
 		mSizeY = mImage->GetFrameHeight();
 		mCurrentAnimation = mBeamAnimation;
 		mDelayTime += Time::GetInstance()->DeltaTime();
-		if (mDelayTime > 5)
+		mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
+
+		if (mBetweenAttackDelay > 0.2 &&count < 5) {
+			if (count == 0)
+				mProjAngle = Math::GetAngle(mX, mY - mSizeY * 1 / 4, mPlayer->GetX(), mPlayer->GetY());
+			count++;
+			CarrotProj* proj = new CarrotProj("proj", mX, mY - mSizeY * 1 / 4, 5, mProjAngle, 2);
+			proj->Init();
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, proj);
+			mBetweenAttackDelay = 0;
+		}
+
+		if (mDelayTime > 2) {
 			mState = EnemyState::FromAttack;
+			count = 0;
+		}
 		mCurrentAnimation->Play();
 		break;
 
@@ -171,6 +192,7 @@ void Carrot::Update() {
 		if (mCurrentAnimation->GetIsPlay() == false) {
 			mState = EnemyState::Attack;
 			mDelayTime = 0;
+			mAttackStartDelay = 0;
 			count = 0;
 		}
 		mCurrentAnimation->Play();
@@ -187,18 +209,20 @@ void Carrot::Update() {
 	case EnemyState::End:
 		mIsActive = false;
 		mIsDestroy = true;
-		//ObjectManager::GetInstance()->FindObject(ObjectLayer::Building,"BotanicPanic")
-		//±ê¹ß ¿Ã¸± ¼ö ÀÖµµ·Ï ¼öÁ¤ÇØÁÙ °Í.
 		break;
 	}
-
-	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+	
+	mRect = RectMakeCenter(mX, mY-mSizeY / 4, mSizeX*3/4, mSizeY/2);
 	mCurrentAnimation->Update();
 }
 
 void Carrot::Render(HDC hdc) {
+	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	//CameraManager::GetInstance()->GetMainCamera()
 	//	->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
-	mImage->FrameRender(hdc, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	mImage->FrameRender(hdc, mX - mSizeX / 2, mY-mSizeY/2, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
+}
+
+void Carrot::InIntersectDamage(int dmage){
+	mHP -= 1;
 }

@@ -12,6 +12,6 @@ public :
 	void Update()override;
 	void Render(HDC hdc)override;
 
-	void InIntersectDamage()override;
+	void InIntersectDamage(int Damge = 0)override;
 };
 

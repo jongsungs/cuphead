@@ -47,12 +47,9 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"BotanicPanicBackground3", Resources(L"Boss/BotanicPanic/BotanicPanicBackground3.bmp"), 885, 567, true);		
 	//감자																																				 
 	IMAGEMANAGER->LoadFromFile(L"PotatoIntro", Resources(L"Boss/BotanicPanic/Potato/Potato_Intro.bmp"), 4208, 512, 8, 1, true);					
-	IMAGEMANAGER->LoadFromFile(L"PotatoIntroEarth", Resources(L"Boss/BotanicPanic/Potato/Potato_Intro_Earth.bmp"), 10026, 461, 18, 1, true);	
-	IMAGEMANAGER->LoadFromFile(L"PotatoIntroEarth1", Resources(L"Boss/BotanicPanic/Potato/Potato_Intro_Earth1.bmp"), 557, 461, true);			
-	IMAGEMANAGER->LoadFromFile(L"PotatoIntroEarth2", Resources(L"Boss/BotanicPanic/Potato/Potato_Intro_Earth2.bmp"), 557, 461, true);			
 	IMAGEMANAGER->LoadFromFile(L"PotatoIdle", Resources(L"Boss/BotanicPanic/Potato/Potato_Idle.bmp"), 3682, 512, 7, 1, true);					
 	IMAGEMANAGER->LoadFromFile(L"PotatoSpitAttack", Resources(L"Boss/BotanicPanic/Potato/Potato_Spit_Attack.bmp"), 12624, 512, 24, 1, true);	
-	IMAGEMANAGER->LoadFromFile(L"PotatoDeath", Resources(L"Boss/BotanicPanic/Potato/Potato_Death.bmp"), 2727, 439, 9, 1, true);					
+	IMAGEMANAGER->LoadFromFile(L"PotatoDeath", Resources(L"Boss/BotanicPanic/Potato/Potato_Death.bmp"), 2988, 512, 9, 1, true);					
 	//감자 투사체																																
 	IMAGEMANAGER->LoadFromFile(L"PotatoParryable", Resources(L"Boss/BotanicPanic/Potato/Potato_Parryable.bmp"), 528, 142, 4, 1, true);			
 	IMAGEMANAGER->LoadFromFile(L"PotatoNonParryable", Resources(L"Boss/BotanicPanic/Potato/Potato_NonParryable.bmp"), 1072, 139, 8, 1, true);																																					
@@ -64,6 +61,7 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"CarrotDeath", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Death.bmp"), 4199, 456, 13, 1, true);				
 	//당근 투사체																																			
 	IMAGEMANAGER->LoadFromFile(L"CarrotMissile", Resources(L"Boss/BotanicPanic/Carrot/Carrot_Missile.bmp"), 492, 137, 6, 1, true);				
+	IMAGEMANAGER->LoadFromFile(L"CarrotBeamProj", Resources(L"Boss/BotanicPanic/Carrot/Carrot_BeamProj.bmp"), 1539, 163, 9, 1, true);
 																																					
 	//양파																																			
 	IMAGEMANAGER->LoadFromFile(L"OnionIntro", Resources(L"Boss/BotanicPanic/Onion/Onion_Intro.bmp"), 12312, 643, 24, 1, true);					

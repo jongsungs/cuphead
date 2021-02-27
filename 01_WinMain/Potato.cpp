@@ -62,7 +62,7 @@ void Potato::Init() {
 	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 
 	//HP 임의설정
-	mHP = 50;
+	mHP = 10;
 	mAttackStartDelay = 0;
 	mAttackCount = 0;
 }
@@ -76,7 +76,7 @@ void Potato::Release() {
 
 void Potato::Update() {
 	if (Input::GetInstance()->GetKeyDown(VK_CONTROL))
-		mHP -= 25;
+		mHP -= 5;
 
 	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
 		mState = EnemyState::Death;
@@ -136,13 +136,13 @@ void Potato::Update() {
 			if (mAttackAnimation->GetNowFrameX() == 16) {
 				mAttackCount++;
 				if (mAttackCount < 4) {
-					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 205, 7, PI, false);
+					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 155, 7, PI, false);
 					proj->Init();
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
 					mIsAttack = true;
 				}
 				else {
-					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 205, 7, PI, true);
+					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 155, 7, PI, true);
 					proj->Init();
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
 					mIsAttack = true;
@@ -179,26 +179,17 @@ void Potato::Update() {
 		ObjectManager::GetInstance()->FindObject("Onion")->SetIsActive(true);
 		break;
 	}
-	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+	mRect = RectMakeCenter(mX, mY, mSizeX/2, mSizeY*3/4);
 	mIntroEarthAnimation->Update();
 	mCurrentAnimation->Update();
 }
 
 void Potato::Render(HDC hdc) {
-	if (mState == EnemyState::Intro) {
-		CameraManager::GetInstance()->GetMainCamera()
-			->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
-		CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromBottom(hdc, IntroEarthImage, 960, 660, mIntroEarthAnimation->GetNowFrameX(), mIntroAnimation->GetNowFrameY());
-	}
+	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	CameraManager::GetInstance()->GetMainCamera()
+		->FrameRender(hdc, mImage, mX-mSizeX/2, mY-mSizeY/2, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
+}
 
-	else {
-		CameraManager::GetInstance()->GetMainCamera()->RenderFromBottom(hdc, IntroEarthImage1, 960, 660);
-		CameraManager::GetInstance()->GetMainCamera()
-			->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
-		CameraManager::GetInstance()->GetMainCamera()->RenderFromBottom(hdc, IntroEarthImage2, 960, 660);
-	}
-	//wstring check = to_wstring(mX);
-	//TextOut(hdc, 10, 10, check.c_str(), check.length());
-
-	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+void Potato::InIntersectDamage(int dmage){
+	mHP -= 1;
 }

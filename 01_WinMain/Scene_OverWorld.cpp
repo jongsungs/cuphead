@@ -47,13 +47,7 @@ void Scene_OverWorld::Init()
 		new BackGround("BackGroundImage_Layer3",
 			IMAGEMANAGER->FindImage(L"OverWorld_Front"), 0, 0));
 
-	//NPC 대화
-	mTalkImage1 = IMAGEMANAGER->FindImage(L"NPC_Apple_Talk1");
-	mTalkImage2 = IMAGEMANAGER->FindImage(L"NPC_Apple_Talk2");
-	mTalkImage3 = IMAGEMANAGER->FindImage(L"NPC_Apple_Talk3");
-	mTalkImage4 = IMAGEMANAGER->FindImage(L"NPC_Apple_Talk4");
-	mTalkImage5 = IMAGEMANAGER->FindImage(L"NPC_Apple_Talk5");
-
+	
 	ObjectManager::GetInstance()->Init();
 }
 
@@ -98,56 +92,6 @@ void Scene_OverWorld::Render(HDC hdc)
 {
 	
 	ObjectManager::GetInstance()->Render(hdc);
-	//대화할때
-	NPC* npc_apple = (NPC*)ObjectManager::GetInstance()->FindObject("NPC_Apple");
-	if (npc_apple->GetIsTalk())
-	{
-		if (npc_apple->GetTalkNum() == 1)
-		{
-			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,
-				mTalkImage1,
-				npc_apple->GetX() - 150,
-				npc_apple->GetY()  ,
-				mTalkImage1->GetWidth() * 0.5f,
-				mTalkImage1->GetHeight() * 0.5f);
-		}
-		else if (npc_apple->GetTalkNum() == 2)
-		{
-			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,
-				mTalkImage2,
-				npc_apple->GetX() - 150,
-				npc_apple->GetY() ,
-				mTalkImage2->GetWidth() * 0.5f,
-				mTalkImage2->GetHeight() * 0.5f);
-		}
-		else if (npc_apple->GetTalkNum() == 3)
-		{
-			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,
-				mTalkImage3,
-				npc_apple->GetX() - 100,
-				npc_apple->GetY() ,
-				mTalkImage3->GetWidth() * 0.5f,
-				mTalkImage3->GetHeight() * 0.5f);
-		}
-		else if (npc_apple->GetTalkNum() == 4)
-		{
-			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,
-				mTalkImage4,
-				npc_apple->GetX() - 120,
-				npc_apple->GetY() ,
-				mTalkImage4->GetWidth() * 0.5f,
-				mTalkImage4->GetHeight() * 0.5f);
-		}
-		else if (npc_apple->GetTalkNum() == 5)
-		{
-			CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,
-				mTalkImage5,
-				npc_apple->GetX() - 110,
-				npc_apple->GetY() ,
-				mTalkImage5->GetWidth() * 0.5f,
-				mTalkImage5->GetHeight() * 0.5f);
-		}
-
-	}
+	
 
 }

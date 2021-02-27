@@ -6,6 +6,12 @@ class SceneBoss1: public Scene{
 	Image* mBackGround2;
 	Image* mBackGround3;
 	float mSceneDelayTime = 0.f;
+	float mDelayTime = 0.f;
+
+	bool mIsPlay = false;
+
+	int randomReady;
+	int randomStart;
 public:
 	void Init()override;
 	void Release()override;

@@ -18,4 +18,6 @@ public:
 	void Release()override;
 	void Update()override;
 	void Render(HDC hdc)override;
+
+	void InIntersectDamage(int dmage = 0)override;
 };
