@@ -5,6 +5,7 @@
 #include "Scene_OverWorld.h"
 #include "LoadingScene.h"
 #include "FadeOut.h"
+#include "NPC.h"
 void Scene_ElderHouse::Init()
 {
 	
@@ -13,16 +14,21 @@ void Scene_ElderHouse::Init()
 	
 	mPlayer = new Cuphead_OverWorld("ElderHouse_Player", 200, 200);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, mPlayer);
+	
+	mElderKettle = new NPC("NPC_ElderKettle", 1100, 400);
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::NPC, mElderKettle);
 
 	ObjectManager::GetInstance()->Init();
-	
+
 	Camera* camera = new Camera();
 	camera->SetX(250);
 	camera->SetY(50);
 	camera->SetMode(Camera::Mode::Free);
 	CameraManager::GetInstance()->SetMainCamera(camera);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::UI, camera);
+
 	mDoorRect = RectMakeCenter(300, 600, 200, 200);
+
 }
 
 void Scene_ElderHouse::Release()

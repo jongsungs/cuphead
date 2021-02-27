@@ -71,7 +71,7 @@ void Building::Update()
 				{
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
 						new Talk("ElderHouse_Talk",
-							IMAGEMANAGER->FindImage(L"ElderHouse_Talk"), 350, 200));
+							IMAGEMANAGER->FindImage(L"ElderHouse_Talk"), 350, 200,true));
 					mIsTalk = 1;
 					
 				}
@@ -100,7 +100,7 @@ void Building::Update()
 				{
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
 						new Talk("BotanicPanic_Talk1",
-							IMAGEMANAGER->FindImage(L"BotanicPanic_Talk1"), 200, 100));
+							IMAGEMANAGER->FindImage(L"BotanicPanic_Talk1"), 200, 100,true));
 					mIsTalk = 1;
 					
 				}
@@ -114,7 +114,7 @@ void Building::Update()
 						ObjectManager::GetInstance()->DeleteObject(ObjectLayer::Talk);
 						ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
 							new Talk("BotanicPanic_Talk1",
-								IMAGEMANAGER->FindImage(L"BotanicPanic_Talk1"), 200, 100));
+								IMAGEMANAGER->FindImage(L"BotanicPanic_Talk1"), 200, 100,true));
 						mIsRegular = 0;
 					}
 				}
@@ -125,7 +125,7 @@ void Building::Update()
 						ObjectManager::GetInstance()->DeleteObject(ObjectLayer::Talk);
 						ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
 							new Talk("BotanicPanic_Talk2",
-								IMAGEMANAGER->FindImage(L"BotanicPanic_Talk2"), 200, 100));
+								IMAGEMANAGER->FindImage(L"BotanicPanic_Talk2"), 200, 100,true));
 						mIsRegular = 1;
 					}
 				}
