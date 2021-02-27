@@ -24,7 +24,7 @@ void SceneBoss1::Init(){
 
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", 0, WINSIZEY / 8 * 7, WINSIZEX, 100));
 
-	Enemy* potato = new Potato("Potato", WINSIZEX * 3 / 4, WINSIZEY / 2);
+	Enemy* potato = new Potato("Potato", WINSIZEX * 3 / 4, WINSIZEY / 2+50);
 	Enemy* carrot = new Carrot("Carrot", WINSIZEX / 2, WINSIZEY * 3 / 8 + 549);
 	Enemy* onion = new Onion("Onion", WINSIZEX / 2, WINSIZEY * 3 / 8);
 

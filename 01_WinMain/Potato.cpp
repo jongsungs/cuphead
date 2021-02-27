@@ -136,13 +136,13 @@ void Potato::Update() {
 			if (mAttackAnimation->GetNowFrameX() == 16) {
 				mAttackCount++;
 				if (mAttackCount < 4) {
-					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 205, 7, PI, false);
+					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 155, 7, PI, false);
 					proj->Init();
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
 					mIsAttack = true;
 				}
 				else {
-					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 205, 7, PI, true);
+					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 155, 7, PI, true);
 					proj->Init();
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
 					mIsAttack = true;
@@ -186,21 +186,8 @@ void Potato::Update() {
 
 void Potato::Render(HDC hdc) {
 	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
-	if (mState == EnemyState::Intro) {
-		CameraManager::GetInstance()->GetMainCamera()
-			->FrameRender(hdc, mImage, mX- mSizeX/2, mY- mSizeY/2, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
-		CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromBottom(hdc, IntroEarthImage, 960, 660, mIntroEarthAnimation->GetNowFrameX(), mIntroAnimation->GetNowFrameY());
-	}
-
-	else {
-		CameraManager::GetInstance()->GetMainCamera()->RenderFromBottom(hdc, IntroEarthImage1, 960, 660);
-		CameraManager::GetInstance()->GetMainCamera()
-			->FrameRender(hdc, mImage, mX - mSizeX / 2, mY - mSizeY / 2, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
-		CameraManager::GetInstance()->GetMainCamera()->RenderFromBottom(hdc, IntroEarthImage2, 960, 660);
-	}
-	//wstring check = to_wstring(mX);
-	//TextOut(hdc, 10, 10, check.c_str(), check.length());
-
+	CameraManager::GetInstance()->GetMainCamera()
+		->FrameRender(hdc, mImage, mX-mSizeX/2, mY-mSizeY/2, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 }
 
 void Potato::InIntersectDamage(int dmage){
