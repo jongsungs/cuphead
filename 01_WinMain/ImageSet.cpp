@@ -94,7 +94,17 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"OnionNonParryAbleASplash", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_NonParryableASplash.bmp"), 1540, 136, 7, 1, true);
 																																											
 	//총알 Test																																								
-	IMAGEMANAGER->LoadFromFile(L"Testbullet", Resources(L"bullet.bmp"), 21, 21, true);																	
+	IMAGEMANAGER->LoadFromFile(L"Testbullet", Resources(L"bullet.bmp"), 21, 21, true);
+	IMAGEMANAGER->LoadFromFile(L"BulletDeath", Resources(L"/Image/Bullet/BulletDeath.bmp"), 1680, 280, 6, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"BulletLeftRight", Resources(L"/Image/Bullet/BulletLeftRight.bmp"), 1136, 60, 8, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"BulletStart", Resources(L"/Image/Bullet/BulletStart.bmp"), 380, 89, 4, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"BulletUpDown", Resources(L"/Image/Bullet/BulletUpDown.bmp"), 240, 284, 8, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"BulletUpLeftRight", Resources(L"/Image/Bullet/BulletUpLeftRight.bmp"), 1296, 184, 8, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"SuperBulletDeath", Resources(L"/Image/Bullet/SuperBulletDeath.bmp"), 4770, 530, 9, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"SuperBulletLeftRight", Resources(L"/Image/Bullet/SuperBulletLeftRight.bmp"), 9584, 896, 8, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"SuperBulletUp", Resources(L"/Image/Bullet/SuperBulletUp.bmp"), 3584, 448, 8, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"SuperBulletUpLeftRight", Resources(L"/Image/Bullet/SuperBulletUpLeftRight.bmp"), 3584, 896, 8, 2, true);
+
 	IMAGEMANAGER->LoadFromFile(L"OnionParryAbleSplash", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_ParryableSplash.bmp"), 1212, 126, 6, 1, true);	
 	IMAGEMANAGER->LoadFromFile(L"ElderHouse_Inside", Resources(L"/ElderHouse/ElderHouse_Inside.bmp"), 1695, 834, true);									
 }
@@ -131,9 +141,10 @@ void ImageSet::SetOverWorldImage() {
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_CanMove1", Resources(L"/overworld/OverWorld_CanMove1.bmp"), 4000, 2200, true);
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_CanMove2", Resources(L"/overworld/OverWorld_CanMove2.bmp"), 4000, 2200, true);
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Front", Resources(L"/overworld/OverWorld_Front.bmp"), 4000, 2200, true, RGB(99, 92, 99));
-	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_ElderHouse", Resources(L"/overworld/Buildings/ElderHouse.bmp"), 300, 350, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_ElderHouse", Resources(L"/overworld/Buildings/ElderHouse.bmp"), 900, 400,3,1, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_PigShop", Resources(L"/overworld/Buildings/PigShop.bmp"), 900, 400, 3, 1, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_Flatformer", Resources(L"/overworld/Buildings/flatformer.bmp"), 63, 46, true, RGB(99, 92, 99));
-	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_BotanicPanic", Resources(L"/overworld/Buildings/BotanicPanic.bmp"), 330, 270, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"OverWorld_Building_BotanicPanic", Resources(L"/overworld/Buildings/BotanicPanic.bmp"), 1200, 300,3,1, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"Dust_OverWolrd", Resources(L"/overworld/Cuphead/Dust_Overworld.bmp"), 1622, 498, 20, 6, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"ZPopUp", Resources(L"/overworld/Z.bmp"), 42, 52, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"NPC_Apple_Talk1", Resources(L"/overworld/NPC/Talk1.bmp"), 1016, 263, true, RGB(99, 92, 99));
@@ -141,6 +152,7 @@ void ImageSet::SetOverWorldImage() {
 	IMAGEMANAGER->LoadFromFile(L"NPC_Apple_Talk3", Resources(L"/overworld/NPC/Talk3.bmp"), 693, 265, true, RGB(99, 92, 99)); 
 	IMAGEMANAGER->LoadFromFile(L"NPC_Apple_Talk4", Resources(L"/overworld/NPC/Talk4.bmp"), 903, 339, true, RGB(99, 92, 99)); 
 	IMAGEMANAGER->LoadFromFile(L"NPC_Apple_Talk5", Resources(L"/overworld/NPC/Talk5.bmp"), 881, 285, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"PigShop_Talk", Resources(L"/overworld/buildings/PigShop_Title.bmp"), 714, 394, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"ElderHouse_Talk", Resources(L"/overworld/buildings/ElderHouse_Title.bmp"), 785, 418, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"BotanicPanic_Talk1", Resources(L"/overworld/buildings/BotanicPanic_Title_Simple.bmp"), 1165, 834, true, RGB(99, 92, 99));
 	IMAGEMANAGER->LoadFromFile(L"BotanicPanic_Talk2", Resources(L"/overworld/buildings/BotanicPanic_Title_Regular.bmp"), 1165, 834, true, RGB(99, 92, 99)); 
@@ -150,4 +162,13 @@ void ImageSet::SetOverWorldImage() {
 
 	//장로집 이미지
 	IMAGEMANAGER->LoadFromFile(L"ElderHouse_Inside", Resources(L"/ElderHouse/ElderHouse_Inside.bmp"), 1695, 834, true);
+
+	//피그샵 이미지
+	IMAGEMANAGER->LoadFromFile(L"PigShop_BackGround", Resources(L"/PigShop/BackGround.bmp"), 1401, 1000, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"PigShop_LeftDoor", Resources(L"/PigShop/LeftDoor.bmp"), 587, 224, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"PigShop_RightDoor", Resources(L"/PigShop/RightDoor.bmp"), 596, 218, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"PigShop_Pig", Resources(L"/PigShop/Pig.bmp"), 922, 406,2,1, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"PigShop_SpreadBullet", Resources(L"/PigShop/PigShop_SpreadBullet.bmp"), 153, 222, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"PigShop_SpreadBullet_SoldOut", Resources(L"/PigShop/PigShop_SpreadBullet_SoldOut.bmp"), 158, 226, true, RGB(99, 92, 99));
+	IMAGEMANAGER->LoadFromFile(L"PigShop_LeftDoor", Resources(L"/PigShop/LeftDoor.bmp"), 587, 224, true, RGB(99, 92, 99));
 }

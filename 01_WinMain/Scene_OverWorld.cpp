@@ -11,10 +11,15 @@
 #include "FadeOut.h"
 void Scene_OverWorld::Init()
 {
-	FadeOut* fadeout = new FadeOut(true);
+	//시작할때 페이드인
+	FadeOut* fadein = new FadeOut(true);
+
+	//건물
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("Flatformer", IMAGEMANAGER->FindImage(L"OverWorld_Building_Flatformer"), 2000, 800));
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("ElderHouse", IMAGEMANAGER->FindImage(L"OverWorld_Building_ElderHouse"), 650, 650));
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("BotanicPanic", IMAGEMANAGER->FindImage(L"OverWorld_Building_BotanicPanic"), 1680, 1490));
+	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("PigShop", IMAGEMANAGER->FindImage(L"OverWorld_Building_PigShop"), 2200, 1000));
+
 	//오브젝트매니저에 컵헤드 추가.
 	if (ObjectManager::GetInstance()->FindObject("CupHead_OverWorld") == nullptr)
 	{
