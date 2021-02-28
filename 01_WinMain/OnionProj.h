@@ -27,4 +27,6 @@ public:
 	virtual void Release()override;
 	virtual void Update()override;
 	virtual void Render(HDC hdc)override;
+
+	void InIntersectDamage(int dmage = 0)override;
 };

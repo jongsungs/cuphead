@@ -182,7 +182,7 @@ void Carrot::Update() {
 			count++;
 			CarrotProj* proj = new CarrotProj("proj", mX, mY - mSizeY * 1 / 4, 5, mProjAngle, 2);
 			proj->Init();
-			ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, proj);
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
 			mBetweenAttackDelay = 0;
 		}
 

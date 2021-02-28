@@ -18,6 +18,7 @@ void SceneBoss1::Init(){
 	mBackGround1 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground1");
 	mBackGround2 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground2");
 	mBackGround3 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground3");
+
 	mBlack = IMAGEMANAGER->FindImage(L"Black");
 	mClear = IMAGEMANAGER->FindImage(L"Clear");
 
@@ -46,7 +47,7 @@ void SceneBoss1::Init(){
 	Camera* camera = new Camera(Camera::Mode::Boss,WINSIZEX/2,WINSIZEY/2);
 	camera->SetCamerArea(RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, WINSIZEX + 10,WINSIZEY));
 	CameraManager::GetInstance()->SetMainCamera(camera);
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, camera);
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Camera, camera);
 	ObjectManager::GetInstance()->Init();
 	mSceneDelayTime = 0.f;
 	SoundPlayer::GetInstance()->Play(L"BotanicPanicBGM", 0.2f);
@@ -79,26 +80,26 @@ void SceneBoss1::Update(){
 	mDelayTime += Time::GetInstance()->DeltaTime();
 	if (mDelayTime > 2.2 && mIsPlay == false) {
 		switch (randomStart) {
-		case 0:
-			SoundPlayer::GetInstance()->Play(L"Start1", 0.4f);
-			mIsPlay = true;
-			break;
-		case 1:
-			SoundPlayer::GetInstance()->Play(L"Start2", 0.4f);
-			mIsPlay = true;
-			break;
-		case 2:
-			SoundPlayer::GetInstance()->Play(L"Start3", 0.4f);
-			mIsPlay = true;
-			break;
-		case 3:
-			SoundPlayer::GetInstance()->Play(L"Start4", 0.4f);
-			mIsPlay = true;
-			break;
-		case 4:
-			SoundPlayer::GetInstance()->Play(L"Start5", 0.4f);
-			mIsPlay = true;
-			break;
+			case 0:
+				SoundPlayer::GetInstance()->Play(L"Start1", 0.4f);
+				mIsPlay = true;
+				break;
+			case 1:
+				SoundPlayer::GetInstance()->Play(L"Start2", 0.4f);
+				mIsPlay = true;
+				break;
+			case 2:
+				SoundPlayer::GetInstance()->Play(L"Start3", 0.4f);
+				mIsPlay = true;
+				break;
+			case 3:
+				SoundPlayer::GetInstance()->Play(L"Start4", 0.4f);
+				mIsPlay = true;
+				break;
+			case 4:
+				SoundPlayer::GetInstance()->Play(L"Start5", 0.4f);
+				mIsPlay = true;
+				break;
 		}
 	}
 	

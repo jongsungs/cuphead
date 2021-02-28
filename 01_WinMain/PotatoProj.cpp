@@ -70,3 +70,8 @@ void PotatoProj::Render(HDC hdc){
 	CameraManager::GetInstance()->GetMainCamera()
 		->FrameRender(hdc, mImage, mX - mImage->GetFrameWidth()/2, mY - mImage->GetFrameHeight()/2, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 }
+
+void PotatoProj::InIntersectDamage(int dmage){
+	mIsActive = false;
+	mIsDestroy = true;
+}

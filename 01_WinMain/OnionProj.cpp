@@ -123,3 +123,8 @@ void OnionProj::Render(HDC hdc){
 	CameraManager::GetInstance()->GetMainCamera()
 		->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 }
+
+void OnionProj::InIntersectDamage(int dmage) {
+	mIsActive = false;
+	mIsDestroy = true;
+}

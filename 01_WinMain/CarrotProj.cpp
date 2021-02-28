@@ -78,4 +78,6 @@ void CarrotProj::Render(HDC hdc){
 
 void CarrotProj::InIntersectDamage(int dmage) {
 	mHP -= 1;
+	mIsActive = false;
+	mIsDestroy = true;
 }
