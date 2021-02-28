@@ -29,6 +29,7 @@ void PlatformerPlayer::Init()
 	mSpcialAttackStack = 0;
 	mParringStack = 0;
 	SoundDelay = 0;
+	isHit = false;
 
 
 	mCurrentAnimation = new Animation();
@@ -1458,6 +1459,8 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::LeftSpecialAttack;
 			mCurrentAnimation = mLeftSpecialAttackAnimation;
 			mCurrentAnimation->Play();
+			if (mCurrentAnimation->GetIsPlay() == false)
+				mPlayerState = PlayerState::LeftIdle;
 		}
 
 		else if (mPlayerState == PlayerState::RightIdle)
@@ -1871,7 +1874,7 @@ void PlatformerPlayer::Render(HDC hdc)
 	//{
 	//	CameraManager::GetInstance()->GetMainCamera()->ScaleFrameRender(hdc, mImage4, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 80, 120);
 	//}
-	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromBottom(hdc, mImage, mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 
 	//RenderRect(hdc, mGround);
@@ -1949,17 +1952,45 @@ void PlatformerPlayer::InIntersectBlock(RECT rc)
 			mCurrentAnimation->Play();
 		}
 	}
+	if (isHit == true)
+	{
+		
+		if (mHP >= 0)
+		{
+			mHP -= 1;
+		}
+		mCurrentAnimation->Stop();
+		mPlayerState = PlayerState::RightHit;
+		mCurrentAnimation = mRightHitAnimation;
+		mCurrentAnimation->Play();
+		if (mCurrentAnimation->GetIsPlay() == false)
+		{
+			mPlayerState = PlayerState::RightIdle;
+		}
+		isHit = false;
+	}
+	if (mHP <= 0)
+	{
+		mCurrentAnimation->Stop();
+		mPlayerState = PlayerState::Die;
+		mCurrentAnimation = mDieAnimation;
+		mCurrentAnimation->Play();
+	}
+
+	
 	mJumpPower = 0.f;
 	mGravity = 0.f;
 	mJumpStack = 0;
 	mSpcialAttackStack = 0;
 	mDashStack = 0;
 	mParringStack = 0;
+	
 }
 
 void PlatformerPlayer::InIntersectDamage(int dmage)
 {
-	mHP -= 1;
+	isHit = true;
+	
 }
 
 

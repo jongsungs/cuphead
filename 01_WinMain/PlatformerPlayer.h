@@ -120,6 +120,7 @@ class PlatformerPlayer : public GameObject
 	int mSpcialAttackStack;
 	int mParringStack;
 	int SoundDelay;
+	bool isHit;
 public:
 	PlatformerPlayer(const string& name, float x, float y);
 
