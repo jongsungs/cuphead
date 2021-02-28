@@ -18,6 +18,8 @@ void SceneBoss1::Init(){
 	mBackGround1 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground1");
 	mBackGround2 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground2");
 	mBackGround3 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground3");
+	mBlack = IMAGEMANAGER->FindImage(L"Black");
+	mClear = IMAGEMANAGER->FindImage(L"Clear");
 
 	PlatformerPlayer* player = new PlatformerPlayer("Player", WINSIZEX / 4, WINSIZEY * 3 / 4);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, player);
@@ -26,7 +28,7 @@ void SceneBoss1::Init(){
 
 	Enemy* potato = new Potato("Potato", WINSIZEX * 3 / 4, WINSIZEY / 2+50);
 	Enemy* carrot = new Carrot("Carrot", WINSIZEX / 2, WINSIZEY * 3 / 8 + 549);
-	Enemy* onion = new Onion("Onion", WINSIZEX / 2, WINSIZEY * 3 / 8);
+	Enemy* onion = new Onion("Onion", WINSIZEX / 2, WINSIZEY / 2);
 
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, potato);
 	potato->SetPlayerPtr(player);
@@ -101,8 +103,10 @@ void SceneBoss1::Update(){
 	}
 	
 	float CarrotHp = ObjectManager::GetInstance()->FindObject(ObjectLayer::Boss, "Carrot")->GetHP();
-	if(CarrotHp < 0){
+	if(CarrotHp <= 0){
 		mSceneDelayTime += Time::GetInstance()->DeltaTime();
+		if(frameX < 11)
+			frameX++;
 	}
 	if (mSceneDelayTime > 3) {
 		LoadingScene* loadingScene = new LoadingScene();
@@ -128,6 +132,11 @@ void SceneBoss1::Render(HDC hdc){
 
 	ObjectManager::GetInstance()->Render(hdc);
 
-	if(mSceneDelayTime < 3)
+	if (mSceneDelayTime < 3) {
 		mBackGround3->ScaleRender(hdc, -5, 0, WINSIZEX + 10, WINSIZEY);
+		if (ObjectManager::GetInstance()->FindObject(ObjectLayer::Boss, "Carrot")->GetHP() <= 0) {
+			mBlack->AlphaScaleRender(hdc, 0, 0, WINSIZEX, WINSIZEY, 0.5f);
+			mClear->ScaleFrameRender(hdc, 0, 0, frameX, 0, WINSIZEX, WINSIZEY);
+		}
+	}
 }
