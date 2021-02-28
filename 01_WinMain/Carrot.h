@@ -15,6 +15,8 @@ class Carrot : public Enemy {
 	int count;
 	float mProjAngle;
 
+	int randomBeam;
+
 	float mAttackStartDelay;
 	float mBetweenAttackDelay;
 public:

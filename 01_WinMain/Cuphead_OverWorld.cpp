@@ -115,6 +115,7 @@ void Cuphead_OverWorld::Update()
 			mCurrentAnimation->Stop();
 			mCurrentAnimation = mLeftUpMoveAnimation;
 			mCurrentAnimation->Play();
+			SoundPlayer::GetInstance()->Play(L"FootStep", 1.f);
 		}
 		else if (Input::GetInstance()->GetKeyDown(VK_DOWN))
 		{
@@ -122,6 +123,7 @@ void Cuphead_OverWorld::Update()
 			mCurrentAnimation->Stop();
 			mCurrentAnimation = mLeftDownMoveAnimation;
 			mCurrentAnimation->Play();
+			SoundPlayer::GetInstance()->Play(L"FootStep", 1.f);
 		}
 		if (Input::GetInstance()->GetKey(VK_UP))
 		{
@@ -228,6 +230,7 @@ void Cuphead_OverWorld::Update()
 			mCurrentAnimation = mLeftMoveAnimation;
 			mCurrentAnimation->Play();
 			mIsGetKeyNow = true;
+			SoundPlayer::GetInstance()->Play(L"FootStep", 1.f);
 	}
 	if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
 	{
@@ -236,6 +239,7 @@ void Cuphead_OverWorld::Update()
 			mCurrentAnimation = mRightMoveAnimation;
 			mCurrentAnimation->Play();
 			mIsGetKeyNow = true;
+			SoundPlayer::GetInstance()->Play(L"FootStep", 1.f);
 	}
 	if (Input::GetInstance()->GetKeyDown(VK_UP))
 	{
@@ -243,6 +247,7 @@ void Cuphead_OverWorld::Update()
 			mCurrentAnimation = mUpMoveAnimation;
 			mCurrentAnimation->Play();
 			mIsGetKeyNow = true;
+			SoundPlayer::GetInstance()->Play(L"FootStep", 1.f);
 	}
 	if (Input::GetInstance()->GetKeyDown(VK_DOWN))
 	{
@@ -251,6 +256,7 @@ void Cuphead_OverWorld::Update()
 			mCurrentAnimation = mDownMoveAnimation;
 			mCurrentAnimation->Play();
 			mIsGetKeyNow = true;
+			SoundPlayer::GetInstance()->Play(L"FootStep", 1.f);
 	}
 
 	
@@ -361,11 +367,17 @@ void Cuphead_OverWorld::Update()
 		mY -= mSpeed * sinf(mAngle);
 		mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 
+		
+
 		if (mDustCount > 50)
 		{
 			Effect* dust = new Effect(mX, mRect.bottom-45, IMAGEMANAGER->FindImage(L"Dust_OverWolrd"));
 			mDustCount = 0;
 		}
+	}
+	else
+	{
+		SoundPlayer::GetInstance()->Stop(L"FootStep");
 	}
 	mDustCount++;
 	mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);

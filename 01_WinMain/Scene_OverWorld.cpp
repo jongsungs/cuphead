@@ -11,11 +11,32 @@
 #include "FadeOut.h"
 void Scene_OverWorld::Init()
 {
+	//시작화면
+	SoundPlayer::GetInstance()->LoadFromFile(L"Start", L"../02_Resources/Start/Start.mp3", true);
+	SoundPlayer::GetInstance()->LoadFromFile(L"Select", L"../02_Resources/Start/Menu_Select.wav", false);
+
+	//엘더하우스
+	SoundPlayer::GetInstance()->LoadFromFile(L"ElderHouse", L"../02_Resources/ElderHouse/ElderHouse.mp3", true);
+	SoundPlayer::GetInstance()->LoadFromFile(L"DoorOpen", L"../02_Resources/ElderHouse/DoorOpen.wav", false);
+
+	//피그샵
+	SoundPlayer::GetInstance()->LoadFromFile(L"PigShop_GoodBye", L"../02_Resources/PigShop/PigShop_GoodBye.wav", false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"PigShop_Welcome", L"../02_Resources/PigShop/PigShop_Welcome.wav", false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"PigShop", L"../02_Resources/PigShop/PigShop.mp3", true);
+	SoundPlayer::GetInstance()->LoadFromFile(L"CoinOpen", L"../02_Resources/PigShop/CoinOpen.wav", false);
+
+	//오버월드
+	SoundPlayer::GetInstance()->LoadFromFile(L"OverWorld", L"../02_Resources/overworld/OverWorld.mp3", true);
+	SoundPlayer::GetInstance()->LoadFromFile(L"FootStep", L"../02_Resources/overworld/Footstep.wav", true);
+	SoundPlayer::GetInstance()->LoadFromFile(L"ZFlop", L"../02_Resources/overworld/ZFlop.wav", false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"Talk", L"../02_Resources/overworld/Talk.wav", false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"Talk", L"../02_Resources/overworld/Talk.wav", false);
+
 	//시작할때 페이드인
 	FadeOut* fadein = new FadeOut(true);
+	SoundPlayer::GetInstance()->Play(L"OverWorld", 0.5f);
 
 	//건물
-	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("Flatformer", IMAGEMANAGER->FindImage(L"OverWorld_Building_Flatformer"), 2000, 800));
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("ElderHouse", IMAGEMANAGER->FindImage(L"OverWorld_Building_ElderHouse"), 650, 650));
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("BotanicPanic", IMAGEMANAGER->FindImage(L"OverWorld_Building_BotanicPanic"), 1680, 1490));
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Building, new Building("PigShop", IMAGEMANAGER->FindImage(L"OverWorld_Building_PigShop"), 2200, 1000));

@@ -28,6 +28,8 @@ protected:
 	float mAttackStartDelay;
 	float mDelayTime;
 
+	bool mIsPlay;
+
 	Animation* mIntroAnimation;
 	Animation* mIdleAnimation;
 	Animation* mAttackAnimation;

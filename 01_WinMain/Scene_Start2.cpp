@@ -21,21 +21,28 @@ void Scene_Start2::Update()
 	if (Input::GetInstance()->GetKeyDown(VK_DOWN))
 	{
 		if (mNum < 2)
+		{
 			mNum++;
+			SoundPlayer::GetInstance()->Play(L"Select", 1.f);
+		}
 	}
 	if (Input::GetInstance()->GetKeyDown(VK_UP))
 	{	
-		
+		SoundPlayer::GetInstance()->Play(L"Select", 1.f);
 		if (mNum > 0)
+		{
 			mNum--;
+			SoundPlayer::GetInstance()->Play(L"Select", 1.f);
+		}
 	}
-	if (Input::GetInstance()->GetKeyDown(VK_RETURN))
+	if (Input::GetInstance()->GetKeyDown(VK_RETURN) || Input::GetInstance()->GetKeyDown('Z'))
 	{
 		switch (mNum)
 		{
 		case 0:
-			SceneManager::GetInstance()->AddScene(L"OverWorldLoadingScene", new LoadingScene);
-			SceneManager::GetInstance()->LoadSceneLoading(L"OverWorld", L"OverWorldLoadingScene");
+			SoundPlayer::GetInstance()->Stop(L"Start");
+			SoundPlayer::GetInstance()->Play(L"Select", 1.f);
+			SceneManager::GetInstance()->LoadSceneLoading(L"ElderHouse", L"Start1LoadingScene");
 			break;
 		case 1:
 			break;

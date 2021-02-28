@@ -3,14 +3,15 @@
 #include "Enemy.h"
 
 class Potato : public Enemy {
-	Image* IntroEarthImage;
-	Image* IntroEarthImage1;
-	Image* IntroEarthImage2;
 	float mAttackStartDelay;
-	int mAttackCount;
 	float mDelayTime;
+
+	int mAttackCount;
+
 	bool mIsAttack;
-	Animation* mIntroEarthAnimation;
+
+	int randomspit;
+	int randomworm;
 public:
 	Potato(const string& name, float x, float y);
 
