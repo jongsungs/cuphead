@@ -23,7 +23,7 @@
     <ProjectGuid>{ADD52605-596E-43E8-879D-E81A28A8BB13}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>My01WinMain</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -157,6 +157,7 @@
     <ClInclude Include="IntersectManager.h" />
     <ClInclude Include="Peashooter.h" />
     <ClInclude Include="PlayerInfo.h" />
+    <ClInclude Include="Player_Bullet_Effect.h" />
     <ClInclude Include="SceneBoss1.h" />
     <ClInclude Include="Building.h" />
     <ClInclude Include="Bullet.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Scene2.h" />
     <ClInclude Include="SceneBoss2.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneTutorial.h" />
     <ClInclude Include="Scene_ElderHouse.h" />
     <ClInclude Include="Scene_OverWorld.h" />
     <ClInclude Include="Scene_Start1.h" />
@@ -204,10 +206,12 @@
     <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="SoundSet.h" />
     <ClInclude Include="Spread.h" />
+    <ClInclude Include="SuperPeashooter.h" />
     <ClInclude Include="Talk.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="TutorialBlock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="01_WinMain.cpp" />
@@ -220,6 +224,7 @@
     <ClCompile Include="IntersectManager.cpp" />
     <ClCompile Include="Peashooter.cpp" />
     <ClCompile Include="PlayerInfo.cpp" />
+    <ClCompile Include="Player_Bullet_Effect.cpp" />
     <ClCompile Include="SceneBoss1.cpp" />
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="Bullet.cpp" />
@@ -262,6 +267,7 @@
     <ClCompile Include="Scene2.cpp" />
     <ClCompile Include="SceneBoss2.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneTutorial.cpp" />
     <ClCompile Include="Scene_ElderHouse.cpp" />
     <ClCompile Include="Scene_OverWorld.cpp" />
     <ClCompile Include="Scene_Start1.cpp" />
@@ -269,9 +275,11 @@
     <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="SoundSet.cpp" />
     <ClCompile Include="Spread.cpp" />
+    <ClCompile Include="SuperPeashooter.cpp" />
     <ClCompile Include="Talk.cpp" />
     <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="TutorialBlock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="01_WinMain.rc" />
