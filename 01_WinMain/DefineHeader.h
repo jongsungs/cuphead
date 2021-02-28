@@ -27,6 +27,8 @@ static ClassName* GetInstance()\
 #define Resources(Path) (wstring(L"../02_Resources/").append(Path))
 #define ResourcesImage(Path) (wstring(L"../02_Resources/Image/").append(Path))
 #define ResourcesSound(Path) (wstring(L"../02_Resources/Sound/").append(Path))
+#define PlatPlayerAnimationTime 0.08f
+#define PlatPlayerShootAnimationTime 0.03f
 
 //금술
 #define Synthesize(VarType,VarName,FuncName)\
