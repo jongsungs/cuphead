@@ -21,10 +21,9 @@ void Animation::Update()
 		{
 			mCurrentFrameTime -= mFrameUpdateTime;
 		}
-
 		mCurrentFrameIndex++;
 		//프레임이 마지막 프레임보다 커지려고 한다면
-		if (mCurrentFrameIndex >= mFrameList.size())
+		if (mCurrentFrameIndex >= mFrameList.size() ||(mIsJumpLoopStart && mCurrentFrameIndex>=mLoopFrameList.size()))
 		{
 			if (mIsLoop == false)
 			{
@@ -33,7 +32,13 @@ void Animation::Update()
 			}
 			else
 			{
-				mCurrentFrameIndex = 0;
+				if (mIsJumpLoop) {
+					mCurrentFrameIndex = 0;
+					mIsJumpLoopStart = true;
+				}
+				else {
+					mCurrentFrameIndex = 0;
+				}
 			}
 			//콜백함수가 바인딩 되어 있다면 그 함수 실행
 			if (mCallbackFunc != nullptr)
@@ -69,6 +74,7 @@ void Animation::InitFrameByVector(const vector<pair<int, int>>& frameList)
 
 void Animation::InitFrameByStartEnd(int startX, int startY, int endX, int endY, bool isReverse)
 {
+	mIsLoop = true;
 	for (int y = startY; y <= endY; ++y)
 	{
 		for (int x = startX; x <= endX; ++x)
@@ -87,7 +93,6 @@ void Animation::InitFrameByStartEnd(int startX, int startY, int endX, int endY, 
 		}
 	}
 }
-
 //역방향 재생
 void Animation::InitFrameByBackStartEnd(int startX, int startY, int endX, int endY, bool isReverse)
 {
@@ -109,7 +114,46 @@ void Animation::InitFrameByBackStartEnd(int startX, int startY, int endX, int en
 		}
 	}
 }
+void Animation::InitFrameStartEndsetLoop(int startX, int startY, int endX, int endY, int LoopStartX, int LoopStartY, int LoopEndX, int LoopEndY, bool isReverse) {
+	mIsJumpLoop = true;
+	mIsLoop = true;
+	for (int y = startY; y <= endY; ++y)
+	{
+		for (int x = startX; x <= endX; ++x)
+		{
+			mFrameList.push_back(make_pair(x, y));
+		}
+	}
+	if (isReverse)
+	{
+		for (int y = endY; y >= startY; --y)
+		{
+			for (int x = endX; x >= startX; --x)
+			{
+				mFrameList.push_back(make_pair(x, y));
+			}
+		}
+	}
 
+	for (int y = LoopStartY; y <= LoopEndY; ++y)
+	{
+		for (int x = LoopStartX; x <= LoopEndX; ++x)
+		{
+			mLoopFrameList.push_back(make_pair(x, y));
+		}
+	}
+	if (isReverse)
+	{
+		for (int y = LoopEndY; y >= LoopStartY; --y)
+		{
+			for (int x = LoopEndX; x >= LoopStartX; --x)
+			{
+				mLoopFrameList.push_back(make_pair(x, y));
+			}
+		}
+	}
+
+}
 void Animation::SetCallbackFunc(const function<void(void)>& func)
 {
 	mCallbackFunc = func;

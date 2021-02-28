@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-//std::pair°¡ ¿ä·± ´À³¦À¸·Î µÇ¾î ÀÖ´Ù.
+//std::pairê°€ ìš”ëŸ° ëŠë‚Œìœ¼ë¡œ ë˜ì–´ ìˆë‹¤.
 //template<typename First,typename Second>
 //struct Pair
 //{
@@ -8,19 +8,21 @@
 //	Second second;
 //};
 
-//ÇÁ·¹ÀÓ µ¹¸± ¶§
+//í”„ë ˆì„ ëŒë¦´ ë•Œ
 class Animation
 {
-	bool mIsPlay;	//ÇÃ·¹ÀÌÁßÀÌ³Ä
-	bool mIsLoop;	//·çÇÁ³Ä
+	bool mIsPlay;	//í”Œë ˆì´ì¤‘ì´ëƒ
+	bool mIsLoop;	//ë£¨í”„ëƒ
+	bool mIsJumpLoop = false; // ë£¨í”„ ì‹œì‘ ì§€ì  í™•ì¸
+	bool mIsJumpLoopStart = false; //ë£¨í”„ ì‹œì‘ ì²´í¬
+	int mCurrentFrameIndex;	//í˜„ì¬ í”„ë ˆì„ ì¸ë±ìŠ¤ 
 
-	int mCurrentFrameIndex;	//ÇöÀç ÇÁ·¹ÀÓ ÀÎµ¦½º 
-
-	float mCurrentFrameTime;	//ÇöÀç ÇÁ·¹ÀÓ °¨´Â ½Ã°£
-	float mFrameUpdateTime;		//ÇÁ·¹ÀÓ °»½Å(Áõ°¡) ÇØ¾ßÇÏ´Â ½Ã°£
+	float mCurrentFrameTime;	//í˜„ì¬ í”„ë ˆì„ ê°ëŠ” ì‹œê°„
+	float mFrameUpdateTime;		//í”„ë ˆì„ ê°±ì‹ (ì¦ê°€) í•´ì•¼í•˜ëŠ” ì‹œê°„
 	
-	vector<pair<int, int>> mFrameList;		//ÇÁ·¹ÀÓ Á¤º¸
-	function<void(void)> mCallbackFunc;		//¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ÀüºÎ ÇÃ·¹ÀÌµÇ°í ³¡³¯ ¶§ ½ÇÇàÇÒ ÇÔ¼ö
+	vector<pair<int, int>> mFrameList;		//í”„ë ˆì„ ì •ë³´
+	vector<pair<int, int>> mLoopFrameList;		//ë£¨í”„í”„ë ˆì„ ì •ë³´
+	function<void(void)> mCallbackFunc;		//ì• ë‹ˆë©”ì´ì…˜ì´ ì „ë¶€ í”Œë ˆì´ë˜ê³  ëë‚  ë•Œ ì‹¤í–‰í•  í•¨ìˆ˜
 public:
 	Animation();
 
@@ -33,6 +35,7 @@ public:
 	void InitFrameByVector(const vector<pair<int, int>>& frameList);
 	void InitFrameByStartEnd(int startX, int startY, int endX, int endY, bool isReverse);
 	void InitFrameByBackStartEnd(int startX, int startY, int endX, int endY, bool isReverse);
+	void InitFrameStartEndsetLoop(int startX, int startY, int endX, int endY,int LoopStartX, int LoopStartY, int LoopEndX, int LoopEndY, bool isReverse);
 
 	void SetCallbackFunc(const function<void(void)>& func);
 	inline void SetIsLoop(bool isLoop) { mIsLoop = isLoop; }
@@ -44,9 +47,9 @@ public:
 	inline float GetCurrentFrameTIme()const { return mCurrentFrameTime; }
 	inline bool GetIsLoop()const { return mIsLoop; }
 	inline bool GetIsPlay()const { return mIsPlay; }
-	inline pair<int, int> GetNowFrame()const { return mFrameList[mCurrentFrameIndex]; }
-	inline int GetNowFrameX()const { return mFrameList[mCurrentFrameIndex].first; }
-	inline int GetNowFrameY()const { return mFrameList[mCurrentFrameIndex].second; }
+	inline pair<int, int> GetNowFrame()const { if (mIsJumpLoopStart) { return mLoopFrameList[mCurrentFrameIndex]; } return  mFrameList[mCurrentFrameIndex]; }
+	inline int GetNowFrameX()const { if (mIsJumpLoopStart) { return mLoopFrameList[mCurrentFrameIndex].first; }return mFrameList[mCurrentFrameIndex].first; }
+	inline int GetNowFrameY()const { if (mIsJumpLoopStart) { return mLoopFrameList[mCurrentFrameIndex].second; } return mFrameList[mCurrentFrameIndex].second; }
 	inline vector<pair<int, int>> GetFrameList() { return mFrameList; };
 
 };
