@@ -17,12 +17,19 @@ Building::Building(const string& name, Image* image, float x, float y)
 
 void Building::Init()
 {
+	mAnimation = new Animation();
+	mAnimation->InitFrameByStartEnd(0, 0, 2, 0, false);
+	mAnimation->SetIsLoop(true);
+	mAnimation->SetFrameUpdateTime(0.2f);
+	mAnimation->Play();
+
 	mFlagAnimation = new Animation();
 	mFlagAnimation->InitFrameByStartEnd(0, 0, 11, 0, false);
 	mFlagAnimation->SetIsLoop(true);
 	mFlagAnimation->SetFrameUpdateTime(0.2f);
 	mFlagAnimation->Play();
 	mFlagImage = IMAGEMANAGER->FindImage(L"OverWorld_Flag");
+
 	mIsTalk = 0;
 	mSizeX = mImage->GetWidth();
 	mSizeY = mImage->GetHeight();
@@ -40,6 +47,7 @@ void Building::Release()
 
 void Building::Update()
 {
+	mAnimation->Update();
 	mFlagAnimation->Update();
 	RECT cupheadRectTemp = ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetRect();
 	RECT recttemp;
@@ -144,16 +152,35 @@ void Building::Update()
 				}
 			}
 		}
-		else if (mName == "Shop")
+		else if (mName == "PigShop")
 		{
 			if (!mIsTalk)
 			{
 				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
+					ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
+						new Talk("PigShop_Talk",
+							IMAGEMANAGER->FindImage(L"PigShop_Talk"), 350, 200, true));
+					
+					mIsTalk = 1;
+
+				}
+			}
+			else
+			{
+				if (Input::GetInstance()->GetKeyDown('Z'))
+				{
 					mZImageSizeX = 0;
 					mZImageSizeY = 0;
+					ObjectManager::GetInstance()->DeleteObject(ObjectLayer::Talk);
+					mIsTalk = 0;
 					FadeOut* fadeout = new FadeOut(false, L"Shop", L"Shop_LoadingScene");
 
+				}
+				if (Input::GetInstance()->GetKeyDown(VK_ESCAPE))
+				{
+					ObjectManager::GetInstance()->DeleteObject(ObjectLayer::Talk);
+					mIsTalk = 0;
 				}
 			}
 		}
@@ -167,7 +194,7 @@ void Building::Update()
 
 void Building::Render(HDC hdc)
 {
-	CameraManager::GetInstance()->GetMainCamera()->Render(hdc, mImage, mX, mY);
+	CameraManager::GetInstance()->GetMainCamera()->FrameRender(hdc, mImage, mX, mY, mAnimation->GetNowFrameX(), mAnimation->GetNowFrameY());
 	CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc,mZImage,
 		ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetX(),
 		ObjectManager::GetInstance()->FindObject("CupHead_OverWorld")->GetRect().top,mZImageSizeX,mZImageSizeY);

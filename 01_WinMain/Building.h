@@ -3,6 +3,7 @@
 class Building :public GameObject
 {
 	Image* mImage;
+	class Animation* mAnimation;
 	//건물근접시 z키누르라는 말풍선뜨게함.
 	Image* mZImage;
 	Image* mFlagImage;
