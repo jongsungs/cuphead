@@ -92,7 +92,11 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"OnionParryable", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_Parryable.bmp"), 117, 69, 3, 1, true);			
 	//양파 투사체 효과																																							
 	IMAGEMANAGER->LoadFromFile(L"OnionNonParryAbleASplash", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_NonParryableASplash.bmp"), 1540, 136, 7, 1, true);
-																																											
+	
+	//클리어
+	IMAGEMANAGER->LoadFromFile(L"Black", Resources(L"Boss/BotanicPanic/Black.bmp"), 1, 1, false);
+	IMAGEMANAGER->LoadFromFile(L"Clear", Resources(L"Boss/BotanicPanic/Clear.bmp"), 15360, 720, 12, 1, true);
+
 	//총알 Test																																								
 	IMAGEMANAGER->LoadFromFile(L"Testbullet", Resources(L"bullet.bmp"), 21, 21, true);
 	IMAGEMANAGER->LoadFromFile(L"BulletDeath", Resources(L"/Image/Bullet/BulletDeath.bmp"), 1680, 280, 6, 1, true);

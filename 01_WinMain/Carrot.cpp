@@ -84,7 +84,7 @@ void Carrot::Update() {
 	if (Input::GetInstance()->GetKeyDown(VK_CONTROL))
 		mHP -= 5;
 
-	if (mHP < 0 && mState != EnemyState::Death && mState != EnemyState::End) {
+	if (mHP <= 0 && mState != EnemyState::Death && mState != EnemyState::End) {
 		mState = EnemyState::Death;
 		mDelayTime = 0;
 		SoundPlayer::GetInstance()->Play(L"End1", 0.2f);
@@ -120,7 +120,7 @@ void Carrot::Update() {
 
 			if (mBetweenAttackDelay > 0.25) {
 				count++;
-				CarrotProj* proj = new CarrotProj("proj", WINSIZEX - WINSIZEX / 8 * count, -50, 10, PI * 3 / 2, 1);
+				CarrotProj* proj = new CarrotProj("proj", WINSIZEX - WINSIZEX / 6 * count, -50, 7, PI * 3 / 2, 1);
 				proj->Init();
 				ObjectManager::GetInstance()->AddObject(ObjectLayer::Boss, proj);
 				mBetweenAttackDelay = 0;

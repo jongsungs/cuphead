@@ -14,7 +14,7 @@ CarrotProj::CarrotProj(const string & name, float x, float y, float speed, float
 	mAngle = angle;
 	mParryAble = false;
 	mWeaponType = weapontype;
-	mHP = 3;
+	mHP = 1;
 }
 
 void CarrotProj::Init(){
@@ -70,6 +70,8 @@ void CarrotProj::Update(){
 }
 
 void CarrotProj::Render(HDC hdc){
+	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+		
 	CameraManager::GetInstance()->GetMainCamera()
 		->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 }
