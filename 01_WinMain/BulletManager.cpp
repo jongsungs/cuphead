@@ -2,6 +2,7 @@
 #include "BulletManager.h"
 #include "Peashooter.h"
 #include "Effect.h"
+#include "Player_Bullet_Effect.h"
 BulletManager::BulletManager() {
 	mPlayerHaveBullet = { {Player_Bullet_Type::Peashooter,Player_Have::IsHave},{Player_Bullet_Type::Spread,Player_Have::NoHave } };
 	mPlayerBulletType = Player_Bullet_Type::Peashooter;
@@ -9,7 +10,7 @@ BulletManager::BulletManager() {
 
 void BulletManager::Player_Shoot(float x, float y, float angle) {
 	if (mPlayerBulletType == Player_Bullet_Type::Peashooter) {
-		//ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet_Effect,new Effect(x,y,ImageManager::GetInstance()->FindImage(L"Peashooter")));
+		new Player_Bullet_Effect(x,y,ImageManager::GetInstance()->FindImage(L"BulletStart"),0.07f);
 		ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet,new Peashooter("Peashooter",x,y, angle));
 	}
 	else if (mPlayerBulletType == Player_Bullet_Type::Spread) {

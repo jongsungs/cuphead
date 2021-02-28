@@ -15,6 +15,10 @@ void Camera::Init()
 	switch (mMode)
 	{
 	case Camera::Mode::Follow:
+		if (mTarget) {
+			mX = mTarget->GetX();
+			mY = mTarget->GetY();
+		}
 		break;
 	case Camera::Mode::Free:
 		break;
@@ -23,6 +27,9 @@ void Camera::Init()
 	case Camera::Mode::Platformer:
 		mX = WINSIZEX / 2;
 		mY = WINSIZEY / 2;
+		if (mTarget) {
+			mX = mTarget->GetX()+200.f;
+		}
 		break;
 	case Camera::Mode::Boss:
 		mX = WINSIZEX / 2;
@@ -55,22 +62,28 @@ void Camera::Update()
 			//mY = mTarget->GetY();
 			//멀리있으면 빨리 쫓아가야하고 가까이 있으면 천천히 쫓아가야함
 			if (mCamerAreaCheck) {
-				float dumpX = Math::Lerp(mX, mTarget->GetX(), 2.f * Time::GetInstance()->DeltaTime());
-				float dumpmY = Math::Lerp(mY, mTarget->GetY(), 2.f * Time::GetInstance()->DeltaTime());
-
-				RECT dump = RectMakeCenter(dumpX, dumpmY, mSizeX, mSizeY);
-				if (mCamerArea.left < mRect.left) {
-					mX = Math::Lerp(mX, mTarget->GetX(), 2.f * Time::GetInstance()->DeltaTime());
-					mY = Math::Lerp(mY, mTarget->GetY(), 2.f * Time::GetInstance()->DeltaTime());
-
-					mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+				mX = Math::Lerp(mX, mTarget->GetX(), 2.f * Time::GetInstance()->DeltaTime());
+				mY = Math::Lerp(mY, mTarget->GetY(), 2.f * Time::GetInstance()->DeltaTime());
+				mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+				float chaX = 0;
+				float chaY = 0;
+				if (mCamerArea.right < mRect.right) {
+					chaX = mRect.right - mCamerArea.right;
+					mX -= chaX;
 				}
-				if (mCamerArea.right > mRect.right) {
-					mX = Math::Lerp(mX, mTarget->GetX(), 2.f * Time::GetInstance()->DeltaTime());
-					mY = Math::Lerp(mY, mTarget->GetY(), 2.f * Time::GetInstance()->DeltaTime());
-
-					mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+				else if (mCamerArea.left > mRect.left) {
+					chaX = mCamerArea.left - mRect.left;
+					mX += chaX;
 				}
+				if (mCamerArea.bottom < mRect.bottom) {
+					chaY = mRect.bottom - mCamerArea.bottom;
+					mY -= chaY;
+				}
+				else if (mCamerArea.top < mRect.top) {
+					chaY = mCamerArea.top - mRect.top;
+					mY += chaY;
+				}
+				mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
 			}
 			else {
 				mX = Math::Lerp(mX, mTarget->GetX(), 2.f * Time::GetInstance()->DeltaTime());
@@ -97,13 +110,27 @@ void Camera::Update()
 		}
 		break;
 	case Camera::Mode::Platformer:
-		if (mTarget)
-		{
-			mX = mTarget->GetX();
-			mY = mTarget->GetY() - 250;
+		if (mTarget) {
+			
+			
+			mX = Math::Lerp(mX, mTarget->GetX() + 200.f, 2.f * Time::GetInstance()->DeltaTime());
+			//mY = Math::Lerp(mY, mTarget->GetY() -100.f, 2.f * Time::GetInstance()->DeltaTime());
 			mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+			
+			//보정
+			float cha = 0;
+			if (mCamerArea.right < mRect.right) {
+				cha = mRect.right - mCamerArea.right;
+				mX -= cha;
+			}
+			else if (mCamerArea.left > mRect.left) {
+				cha = mCamerArea.left - mRect.left;
+				mX += cha;
+			}
+			
+			mRect = RectMakeCenter(mX, mY, mSizeX, mSizeY);
+			break;
 		}
-		break;
 	case Camera::Mode::Boss:
 		if (mTarget) {	
 			float mDumpX = mTarget->GetX();
@@ -269,6 +296,30 @@ void Camera::ScaleFrameRenderFromBottom(HDC hdc, Image* image, int x, int y, int
 	x += -(width / 2);
 	y += -height;
 	ScaleFrameRender(hdc,image ,x, y, frameX, frameY, width, height);
+}
+
+void Camera::FrameRenderFromTopCenter(HDC hdc, Image* image, int x, int y, int frameX, int frameY)
+{
+	x += -(image->GetFrameWidth() / 2);
+	FrameRender(hdc, image, x, y, frameX, frameY);
+}
+
+void Camera::FrameRenderFromLeftCenter(HDC hdc, Image* image, int x, int y, int frameX, int frameY)
+{
+	y += -(image->GetFrameHeight() / 2);
+	FrameRender(hdc, image, x, y, frameX, frameY);
+}
+
+void Camera::FrameRenderFromRightCenter(HDC hdc, Image* image, int x, int y, int frameX, int frameY)
+{
+	x += -image->GetFrameWidth();
+	y += -(image->GetFrameHeight() / 2);
+	FrameRender(hdc, image, x, y, frameX, frameY);
+}
+void Camera::FrameRenderFromRightTop(HDC hdc, Image* image, int x, int y, int frameX, int frameY)
+{
+	x += -image->GetFrameWidth();
+	FrameRender(hdc, image, x, y, frameX, frameY);
 }
 
 

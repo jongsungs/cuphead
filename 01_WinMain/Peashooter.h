@@ -4,7 +4,8 @@ class Peashooter : public Bullet
 {
 private:
 	class Image* mImage;
-	float Range = 1000.f;
+	float Range = 500.f;
+	class Animation* mAnimation;
 public :
 	Peashooter(string name, float x, float y,float angle);
 	void Init()override;

@@ -48,6 +48,11 @@ public:
 	void ScaleRenderFromBottom(HDC hdc, Image* image, int x, int y, int width, int height);
 	void ScaleFrameRenderFromBottom(HDC hdc, Image* image, int x, int y, int frameX, int frameY, int width, int height);
 
+	void FrameRenderFromTopCenter(HDC hdc, class Image* image, int x, int y, int frameX, int frameY);
+	void FrameRenderFromLeftCenter(HDC hdc, class Image* image, int x, int y, int frameX, int frameY);
+	void FrameRenderFromRightCenter(HDC hdc, class Image* image, int x, int y, int frameX, int frameY);
+	void FrameRenderFromRightTop(HDC hdc, class Image* image, int x, int y, int frameX, int frameY);
+
 	void RenderRect(HDC hdc, RECT rc);
 	void RenderEllipse(HDC hdc, float x, float y, float radius);
 

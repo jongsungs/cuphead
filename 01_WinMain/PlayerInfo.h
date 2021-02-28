@@ -10,5 +10,7 @@ private:
 public :
 	void PlayerInfoDataLoad();
 	void PlayerInfoDateSave();
+	void SetBossStage1Clear(bool d) { mBossStage1Clear = d; }
+	void SetBossStage2Clear(bool d) { mBossStage2Clear = d; }
 };
 

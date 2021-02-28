@@ -136,6 +136,12 @@
     <Filter Include="MainGame\Object\Block">
       <UniqueIdentifier>{28a818cb-7dc7-4501-b3f7-24aad66e4f65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Object\Tutorial">
+      <UniqueIdentifier>{25640c23-cac1-4ce1-a9f5-b3b5f09b0fc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\TheadManager">
+      <UniqueIdentifier>{87b00f72-a998-48e0-b58a-46aac09c0edf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -300,9 +306,6 @@
     <ClInclude Include="BulletManager.h">
       <Filter>MainGame\Object\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="ThreadManager.h">
-      <Filter>FrameWork</Filter>
-    </ClInclude>
     <ClInclude Include="FadeOut.h">
       <Filter>MainGame\Object\Effect</Filter>
     </ClInclude>
@@ -321,8 +324,20 @@
     <ClInclude Include="Block.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene_Shop.h">
+    <ClInclude Include="SceneTutorial.h">
       <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialBlock.h">
+      <Filter>MainGame\Object\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperPeashooter.h">
+      <Filter>MainGame\Object\Bullet\Peashooter</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Bullet_Effect.h">
+      <Filter>MainGame\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadManager.h">
+      <Filter>FrameWork\TheadManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -476,9 +491,6 @@
     <ClCompile Include="BulletManager.cpp">
       <Filter>MainGame\Object\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="ThreadManager.cpp">
-      <Filter>FrameWork</Filter>
-    </ClCompile>
     <ClCompile Include="FadeOut.cpp">
       <Filter>MainGame\Object\Effect</Filter>
     </ClCompile>
@@ -497,8 +509,20 @@
     <ClCompile Include="Block.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene_Shop.cpp">
+    <ClCompile Include="SceneTutorial.cpp">
       <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialBlock.cpp">
+      <Filter>MainGame\Object\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperPeashooter.cpp">
+      <Filter>MainGame\Object\Bullet\Peashooter</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Bullet_Effect.cpp">
+      <Filter>MainGame\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadManager.cpp">
+      <Filter>FrameWork\TheadManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
