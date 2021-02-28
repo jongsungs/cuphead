@@ -31,7 +31,7 @@ void Building::Init()
 	mFlagImage = IMAGEMANAGER->FindImage(L"OverWorld_Flag");
 
 	mIsTalk = 0;
-	mSizeX = mImage->GetWidth();
+	mSizeX = mImage->GetWidth()/3;
 	mSizeY = mImage->GetHeight();
 	mRect = RectMakeCenter(mX+mSizeX/2, mY+mSizeY/2, mSizeX, mSizeY);
 	mZImage = IMAGEMANAGER->FindImage(L"ZPopUp");
@@ -53,6 +53,8 @@ void Building::Update()
 	RECT recttemp;
 	if (IntersectRect(&recttemp, &cupheadRectTemp, &mRect))
 	{
+		if(mZImageSizeX == 0)
+			SoundPlayer::GetInstance()->Play(L"ZFlop", 1.f);
 		if (mZImageSizeX < 50)
 		{
 			mZImageSizeX++;
@@ -77,6 +79,7 @@ void Building::Update()
 			{
 				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
+					SoundPlayer::GetInstance()->Play(L"Talk", 1.f);
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
 						new Talk("ElderHouse_Talk",
 							IMAGEMANAGER->FindImage(L"ElderHouse_Talk"), 350, 200,true));
@@ -93,9 +96,8 @@ void Building::Update()
 				}
 				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
-					
-
-					FadeOut* fadeout = new FadeOut(false, L"Scene_ElderHouse", L"ElderHouse_LoadingScene");
+					SoundPlayer::GetInstance()->Stop(L"OverWorld");
+					FadeOut* fadeout = new FadeOut(false, L"ElderHouse", L"ElderHouse_LoadingScene");
 				}
 			}
 
@@ -106,6 +108,8 @@ void Building::Update()
 			{
 				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
+
+					SoundPlayer::GetInstance()->Play(L"Talk", 1.f);
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
 						new Talk("BotanicPanic_Talk1",
 							IMAGEMANAGER->FindImage(L"BotanicPanic_Talk1"), 200, 100,true));
@@ -147,6 +151,7 @@ void Building::Update()
 					mZImageSizeX = 0;
 					mZImageSizeY = 0;
 
+					SoundPlayer::GetInstance()->Stop(L"OverWorld");
 					FadeOut* fadeout = new FadeOut(false, L"BotanicPanic", L"BotanicPanic_LoadingScene");
 					mIsTalk = 0;
 				}
@@ -158,6 +163,8 @@ void Building::Update()
 			{
 				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
+
+					SoundPlayer::GetInstance()->Play(L"Talk", 1.f);
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Talk,
 						new Talk("PigShop_Talk",
 							IMAGEMANAGER->FindImage(L"PigShop_Talk"), 350, 200, true));
@@ -174,6 +181,8 @@ void Building::Update()
 					mZImageSizeY = 0;
 					ObjectManager::GetInstance()->DeleteObject(ObjectLayer::Talk);
 					mIsTalk = 0;
+
+					SoundPlayer::GetInstance()->Stop(L"OverWorld");
 					FadeOut* fadeout = new FadeOut(false, L"Shop", L"Shop_LoadingScene");
 
 				}

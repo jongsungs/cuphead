@@ -10,6 +10,7 @@
 void Scene_ElderHouse::Init()
 {
 	
+	SoundPlayer::GetInstance()->Play(L"ElderHouse", 0.5f);
 
 	mImage = IMAGEMANAGER->GetInstance()->FindImage(L"ElderHouse_Inside");
 	
@@ -53,6 +54,8 @@ void Scene_ElderHouse::Update()
 		
 		if (Input::GetInstance()->GetKeyDown('Z'))
 		{
+			SoundPlayer::GetInstance()->Stop(L"ElderHouse");
+			SoundPlayer::GetInstance()->Play(L"DoorOpen",1.f);
 			FadeOut* fadeout = new FadeOut(false, L"OverWorld", L"OverWorld_LoadingScene");
 		}
 		
