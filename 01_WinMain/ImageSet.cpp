@@ -94,7 +94,17 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"OnionNonParryAbleASplash", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_NonParryableASplash.bmp"), 1540, 136, 7, 1, true);
 																																											
 	//총알 Test																																								
-	IMAGEMANAGER->LoadFromFile(L"Testbullet", Resources(L"bullet.bmp"), 21, 21, true);																	
+	IMAGEMANAGER->LoadFromFile(L"Testbullet", Resources(L"bullet.bmp"), 21, 21, true);
+	IMAGEMANAGER->LoadFromFile(L"BulletDeath", Resources(L"/Image/Bullet/BulletDeath.bmp"), 1680, 280, 6, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"BulletLeftRight", Resources(L"/Image/Bullet/BulletLeftRight.bmp"), 1136, 60, 8, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"BulletStart", Resources(L"/Image/Bullet/BulletStart.bmp"), 380, 89, 4, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"BulletUpDown", Resources(L"/Image/Bullet/BulletUpDown.bmp"), 240, 284, 8, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"BulletUpLeftRight", Resources(L"/Image/Bullet/BulletUpLeftRight.bmp"), 1296, 184, 8, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"SuperBulletDeath", Resources(L"/Image/Bullet/SuperBulletDeath.bmp"), 4770, 530, 9, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"SuperBulletLeftRight", Resources(L"/Image/Bullet/SuperBulletLeftRight.bmp"), 9584, 896, 8, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"SuperBulletUp", Resources(L"/Image/Bullet/SuperBulletUp.bmp"), 3584, 448, 8, 1, true);
+	IMAGEMANAGER->LoadFromFile(L"SuperBulletUpLeftRight", Resources(L"/Image/Bullet/SuperBulletUpLeftRight.bmp"), 3584, 896, 8, 2, true);
+
 	IMAGEMANAGER->LoadFromFile(L"OnionParryAbleSplash", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_ParryableSplash.bmp"), 1212, 126, 6, 1, true);	
 	IMAGEMANAGER->LoadFromFile(L"ElderHouse_Inside", Resources(L"/ElderHouse/ElderHouse_Inside.bmp"), 1695, 834, true);									
 }
