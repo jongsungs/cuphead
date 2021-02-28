@@ -147,6 +147,7 @@ void Carrot::Update() {
 			mDelayTime = 0;
 			mBetweenAttackDelay = 0;
 			count = 0;
+			SoundPlayer::GetInstance()->Play(L"CarrotBeamLoop", 0.4f);
 		}
 		mCurrentAnimation->Play();
 		break;
@@ -164,6 +165,18 @@ void Carrot::Update() {
 		mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
 
 		if (mBetweenAttackDelay > 0.2 &&count < 5) {
+			randomBeam = Random::GetInstance()->RandomInt(2);
+			if (mIsPlay == false) {
+				switch (randomBeam) {
+				case 0:
+					SoundPlayer::GetInstance()->Play(L"CarrotBeamFire1", 0.4f);
+					break;
+				case 1:
+					SoundPlayer::GetInstance()->Play(L"CarrotBeamFire2", 0.4f);
+					break;
+				}
+			}
+
 			if (count == 0)
 				mProjAngle = Math::GetAngle(mX, mY - mSizeY * 1 / 4, mPlayer->GetX(), mPlayer->GetY());
 			count++;
@@ -176,6 +189,7 @@ void Carrot::Update() {
 		if (mDelayTime > 2) {
 			mState = EnemyState::FromAttack;
 			count = 0;
+			SoundPlayer::GetInstance()->Stop(L"CarrotBeamLoop");
 		}
 		mCurrentAnimation->Play();
 		break;

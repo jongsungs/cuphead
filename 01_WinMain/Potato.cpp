@@ -21,10 +21,6 @@ void Potato::Init() {
 	mAttackImage = IMAGEMANAGER->FindImage(L"PotatoSpitAttack");
 	mDeathImage = IMAGEMANAGER->FindImage(L"PotatoDeath");
 
-	IntroEarthImage = IMAGEMANAGER->FindImage(L"PotatoIntroEarth");
-	IntroEarthImage1 = IMAGEMANAGER->FindImage(L"PotatoIntroEarth1");
-	IntroEarthImage2 = IMAGEMANAGER->FindImage(L"PotatoIntroEarth2");
-
 	//애니메이션 설정
 	//등장 애니메이션
 	mIntroAnimation = new Animation();
@@ -46,12 +42,6 @@ void Potato::Init() {
 	mDeathAnimation->InitFrameByStartEnd(0, 0, 8, 0, false);
 	mDeathAnimation->SetIsLoop(false);
 	mDeathAnimation->SetFrameUpdateTime(0.07f);
-
-	mIntroEarthAnimation = new Animation();
-	mIntroEarthAnimation->InitFrameByStartEnd(0, 0, 17, 0, false);
-	mIntroEarthAnimation->SetIsLoop(false);
-	mIntroEarthAnimation->SetFrameUpdateTime(0.02f);
-	mIntroEarthAnimation->Play();
 
 	//초기생성시 들어가야 할 데이터
 	mCurrentAnimation = mIntroAnimation;
@@ -107,11 +97,12 @@ void Potato::Update() {
 		mCurrentAnimation = mIdleAnimation;
 		mDelayTime += Time::GetInstance()->DeltaTime();
 		if (mAttackCount == 0) {
-			if (mDelayTime > 1) {
+			if (mDelayTime > 3) {
 				mCurrentAnimation->Stop();
 				mAttackStartDelay = 0;
 				mDelayTime = 0;
 				mState = EnemyState::Attack;
+				mIsPlay = false;
 			}
 		}
 		else {
@@ -119,6 +110,9 @@ void Potato::Update() {
 			mAttackStartDelay = 0;
 			mDelayTime = 0;
 			mState = EnemyState::Attack;
+			mIsPlay = false;
+			randomspit = Random::GetInstance()->RandomInt(3);
+			randomworm = Random::GetInstance()->RandomInt(2);
 		}
 		mCurrentAnimation->Play();
 		break;
@@ -136,16 +130,42 @@ void Potato::Update() {
 			if (mAttackAnimation->GetNowFrameX() == 16) {
 				mAttackCount++;
 				if (mAttackCount < 4) {
+					if (mIsPlay == false) {
+						switch (randomspit) {
+						case 0:
+							SoundPlayer::GetInstance()->Play(L"PotatoSpit1", 0.4f);
+							break;
+						case 1:
+							SoundPlayer::GetInstance()->Play(L"PotatoSpit2", 0.4f);
+							break;
+						case 2:
+							SoundPlayer::GetInstance()->Play(L"PotatoSpit3", 0.4f);
+							break;
+						}
+					}
+
 					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 155, 7, PI, false);
 					proj->Init();
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
 					mIsAttack = true;
+					mIsPlay = true;
 				}
 				else {
+					if (mIsPlay == false) {
+						switch (randomworm) {
+						case 0:
+							SoundPlayer::GetInstance()->Play(L"PotatoSpitWorm1", 0.4f);
+							break;
+						case 1:
+							SoundPlayer::GetInstance()->Play(L"PotatoSpitWorm2", 0.4f);
+							break;
+						}
+					}
 					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 155, 7, PI, true);
 					proj->Init();
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);
 					mIsAttack = true;
+					mIsPlay = true;
 					mAttackCount = 0;
 				}
 			}
@@ -180,7 +200,6 @@ void Potato::Update() {
 		break;
 	}
 	mRect = RectMakeCenter(mX, mY, mSizeX/2, mSizeY*3/4);
-	mIntroEarthAnimation->Update();
 	mCurrentAnimation->Update();
 }
 

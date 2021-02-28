@@ -168,6 +168,7 @@ void Onion::Update() {
 		if (mCurrentAnimation->GetIsPlay() == false) {
 			mDelayTime = 0;
 			mState = EnemyState::Attack;
+			SoundPlayer::GetInstance()->Play(L"OnionCrying", 0.4f);
 		}
 		mCurrentAnimation->Play();
 		break;
@@ -181,6 +182,7 @@ void Onion::Update() {
 		if (mDelayTime > 5) {
 			mState = EnemyState::FromAttack;
 			mTearEffectAnimation->Stop();
+			SoundPlayer::GetInstance()->Stop(L"OnionCrying");
 		}
 		mBetweenAttackDelay += Time::GetInstance()->DeltaTime();
 		if (mBetweenAttackDelay > 0.75) {
@@ -226,6 +228,7 @@ void Onion::Update() {
 		mIsActive = false;
 		mIsDestroy = true;
 		ObjectManager::GetInstance()->FindObject("Carrot")->SetIsActive(true);
+		SoundPlayer::GetInstance()->Stop(L"OnionCrying");
 		break;
 	}
 
