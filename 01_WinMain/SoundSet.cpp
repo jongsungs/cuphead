@@ -20,4 +20,18 @@ void SoundSet::SetSound() {
 	SoundPlayer::GetInstance()->LoadFromFile(L"Start5", Resources(L"Announcer Voice/Now go!.mp3"), false);
 	//아나운서 게임 종료 안내
 	SoundPlayer::GetInstance()->LoadFromFile(L"End1", Resources(L"Announcer Voice/Knockout!.mp3"), false);
+	//플랫포머 플레이어 효과음
+	SoundPlayer::GetInstance()->LoadFromFile(L"SpecialAttack", Resources(L"PlayerSound/palyer_specialattack.wav"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"Dash", Resources(L"PlayerSound/player_dash.wav"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"Death", Resources(L"PlayerSound/player_daath.wav"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"PeashootFire", Resources(L"PlayerSound/player_default_fire.mp3"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"SpreadshootFire", Resources(L"PlayerSound/player_default_spread_fire.mp3"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"GameOver", Resources(L"PlayerSound/player_game_over.wav"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"PlyerHit", Resources(L"PlayerSound/player_hit.wav"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"PlyerJump", Resources(L"PlayerSound/player_jump.wav"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"LandGround", Resources(L"PlayerSound/player_land_ground.wav"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"ParringSlap", Resources(L"PlayerSound/player_parry_slap.wav"), false);
+
+
+
 }

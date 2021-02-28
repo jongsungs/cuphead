@@ -28,6 +28,7 @@ void PlatformerPlayer::Init()
 	mDashStack = 0;
 	mSpcialAttackStack = 0;
 	mParringStack = 0;
+	SoundDelay = 0;
 
 
 	mCurrentAnimation = new Animation();
@@ -595,6 +596,10 @@ void PlatformerPlayer::Update()
 				{
 					if (mPlayerState == PlayerState::LeftRunDiagonalUpShoot)
 					{
+						if (SoundDelay == 4)
+						{
+							SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+						}
 						if (bulletdelay == 9)
 						{
 							BulletManager::GetInstance()->Player_Shoot(mX - 70, mY - 80, (PI / 2) + (PI / 4));
@@ -618,6 +623,10 @@ void PlatformerPlayer::Update()
 			{
 				if (mPlayerState == PlayerState::LeftRunShoot)
 				{
+					if (SoundDelay == 4)
+					{
+						SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+					}
 					if (bulletdelay == 9)
 					{
 						BulletManager::GetInstance()->Player_Shoot(mX - 70, mY, PI);
@@ -646,6 +655,7 @@ void PlatformerPlayer::Update()
 			{
 				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
+					SoundPlayer::GetInstance()->Play(L"PlyerJump", 0.2f);
 					mJumpStack++;
 					mJumpPower = 10.f;
 					mCurrentAnimation->Stop();
@@ -656,6 +666,7 @@ void PlatformerPlayer::Update()
 			}
 			if (Input::GetInstance()->GetKeyDown('V'))
 			{
+				SoundPlayer::GetInstance()->Play(L"SpecialAttack", 0.5f);
 				isMove = false;
 				mX += 0.5f;
 				mCurrentAnimation->Stop();
@@ -701,6 +712,10 @@ void PlatformerPlayer::Update()
 				{
 					if (mPlayerState == PlayerState::RightRunDiagonalUpShoot)
 					{
+						if (SoundDelay == 4)
+						{
+							SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+						}
 						if (bulletdelay == 9)
 						{
 							BulletManager::GetInstance()->Player_Shoot(mX + 70, mY - 80, PI / 4);
@@ -712,6 +727,10 @@ void PlatformerPlayer::Update()
 			{
 				if (mPlayerState == PlayerState::RightRunShoot)
 				{
+					if (SoundDelay == 4)
+					{
+						SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+					}
 					if (bulletdelay == 9)
 					{
 						BulletManager::GetInstance()->Player_Shoot(mX + 70, mY, 0);
@@ -753,6 +772,7 @@ void PlatformerPlayer::Update()
 			{
 				if (Input::GetInstance()->GetKeyDown('Z'))
 				{
+					SoundPlayer::GetInstance()->Play(L"PlyerJump", 0.2f);
 					mJumpStack++;
 					mJumpPower = 10.f;
 					mCurrentAnimation->Stop();
@@ -765,6 +785,7 @@ void PlatformerPlayer::Update()
 			}
 			if (Input::GetInstance()->GetKeyDown('V'))
 			{
+				SoundPlayer::GetInstance()->Play(L"SpecialAttack", 0.5f);
 				isMove = false;
 				mX += 0.5f;
 				mCurrentAnimation->Stop();
@@ -804,6 +825,7 @@ void PlatformerPlayer::Update()
 				}
 				if (Input::GetInstance()->GetKey(VK_UP))
 				{
+
 					if (Input::GetInstance()->GetKeyDown('X'))
 					{
 						mCurrentAnimation->Stop();
@@ -815,6 +837,10 @@ void PlatformerPlayer::Update()
 					{
 						if (mPlayerState == PlayerState::LeftDiagonalUpShoot)
 						{
+							if (SoundDelay == 4)
+							{
+								SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+							}
 							if (bulletdelay == 9)
 							{
 								BulletManager::GetInstance()->Player_Shoot(mX - 70, mY - 80, (PI / 2) + (PI / 4));
@@ -837,7 +863,7 @@ void PlatformerPlayer::Update()
 					mCurrentAnimation->Play();
 				}
 			}
-			else if (Input::GetInstance()->GetKey(VK_RIGHT))
+			if (Input::GetInstance()->GetKey(VK_RIGHT))
 			{
 				if (Input::GetInstance()->GetKeyDown(VK_UP))
 				{
@@ -859,6 +885,10 @@ void PlatformerPlayer::Update()
 					{
 						if (mPlayerState == PlayerState::RightDiagonalUpShoot)
 						{
+							if (SoundDelay == 4)
+							{
+								SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+							}
 							if (bulletdelay == 9)
 							{
 								BulletManager::GetInstance()->Player_Shoot(mX + 70, mY - 80, PI / 4);
@@ -1081,6 +1111,10 @@ void PlatformerPlayer::Update()
 
 			if (mPlayerState == PlayerState::LeftDuckShoot)
 			{
+				if (SoundDelay == 4)
+				{
+					SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+				}
 				if (bulletdelay == 9)
 				{
 					BulletManager::GetInstance()->Player_Shoot(mX - 90, mY + 40, PI);
@@ -1088,6 +1122,10 @@ void PlatformerPlayer::Update()
 			}
 			if (mPlayerState == PlayerState::RightDuckShoot)
 			{
+				if (SoundDelay == 4)
+				{
+					SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+				}
 				if (bulletdelay == 9)
 				{
 					BulletManager::GetInstance()->Player_Shoot(mX + 90, mY + 40, 0);
@@ -1159,6 +1197,10 @@ void PlatformerPlayer::Update()
 		{
 			if (mPlayerState == PlayerState::LeftUpShoot)
 			{
+				if (SoundDelay == 4)
+				{
+					SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+				}
 				if (bulletdelay == 9)
 				{
 					BulletManager::GetInstance()->Player_Shoot(mX - 30, mY - 100, PI / 2);
@@ -1166,12 +1208,16 @@ void PlatformerPlayer::Update()
 			}
 			if (mPlayerState == PlayerState::RightUpShoot)
 			{
+				if (SoundDelay == 4)
+				{
+					SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+				}
 				if (bulletdelay == 9)
 				{
 					BulletManager::GetInstance()->Player_Shoot(mX + 30, mY - 100, PI / 2);
 				}
 			}
-
+		
 		}
 
 		if (Input::GetInstance()->GetKeyUp('X'))
@@ -1279,9 +1325,11 @@ void PlatformerPlayer::Update()
 	{
 		if (Input::GetInstance()->GetKeyDown('V'))
 		{
+			
 			mSpcialAttackStack++;
 			if (mPlayerState == PlayerState::LeftUpaim)
 			{
+				SoundPlayer::GetInstance()->Play(L"SpecialAttack", 0.5f);
 				mCurrentAnimation->Stop();
 				mPlayerState = PlayerState::LeftUpSpecialAttack;
 				mCurrentAnimation = mLeftUpSpecialAttackAnimation;
@@ -1289,6 +1337,7 @@ void PlatformerPlayer::Update()
 			}
 			else if (mPlayerState == PlayerState::RightUpaim)
 			{
+				SoundPlayer::GetInstance()->Play(L"SpecialAttack", 0.5f);
 				mCurrentAnimation->Stop();
 				mPlayerState = PlayerState::RightUpSpecialAttack;
 				mCurrentAnimation = mRightUpSpecialAttackAnimation;
@@ -1302,6 +1351,7 @@ void PlatformerPlayer::Update()
 	{
 		if (Input::GetInstance()->GetKeyDown('Z'))
 		{
+			SoundPlayer::GetInstance()->Play(L"PlyerJump", 0.2f);
 			mJumpPower = 10.f;
 			mJumpStack++;
 			if (mPlayerState == PlayerState::RightJump)
@@ -1359,6 +1409,10 @@ void PlatformerPlayer::Update()
 	{
 		if (mPlayerState == PlayerState::LeftShoot)
 		{
+			if (SoundDelay == 4)
+			{
+				SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+			}
 			if (bulletdelay == 9)
 			{
 				BulletManager::GetInstance()->Player_Shoot(mX - 70, mY, PI);
@@ -1366,6 +1420,10 @@ void PlatformerPlayer::Update()
 		}
 		if (mPlayerState == PlayerState::RightShoot)
 		{
+			if (SoundDelay == 4)
+			{
+				SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+			}
 			if (bulletdelay == 9)
 			{
 				BulletManager::GetInstance()->Player_Shoot(mX + 70, mY, 0);
@@ -1459,6 +1517,7 @@ void PlatformerPlayer::Update()
 	//대쉬
 	if (Input::GetInstance()->GetKeyDown(VK_LSHIFT))
 	{
+		SoundPlayer::GetInstance()->Play(L"Dash", 0.2f);
 		if (mPlayerState == PlayerState::RightRun)
 		{
 			mCurrentAnimation->Stop();
@@ -1508,6 +1567,7 @@ void PlatformerPlayer::Update()
 	//공격중 이동
 	if (Input::GetInstance()->GetKey('X'))
 	{
+		
 		if (mPlayerState == PlayerState::LeftJump)
 		{
 			if (bulletdelay == 9)
@@ -1549,18 +1609,35 @@ void PlatformerPlayer::Update()
 		{
 			if (Input::GetInstance()->GetKey(VK_UP))
 			{
-				mPlayerState = PlayerState::LeftRunDiagonalUpShoot;
-				if (mCurrentAnimation != mLeftRunDiagonalUpShootAnimation) {
-					mCurrentAnimation->Stop();
-					mCurrentAnimation = mLeftRunDiagonalUpShootAnimation;
-				}
-				mCurrentAnimation->Play();
-
-				if (mPlayerState == PlayerState::LeftRunDiagonalUpShoot)
+				if (mPlayerState == PlayerState::LeftRun)
 				{
-					if (bulletdelay == 9)
+					mPlayerState = PlayerState::LeftRunDiagonalUpShoot;
+					if (mCurrentAnimation != mLeftRunDiagonalUpShootAnimation) {
+						mCurrentAnimation->Stop();
+						mCurrentAnimation = mLeftRunDiagonalUpShootAnimation;
+					}
+					mCurrentAnimation->Play();
+				 
+					if (mPlayerState == PlayerState::LeftRunDiagonalUpShoot)
 					{
-						BulletManager::GetInstance()->Player_Shoot(mX - 70, mY - 80, (PI / 2) + (PI / 4));
+						if (bulletdelay == 9)
+						{
+							BulletManager::GetInstance()->Player_Shoot(mX - 70, mY - 80, (PI / 2) + (PI / 4));
+						}
+					}
+				}
+				if (mPlayerState == PlayerState::LeftDiagonalUpaim)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::LeftDiagonalUpShoot;
+					mCurrentAnimation = mLeftDiagonalUpShootAnimation;
+					mCurrentAnimation->Play();
+					if (mPlayerState == PlayerState::LeftDiagonalUpShoot)
+					{
+						if (bulletdelay == 9)
+						{
+							BulletManager::GetInstance()->Player_Shoot(mX - 70, mY - 80, (PI / 2) + (PI / 4));
+						}
 					}
 				}
 			}
@@ -1569,97 +1646,53 @@ void PlatformerPlayer::Update()
 		{
 			if (Input::GetInstance()->GetKey(VK_UP))
 			{
-				mPlayerState = PlayerState::RightRunDiagonalUpShoot;
-				if (mCurrentAnimation != mRightRunDiagonalUpShootAnimation) {
-					mCurrentAnimation->Stop();
-					mCurrentAnimation = mRightRunDiagonalUpShootAnimation;
-				}
-				mCurrentAnimation->Play();
-
-				if (mPlayerState == PlayerState::RightRunDiagonalUpShoot)
+				if (mPlayerState == PlayerState::RightRun)
 				{
-					if (bulletdelay == 9)
+					mPlayerState = PlayerState::RightRunDiagonalUpShoot;
+					if (mCurrentAnimation != mRightRunDiagonalUpShootAnimation) {
+						mCurrentAnimation->Stop();
+						mCurrentAnimation = mRightRunDiagonalUpShootAnimation;
+					}
+					mCurrentAnimation->Play();
+
+					if (mPlayerState == PlayerState::RightRunDiagonalUpShoot)
 					{
-						BulletManager::GetInstance()->Player_Shoot(mX + 70, mY - 80, PI / 4);
+						if (bulletdelay == 9)
+						{
+							BulletManager::GetInstance()->Player_Shoot(mX - 70, mY - 80, (PI / 4));
+						}
+					}
+				}
+				if (mPlayerState == PlayerState::RightDiagonalUpaim)
+				{
+					mCurrentAnimation->Stop();
+					mPlayerState = PlayerState::RightDiagonalUpShoot;
+					mCurrentAnimation = mRightDiagonalUpShootAnimation;
+					mCurrentAnimation->Play();
+					if (mPlayerState == PlayerState::RightDiagonalUpShoot)
+					{
+						if (bulletdelay == 9)
+						{
+							BulletManager::GetInstance()->Player_Shoot(mX - 70, mY - 80, (PI / 4));
+						}
 					}
 				}
 			}
 		}
 		
-		//if (Input::GetInstance()->GetKey(VK_DOWN))
-		//{
-		//	if (Input::GetInstance()->GetKey(VK_LEFT))
-		//	{
-		//		isMove = false;
-		//		mPlayerState = PlayerState::LeftDuckShoot;
-		//		if (mCurrentAnimation != mLeftDuckShootAnimation) 
-		//		{
-		//			mCurrentAnimation->Stop();
-		//			mCurrentAnimation = mLeftDuckShootAnimation;
-		//		}
-		//		mCurrentAnimation->Play();
-		//
-		//		if (mPlayerState == PlayerState::LeftDuckShoot)
-		//		{
-		//			if (bulletdelay == 9)
-		//			{
-		//				BulletManager::GetInstance()->Player_Shoot(mX - 90, mY + 40, PI);
-		//			}
-		//		}
-		//	}
-		//	if (Input::GetInstance()->GetKeyUp(VK_LEFT))
-		//	{
-		//		isMove = true;
-		//	}
-		//	if (Input::GetInstance()->GetKey(VK_RIGHT))
-		//	{
-		//		isMove = false;
-		//		mPlayerState = PlayerState::RightDuckShoot;
-		//		if (mCurrentAnimation != mRightDuckShootAnimation)
-		//		{
-		//			mCurrentAnimation->Stop();
-		//			mCurrentAnimation = mRightDuckShootAnimation;
-		//		}
-		//		mCurrentAnimation->Play();
-		//
-		//		if (mPlayerState == PlayerState::RightDuckShoot)
-		//		{
-		//			if (bulletdelay == 9)
-		//			{
-		//				BulletManager::GetInstance()->Player_Shoot(mX + 90, mY + 40, 0);
-		//			}
-		//		}
-		//	}
-		//	if (Input::GetInstance()->GetKeyUp(VK_RIGHT))
-		//	{
-		//		isMove = true;
-		//	}
-		//}
-		//if (Input::GetInstance()->GetKeyUp(VK_DOWN))
-		//{
-		//	if (mPlayerState == PlayerState::RightDuckIdle || mPlayerState == PlayerState::RightDuckShoot)
-		//	{
-		//		mCurrentAnimation->Stop();
-		//		mPlayerState = PlayerState::RightShoot;
-		//		mCurrentAnimation = mRightShootAnimation;
-		//		mCurrentAnimation->Play();
-		//	}
-		//	if (mPlayerState == PlayerState::LeftDuckIdle || mPlayerState == PlayerState::LeftDuckShoot)
-		//	{
-		//		mCurrentAnimation->Stop();
-		//		mPlayerState = PlayerState::LeftShoot;
-		//		mCurrentAnimation = mLeftShootAnimation;
-		//		mCurrentAnimation->Play();
-		//	}
-		//}
+		
 		
 	}
 	
 
 
 
-
+	SoundDelay++;
 	bulletdelay++;
+	if (SoundDelay > 4)
+	{
+		SoundDelay = 0;
+	}
 	if (bulletdelay > 10)
 	{
 		bulletdelay = 0;
@@ -1686,6 +1719,7 @@ void PlatformerPlayer::Update()
 	}
 
 	mCurrentAnimation->Update();
+
 	if (mPlayerState == PlayerState::RightIdle)
 	{
 		mImage = IMAGEMANAGER->FindImage(L"PlatformerPlayerIdle");
@@ -1887,6 +1921,34 @@ void PlatformerPlayer::InIntersectBlock(RECT rc)
 			mCurrentAnimation->Play();
 		}
 	}
+	if (mPlayerState == PlayerState::LeftParring)
+	{
+		mCurrentAnimation->Stop();
+		mPlayerState = PlayerState::LeftIdle;
+		mCurrentAnimation = mLeftIdleAnimation;
+		mCurrentAnimation->Play();
+		if (Input::GetInstance()->GetKey(VK_LEFT))
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftRun;
+			mCurrentAnimation = mLeftRunAnimation;
+			mCurrentAnimation->Play();
+		}
+	}
+	if (mPlayerState == PlayerState::RightParring)
+	{
+		mCurrentAnimation->Stop();
+		mPlayerState = PlayerState::RightIdle;
+		mCurrentAnimation = mRightIdleAnimation;
+		mCurrentAnimation->Play();
+		if (Input::GetInstance()->GetKey(VK_RIGHT))
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightRun;
+			mCurrentAnimation = mRightRunAnimation;
+			mCurrentAnimation->Play();
+		}
+	}
 	mJumpPower = 0.f;
 	mGravity = 0.f;
 	mJumpStack = 0;
@@ -1894,3 +1956,5 @@ void PlatformerPlayer::InIntersectBlock(RECT rc)
 	mDashStack = 0;
 	mParringStack = 0;
 }
+
+

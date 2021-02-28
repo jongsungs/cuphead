@@ -119,6 +119,7 @@ class PlatformerPlayer : public GameObject
 	int mDashStack;
 	int mSpcialAttackStack;
 	int mParringStack;
+	int SoundDelay;
 public:
 	PlatformerPlayer(const string& name, float x, float y);
 
@@ -127,5 +128,6 @@ public:
 	void Update()override;
 	void Render(HDC hdc)override;
 	void InIntersectBlock(RECT rc)override;
+	
 };
 
