@@ -128,6 +128,6 @@ public:
 	void Update()override;
 	void Render(HDC hdc)override;
 	void InIntersectBlock(RECT rc)override;
-	
+	void InIntersectDamage(int dmage = 0)override;
 };
 

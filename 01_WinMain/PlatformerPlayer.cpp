@@ -34,7 +34,7 @@ void PlatformerPlayer::Init()
 	mCurrentAnimation = new Animation();
 	mCurrentAnimation->InitFrameByStartEnd(0, 0, 4, 0, false);
 	mCurrentAnimation->SetIsLoop(true);
-	mCurrentAnimation->SetFrameUpdateTime(0.1f);
+	mCurrentAnimation->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mCurrentAnimation->Play();
 
 	//아이들
@@ -45,7 +45,7 @@ void PlatformerPlayer::Init()
 	mRightIdleAnimation
 		->SetIsLoop(true);
 	mRightIdleAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightIdleAnimation
 		->Play();
 
@@ -55,7 +55,7 @@ void PlatformerPlayer::Init()
 	mLeftIdleAnimation
 		->SetIsLoop(true);
 	mLeftIdleAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftIdleAnimation
 		->Play();
 	//대쉬
@@ -66,7 +66,7 @@ void PlatformerPlayer::Init()
 	mRightDashAnimation
 		->SetIsLoop(false);
 	mRightDashAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightDashAnimation
 		->Play();
 
@@ -76,7 +76,7 @@ void PlatformerPlayer::Init()
 	mLeftDashAnimation
 		->SetIsLoop(false);
 	mLeftDashAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftDashAnimation
 		->Play();
 	//죽음
@@ -87,7 +87,7 @@ void PlatformerPlayer::Init()
 	mDieAnimation
 		->SetIsLoop(false);
 	mDieAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mDieAnimation
 		->Play();
 	//덕 아이들
@@ -98,7 +98,7 @@ void PlatformerPlayer::Init()
 	mRightDuckIdleAnimation
 		->SetIsLoop(true);
 	mRightDuckIdleAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightDuckIdleAnimation
 		->Play();
 
@@ -108,7 +108,7 @@ void PlatformerPlayer::Init()
 	mLeftDuckIdleAnimation
 		->SetIsLoop(true);
 	mLeftDuckIdleAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftDuckIdleAnimation
 		->Play();
 	//덕
@@ -119,7 +119,7 @@ void PlatformerPlayer::Init()
 	mRightDuckAnimation
 		->SetIsLoop(false);
 	mRightDuckAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightDuckAnimation
 		->Play();
 
@@ -129,7 +129,7 @@ void PlatformerPlayer::Init()
 	mLeftDuckAnimation
 		->SetIsLoop(false);
 	mLeftDuckAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftDuckAnimation
 		->Play();
 	//덕샷
@@ -140,7 +140,7 @@ void PlatformerPlayer::Init()
 	mRightDuckShootAnimation
 		->SetIsLoop(true);
 	mRightDuckShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mRightDuckShootAnimation
 		->Play();
 
@@ -150,7 +150,7 @@ void PlatformerPlayer::Init()
 	mLeftDuckShootAnimation
 		->SetIsLoop(true);
 	mLeftDuckShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mLeftDuckShootAnimation
 		->Play();
 	//피격
@@ -161,7 +161,7 @@ void PlatformerPlayer::Init()
 	mRightHitAnimation
 		->SetIsLoop(false);
 	mRightHitAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightHitAnimation
 		->Play();
 
@@ -171,7 +171,7 @@ void PlatformerPlayer::Init()
 	mLeftHitAnimation
 		->SetIsLoop(false);
 	mLeftHitAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftHitAnimation
 		->Play();
 	//필살기
@@ -182,7 +182,7 @@ void PlatformerPlayer::Init()
 	mRightSpecialAttackAnimation
 		->SetIsLoop(false);
 	mRightSpecialAttackAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mRightSpecialAttackAnimation
 		->Play();
 
@@ -192,7 +192,7 @@ void PlatformerPlayer::Init()
 	mLeftSpecialAttackAnimation
 		->SetIsLoop(false);
 	mLeftSpecialAttackAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mLeftSpecialAttackAnimation
 		->Play();
 
@@ -204,7 +204,7 @@ void PlatformerPlayer::Init()
 	mRightJumpAnimation
 		->SetIsLoop(true);
 	mRightJumpAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightJumpAnimation
 		->Play();
 
@@ -214,7 +214,7 @@ void PlatformerPlayer::Init()
 	mLeftJumpAnimation
 		->SetIsLoop(true);
 	mLeftJumpAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftJumpAnimation
 		->Play();
 	//달리기
@@ -225,7 +225,7 @@ void PlatformerPlayer::Init()
 	mRightRunAnimation
 		->SetIsLoop(true);
 	mRightRunAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightRunAnimation
 		->Play();
 
@@ -235,7 +235,7 @@ void PlatformerPlayer::Init()
 	mLeftRunAnimation
 		->SetIsLoop(true);
 	mLeftRunAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftRunAnimation
 		->Play();
 
@@ -245,7 +245,7 @@ void PlatformerPlayer::Init()
 	mRightRunturnAnimation
 		->SetIsLoop(false);
 	mRightRunturnAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightRunturnAnimation
 		->Play();
 
@@ -255,7 +255,7 @@ void PlatformerPlayer::Init()
 	mLeftRunturnAnimation
 		->SetIsLoop(false);
 	mLeftRunturnAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftRunturnAnimation
 		->Play();
 	//달리면서 쏘기
@@ -266,7 +266,7 @@ void PlatformerPlayer::Init()
 	mRightRunShootAnimation
 		->SetIsLoop(true);
 	mRightRunShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightRunShootAnimation
 		->Play();
 
@@ -276,7 +276,7 @@ void PlatformerPlayer::Init()
 	mLeftRunShootAnimation
 		->SetIsLoop(true);
 	mLeftRunShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftRunShootAnimation
 		->Play();
 
@@ -286,7 +286,7 @@ void PlatformerPlayer::Init()
 	mRightRunShootturnAnimation
 		->SetIsLoop(true);
 	mRightRunShootturnAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightRunShootturnAnimation
 		->Play();
 
@@ -296,7 +296,7 @@ void PlatformerPlayer::Init()
 	mLeftRunShootturnAnimation
 		->SetIsLoop(false);
 	mLeftRunShootturnAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftRunShootturnAnimation
 		->Play();
 
@@ -306,7 +306,7 @@ void PlatformerPlayer::Init()
 	mRightRunDiagonalUpShootAnimation
 		->SetIsLoop(true);
 	mRightRunDiagonalUpShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightRunDiagonalUpShootAnimation
 		->Play();
 
@@ -316,7 +316,7 @@ void PlatformerPlayer::Init()
 	mLeftRunDiagonalUpShootAnimation
 		->SetIsLoop(true);
 	mLeftRunDiagonalUpShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftRunDiagonalUpShootAnimation
 		->Play();
 
@@ -326,7 +326,7 @@ void PlatformerPlayer::Init()
 	mRightRunDiagonalUpShootturnAnimation
 		->SetIsLoop(false);
 	mRightRunDiagonalUpShootturnAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightRunDiagonalUpShootturnAnimation
 		->Play();
 
@@ -336,7 +336,7 @@ void PlatformerPlayer::Init()
 	mLeftRunDiagonalUpShootturnAnimation
 		->SetIsLoop(false);
 	mLeftRunDiagonalUpShootturnAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftRunDiagonalUpShootturnAnimation
 		->Play();
 	//제자리 발사
@@ -347,7 +347,7 @@ void PlatformerPlayer::Init()
 	mRightShootAnimation
 		->SetIsLoop(true);
 	mRightShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mRightShootAnimation
 		->Play();
 
@@ -357,7 +357,7 @@ void PlatformerPlayer::Init()
 	mLeftShootAnimation
 		->SetIsLoop(true);
 	mLeftShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mLeftShootAnimation
 		->Play();
 
@@ -367,7 +367,7 @@ void PlatformerPlayer::Init()
 	mRightUpShootAnimation
 		->SetIsLoop(true);
 	mRightUpShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mRightUpShootAnimation
 		->Play();
 
@@ -377,7 +377,7 @@ void PlatformerPlayer::Init()
 	mLeftUpShootAnimation
 		->SetIsLoop(true);
 	mLeftUpShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mLeftUpShootAnimation
 		->Play();
 
@@ -387,7 +387,7 @@ void PlatformerPlayer::Init()
 	mRightDiagonalUpShootAnimation
 		->SetIsLoop(true);
 	mRightDiagonalUpShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mRightDiagonalUpShootAnimation
 		->Play();
 
@@ -397,7 +397,7 @@ void PlatformerPlayer::Init()
 	mLeftDiagonalUpShootAnimation
 		->SetIsLoop(true);
 	mLeftDiagonalUpShootAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mLeftDiagonalUpShootAnimation
 		->Play();
 
@@ -409,7 +409,7 @@ void PlatformerPlayer::Init()
 	mRightParringAnimation
 		->SetIsLoop(true);
 	mRightParringAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightParringAnimation
 		->Play();
 
@@ -419,57 +419,57 @@ void PlatformerPlayer::Init()
 	mLeftParringAnimation
 		->SetIsLoop(true);
 	mLeftParringAnimation
-		->SetFrameUpdateTime(0.1f);
+		->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftParringAnimation
 		->Play();
 
 	mRightUpaimAnimation = new Animation();
 	mRightUpaimAnimation->InitFrameByStartEnd(0, 0, 4, 0, true);
 	mRightUpaimAnimation->SetIsLoop(true);
-	mRightUpaimAnimation->SetFrameUpdateTime(0.1f);
+	mRightUpaimAnimation->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightUpaimAnimation->Play();
 
 	mLeftUpaimAnimation = new Animation();
 	mLeftUpaimAnimation->InitFrameByBackStartEnd(4, 1, 0, 1, true);
 	mLeftUpaimAnimation->SetIsLoop(true);
-	mLeftUpaimAnimation->SetFrameUpdateTime(0.1f);
+	mLeftUpaimAnimation->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftUpaimAnimation->Play();
 
 	mLeftShootaimAnimation = new Animation();
 	mLeftShootaimAnimation->InitFrameByBackStartEnd(4, 1, 0, 1, true);
 	mLeftShootaimAnimation->SetIsLoop(true);
-	mLeftShootaimAnimation->SetFrameUpdateTime(0.1f);
+	mLeftShootaimAnimation->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftShootaimAnimation->Play();
 
 	mRightShootaimAnimation = new Animation();
 	mRightShootaimAnimation->InitFrameByStartEnd(0, 0, 4, 0, true);
 	mRightShootaimAnimation->SetIsLoop(true);
-	mRightShootaimAnimation->SetFrameUpdateTime(0.1f);
+	mRightShootaimAnimation->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightShootaimAnimation->Play();
 
 	mRightDiagonalUpaimAnimation = new Animation();
 	mRightDiagonalUpaimAnimation->InitFrameByStartEnd(0, 0, 4, 0, true);
 	mRightDiagonalUpaimAnimation->SetIsLoop(true);
-	mRightDiagonalUpaimAnimation->SetFrameUpdateTime(0.1f);
+	mRightDiagonalUpaimAnimation->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mRightDiagonalUpaimAnimation->Play();
 
 	mLeftDiagonalUpaimAnimation = new Animation();
 	mLeftDiagonalUpaimAnimation->InitFrameByBackStartEnd(4, 1, 0, 1, true);
 	mLeftDiagonalUpaimAnimation->SetIsLoop(true);
-	mLeftDiagonalUpaimAnimation->SetFrameUpdateTime(0.1f);
+	mLeftDiagonalUpaimAnimation->SetFrameUpdateTime(PlatPlayerAnimationTime);
 	mLeftDiagonalUpaimAnimation->Play();
 	//위로보고 필살기
 
 	mLeftUpSpecialAttackAnimation = new Animation();
 	mLeftUpSpecialAttackAnimation->InitFrameByBackStartEnd(12, 1, 0, 1, false);
 	mLeftUpSpecialAttackAnimation->SetIsLoop(false);
-	mLeftUpSpecialAttackAnimation->SetFrameUpdateTime(0.1f);
+	mLeftUpSpecialAttackAnimation->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mLeftUpSpecialAttackAnimation->Play();
 
 	mRightUpSpecialAttackAnimation = new Animation();
 	mRightUpSpecialAttackAnimation->InitFrameByStartEnd(0, 0, 12, 0, false);
 	mRightUpSpecialAttackAnimation->SetIsLoop(false);
-	mRightUpSpecialAttackAnimation->SetFrameUpdateTime(0.1f);
+	mRightUpSpecialAttackAnimation->SetFrameUpdateTime(PlatPlayerShootAnimationTime);
 	mRightUpSpecialAttackAnimation->Play();
 }
 
@@ -1871,7 +1871,7 @@ void PlatformerPlayer::Render(HDC hdc)
 	//{
 	//	CameraManager::GetInstance()->GetMainCamera()->ScaleFrameRender(hdc, mImage4, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 80, 120);
 	//}
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromBottom(hdc, mImage, mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 
 	//RenderRect(hdc, mGround);
@@ -1955,6 +1955,11 @@ void PlatformerPlayer::InIntersectBlock(RECT rc)
 	mSpcialAttackStack = 0;
 	mDashStack = 0;
 	mParringStack = 0;
+}
+
+void PlatformerPlayer::InIntersectDamage(int dmage)
+{
+	mHP -= 1;
 }
 
 
