@@ -25,7 +25,7 @@ public :
 	void Player_Special_Shoot(float x, float y, float angle);
 	void Enmey_Shoot(Enemy_Bullet_Type type, float x, float y, float speed, float angle);
 
-	void BulletHaveCange(Player_Bullet_Type type) { mPlayerHaveBullet.find(type)->second = Player_Have::IsHave; }
+	void BulletHaveChange(Player_Bullet_Type type) { mPlayerHaveBullet.find(type)->second = Player_Have::IsHave; }
 	void ResetPlayerBullet() { mPlayerBulletType = Player_Bullet_Type::Peashooter; }
 	void ChangeBullet();
 };
