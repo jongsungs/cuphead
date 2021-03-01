@@ -146,7 +146,7 @@
       <UniqueIdentifier>{c423a0f5-abe9-4395-a0bf-5139bef88b31}</UniqueIdentifier>
     </Filter>
     <Filter Include="MainGame\Object\Coin">
-      <UniqueIdentifier>{2077fa6d-8549-4356-a6ba-fc9bbdd786cb}</UniqueIdentifier>
+      <UniqueIdentifier>{721678e4-13e0-452b-90fa-22d6c0f7fb5f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -354,6 +354,9 @@
     <ClInclude Include="TutorialCube.h">
       <Filter>MainGame\Object\Tutorial</Filter>
     </ClInclude>
+    <ClInclude Include="TutorialPrint.h">
+      <Filter>MainGame\Object\Tutorial</Filter>
+    </ClInclude>
     <ClInclude Include="Coin.h">
       <Filter>MainGame\Object\Coin</Filter>
     </ClInclude>
@@ -552,6 +555,9 @@
       <Filter>MainGame\Object\Tutorial\Ground</Filter>
     </ClCompile>
     <ClCompile Include="TutorialCube.cpp">
+      <Filter>MainGame\Object\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialPrint.cpp">
       <Filter>MainGame\Object\Tutorial</Filter>
     </ClCompile>
     <ClCompile Include="Coin.cpp">

@@ -3,7 +3,7 @@
 #include "Image.h"
 #include "Camera.h"
 #include "Animation.h"
-#include "Effect.h"
+#include "Player_Bullet_Effect.h"
 
 #define RadianAngle(angle) angle* PI/180
 Peashooter::Peashooter(string name, float x, float y, float angle) 
@@ -81,6 +81,6 @@ void Peashooter::Render(HDC hdc) {
 }
 
 void Peashooter::InIntersectDamage(int dmage) { //삭제 처리
-	new Effect(mX, mY, ImageManager::GetInstance()->FindImage(L"BulletDeath"), 0.07f);
+	new Player_Bullet_Effect(mX, mY, ImageManager::GetInstance()->FindImage(L"BulletDeath"), 0.07f);
 	mIsDestroy = true;
 }

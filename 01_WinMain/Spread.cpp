@@ -2,6 +2,7 @@
 #include "Spread.h"
 #include "Camera.h"
 #include "Animation.h"
+#include "Player_Bullet_Effect.h"
 
 #define RadianAngle(angle) angle* PI/180
 Spread::Spread(string name, float x, float y, float angle, int speed) :Bullet(name, x,y,angle) {
@@ -69,7 +70,7 @@ void Spread::Update()
 
 void Spread::Render(HDC hdc)
 {
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	if (mAngle == RadianAngle(0)) { //0도
 		CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromRightCenter(hdc, mImage, mRect.right, mY, mAnimation->GetNowFrameX(), mAnimation->GetNowFrameY());
 	}
@@ -95,5 +96,6 @@ void Spread::Render(HDC hdc)
 
 void Spread::InIntersectDamage(int damge)
 {
+	new Player_Bullet_Effect(mX, mY, ImageManager::GetInstance()->FindImage(L"RedBulletDeath"), 0.07f);
 	mIsDestroy = true;
 }
