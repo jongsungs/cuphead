@@ -21,12 +21,12 @@ void PlatformerPlayer::Init()
 	mGravity = 0.3f;
 	mJumpPower = 0.f;
 	mPlayerState = PlayerState::RightIdle;
-	mHP = 3;
+	mHP = 100;
 	isMove = true;
 	bulletdelay = 0;
 	mJumpStack = 0;
 	mDashStack = 0;
-	mSpcialAttackStack = 0;
+	mSpcialAttackStack = 3;
 	mParringStack = 0;
 	SoundDelay = 0;
 	isHit = false;
@@ -525,9 +525,9 @@ void PlatformerPlayer::Release()
 
 void PlatformerPlayer::Update()
 {
-	
 
-	if (mPlayerState == PlayerState::RightJump||mPlayerState==PlayerState::LeftJump)
+
+	if (mPlayerState == PlayerState::RightJump || mPlayerState == PlayerState::LeftJump)
 	{
 		if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
 		{
@@ -547,7 +547,7 @@ void PlatformerPlayer::Update()
 
 		}
 	}
-	if (mPlayerState == PlayerState::LeftJump ||mPlayerState==PlayerState::RightJump)
+	if (mPlayerState == PlayerState::LeftJump || mPlayerState == PlayerState::RightJump)
 	{
 		if (Input::GetInstance()->GetKeyDown(VK_RIGHT))
 		{
@@ -580,7 +580,9 @@ void PlatformerPlayer::Update()
 		}
 		if (Input::GetInstance()->GetKey(VK_LEFT))
 		{
-			mX -= 5;
+			if (mPlayerState != PlayerState::LeftDash) {
+				mX -= 5;
+			}
 			if (Input::GetInstance()->GetKey(VK_UP))
 			{
 				if (Input::GetInstance()->GetKeyDown('X'))
@@ -674,6 +676,8 @@ void PlatformerPlayer::Update()
 				mPlayerState = PlayerState::LeftSpecialAttack;
 				mCurrentAnimation = mLeftSpecialAttackAnimation;
 				mCurrentAnimation->Play();
+				BulletManager::GetInstance()->Player_Special_Shoot(mX - 200, mY, PI);
+				mSpcialAttackStack--;
 			}
 		}
 		if (Input::GetInstance()->GetKeyUp(VK_LEFT))
@@ -696,7 +700,10 @@ void PlatformerPlayer::Update()
 		//달리면서 업샷 및 점프
 		if (Input::GetInstance()->GetKey(VK_RIGHT))
 		{
-			mX += 5;
+			if (mPlayerState != PlayerState::RightDash)
+			{
+				mX += 5;
+			}
 			if (Input::GetInstance()->GetKey(VK_UP))
 			{
 				if (Input::GetInstance()->GetKeyDown('X'))
@@ -793,6 +800,8 @@ void PlatformerPlayer::Update()
 				mPlayerState = PlayerState::RightSpecialAttack;
 				mCurrentAnimation = mRightSpecialAttackAnimation;
 				mCurrentAnimation->Play();
+				BulletManager::GetInstance()->Player_Special_Shoot(mX + 200, mY, 0);
+				mSpcialAttackStack--;
 			}
 
 		}
@@ -1090,7 +1099,7 @@ void PlatformerPlayer::Update()
 		}
 		if (Input::GetInstance()->GetKeyDown('X'))
 		{
-			
+
 			if (mPlayerState == PlayerState::RightDuckIdle)
 			{
 				mCurrentAnimation->Stop();
@@ -1108,7 +1117,7 @@ void PlatformerPlayer::Update()
 		}
 		if (Input::GetInstance()->GetKey('X'))
 		{
-			
+
 
 			if (mPlayerState == PlayerState::LeftDuckShoot)
 			{
@@ -1218,7 +1227,7 @@ void PlatformerPlayer::Update()
 					BulletManager::GetInstance()->Player_Shoot(mX + 30, mY - 100, PI / 2);
 				}
 			}
-		
+
 		}
 
 		if (Input::GetInstance()->GetKeyUp('X'))
@@ -1326,7 +1335,7 @@ void PlatformerPlayer::Update()
 	{
 		if (Input::GetInstance()->GetKeyDown('V'))
 		{
-			
+
 			mSpcialAttackStack++;
 			if (mPlayerState == PlayerState::LeftUpaim)
 			{
@@ -1335,6 +1344,8 @@ void PlatformerPlayer::Update()
 				mPlayerState = PlayerState::LeftUpSpecialAttack;
 				mCurrentAnimation = mLeftUpSpecialAttackAnimation;
 				mCurrentAnimation->Play();
+				BulletManager::GetInstance()->Player_Special_Shoot(mX, mY-200, PI/2);
+				mSpcialAttackStack--;
 			}
 			else if (mPlayerState == PlayerState::RightUpaim)
 			{
@@ -1343,6 +1354,8 @@ void PlatformerPlayer::Update()
 				mPlayerState = PlayerState::RightUpSpecialAttack;
 				mCurrentAnimation = mRightUpSpecialAttackAnimation;
 				mCurrentAnimation->Play();
+				BulletManager::GetInstance()->Player_Special_Shoot(mX , mY-200, PI / 2);
+				mSpcialAttackStack--;
 			}
 		}
 	}
@@ -1385,7 +1398,7 @@ void PlatformerPlayer::Update()
 				mCurrentAnimation = mLeftJumpAnimation;
 				mCurrentAnimation->Play();
 			}
-			
+
 		}
 	}
 	if (Input::GetInstance()->GetKeyDown('X'))
@@ -1459,6 +1472,8 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::LeftSpecialAttack;
 			mCurrentAnimation = mLeftSpecialAttackAnimation;
 			mCurrentAnimation->Play();
+			BulletManager::GetInstance()->Player_Special_Shoot(mX + 200, mY, PI );
+			mSpcialAttackStack--;
 			if (mCurrentAnimation->GetIsPlay() == false)
 				mPlayerState = PlayerState::LeftIdle;
 		}
@@ -1469,6 +1484,8 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::RightSpecialAttack;
 			mCurrentAnimation = mRightSpecialAttackAnimation;
 			mCurrentAnimation->Play();
+			BulletManager::GetInstance()->Player_Special_Shoot(mX + 100, mY, 0);
+			mSpcialAttackStack--;
 			if (mCurrentAnimation->GetIsPlay() == false)
 				mPlayerState = PlayerState::RightIdle;
 		}
@@ -1518,6 +1535,14 @@ void PlatformerPlayer::Update()
 		}
 	}
 	//대쉬
+	if (mPlayerState == PlayerState::RightDash)
+	{
+		mX += 10;
+	}
+	if (mPlayerState == PlayerState::LeftDash)
+	{
+		mX -= 10;
+	}
 	if (Input::GetInstance()->GetKeyDown(VK_LSHIFT))
 	{
 		SoundPlayer::GetInstance()->Play(L"Dash", 0.2f);
@@ -1527,7 +1552,7 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::RightDash;
 			mCurrentAnimation = mRightDashAnimation;
 			mCurrentAnimation->Play();
-			mX += 100;
+			
 		}
 		else if (mPlayerState == PlayerState::RightIdle)
 		{
@@ -1535,7 +1560,7 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::RightDash;
 			mCurrentAnimation = mRightDashAnimation;
 			mCurrentAnimation->Play();
-			mX += 100;
+		
 		}
 		else if (mPlayerState == PlayerState::RightJump)
 		{
@@ -1544,7 +1569,7 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::RightDash;
 			mCurrentAnimation = mRightDashAnimation;
 			mCurrentAnimation->Play();
-			mX += 100;
+			
 		}
 		else if (mPlayerState == PlayerState::LeftRun)
 		{
@@ -1552,7 +1577,7 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::LeftDash;
 			mCurrentAnimation = mLeftDashAnimation;
 			mCurrentAnimation->Play();
-			mX -= 100;
+		
 		}
 		else if (mPlayerState == PlayerState::LeftIdle)
 		{
@@ -1560,7 +1585,7 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::LeftDash;
 			mCurrentAnimation = mLeftDashAnimation;
 			mCurrentAnimation->Play();
-			mX -= 100;
+		
 		}
 		else if (mPlayerState == PlayerState::LeftJump)
 		{
@@ -1569,7 +1594,7 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::LeftDash;
 			mCurrentAnimation = mLeftDashAnimation;
 			mCurrentAnimation->Play();
-			mX -= 100;
+			
 		}
 
 	}
@@ -1939,7 +1964,7 @@ void PlatformerPlayer::Render(HDC hdc)
 	//{
 	//	CameraManager::GetInstance()->GetMainCamera()->ScaleFrameRender(hdc, mImage4, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 80, 120);
 	//}
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromBottom(hdc, mImage, mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 
 	//RenderRect(hdc, mGround);
@@ -1953,6 +1978,10 @@ void PlatformerPlayer::Render(HDC hdc)
 
 void PlatformerPlayer::InIntersectBlock(RECT rc)
 {
+	if (mJumpPower > 0)
+	{
+		return;
+	}
 	if ((rc.bottom - rc.top) < (rc.right - rc.left) && rc.bottom == mRect.bottom)
 		mY -= rc.bottom - rc.top;
 	if ((rc.bottom - rc.top) < (rc.right - rc.left) && rc.top == mRect.top)
@@ -1961,6 +1990,14 @@ void PlatformerPlayer::InIntersectBlock(RECT rc)
 		mX += rc.right - rc.left;
 	if ((rc.bottom - rc.top) > (rc.right - rc.left) && rc.right == mRect.right)
 		mX -= rc.right - rc.left;
+	if (mPlayerState == PlayerState::RightDuckIdle || mPlayerState == PlayerState::LeftDuckIdle || mPlayerState == PlayerState::LeftDuckShoot || mPlayerState == PlayerState::RightDuckShoot)
+	{	
+		mRect = RectMakeCenter(mX, mY + 50, 98, 50);
+	}
+	else
+	{
+		mRect = RectMakeCenter(mX, mY, 98, 155);
+	}
 	if (mPlayerState == PlayerState::LeftJump)
 	{
 		mCurrentAnimation->Stop();
@@ -2024,7 +2061,6 @@ void PlatformerPlayer::InIntersectBlock(RECT rc)
 	mJumpPower = 0.f;
 	mGravity = 0.f;
 	mJumpStack = 0;
-	mSpcialAttackStack = 0;
 	mDashStack = 0;
 	mParringStack = 0;
 	
@@ -2032,7 +2068,7 @@ void PlatformerPlayer::InIntersectBlock(RECT rc)
 
 void PlatformerPlayer::InIntersectDamage(int dmage)
 {
-	isHit = true;
+	//isHit = true;
 	
 }
 
