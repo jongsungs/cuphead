@@ -22,7 +22,7 @@ void Block::Update()
 
 void Block::Render(HDC hdc)
 {
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 }
 
 void Block::Release()

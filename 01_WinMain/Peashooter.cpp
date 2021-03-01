@@ -59,7 +59,7 @@ void Peashooter::Update() {
 }
 void Peashooter::Render(HDC hdc) {
 	
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	if (mAngle == RadianAngle(0)) { //0도
 		CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromRightCenter(hdc, mImage, mRect.right, mY, mAnimation->GetNowFrameX(),mAnimation->GetNowFrameY());
 	}

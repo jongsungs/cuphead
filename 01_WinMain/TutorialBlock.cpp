@@ -16,5 +16,6 @@ void TutorialBlock::Init()
 void TutorialBlock::Render(HDC hdc)
 {
 	CameraManager::GetInstance()->GetMainCamera()->Render(hdc, mImage, mRect.left, mRect.top);
+	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 }
 

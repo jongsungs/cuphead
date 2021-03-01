@@ -3,6 +3,9 @@
 class SceneTutorial : public Scene
 {
 	RECT mMap;
+	bool mExitDoorCheck;
+	float mDistance;
+	class Image* mZImage;
 public:
 	void Init()override;
 	void Release()override;

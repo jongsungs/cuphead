@@ -128,7 +128,7 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"Tutorial_BackGround", Resources(L"/Image/Tutorial/tutorial_room_back_layer_0001.bmp"), 1024, 576, false);
 	IMAGEMANAGER->LoadFromFile(L"Tutorial_FrontGround", Resources(L"/Image/Tutorial/tutorial_room_front_layer_0001.bmp"), 1024, 576, true);
 
-	IMAGEMANAGER->LoadFromFile(L"Tutorial_Dash", Resources(L"/Image/Tutorial/Dash.bmp"), 275, 1546, true);
+	IMAGEMANAGER->LoadFromFile(L"Tutorial_Dash", Resources(L"/Image/Tutorial/Dash.bmp"), 275, 154, true);
 	IMAGEMANAGER->LoadFromFile(L"Tutorial_Duck", Resources(L"/Image/Tutorial/Duck.bmp"), 312, 286, true);
 	IMAGEMANAGER->LoadFromFile(L"Tutorial_Ex", Resources(L"/Image/Tutorial/Ex.bmp"), 317, 165, true);
 	IMAGEMANAGER->LoadFromFile(L"Tutorial_Jump", Resources(L"/Image/Tutorial/Jump.bmp"), 271, 237, true);

@@ -8,6 +8,7 @@ TutorialPrint::TutorialPrint(string name, float x, float y, Image* image)
 	mX = x;
 	mY = y;
 	mImage = image;
+	mRect = RectMake(x, y, mImage->GetWidth(), mImage->GetHeight());
 }
 
 void TutorialPrint::Init()
