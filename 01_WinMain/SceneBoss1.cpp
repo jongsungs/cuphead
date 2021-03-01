@@ -26,7 +26,9 @@ void SceneBoss1::Init(){
 	PlatformerPlayer* player = new PlatformerPlayer("Player", WINSIZEX / 4, WINSIZEY * 3 / 4);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, player);
 
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", 0, WINSIZEY / 8 * 7, WINSIZEX*8, 100));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", 0, WINSIZEY / 8 * 7, WINSIZEX, 100));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", WINSIZEX, 0, 100, WINSIZEY));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", -100, 0, 100, WINSIZEY));
 
 	Enemy* potato = new Potato("Potato", WINSIZEX * 3 / 4, WINSIZEY / 2+50);
 	Enemy* carrot = new Carrot("Carrot", WINSIZEX / 2, WINSIZEY * 3 / 8 + 549);
