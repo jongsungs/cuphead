@@ -75,7 +75,7 @@ void IntersectManager::IntersectPlayerAndEnemyBullet()
 		for (int b = 0; b < mPlayer->size(); ++b) {
 			if (!(*mPlayer)[b]->GetIsActive() && (*mPlayer)[b]->GetIsDestroy())
 				continue;
-			RECT enemyBulletRect = (*mPlayer)[a]->GetRect();
+			RECT enemyBulletRect = (*mEnemyBullet)[a]->GetRect();
 			RECT playerRect = (*mPlayer)[b]->GetRect();
 			RECT dump;
 			if (IntersectRect(&dump, &enemyBulletRect, &playerRect)) {
