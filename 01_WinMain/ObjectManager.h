@@ -9,6 +9,7 @@ GameObject 관리하는 클래스
 enum class ObjectLayer : int
 {
 	Background = 0,
+	Print,
 	Camera,
 	Effect,
 	Block,

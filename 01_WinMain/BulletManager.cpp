@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "BulletManager.h"
 #include "Peashooter.h"
+#include "Spread.h"
 #include "Effect.h"
 #include "Player_Bullet_Effect.h"
+#define RadianAngle(angle) angle* PI/180
 BulletManager::BulletManager() {
 	mPlayerHaveBullet = { {Player_Bullet_Type::Peashooter,Player_Have::IsHave},{Player_Bullet_Type::Spread,Player_Have::NoHave } };
-	mPlayerBulletType = Player_Bullet_Type::Peashooter;
+	mPlayerBulletType = Player_Bullet_Type::Spread;
 }
 
 void BulletManager::Player_Shoot(float x, float y, float angle) {
@@ -14,12 +16,42 @@ void BulletManager::Player_Shoot(float x, float y, float angle) {
 		ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet,new Peashooter("Peashooter",x,y, angle));
 	}
 	else if (mPlayerBulletType == Player_Bullet_Type::Spread) {
+		new Player_Bullet_Effect(x, y, ImageManager::GetInstance()->FindImage(L"RedBulletStart"), 0.07f);
 		//ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet_Effect, new Effect(x, y, ImageManager::GetInstance()->FindImage(L"Spread")));
-		ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Peashooter("Spread", x, y, angle));
-		ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Peashooter("Spread", x + 10, y - 10, angle));
-		ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Peashooter("Spread", x + 10, y + 10, angle));
-		ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Peashooter("Spread", x - 10, y - 10, angle));
-		ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Peashooter("Spread", x -10, y +10, angle));
+		ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, angle, 0));
+		if (angle == RadianAngle(0)) { //0µµ
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, RadianAngle(45), 0));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, RadianAngle(315), 0));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y - 10, angle, 1));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y + 10, angle, 1));
+		}
+		else if (angle == RadianAngle(45)) {
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, RadianAngle(90), 0));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, RadianAngle(0), 0));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x -5, y-5, angle, 1));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x + 5, y+5, angle, 1));
+		}
+		else if (angle == RadianAngle(90)) {
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, RadianAngle(135), 0));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, RadianAngle(45), 0));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x -10, y, angle, 1));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x + 10, y, angle, 1));
+		}
+		else if (angle == RadianAngle(135)) {
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, RadianAngle(180), 0));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, RadianAngle(90), 0));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x - 5, y-5, angle, 1));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x + 5, y+5, angle, 1));
+		}
+		else if (angle == RadianAngle(180)) {
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, RadianAngle(225), 0));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, RadianAngle(135), 0));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y - 10, angle, 1));
+			ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y + 10, angle, 1));
+		}
+		//ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, angle - RadianAngle(45), 0));
+		//ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new Spread("Spread", x, y, angle + RadianAngle(45), 0));
+		
 	}
 }
 

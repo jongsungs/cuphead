@@ -5,19 +5,13 @@
 #include "Block.h"
 #include "Image.h"
 #include "TutorialBackGround.h"
+#include "TutorialPrint.h"
+#include "TutorialCube.h"
 void SceneTutorial::Init()
 {
+	SoundPlayer::GetInstance()->Play(L"TutorialMap", 1.f);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, new PlatformerPlayer("Player", 200, WINSIZEY / 8 * 7));
-	mMap = RectMake(-20,0,4000,WINSIZEY);
-	//for (int a = 0; a < 5; ++a) {
-	//	string enemyname = "Enemy";
-	//	enemyname += to_string(a);
-	//	Enemy* enemy = new Enemy(enemyname, WINSIZEX / 2 + a* 30, WINSIZEY / 2 + a*10);
-	//	enemy->SetPlayerPtr(mPlayer);
-	//	ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemey, enemy);
-	//	mEnemys.push_back(enemy);
-	//}
-	//Player* player1 = new Player("1", 100, WINSIZEY / 2);
+	mMap = RectMake(-15,0,3950,WINSIZEY);
 	Camera* camera = new Camera();
 	camera->SetMode(Camera::Mode::Platformer);
 	camera->SetTarget(ObjectManager::GetInstance()->FindObject("Player"));
@@ -25,7 +19,16 @@ void SceneTutorial::Init()
 	CameraManager::GetInstance()->SetMainCamera(camera);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Camera, camera);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", -20, WINSIZEY / 8 * 7, 4000, 100));
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Trap", WINSIZEX / 8 * 6, WINSIZEY - 200, 100, 100));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", -20, 0, 10, WINSIZEY));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", 3930, 0, 4000, WINSIZEY));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new TutorialCube("Trap",1000, WINSIZEY - 200, 180, 170, ImageManager::GetInstance()->FindImage(L"Tutorial_cube")));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Print, new TutorialPrint("Tutorial", 150, WINSIZEY-400, ImageManager::GetInstance()->FindImage(L"Tutorial_Tutorial")));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Print, new TutorialPrint("Duck", 400, WINSIZEY - 400, ImageManager::GetInstance()->FindImage(L"Tutorial_Duck")));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Print, new TutorialPrint("Jump", 750, WINSIZEY-400, ImageManager::GetInstance()->FindImage(L"Tutorial_Jump")));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Print, new TutorialPrint("Shoot", 1200, WINSIZEY - 400, ImageManager::GetInstance()->FindImage(L"Tutorial_Shoot")));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Print, new TutorialPrint("Lock", 1600, WINSIZEY - 400, ImageManager::GetInstance()->FindImage(L"Tutorial_Lock")));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new TutorialCube("Trap", 1800, WINSIZEY - 200, 180, 170, ImageManager::GetInstance()->FindImage(L"Tutorial_cube")));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Print, new TutorialPrint("ExitDoor", 1600, WINSIZEY - 400, ImageManager::GetInstance()->FindImage(L"Tutorial_Lock")));
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Background, new TutorialBackGround("TutorialBackgroud" , ImageManager::GetInstance()->FindImage(L"Tutorial_BackGround")));
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::FrontGround, new TutorialBackGround("TutorialFrontGround", ImageManager::GetInstance()->FindImage(L"Tutorial_FrontGround")));
 	ObjectManager::GetInstance()->Init();
@@ -34,6 +37,7 @@ void SceneTutorial::Init()
 
 void SceneTutorial::Release()
 {
+	SoundPlayer::GetInstance()->Stop(L"TutorialMap");
 	ObjectManager::GetInstance()->Release();
 }
 
@@ -45,7 +49,5 @@ void SceneTutorial::Update()
 
 void SceneTutorial::Render(HDC hdc)
 {
-	//ImageManager::GetInstance()->FindImage(L"Tutorial_BackGround")->ScaleRender(hdc,0,0,WINSIZEX,WINSIZEY);
 	ObjectManager::GetInstance()->Render(hdc);
-	//ImageManager::GetInstance()->FindImage(L"Tutorial_FrontGround")->ScaleRender(hdc, 0, 0, WINSIZEX, WINSIZEY);
 }

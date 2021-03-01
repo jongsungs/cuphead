@@ -1,11 +1,10 @@
 #pragma once
-#include "Block.h"
-class TutorialCube : public Block
+#include "GameObject.h"
+class TutorialPrint : public GameObject
 {
 	class Image* mImage;
-	float mCenterX;
 public:
-	TutorialCube(string name, float x, float y, float sizeX, float sizeY,  Image* image);
+	TutorialPrint(string name, float x, float y, Image* image);
 	virtual void Init() override;
 	virtual void Release()override;
 	virtual void Update()override;

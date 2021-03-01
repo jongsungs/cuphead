@@ -108,22 +108,25 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"SuperBulletLeftRight", Resources(L"/Image/Bullet/SuperBulletLeftRight.bmp"), 9584, 896, 8, 2, true);
 	IMAGEMANAGER->LoadFromFile(L"SuperBulletUp", Resources(L"/Image/Bullet/SuperBulletUp.bmp"), 3584, 448, 8, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"SuperBulletUpLeftRight", Resources(L"/Image/Bullet/SuperBulletUpLeftRight.bmp"), 3584, 896, 8, 2, true);
-
+	IMAGEMANAGER->LoadFromFile(L"RedBullet", Resources(L"/PlayerBullet/RedBullet.bmp"), 256, 512, 4, 8, true);
+	IMAGEMANAGER->LoadFromFile(L"RedBulletDeath", Resources(L"/PlayerBullet/RedBullet_Death.bmp"), 530, 97, 5, 1, true,RGB(254,1,2));
+	IMAGEMANAGER->LoadFromFile(L"RedBulletStart", Resources(L"/PlayerBullet/RedBullet_Spawn.bmp"), 420, 99, 4, 1, true, RGB(254,1,2));
+	
 	IMAGEMANAGER->LoadFromFile(L"OnionParryAbleSplash", Resources(L"Boss/BotanicPanic/Onion/Onion_Proj_ParryableSplash.bmp"), 1212, 126, 6, 1, true);	
 	IMAGEMANAGER->LoadFromFile(L"ElderHouse_Inside", Resources(L"/ElderHouse/ElderHouse_Inside.bmp"), 1695, 834, true);							
 
 	//튜토리얼
-	IMAGEMANAGER->LoadFromFile(L"Tutorial_cube", Resources(L"/Image/Tutorial/tutorial_cube.bmp"), 1680, 280, 6, 1, true);
-	IMAGEMANAGER->LoadFromFile(L"Tutorial_cube2", Resources(L"/Image/Tutorial/tutorial_cube_2.bmp"), 1136, 60, 8, 2, true);
-	IMAGEMANAGER->LoadFromFile(L"Tutorial_cylinder_1", Resources(L"/Image/Tutorial/tutorial_cylinder_1.bmp"), 380, 89, 4, 1, true);
-	IMAGEMANAGER->LoadFromFile(L"Tutorial_cylinder_2", Resources(L"/Image/Tutorial/tutorial_cylinder_2.bmp"), 240, 284, 8, 2, true);
-	IMAGEMANAGER->LoadFromFile(L"Tutorial_platform", Resources(L"/Image/Tutorial/tutorial_cylinder_and_platform.bmp"), 240, 284, 8, 2, true);
-	IMAGEMANAGER->LoadFromFile(L"Tutorial_exit_door", Resources(L"/Image/Tutorial/tutorial_exit_door.bmp"), 240, 284, 8, 2, true);
-	IMAGEMANAGER->LoadFromFile(L"Tutorial_after", Resources(L"/Image/Tutorial/tutorial_plynth_after_pyramid_is_destroyed.bmp"), 240, 284, 8, 2, true);
-	IMAGEMANAGER->LoadFromFile(L"Tutorial_before", Resources(L"/Image/Tutorial/tutorial_plynth_before_pyramid_is_destroyed.bmp"), 240, 284, 8, 2, true);
-	IMAGEMANAGER->LoadFromFile(L"Tutorial_topper", Resources(L"/Image/Tutorial/tutorial_pyramid_topper.bmp"), 240, 284, 8, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"Tutorial_cube", Resources(L"/Image/Tutorial/tutorial_cube.bmp"), 224, 192, true);
+	IMAGEMANAGER->LoadFromFile(L"Tutorial_cube2", Resources(L"/Image/Tutorial/tutorial_cube_2.bmp"), 232, 195, true);
+	IMAGEMANAGER->LoadFromFile(L"Tutorial_cylinder_1", Resources(L"/Image/Tutorial/tutorial_cylinder_1.bmp"), 224, 393, true);
+	IMAGEMANAGER->LoadFromFile(L"Tutorial_cylinder_2", Resources(L"/Image/Tutorial/tutorial_cylinder_2.bmp"), 393, 386, true);
+	IMAGEMANAGER->LoadFromFile(L"Tutorial_platform", Resources(L"/Image/Tutorial/tutorial_cylinder_and_platform.bmp"), 1404, 1455,  true);
+	IMAGEMANAGER->LoadFromFile(L"Tutorial_exit_door", Resources(L"/Image/Tutorial/tutorial_exit_door.bmp"), 320, 273, true);
+	IMAGEMANAGER->LoadFromFile(L"Tutorial_after", Resources(L"/Image/Tutorial/tutorial_plynth_after_pyramid_is_destroyed.bmp"), 288, 321, true);
+	IMAGEMANAGER->LoadFromFile(L"Tutorial_before", Resources(L"/Image/Tutorial/tutorial_plynth_before_pyramid_is_destroyed.bmp"), 288, 294, true);
+	IMAGEMANAGER->LoadFromFile(L"Tutorial_topper", Resources(L"/Image/Tutorial/tutorial_pyramid_topper.bmp"), 226, 190, true);
 	IMAGEMANAGER->LoadFromFile(L"Tutorial_BackGround", Resources(L"/Image/Tutorial/tutorial_room_back_layer_0001.bmp"), 1024, 576, false);
-	IMAGEMANAGER->LoadFromFile(L"Tutorial_FrontGround", Resources(L"/Image/Tutorial/tutorial_room_front_layer_0001.bmp"), 1024, 576, 8, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"Tutorial_FrontGround", Resources(L"/Image/Tutorial/tutorial_room_front_layer_0001.bmp"), 1024, 576, true);
 
 	IMAGEMANAGER->LoadFromFile(L"Tutorial_Dash", Resources(L"/Image/Tutorial/Dash.bmp"), 275, 1546, true);
 	IMAGEMANAGER->LoadFromFile(L"Tutorial_Duck", Resources(L"/Image/Tutorial/Duck.bmp"), 312, 286, true);
