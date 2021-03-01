@@ -38,8 +38,8 @@ void SoundSet::SetSound() {
 	SoundPlayer::GetInstance()->LoadFromFile(L"PeashootFire", Resources(L"PlayerSound/player_default_fire.mp3"), false);
 	SoundPlayer::GetInstance()->LoadFromFile(L"SpreadshootFire", Resources(L"PlayerSound/player_default_spread_fire.mp3"), false);
 	SoundPlayer::GetInstance()->LoadFromFile(L"GameOver", Resources(L"PlayerSound/player_game_over.wav"), false);
-	SoundPlayer::GetInstance()->LoadFromFile(L"PlyerHit", Resources(L"PlayerSound/player_hit.wav"), false);
-	SoundPlayer::GetInstance()->LoadFromFile(L"PlyerJump", Resources(L"PlayerSound/player_jump.wav"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"PlayerHit", Resources(L"PlayerSound/player_hit.wav"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"PlayerJump", Resources(L"PlayerSound/player_jump.wav"), false);
 	SoundPlayer::GetInstance()->LoadFromFile(L"LandGround", Resources(L"PlayerSound/player_land_ground.wav"), false);
 	SoundPlayer::GetInstance()->LoadFromFile(L"ParringSlap", Resources(L"PlayerSound/player_parry_slap.wav"), false);
 
