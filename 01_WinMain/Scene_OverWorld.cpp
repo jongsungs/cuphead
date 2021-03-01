@@ -9,6 +9,8 @@
 #include "NPC.h"
 #include "BackGround.h"
 #include "FadeOut.h"
+#include "Coin.h"
+
 void Scene_OverWorld::Init()
 {
 	//시작화면
@@ -54,6 +56,9 @@ void Scene_OverWorld::Init()
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::Player, mCupHead);
 	//오브젝트매니저에NPC추가
 	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::NPC, new NPC("NPC_Apple", 1715, 1010));
+
+	//코인
+	ObjectManager::GetInstance()->AddObjectNoDelete(ObjectLayer::UI, new Coin("Coin", 20, 20));
 
 	//카메라 추가
 	Camera* camera = new Camera();

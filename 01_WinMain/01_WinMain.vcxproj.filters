@@ -145,6 +145,9 @@
     <Filter Include="MainGame\Object\Tutorial\Ground">
       <UniqueIdentifier>{c423a0f5-abe9-4395-a0bf-5139bef88b31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Object\Coin">
+      <UniqueIdentifier>{2077fa6d-8549-4356-a6ba-fc9bbdd786cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -351,6 +354,12 @@
     <ClInclude Include="TutorialCube.h">
       <Filter>MainGame\Object\Tutorial</Filter>
     </ClInclude>
+    <ClInclude Include="Coin.h">
+      <Filter>MainGame\Object\Coin</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Shop.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="01_WinMain.cpp">
@@ -544,6 +553,12 @@
     </ClCompile>
     <ClCompile Include="TutorialCube.cpp">
       <Filter>MainGame\Object\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>MainGame\Object\Coin</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Shop.cpp">
+      <Filter>MainGame\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

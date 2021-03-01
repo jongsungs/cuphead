@@ -7,6 +7,7 @@ class Effect : public GameObject
 	class Animation* mEffectAnimation;
 public :
 	Effect(float x, float y, class Image* image, float frameTime = 0.1f, bool isReverse = false);
+	Effect(float x, float y, class Image* image, ObjectLayer layer, float frameTime = 0.1f, bool isReverse = false);
 	void virtual Init()override;
 	void virtual Update()override;
 	void virtual Release()override;

@@ -7,6 +7,8 @@ class Scene_Shop :public Scene
 	Image* mSpreadBulletImage;
 	Image* mLeftDoorImage;
 	Image* mRightDoorImage;
+	Image* mCoinImage;
+	Image* mCoinNumImage;
 	int mLeftDoorX;
 	int mRightDoorX;
 

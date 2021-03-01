@@ -4,21 +4,26 @@
 #include "Animation.h"
 #include "FadeOut.h"
 #include "SoundPlayer.h"
+#include "Coin.h"
 void Scene_Shop::Init()
 {
 	SoundPlayer::GetInstance()->Play(L"PigShop", 0.5f);
 	SoundPlayer::GetInstance()->Play(L"PigShop_Welcome", 1.0f);
 	FadeOut* fadein = new FadeOut(true);
 
+	ObjectManager::GetInstance()->FindObject("Coin")->SetIsActive(true);
+
 	mBackGroundImage = IMAGEMANAGER->FindImage(L"PigShop_BackGround");
 	mPigImage = IMAGEMANAGER->FindImage(L"PigShop_Pig");
 	mSpreadBulletImage = IMAGEMANAGER->FindImage(L"PigShop_SpreadBullet");
 	mLeftDoorImage = IMAGEMANAGER->FindImage(L"PigShop_LeftDoor");
 	mRightDoorImage = IMAGEMANAGER->FindImage(L"PigShop_RightDoor");
+	mCoinImage = IMAGEMANAGER->FindImage(L"Coin");
+	mCoinNumImage = IMAGEMANAGER->FindImage(L"Shop_CoinNum");
 
 	mLeftDoorX = 50;
 	mRightDoorX = 650;
-
+	
 	mPigAnimation = new Animation();
 	mPigAnimation->InitFrameByStartEnd(0, 0, 1, 0, false);
 	mPigAnimation->SetIsLoop(true);
@@ -45,9 +50,14 @@ void Scene_Shop::Update()
 	}
 	if (Input::GetInstance()->GetKeyDown('Z'))
 	{
-		SoundPlayer::GetInstance()->Play(L"CoinOpen", 1.f);
-		mSpreadBulletIsSoldOut = true;
-		mSpreadBulletImage = IMAGEMANAGER->FindImage(L"PigShop_SpreadBullet_SoldOut");
+		Coin* coin = (Coin*)ObjectManager::GetInstance()->FindObject("Coin");
+		if (coin->GetNum() >= 3)
+		{
+			SoundPlayer::GetInstance()->Play(L"CoinOpen", 1.f);
+			mSpreadBulletIsSoldOut = true;
+			mSpreadBulletImage = IMAGEMANAGER->FindImage(L"PigShop_SpreadBullet_SoldOut");
+			coin->SetNum(coin->GetNum() - 3);
+		}
 	}
 	if (Input::GetInstance()->GetKeyDown(VK_ESCAPE))
 	{
@@ -80,6 +90,8 @@ void Scene_Shop::Render(HDC hdc)
 		TextOut(hdc, 120, 610, L"you can keep close to your target", strlen("you can keep close to your target"));
 		SelectObject(hdc, oldFont);
 		DeleteObject(myFont);
+		mCoinImage->FrameRender(hdc, 500, 510, 0, 0);
+		mCoinNumImage->FrameRender(hdc, 530, 510, 2, 0);
 	}
 	
 

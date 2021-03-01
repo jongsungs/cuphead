@@ -7,6 +7,9 @@ class Scene_ElderHouse :public Scene
 	class NPC* mElderKettle;
 	RECT mTutorialRect;
 	RECT mDoorRect;
+	Image* mZImage;
+	int mZImageSizeX;
+	int mZImageSizeY;
 public:
 	
 	void Init()override;

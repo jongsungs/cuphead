@@ -5,6 +5,8 @@
 #include "Animation.h"
 #include "Camera.h"
 #include "Talk.h"
+#include "Effect.h"
+#include "Coin.h"
 NPC::NPC(const string& name, float x, float y)
 	:GameObject(name)
 {
@@ -80,6 +82,15 @@ void NPC::Update()
 				mTalkNum++;
 				if (mTalkNum > 5)
 				{
+					SoundPlayer::GetInstance()->Play(L"CoinOpen",1.f);
+					
+					Effect* coineffect = new Effect(mX, mY, IMAGEMANAGER->FindImage(L"GetCoin"),ObjectLayer::UI, 0.3f);
+					Effect* coineffect2 = new Effect(mX+300, mY, IMAGEMANAGER->FindImage(L"GetCoin"), ObjectLayer::UI, 0.3f);
+					Effect* coineffect3 = new Effect(mX-300, mY, IMAGEMANAGER->FindImage(L"GetCoin"), ObjectLayer::UI, 0.3f);
+					
+					Coin* coin = (Coin*)ObjectManager::GetInstance()->FindObject("Coin");
+					coin->SetNum(coin->GetNum() + 3);
+
 					mTalkNum = 0;
 					mIsTalk = 0;
 					ObjectManager::GetInstance()->DeleteObject(ObjectLayer::Talk);
@@ -138,7 +149,6 @@ void NPC::Update()
 
 void NPC::Render(HDC hdc)
 {
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRange);
 	CameraManager::GetInstance()->GetMainCamera()
 		->FrameRender(hdc, mImage, mRect.left, mRect.top,
 			mAnimaition->GetNowFrameX(), mAnimaition->GetNowFrameY());

@@ -28,6 +28,28 @@ Effect::Effect(float x, float y, Image* image , float frameTime, bool isReverse)
 	mRect = RectMakeCenter(mX, mY, mImage->GetFrameWidth(), mImage->GetFrameHeight());
 }
 
+Effect::Effect(float x, float y, Image* image, ObjectLayer layer, float frameTime, bool isReverse)
+{
+	mX = x;
+	mY = y;
+	mImage = image;
+	mEffectAnimation = new Animation();
+	mEffectAnimation->InitFrameByStartEnd(0, 0, mImage->GetFrameX() - 1, 0, false);
+	mEffectAnimation->SetIsLoop(false);
+	mEffectAnimation->SetFrameUpdateTime(frameTime);
+	mEffectAnimation->Play();
+
+	vector<GameObject*>* effectvector = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Effect);
+
+	mName = to_string(effectvector->size());
+	mIsActive = true;
+	mIsDestroy = false;
+
+	ObjectManager::GetInstance()->AddObject(layer, this);
+
+	mRect = RectMakeCenter(mX, mY, mImage->GetFrameWidth(), mImage->GetFrameHeight());
+}
+
 void Effect::Init()
 {
 }

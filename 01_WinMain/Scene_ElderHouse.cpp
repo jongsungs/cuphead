@@ -13,7 +13,11 @@ void Scene_ElderHouse::Init()
 	SoundPlayer::GetInstance()->Play(L"ElderHouse", 0.5f);
 
 	mImage = IMAGEMANAGER->GetInstance()->FindImage(L"ElderHouse_Inside");
-	
+
+	mZImage = IMAGEMANAGER->GetInstance()->FindImage(L"ZPopUp");
+	mZImageSizeX = 0;
+	mZImageSizeY = 0;
+
 	mPlayer = new PlatformerPlayer("CupHead_ElderHouse", 400, 600);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, mPlayer);
 	
@@ -51,7 +55,11 @@ void Scene_ElderHouse::Update()
 	//ÅðÀå
 	if(IntersectRect(&rctemp, &playerrctemp,&mDoorRect))
 	{
-		
+		if (mZImageSizeX < 50)
+		{
+			mZImageSizeX++;
+			mZImageSizeY++;
+		}
 		if (Input::GetInstance()->GetKeyDown('Z'))
 		{
 			SoundPlayer::GetInstance()->Stop(L"ElderHouse");
@@ -61,12 +69,23 @@ void Scene_ElderHouse::Update()
 		
 	}
 	//Æ©Åä¸®¾ó
-	if (IntersectRect(&rctemp, &playerrctemp, &mTutorialRect))
+	else if (IntersectRect(&rctemp, &playerrctemp, &mTutorialRect))
 	{
+		if (mZImageSizeX < 50)
+		{
+			mZImageSizeX++;
+			mZImageSizeY++;
+		}
 		if (Input::GetInstance()->GetKeyDown('Z'))
 		{
 			FadeOut* fadeout = new FadeOut(false, L"Tutorial", L"Tutorial_LoadingScene");
 		}
+	}
+	else
+	{
+		mZImageSizeX = 0;
+		mZImageSizeY = 0;
+
 	}
 	ObjectManager::GetInstance()->Update();
 }
@@ -74,7 +93,6 @@ void Scene_ElderHouse::Update()
 void Scene_ElderHouse::Render(HDC hdc)
 {
 	CameraManager::GetInstance()->GetMainCamera()->Render(hdc,mImage, 0, 0);
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mDoorRect);
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mTutorialRect);
+	CameraManager::GetInstance()->GetMainCamera()->ScaleRenderFromBottom(hdc, mZImage, mPlayer->GetX(), mPlayer->GetY() -77,mZImageSizeX,mZImageSizeY);
 	ObjectManager::GetInstance()->Render(hdc);
 }
