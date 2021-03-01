@@ -4,8 +4,7 @@
 #include "Image.h"
 #include "Animation.h"
 
-void Scene_Start1::Init()
-{
+void Scene_Start1::Init(){
 	SoundPlayer::GetInstance()->Play(L"Start", 0.5f);
 	mImage = IMAGEMANAGER->FindImage(L"StartScene_Cup&Mug");
 	mBackGroundImage = IMAGEMANAGER->FindImage(L"StartScene");

@@ -26,7 +26,7 @@ void SceneBoss1::Init(){
 	PlatformerPlayer* player = new PlatformerPlayer("Player", WINSIZEX / 4, WINSIZEY * 3 / 4);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, player);
 
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", 0, WINSIZEY / 8 * 7, WINSIZEX, 100));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", 0, WINSIZEY / 8 * 7, WINSIZEX*8, 100));
 
 	Enemy* potato = new Potato("Potato", WINSIZEX * 3 / 4, WINSIZEY / 2+50);
 	Enemy* carrot = new Carrot("Carrot", WINSIZEX / 2, WINSIZEY * 3 / 8 + 549);
@@ -78,6 +78,13 @@ void SceneBoss1::Release(){
 }
 
 void SceneBoss1::Update(){
+	if (ObjectManager::GetInstance()->FindObject(ObjectLayer::Player, "Player")->GetHP() <= 0) {
+		if(mIsOver == false)
+			SoundPlayer::GetInstance()->Play(L"Over", 0.4f);
+		mIsOver = true;
+		mSceneDelayTime += Time::GetInstance()->DeltaTime();
+	}
+
 	mDelayTime += Time::GetInstance()->DeltaTime();
 	if (mDelayTime > 2.2 && mIsPlay == false) {
 		switch (randomStart) {
@@ -114,6 +121,7 @@ void SceneBoss1::Update(){
 		LoadingScene* loadingScene = new LoadingScene();
 		SceneManager::GetInstance()->AddScene(L"Overworld_LoadingScene", loadingScene);
 		SoundPlayer::GetInstance()->Stop(L"BotanicPanicBGM");
+		SoundPlayer::GetInstance()->Stop(L"Over");
 		FadeOut* fadeout = new FadeOut(false, L"OverWorld", L"Overworld_LoadingScene");
 		Building* check = (Building*)ObjectManager::GetInstance()->FindObject("BotanicPanic");
 		check->SetIsClear(true);

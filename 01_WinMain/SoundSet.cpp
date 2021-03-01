@@ -31,6 +31,8 @@ void SoundSet::SetSound() {
 	SoundPlayer::GetInstance()->LoadFromFile(L"Start5", Resources(L"Announcer Voice/Now go!.mp3"), false);
 	//아나운서 게임 종료 안내
 	SoundPlayer::GetInstance()->LoadFromFile(L"End1", Resources(L"Announcer Voice/Knockout!.mp3"), false);
+	SoundPlayer::GetInstance()->LoadFromFile(L"Over", Resources(L"Boss/Over.mp3"), false);
+
 	//플랫포머 플레이어 효과음
 	SoundPlayer::GetInstance()->LoadFromFile(L"SpecialAttack", Resources(L"PlayerSound/palyer_specialattack.wav"), false);
 	SoundPlayer::GetInstance()->LoadFromFile(L"Dash", Resources(L"PlayerSound/player_dash.wav"), false);

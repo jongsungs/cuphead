@@ -8,10 +8,12 @@ class SceneBoss1: public Scene{
 	Image* mBlack;
 	Image* mClear;
 
+
 	float mSceneDelayTime = 0.f;
 	float mDelayTime = 0.f;
 
 	bool mIsPlay = false;
+	bool mIsOver = false;
 	int frameX=0;
 	int randomReady;
 	int randomStart;
