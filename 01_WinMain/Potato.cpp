@@ -143,7 +143,6 @@ void Potato::Update() {
 							break;
 						}
 					}
-
 					PotatoProj* proj = new PotatoProj("proj", mX - 213, mY + 155, 7, PI, false);
 					proj->Init();
 					ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, proj);

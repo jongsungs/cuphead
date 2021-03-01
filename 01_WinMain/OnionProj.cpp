@@ -19,7 +19,6 @@ OnionProj::OnionProj(const string& name, float x, float y, float speed, float an
 void OnionProj::Init(){
 	vector<GameObject*>* EnemyProj = ObjectManager::GetInstance()->GetObjectListPt(ObjectLayer::Enemy_Bullet);
 	mName = to_string(EnemyProj->size());
-	ObjectManager::GetInstance()->AddObject(ObjectLayer::Enemy_Bullet, this);
 
 	NonParryAbleAImg = IMAGEMANAGER->FindImage(L"OnionNonParryAbleA");
 	NonParryAbleBImg = IMAGEMANAGER->FindImage(L"OnionNonParryAbleB");
