@@ -238,7 +238,7 @@ void Onion::Render(HDC hdc) {
 		->ScaleFrameRenderFromBottom(hdc, mImage, mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 472, 570);
 	if(mState == EnemyState::Attack)
 		CameraManager::GetInstance()->GetMainCamera()
-			->FrameRenderFromBottom(hdc, mTearEffectImage, mX, mY-60, mTearEffectAnimation->GetNowFrameX(), mTearEffectAnimation->GetNowFrameY());
+			->FrameRenderFromBottom(hdc, mTearEffectImage, mX-5, mY-125, mTearEffectAnimation->GetNowFrameX(), mTearEffectAnimation->GetNowFrameY());
 }
 
 void Onion::InIntersectDamage(int dmage){
