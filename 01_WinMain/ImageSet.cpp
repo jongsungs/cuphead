@@ -105,7 +105,7 @@ void ImageSet::SetImage() //첫 scene1 로드
 	IMAGEMANAGER->LoadFromFile(L"BulletUpDown", Resources(L"/Image/Bullet/BulletUpDown.bmp"), 240, 284, 8, 2, true);
 	IMAGEMANAGER->LoadFromFile(L"BulletUpLeftRight", Resources(L"/Image/Bullet/BulletUpLeftRight.bmp"), 1296, 184, 8, 2, true);
 	IMAGEMANAGER->LoadFromFile(L"SuperBulletDeath", Resources(L"/Image/Bullet/SuperBulletDeath.bmp"), 4770, 530, 9, 1, true);
-	IMAGEMANAGER->LoadFromFile(L"SuperBulletLeftRight", Resources(L"/Image/Bullet/SuperBulletLeftRight.bmp"), 9584, 896, 8, 2, true);
+	IMAGEMANAGER->LoadFromFile(L"SuperBulletLeftRight", Resources(L"/Image/Bullet/SuperBulletLeftRight.bmp"), 3584, 896, 8, 2, true);
 	IMAGEMANAGER->LoadFromFile(L"SuperBulletUp", Resources(L"/Image/Bullet/SuperBulletUp.bmp"), 3584, 448, 8, 1, true);
 	IMAGEMANAGER->LoadFromFile(L"SuperBulletUpLeftRight", Resources(L"/Image/Bullet/SuperBulletUpLeftRight.bmp"), 3584, 896, 8, 2, true);
 	IMAGEMANAGER->LoadFromFile(L"RedBullet", Resources(L"/PlayerBullet/RedBullet.bmp"), 256, 512, 4, 8, true);

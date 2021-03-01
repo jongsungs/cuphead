@@ -64,18 +64,18 @@ void SuperPeashooter::Update() {
 }
 void SuperPeashooter::Render(HDC hdc) {
 
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	if (mAngle == RadianAngle(0)) { //0도
 		CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromRightCenter(hdc, mImage, mRect.right, mY, mAnimation->GetNowFrameX(), mAnimation->GetNowFrameY());
 	}
 	else if (mAngle == RadianAngle(45)) {
-		CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromRightTop(hdc, mImage, mRect.right, mRect.top, mAnimation->GetNowFrameX(), mAnimation->GetNowFrameY());
+		CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromRightTop(hdc, mImage, mRect.right + 60, mRect.top - 60, mAnimation->GetNowFrameX(), mAnimation->GetNowFrameY());
 	}
 	else if (mAngle == RadianAngle(90)) {
 		CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromTopCenter(hdc, mImage, mX, mRect.top, mAnimation->GetNowFrameX(), mAnimation->GetNowFrameY());
 	}
 	else if (mAngle == RadianAngle(135)) {
-		CameraManager::GetInstance()->GetMainCamera()->FrameRender(hdc, mImage, mRect.left, mRect.top, mAnimation->GetNowFrameX(), mAnimation->GetNowFrameY());
+		CameraManager::GetInstance()->GetMainCamera()->FrameRender(hdc, mImage, mRect.left - 60 , mRect.top - 60, mAnimation->GetNowFrameX(), mAnimation->GetNowFrameY());
 	}
 	else if (mAngle == RadianAngle(180)) {
 		CameraManager::GetInstance()->GetMainCamera()->FrameRenderFromLeftCenter(hdc, mImage, mRect.left - 20, mY, mAnimation->GetNowFrameX(), mAnimation->GetNowFrameY());

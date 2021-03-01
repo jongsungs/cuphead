@@ -4,10 +4,11 @@
 #include "Spread.h"
 #include "Effect.h"
 #include "Player_Bullet_Effect.h"
+#include "SuperPeashooter.h"
 #define RadianAngle(angle) angle* PI/180
 BulletManager::BulletManager() {
 	mPlayerHaveBullet = { {Player_Bullet_Type::Peashooter,Player_Have::IsHave},{Player_Bullet_Type::Spread,Player_Have::NoHave } };
-	mPlayerBulletType = Player_Bullet_Type::Spread;
+	mPlayerBulletType = Player_Bullet_Type::Peashooter;
 }
 
 void BulletManager::Player_Shoot(float x, float y, float angle) {
@@ -55,10 +56,12 @@ void BulletManager::Player_Shoot(float x, float y, float angle) {
 	}
 }
 
-void BulletManager::Enmey_Shoot(Enemy_Bullet_Type type, float x, float y, float speed, float angle){
-	if (type == Enemy_Bullet_Type::Potato) {
+void BulletManager::Player_Special_Shoot(float x, float y, float angle) {
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player_Bullet, new SuperPeashooter("SuperPeashooter", x, y, angle));
 
-	}
+}
+
+void BulletManager::Enmey_Shoot(Enemy_Bullet_Type type, float x, float y, float speed, float angle){
 }
 
 
