@@ -1529,6 +1529,23 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 			mX += 100;
 		}
+		else if (mPlayerState == PlayerState::RightIdle)
+		{
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightDash;
+			mCurrentAnimation = mRightDashAnimation;
+			mCurrentAnimation->Play();
+			mX += 100;
+		}
+		else if (mPlayerState == PlayerState::RightJump)
+		{
+			mGravity = 0;
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::RightDash;
+			mCurrentAnimation = mRightDashAnimation;
+			mCurrentAnimation->Play();
+			mX += 100;
+		}
 		else if (mPlayerState == PlayerState::LeftRun)
 		{
 			mCurrentAnimation->Stop();
@@ -1545,8 +1562,30 @@ void PlatformerPlayer::Update()
 			mCurrentAnimation->Play();
 			mX -= 100;
 		}
+		else if (mPlayerState == PlayerState::LeftJump)
+		{
+			mGravity = 0;
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftDash;
+			mCurrentAnimation = mLeftDashAnimation;
+			mCurrentAnimation->Play();
+			mX -= 100;
+		}
 
 	}
+	if (mPlayerState == PlayerState::LeftJump) 
+	{
+		if (Input::GetInstance()->GetKeyDown(VK_LSHIFT))
+		{
+			mGravity = 0;
+			mCurrentAnimation->Stop();
+			mPlayerState = PlayerState::LeftDash;
+			mCurrentAnimation = mLeftDashAnimation;
+			mCurrentAnimation->Play();
+
+		}
+	}
+	
 	if (mPlayerState == PlayerState::RightDash)
 	{
 		if (mCurrentAnimation->GetIsPlay() == false)
@@ -1555,6 +1594,7 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::RightRun;
 			mCurrentAnimation = mRightRunAnimation;
 			mCurrentAnimation->Play();
+			mGravity = 0.3f;
 		}
 	}
 	if (mPlayerState == PlayerState::LeftDash)
@@ -1565,6 +1605,7 @@ void PlatformerPlayer::Update()
 			mPlayerState = PlayerState::LeftRun;
 			mCurrentAnimation = mLeftRunAnimation;
 			mCurrentAnimation->Play();
+			mGravity = 0.3f;
 		}
 	}
 	//공격중 이동
@@ -1713,9 +1754,33 @@ void PlatformerPlayer::Update()
 	mJumpPower -= mGravity;
 	mY -= mJumpPower;
 
+	if (isHit == true)
+	{
 
+		if (mHP >= 0)
+		{
+			mHP -= 1;
+		}
+		mCurrentAnimation->Stop();
+		SoundPlayer::GetInstance()->Play(L"PlayerHit", 0.2f);
+		mPlayerState = PlayerState::RightHit;
+		mCurrentAnimation = mRightHitAnimation;
+		mCurrentAnimation->Play();
+		if (mCurrentAnimation->GetIsPlay() == false)
+		{
+			mPlayerState = PlayerState::RightIdle;
+		}
+		isHit = false;
+	}
 
-
+	if (mHP <= 0)
+	{
+		mCurrentAnimation->Stop();
+		SoundPlayer::GetInstance()->Play(L"Death", 0.2f);
+		mPlayerState = PlayerState::Die;
+		mCurrentAnimation = mDieAnimation;
+		mCurrentAnimation->Play();
+	}
 	for (int i = 0; i < mBullet.size(); i++)
 	{
 		mBullet[i]->Update();
@@ -1952,30 +2017,8 @@ void PlatformerPlayer::InIntersectBlock(RECT rc)
 			mCurrentAnimation->Play();
 		}
 	}
-	if (isHit == true)
-	{
-		
-		if (mHP >= 0)
-		{
-			mHP -= 1;
-		}
-		mCurrentAnimation->Stop();
-		mPlayerState = PlayerState::RightHit;
-		mCurrentAnimation = mRightHitAnimation;
-		mCurrentAnimation->Play();
-		if (mCurrentAnimation->GetIsPlay() == false)
-		{
-			mPlayerState = PlayerState::RightIdle;
-		}
-		isHit = false;
-	}
-	if (mHP <= 0)
-	{
-		mCurrentAnimation->Stop();
-		mPlayerState = PlayerState::Die;
-		mCurrentAnimation = mDieAnimation;
-		mCurrentAnimation->Play();
-	}
+	
+	
 
 	
 	mJumpPower = 0.f;
