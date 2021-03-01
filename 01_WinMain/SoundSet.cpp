@@ -63,4 +63,8 @@ void SoundSet::SetSound() {
 	SoundPlayer::GetInstance()->LoadFromFile(L"ZFlop", L"../02_Resources/overworld/ZFlop.wav", false);
 	SoundPlayer::GetInstance()->LoadFromFile(L"Talk", L"../02_Resources/overworld/Talk.wav", false);
 	SoundPlayer::GetInstance()->LoadFromFile(L"Talk", L"../02_Resources/overworld/Talk.wav", false);
+
+	//튜토리얼
+
+	SoundPlayer::GetInstance()->LoadFromFile(L"TutorialMap", Resources(L"Sound/04_Tutorial.mp3"), true);
 }
