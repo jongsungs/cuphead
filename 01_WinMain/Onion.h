@@ -4,13 +4,11 @@
 class Image;
 class Animation;
 class Onion : public Enemy {
-	Image* mDeathLeaveImage;
 	Image* mChangeToAttackImage;
 	Image* mBeforeAttackImage;
 	
 	Image* mTearEffectImage;
 
-	Animation* mDeathLeaveAnimation;
 	Animation* mBeforeAttackAnimation;
 	Animation* mChangeToAttackAnimation;
 	Animation* mChangeFromAttackAnimation;

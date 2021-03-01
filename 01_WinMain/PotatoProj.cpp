@@ -65,7 +65,7 @@ void PotatoProj::Update(){
 }
 
 void PotatoProj::Render(HDC hdc){
-	RenderRect(hdc, mRect);
+	//RenderRect(hdc, mRect);
 	
 	CameraManager::GetInstance()->GetMainCamera()
 		->FrameRender(hdc, mImage, mX - mImage->GetFrameWidth()/2, mY - mImage->GetFrameHeight()/2, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());

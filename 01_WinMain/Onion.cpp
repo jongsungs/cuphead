@@ -27,8 +27,6 @@ void Onion::Init() {
 	mBeforeAttackImage = IMAGEMANAGER->FindImage(L"OnionBeforeAttack");
 	mDeathImage = IMAGEMANAGER->FindImage(L"OnionDeath");
 
-	mDeathLeaveImage = IMAGEMANAGER->FindImage(L"OnionDeathLeave");
-
 	mTearEffectImage = IMAGEMANAGER->FindImage(L"OnionTearEffect");
 		
 	//캐릭터 상태에 따라 다른 애니메이션을 보여주기 위함
@@ -67,14 +65,9 @@ void Onion::Init() {
 	mChangeFromAttackAnimation->Play();
 	//사망 애니메이션
 	mDeathAnimation = new Animation();
-	mDeathAnimation->InitFrameByStartEnd(0, 0, 5, 0, true);
-	mDeathAnimation->SetIsLoop(true);
+	mDeathAnimation->InitFrameByStartEnd(0, 0, 32, 0, false);
+	mDeathAnimation->SetIsLoop(false);
 	mDeathAnimation->SetFrameUpdateTime(0.07f);
-	//퇴장 애니메이션
-	mDeathLeaveAnimation = new Animation();
-	mDeathLeaveAnimation->InitFrameByStartEnd(0, 0, 30, 0, false);
-	mDeathLeaveAnimation->SetIsLoop(false);
-	mDeathLeaveAnimation->SetFrameUpdateTime(0.07f);
 	//공격시 나오는 눈물 효과 애니메이션
 	mTearEffectAnimation = new Animation();
 	mTearEffectAnimation->InitFrameByStartEnd(0, 0, 3, 0, false);
@@ -101,7 +94,6 @@ void Onion::Release() {
 	SafeDelete(mIdleAnimation);
 	SafeDelete(mAttackAnimation);
 	SafeDelete(mDeathAnimation);
-	SafeDelete(mDeathLeaveAnimation);
 	SafeDelete(mBeforeAttackAnimation);
 	SafeDelete(mChangeToAttackAnimation);
 	SafeDelete(mChangeFromAttackAnimation);
@@ -113,7 +105,7 @@ void Onion::Update() {
 		mHP -= 5;
 
 	if (mHP <= 0 && mState != EnemyState::Death && mState != EnemyState::End) {
-		mState = EnemyState::End;
+		mState = EnemyState::Death;
 		mDelayTime = 0;
 	}
 
@@ -213,15 +205,17 @@ void Onion::Update() {
 		break;
 
 	case EnemyState::Death:
+		if (mCurrentAnimation != mDeathAnimation) {
+			mCurrentAnimation->Stop();
+			mDeathAnimation->Play();
+		}
 		mImage = mDeathImage;
 		mSizeX = mImage->GetFrameWidth();
 		mSizeY = mImage->GetFrameHeight();
 		mCurrentAnimation = mDeathAnimation;
-		mCurrentAnimation->Play();
-		
 		if (mCurrentAnimation->GetIsPlay() == false)
 			mState = EnemyState::End;
-	
+		mCurrentAnimation->Play();
 		break;
 
 	case EnemyState::End:
@@ -239,7 +233,7 @@ void Onion::Update() {
 }
 
 void Onion::Render(HDC hdc) {
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	CameraManager::GetInstance()->GetMainCamera()
 		->ScaleFrameRenderFromBottom(hdc, mImage, mX, mRect.bottom, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY(), 472, 570);
 	if(mState == EnemyState::Attack)

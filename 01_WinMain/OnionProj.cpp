@@ -118,7 +118,7 @@ void OnionProj::Update(){
 }
 
 void OnionProj::Render(HDC hdc){
-	RenderRect(hdc, mRect);
+	//RenderRect(hdc, mRect);
 
 	CameraManager::GetInstance()->GetMainCamera()
 		->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
