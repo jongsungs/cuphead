@@ -66,7 +66,7 @@ void SceneTutorial::Update()
 		}
 		if (Input::GetInstance()->GetKeyDown('Z')) {
 			mExitDoorCheck = false;
-			SceneManager::GetInstance()->LoadScene(L"Scene_ElderHouse");
+			SceneManager::GetInstance()->LoadScene(L"ElderHouse");
 		}
 	}
 	else {
