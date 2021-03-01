@@ -1468,11 +1468,12 @@ void PlatformerPlayer::Update()
 	{
 		if (mPlayerState == PlayerState::LeftIdle)
 		{
+			SoundPlayer::GetInstance()->Play(L"SpecialAttack", 0.5f);
 			mCurrentAnimation->Stop();
 			mPlayerState = PlayerState::LeftSpecialAttack;
 			mCurrentAnimation = mLeftSpecialAttackAnimation;
 			mCurrentAnimation->Play();
-			BulletManager::GetInstance()->Player_Special_Shoot(mX + 200, mY, PI );
+			BulletManager::GetInstance()->Player_Special_Shoot(mX - 200, mY, PI );
 			mSpcialAttackStack--;
 			if (mCurrentAnimation->GetIsPlay() == false)
 				mPlayerState = PlayerState::LeftIdle;
@@ -1480,11 +1481,12 @@ void PlatformerPlayer::Update()
 
 		else if (mPlayerState == PlayerState::RightIdle)
 		{
+			SoundPlayer::GetInstance()->Play(L"SpecialAttack", 0.5f);
 			mCurrentAnimation->Stop();
 			mPlayerState = PlayerState::RightSpecialAttack;
 			mCurrentAnimation = mRightSpecialAttackAnimation;
 			mCurrentAnimation->Play();
-			BulletManager::GetInstance()->Player_Special_Shoot(mX + 100, mY, 0);
+			BulletManager::GetInstance()->Player_Special_Shoot(mX + 200, mY, 0);
 			mSpcialAttackStack--;
 			if (mCurrentAnimation->GetIsPlay() == false)
 				mPlayerState = PlayerState::RightIdle;
@@ -1639,6 +1641,10 @@ void PlatformerPlayer::Update()
 		
 		if (mPlayerState == PlayerState::LeftJump)
 		{
+			if (SoundDelay == 4)
+			{
+				SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+			}
 			if (bulletdelay == 9)
 			{
 				BulletManager::GetInstance()->Player_Shoot(mX - 70, mY, PI);
@@ -1646,6 +1652,10 @@ void PlatformerPlayer::Update()
 		}
 		if (mPlayerState == PlayerState::RightJump)
 		{
+			if (SoundDelay == 4)
+			{
+				SoundPlayer::GetInstance()->Play(L"PeashootFire", 0.2f);
+			}
 			if (bulletdelay == 9)
 			{
 				BulletManager::GetInstance()->Player_Shoot(mX +70, mY, 0);
