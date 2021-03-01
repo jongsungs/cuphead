@@ -3,6 +3,8 @@
 #include "PlatformerPlayer.h"
 #include "Camera.h"
 #include "Block.h"
+#include "Image.h"
+#include "TutorialBackGround.h"
 void SceneTutorial::Init()
 {
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Player, new PlatformerPlayer("Player", 200, WINSIZEY / 8 * 7));
@@ -24,6 +26,8 @@ void SceneTutorial::Init()
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Camera, camera);
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Ground", -20, WINSIZEY / 8 * 7, 4000, 100));
 	ObjectManager::GetInstance()->AddObject(ObjectLayer::Block, new Block("Trap", WINSIZEX / 8 * 6, WINSIZEY - 200, 100, 100));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::Background, new TutorialBackGround("TutorialBackgroud" , ImageManager::GetInstance()->FindImage(L"Tutorial_BackGround")));
+	ObjectManager::GetInstance()->AddObject(ObjectLayer::FrontGround, new TutorialBackGround("TutorialFrontGround", ImageManager::GetInstance()->FindImage(L"Tutorial_FrontGround")));
 	ObjectManager::GetInstance()->Init();
 
 }
@@ -41,5 +45,7 @@ void SceneTutorial::Update()
 
 void SceneTutorial::Render(HDC hdc)
 {
+	//ImageManager::GetInstance()->FindImage(L"Tutorial_BackGround")->ScaleRender(hdc,0,0,WINSIZEX,WINSIZEY);
 	ObjectManager::GetInstance()->Render(hdc);
+	//ImageManager::GetInstance()->FindImage(L"Tutorial_FrontGround")->ScaleRender(hdc, 0, 0, WINSIZEX, WINSIZEY);
 }

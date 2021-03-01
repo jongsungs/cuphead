@@ -211,7 +211,10 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="TutorialBackGround.h" />
     <ClInclude Include="TutorialBlock.h" />
+    <ClInclude Include="TutorialCube.h" />
+    <ClInclude Include="TutorialExitDoor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="01_WinMain.cpp" />
@@ -279,7 +282,10 @@
     <ClCompile Include="Talk.cpp" />
     <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="TutorialBackGround.cpp" />
     <ClCompile Include="TutorialBlock.cpp" />
+    <ClCompile Include="TutorialCube.cpp" />
+    <ClCompile Include="TutorialExitDoor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="01_WinMain.rc" />
