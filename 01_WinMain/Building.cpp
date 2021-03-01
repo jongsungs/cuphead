@@ -13,6 +13,8 @@ Building::Building(const string& name, Image* image, float x, float y)
 	mX = x;
 	mY = y;
 	mImage = image;
+
+	mIsClear = 0;
 }
 
 void Building::Init()
@@ -37,7 +39,6 @@ void Building::Init()
 	mZImage = IMAGEMANAGER->FindImage(L"ZPopUp");
 	mZImageSizeX = 0;
 	mZImageSizeY = 0;
-	mIsClear = 1;
 	mIsRegular = 0;
 }
 
