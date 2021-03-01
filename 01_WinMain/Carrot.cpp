@@ -231,7 +231,7 @@ void Carrot::Update() {
 }
 
 void Carrot::Render(HDC hdc) {
-	CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
+	//CameraManager::GetInstance()->GetMainCamera()->RenderRect(hdc, mRect);
 	//CameraManager::GetInstance()->GetMainCamera()
 	//	->FrameRender(hdc, mImage, mRect.left, mRect.top, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());
 	mImage->FrameRender(hdc, mX - mSizeX / 2, mY-mSizeY/2, mCurrentAnimation->GetNowFrameX(), mCurrentAnimation->GetNowFrameY());

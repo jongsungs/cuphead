@@ -106,6 +106,7 @@ void Onion::Update() {
 
 	if (mHP <= 0 && mState != EnemyState::Death && mState != EnemyState::End) {
 		mState = EnemyState::Death;
+		SoundPlayer::GetInstance()->Stop(L"OnionCrying");
 		mDelayTime = 0;
 	}
 
@@ -222,7 +223,6 @@ void Onion::Update() {
 		mIsActive = false;
 		mIsDestroy = true;
 		ObjectManager::GetInstance()->FindObject("Carrot")->SetIsActive(true);
-		SoundPlayer::GetInstance()->Stop(L"OnionCrying");
 		break;
 	}
 
