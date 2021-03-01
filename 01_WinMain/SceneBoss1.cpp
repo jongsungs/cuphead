@@ -13,6 +13,7 @@
 #include "FadeOut.h"
 #include "LoadingScene.h"
 #include "BackGround.h"
+#include "Building.h"
 
 void SceneBoss1::Init(){
 	mBackGround1 = IMAGEMANAGER->FindImage(L"BotanicPanicBackground1");
@@ -114,6 +115,8 @@ void SceneBoss1::Update(){
 		SceneManager::GetInstance()->AddScene(L"Overworld_LoadingScene", loadingScene);
 		SoundPlayer::GetInstance()->Stop(L"BotanicPanicBGM");
 		FadeOut* fadeout = new FadeOut(false, L"OverWorld", L"Overworld_LoadingScene");
+		Building* check = (Building*)ObjectManager::GetInstance()->FindObject("BotanicPanic");
+		check->SetIsClear(true);
 	}
 	ObjectManager::GetInstance()->Update();
 	IntersectManager::GetInstance()->IntersectPlayerAndFloor();
